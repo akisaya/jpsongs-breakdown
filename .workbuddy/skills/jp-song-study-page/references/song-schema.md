@@ -16,11 +16,12 @@ node scripts/build.js --check song.json   # 改的时候反复跑这个
   "meta":   { ... },          // 必填
   "stats":  [ 3–4 项 ],       // 顶部数据条
   "cta":    { ... },          // 两个按钮
-  "nav":    [ 8 项 ],         // 章节导航
+  "nav":    [ 5–9 项 ],       // 章节导航
   "segments": [ 4 项 ],       // 段落（筛选按钮 + 卡片配色）
   "map":    { ... },          // 学习地图
   "steps":  [ 3 项 ],
-  "sec":    { map, lines, vocab, grammar, listen, studio, quiz, plan },  // 必填
+  "sec":    { map, lyrics, lines, vocab, grammar, listen, studio, quiz, plan },  // 必填
+  "lyrics": { "blocks": [...] },  // 可选（modules.lyrics）：完整歌词
   "lines":  [ 卡片 ],          // 必填
   "vocab":  [ 词 ],            // 必填
   "grammar":[ 语法 ],          // 必填
@@ -34,10 +35,11 @@ node scripts/build.js --check song.json   # 改的时候反复跑这个
 
 ## modules（可选）
 
-控制 8 个板块的开关。**核心四块 `map / lines / vocab / grammar` 不能关**（build 会报错）。
+控制 9 个板块的开关。**核心四块 `map / lines / vocab / grammar` 不能关**（build 会报错）；
+`lyrics`（完整歌词）默认为开，但没写歌词数据时会自动裁掉，也可以显式关掉。
 
 ```json
-"modules": { "listen": false, "studio": false, "quiz": false, "plan": false }
+"modules": { "lyrics": false, "listen": false, "studio": false, "quiz": false, "plan": false }
 ```
 
 `build.js` 在生成阶段就把对应 `<section>` 从 HTML 里裁掉；导航项、章节编号、顶部数据条项数会自动跟随，不需要改模板。
@@ -65,7 +67,7 @@ node scripts/build.js --check song.json   # 改的时候反复跑这个
 | `titleLine1` / `titleLine2` | 大标题拆两行。只有一行时 `titleLine2` 给 `""` |
 | `artist` | 演唱者 |
 | `subtitle` | 通常 `歌詞精読` |
-| `level` | `N3` 这类等级标 |
+| `level` | 大致难度档位，会显示在封面右下角，如 `N3 上下`、`N3–N2` |
 | `lead` | **允许 HTML**。首屏导语，一到两句，说清"为什么拿这首入门" |
 | `badges` | 4 个徽章。**第一个**会渲染成等级色（橙色），其余是圆点样式 |
 | `discLabel` / `discSub` | CD 中心的字，通常年份 + `single`；同时作为排版封面的年份 |
@@ -164,15 +166,43 @@ node scripts/build.js --check song.json   # 改的时候反复跑这个
 
 固定 3 条：听 → 读 → 测。
 
+## lyrics（可选，`modules.lyrics`）
+
+完整歌词，按段落分组。没有这个字段时，整块会自动从产物里裁掉。
+
+```json
+"lyrics": {
+  "foot": "点任意一行可以朗读。注音与逐句讲解在下一节「逐句精读」。",
+  "blocks": [
+    { "label": "Aメロ①", "tone": "a", "lines": [
+        "逃げたりあきらめるコトは 誰も",
+        "一瞬あればできるから 歩き続けよう"
+    ]},
+    { "label": "サビ①", "tone": "s", "lines": ["どんな願いも 嘘じゃない"] }
+  ]
+}
+```
+
+| 字段 | 说明 |
+|---|---|
+| `label` | 段落标签，如 `Aメロ①` / `サビ②` / `大サビ` / `ラスサビ` |
+| `tone` | 左侧色条，`a` 琥珀 / `b` 青 / `s` 橙 / `c` 蓝 / `d` 玫瑰 |
+| `lines` | 每行一句，日文原文。**不要写注音括号**——这一块是给人对着听的，标了反而看不清 |
+| `foot` | 区块下方的一行提示 |
+
+**分段以副歌重复为锚点**，不写时间戳（时间点容易对不准，标签够定位）。
+每行点一下就朗读（走 `data-say`），不需要额外按钮。
+
 ## sec（必填）
 
-8 个章节的标题区，字段统一 `num / title / jp / lead`：
+8–9 个章节的标题区，字段统一 `num / title / jp / lead`：
 
 ```
-sec.map / sec.lines / sec.vocab / sec.grammar / sec.listen / sec.studio / sec.quiz / sec.plan
+sec.map / sec.lyrics / sec.lines / sec.vocab / sec.grammar / sec.listen / sec.studio / sec.quiz / sec.plan
 ```
 
-`num` 从 `01` 顺排到 `08`。`jp` 用平假名写章节名的读法，全角空格分词。
+`num` 从 `01` 顺排；插入或裁掉板块时**不用手改**，运行时会按实际顺序重排。
+`jp` 用平假名写章节名的读法，全角空格分词。
 
 ## lines（必填，16–24 张）
 

@@ -36,6 +36,10 @@ const sp = (ok, msg) => statics.push((ok ? '✓ ' : '✗ ') + msg);
 
 ['map', 'lines', 'vocab', 'grammar'].forEach(k => sp(has(k), `含板块 ${k}`));
 sp(html.includes('id="lyric-list"'), '含 id="lyric-list"');
+/* 完整歌词是可选板块：有就检查容器，段落数在浏览器检查里验 */
+if (has('lyrics')) {
+  sp(html.includes('id="lyrics-body"'), '含完整歌词容器 id="lyrics-body"');
+}
 sp(html.includes('id="v-body"'), '含 id="v-body"');
 sp(html.includes('id="grammar-list"'), '含 id="grammar-list"');
 sp(html.includes('window.SONG'), '含 window.SONG');
@@ -107,6 +111,8 @@ async function launch() {
       stats: q('.hero-stats .stat'),
       statValues: Array.from(document.querySelectorAll('.hero-stats .stat b')).map(e => Number(e.textContent)),
       lines: q('#lyric-list .lyric'),
+      lyrBlocks: q('#lyrics-body .lyr-block'),
+      lyrLines: q('#lyrics-body .lyr-line'),
       words: q('#v-body tr'),
       gram: q('#grammar-list details'),
       quiz: q('#quiz-list .q'),
@@ -123,6 +129,10 @@ async function launch() {
      + (has('quiz') ? ` / ${counts.quiz} 题` : '') + (has('plan') ? ` / ${counts.plan} 天` : ''));
   ok(counts.statValues.length === counts.stats && counts.statValues.every(v => v > 0),
      `数据条 ${counts.stats} 项，数值均非 0（${counts.statValues.join(' / ')}）`);
+  if (has('lyrics')) {
+    ok(counts.lyrBlocks > 0 && counts.lyrLines >= counts.lyrBlocks,
+       `完整歌词 ${counts.lyrBlocks} 段 / ${counts.lyrLines} 行`);
+  }
   ok(counts.nums.every((n, i) => n === String(i + 1).padStart(2, '0')),
      `章节编号连续（${counts.nums.join(' ')}）`);
 

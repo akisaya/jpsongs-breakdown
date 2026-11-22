@@ -100,13 +100,13 @@ need(segs.length >= 1, 'segments 至少 1 段');
 const segKeys = new Set(segs.map(s => s.key));
 
 /* 板块开关：核心四块不可关，其余可关 */
-const MODULES = Object.assign({ map: true, lines: true, vocab: true, grammar: true, listen: true, studio: true, quiz: true, plan: true }, song.modules || {});
+const MODULES = Object.assign({ map: true, lyrics: true, lines: true, vocab: true, grammar: true, listen: true, studio: true, quiz: true, plan: true }, song.modules || {});
 const on = k => MODULES[k] !== false;
 ['map', 'lines', 'vocab', 'grammar'].forEach(k => {
   if (MODULES[k] === false) errors.push(`核心板块 "${k}" 不能关闭（关掉就没有内容了）`);
 });
 Object.keys(song.modules || {}).forEach(k => {
-  if (!['map', 'lines', 'vocab', 'grammar', 'listen', 'studio', 'quiz', 'plan'].includes(k)) {
+  if (!['map', 'lyrics', 'lines', 'vocab', 'grammar', 'listen', 'studio', 'quiz', 'plan'].includes(k)) {
     errors.push(`modules 里有未知板块 "${k}"`);
   }
 });
@@ -133,6 +133,34 @@ lines.forEach((l, i) => {
   if (open !== close) errors.push(`lines[${i}].jp 的 [ ] 不配对`);
   if (/\]\[/.test(l.jp)) warns.push(`lines[${i}].jp 出现 ][ 相邻，检查注音写法`);
 });
+
+/* 完整歌词 */
+if (on('lyrics')) {
+  const L = song.lyrics;
+  if (!L || !Array.isArray(L.blocks) || !L.blocks.length) {
+    warns.push('没有 lyrics.blocks，构建时会自动裁掉「完整歌词」这一节');
+  } else {
+    let total = 0;
+    L.blocks.forEach((b, i) => {
+      if (!b.label) warns.push(`lyrics.blocks[${i}] 没有段落标签 label`);
+      if (b.tone && !['a', 'b', 's', 'c', 'd'].includes(b.tone)) {
+        errors.push(`lyrics.blocks[${i}].tone="${b.tone}" 不认识（只允许 a/b/s/c/d）`);
+      }
+      if (!Array.isArray(b.lines) || !b.lines.length) {
+        warns.push(`lyrics.blocks[${i}] 没有歌词行`);
+        return;
+      }
+      total += b.lines.length;
+      b.lines.forEach((l, j) => {
+        const open = (l.match(/\[/g) || []).length;
+        const close = (l.match(/\]/g) || []).length;
+        if (open !== close) errors.push(`lyrics.blocks[${i}].lines[${j}] 注音 [ ] 不配对：${l}`);
+        if (!String(l).trim()) errors.push(`lyrics.blocks[${i}].lines[${j}] 是空行`);
+      });
+    });
+    if (total < 8) warns.push(`lyrics 只有 ${total} 行，确认是不是漏了段落`);
+  }
+}
 
 const seenK = new Set();
 vocab.forEach((v, i) => {
@@ -275,22 +303,27 @@ if (filled.missing.size) {
 }
 html = filled.out;
 
-/* 按 modules 裁剪未启用的板块：产物里直接不含这些 section，而不是靠运行时删除 */
-['listen', 'studio', 'quiz', 'plan'].forEach(k => {
-  if (MODULES[k] === false) {
-    const before = html;
+/* 按 modules 裁剪未启用的板块：产物里直接不含这些 section，而不是靠运行时删除。
+   lyrics 额外看数据：没写歌词就一起裁掉，避免留下空板块。 */
+const dropSections = new Set(
+  ['lyrics', 'listen', 'studio', 'quiz', 'plan'].filter(k => MODULES[k] === false)
+);
+if (!song.lyrics || !Array.isArray(song.lyrics.blocks) || !song.lyrics.blocks.length) {
+  dropSections.add('lyrics');
+}
+dropSections.forEach(k => {
+  const before = html;
+  html = html.replace(
+    new RegExp('\\s*<!--[^>]*?-->\\s*<section[^>]*?id="' + k + '">[\\s\\S]*?</section>', 'g'), '');
+  if (html === before) {
     html = html.replace(
-      new RegExp('\\s*<!--[^>]*?-->\\s*<section[^>]*?id="' + k + '">[\\s\\S]*?</section>', 'g'), '');
-    if (html === before) {
-      html = html.replace(
-        new RegExp('\\s*<section[^>]*?id="' + k + '">[\\s\\S]*?</section>', 'g'), '');
-    }
+      new RegExp('\\s*<section[^>]*?id="' + k + '">[\\s\\S]*?</section>', 'g'), '');
   }
 });
 
 /* 关闭的板块连数据一起剔除，避免无用的 JSON 占体积、源码里露出来 */
-['listen', 'studio', 'quiz', 'plan'].forEach(k => {
-  if (MODULES[k] === false) {
+['lyrics', 'listen', 'studio', 'quiz', 'plan'].forEach(k => {
+  if (dropSections.has(k)) {
     delete song[k];
     if (song.sec) delete song.sec[k];
   }

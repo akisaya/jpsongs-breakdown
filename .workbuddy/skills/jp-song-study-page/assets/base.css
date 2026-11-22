@@ -657,6 +657,71 @@ img,svg{display:block}
 .step p{font-size:.8rem;color:var(--ink-3);line-height:1.6;margin-top:.25rem}
 
 /* ============================================================
+   完整歌词
+   ============================================================ */
+.lyr-wrap{
+  display:grid;
+  gap:.7rem;
+  max-width:46rem;
+}
+.lyr-block{
+  position:relative;
+  background:var(--surface-warm);
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  padding:1rem 1.25rem 1.1rem 1.35rem;
+  overflow:hidden;
+}
+.lyr-block::before{
+  content:"";position:absolute;inset-block:0;inset-inline-start:0;
+  inline-size:3px;background:var(--tone,var(--orange-3));
+}
+/* 色条用饱和度高的品牌色，标签文字另给一档深色（原色对比度不够） */
+.lyr-block[data-tone="a"]{--tone:var(--amber);--tone-ink:#96660F}
+.lyr-block[data-tone="b"]{--tone:var(--teal);--tone-ink:#12675D}
+.lyr-block[data-tone="s"]{--tone:var(--orange);--tone-ink:#B2431A}
+.lyr-block[data-tone="c"]{--tone:var(--blue);--tone-ink:#2A4A78}
+.lyr-block[data-tone="d"]{--tone:var(--rose);--tone-ink:#923347}
+
+.lyr-head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:.7rem;
+  margin-bottom:.35rem;
+}
+.lyr-head span{
+  font-size:.66rem;font-weight:700;letter-spacing:.16em;
+  color:var(--tone-ink,var(--orange));
+}
+.lyr-head em{
+  font-style:normal;font-size:.62rem;letter-spacing:.08em;
+  color:var(--ink-4);
+  font-variant-numeric:tabular-nums;
+}
+.lyr-line{
+  margin:0;
+  padding-inline:.22rem;margin-inline:-.22rem;
+  border-radius:6px;
+  font-family:var(--font-serif);
+  font-size:1.06rem;
+  line-height:2.05;
+  letter-spacing:.02em;
+  color:#2A2D33;
+  cursor:pointer;
+  text-wrap:pretty;
+  transition:background .16s ease,color .16s ease;
+}
+.lyr-line:hover{background:rgba(242,179,61,.14);color:#14171B}
+.lyr-line:active{background:rgba(242,179,61,.22)}
+.lyr-foot{
+  margin:.85rem 0 0;
+  font-size:.74rem;line-height:1.8;
+  color:var(--ink-3);
+}
+@media (max-width:600px){
+  .lyr-block{padding:.85rem 1rem .95rem 1.1rem}
+  .lyr-line{font-size:.96rem;line-height:2}
+}
+
+/* ============================================================
    5. 逐句精读
    ============================================================ */
 .toolbar{

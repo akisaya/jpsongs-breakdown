@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>歌詞精読 · 日语歌词拆解合集</title>
-<meta name="description" content="把日文歌拆成 JLPT N3 级精读教材：逐句注音、核心词汇、语法图谱。目前收录 brave heart、again 两首。">
+<meta name="description" content="日文歌词逐句解析：完整歌词、注音精读、核心词汇、语法图谱。目前收录 brave heart、again 两首。">
 <meta name="theme-color" content="#FBF6EF">
 <style>
 /* ============================================================
@@ -267,6 +267,21 @@ a{color:inherit;text-decoration:none}
   font-family:var(--font-serif);
   font-size:.74rem;letter-spacing:.05em;color:var(--ink-2);
 }
+/* 大致难度：不是考试级别判定，只是给个参考档位 */
+.song-lv{
+  display:inline-block;
+  margin-left:.45rem;
+  padding:.08em .52em;
+  border-radius:999px;
+  border:1px solid #EADCC6;
+  background:#FFF8EC;
+  color:#8A5B14;
+  font-family:var(--font-sans);
+  font-size:.63rem;
+  letter-spacing:.02em;
+  white-space:nowrap;
+  vertical-align:.06em;
+}
 .song-desc{
   margin:.6rem 0 0;
   font-size:.78rem;line-height:1.72;color:var(--ink-3);
@@ -309,6 +324,8 @@ a{color:inherit;text-decoration:none}
   .cov-work,.cov-top,.cov-foot,.cov-artist{font-size:.35rem}
   .song{gap:.85rem;padding:.9rem}
   .song-title{font-size:1.24rem}
+  /* 窄屏不截断：纵向排列，两张卡不等高也不刺眼 */
+  .song-desc{-webkit-line-clamp:unset;min-block-size:0}
 }
 
 /* ============================================================
@@ -355,11 +372,11 @@ a{color:inherit;text-decoration:none}
 
 <main>
   <section class="intro wrap">
-    <p class="intro-kicker">JLPT N3 · 逐句拆解</p>
-    <h1>一首歌，<br>就是一份 <em>N3 教材</em></h1>
+    <p class="intro-kicker">Japanese Lyrics · 逐句解析</p>
+    <h1>把一首歌，<br>拆成<em>看得懂的句子</em></h1>
     <p class="intro-lead">
-      每首歌拆成 20 多张卡片：带注音的句子、句中单词、语法点，以及一句「唱的时候才会注意到的细节」。
-      不收录完整歌词，只做语言分析——<b>你对着正版音源听，我负责把句子讲透</b>。
+      每首歌拆成 20 多张卡片：完整歌词、带注音的句子、句中单词、语法点，以及一句「唱的时候才会注意到的细节」。
+      不追求「学完就能考级」，只求<b>你把这首歌真的听懂、唱顺</b>。
     </p>
     <div class="tally" id="tally"></div>
   </section>
@@ -376,12 +393,12 @@ a{color:inherit;text-decoration:none}
 <footer class="foot wrap">
   <div class="foot-inner">
     <p class="foot-note">
-      本站为日语学习用途的语言分析作品，不提供完整歌词。歌词著作权归各曲作词、作曲、演唱者及相关权利方所有；
-      页面仅引用极短片段用于语法与词汇讲解。请通过正版音源与官方歌词页对照收听。
+      本站为个人日语学习用途的歌词解析作品，非官方发布。歌词著作权归各曲作词、作曲、演唱者及相关权利方所有；
+      页面内容仅供学习参考，请勿用于商业用途。请通过正版音源与官方歌词页对照收听。
     </p>
     <p class="foot-meta">
       Lyrics Breakdown<br>
-      JLPT N3 Study Pages<br>
+      逐句解析 · 完整歌词<br>
       <span id="foot-year"></span>
     </p>
   </div>
@@ -403,9 +420,10 @@ a{color:inherit;text-decoration:none}
       title: ['brave', 'heart'],
       artist: '宮崎歩',
       year: '1999',
+      level: 'N3 上下',
       tone: 'teal',
-      desc: '24 行歌词把命令形、意志形、假定形用了个遍。进化曲的句子短、咬字清楚，最合适拿来做影子跟读。',
-      scale: { lines: 22, vocab: 61, grammar: 16 }
+      desc: '进化曲里最耐听的一首。命令形、意志形、假定形轮番上阵，句子短、咬字清楚，最合适拿来做影子跟读。副歌两句「つかめ」「まもれ」跟着喊几遍就顺了。',
+      scale: { lyr: 27, lines: 22, vocab: 61, grammar: 16 }
     },
     {
       slug: 'again-yui',
@@ -415,9 +433,10 @@ a{color:inherit;text-decoration:none}
       title: ['again'],
       artist: 'YUI',
       year: '2009',
+      level: 'N3–N2',
       tone: 'rust',
       desc: '口语缩约最密集的一首：てく、ちゃ、ん、じゃん、らんない 全挤在副歌里。练「听懂日本人真实说话」比练考试语法更有用。',
-      scale: { lines: 23, vocab: 68, grammar: 16 }
+      scale: { lyr: 46, lines: 23, vocab: 68, grammar: 16 }
     }
   ];
 
@@ -447,14 +466,15 @@ a{color:inherit;text-decoration:none}
   function renderTally(){
     var sum = SONGS.reduce(function(a, s){
       return {
+        lyr: a.lyr + s.scale.lyr,
         lines: a.lines + s.scale.lines,
         vocab: a.vocab + s.scale.vocab,
         grammar: a.grammar + s.scale.grammar
       };
-    }, { lines: 0, vocab: 0, grammar: 0 });
+    }, { lyr: 0, lines: 0, vocab: 0, grammar: 0 });
 
     var items = [
-      [SONGS.length, '首 歌'],
+      [sum.lyr, '行 歌 词'],
       [sum.lines, '精 读 句'],
       [sum.vocab, '核 心 词'],
       [sum.grammar, '语 法 点']
@@ -484,12 +504,14 @@ a{color:inherit;text-decoration:none}
         +     '<span class="cov-title">' + titleHtml + '</span>'
         +     '<span class="cov-artist">' + esc(s.artist) + '</span>'
         +   '</div>'
-        +   '<div class="cov-foot"><span>歌詞精読</span><span>N3</span></div>'
+        +   '<div class="cov-foot"><span>歌詞精読</span><span>' + esc(s.level) + '</span></div>'
         + '</figure>'
         + '<div class="song-body">'
         +   '<p class="song-kicker">' + esc(s.kicker) + '</p>'
         +   '<h3 class="song-title">' + titleText + '</h3>'
-        +   '<p class="song-by">' + esc(s.artist) + ' · ' + esc(s.year) + progHtml + '</p>'
+        +   '<p class="song-by">' + esc(s.artist) + ' · ' + esc(s.year)
+        +     '<span class="song-lv" title="大致难度参考，不是考试级别判定">' + esc(s.level) + '</span>'
+        +     progHtml + '</p>'
         +   '<p class="song-desc">' + esc(s.desc) + '</p>'
         +   '<div class="song-foot">'
         +     '<span class="song-scale">' + s.scale.lines + ' 句 · ' + s.scale.vocab + ' 词 · ' + s.scale.grammar + ' 语法</span>'

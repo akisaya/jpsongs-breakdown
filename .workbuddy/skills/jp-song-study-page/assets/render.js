@@ -17,7 +17,7 @@
   const SEGS   = SONG.segments || [];
   const NS     = 'jss.' + (META.slug || 'default') + '.';
 
-  const ALL_SECTIONS = ['map', 'lines', 'vocab', 'grammar', 'listen', 'studio', 'quiz', 'plan'];
+  const ALL_SECTIONS = ['map', 'lyrics', 'lines', 'vocab', 'grammar', 'listen', 'studio', 'quiz', 'plan'];
   const MODULES = Object.assign({}, ...ALL_SECTIONS.map(k => ({ [k]: true })), SONG.modules || {});
   const on = k => MODULES[k] !== false;
 
@@ -80,16 +80,20 @@
   }
 
   /* ---------------- 板块卸载 + 章节编号重排 ---------------- */
+  function renumberSections() {
+    $$('main > section').forEach((s, i) => {
+      const n = s.querySelector('.sec-num');
+      if (n) n.textContent = String(i + 1).padStart(2, '0');
+    });
+  }
+
   ALL_SECTIONS.forEach(k => {
     if (!on(k)) {
       const el = document.getElementById(k);
       if (el) el.remove();
     }
   });
-  $$('main > section').forEach((s, i) => {
-    const n = s.querySelector('.sec-num');
-    if (n) n.textContent = String(i + 1).padStart(2, '0');
-  });
+  renumberSections();
 
   /* ---------------- 首屏右侧：封面 ----------------
      meta.cover = "disc"  → 用模板里的 CD 图形
@@ -131,6 +135,37 @@
       +     '<span>' + escapeHtml(META.level || '') + '</span>'
       +   '</div>'
       + '</div></figure>';
+  }
+
+  /* ---------------- 完整歌词 ---------------- */
+  function renderLyrics() {
+    const box = $('#lyrics-body');
+    if (!box) return;
+    const L = SONG.lyrics;
+    const blocks = (L && Array.isArray(L.blocks))
+      ? L.blocks.filter(b => b && Array.isArray(b.lines) && b.lines.length) : [];
+
+    /* 没有歌词数据就把这一节整块撤掉，章节编号重新排 */
+    if (!blocks.length) {
+      const sec = document.getElementById('lyrics');
+      if (sec) { sec.remove(); renumberSections(); }
+      return;
+    }
+
+    box.innerHTML = blocks.map(b => {
+      const head = '<div class="lyr-head"><span>' + escapeHtml(b.label || '')
+        + '</span>' + (b.time ? '<em>' + escapeHtml(b.time) + '</em>' : '') + '</div>';
+      const lines = b.lines.map(l =>
+        '<p class="lyr-line" data-say="' + escapeAttr(plain(l)) + '">' + ruby(l) + '</p>').join('');
+      return '<div class="lyr-block" data-tone="' + escapeAttr(b.tone || 'a') + '">'
+        + head + lines + '</div>';
+    }).join('');
+
+    const foot = $('#lyrics-foot');
+    if (foot) {
+      foot.innerHTML = L.foot
+        || '点任意一行可以朗读。这一段是整首歌词，方便对照听唱；注音与逐句讲解见下一节。';
+    }
   }
 
   /* ---------------- 导航 ---------------- */
@@ -583,6 +618,7 @@
   }
 
   /* ---------------- 启动 ---------------- */
+  renderLyrics();
   renderNav();
   renderStats();
   renderHeroArt();
