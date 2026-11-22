@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{meta.pageTitle}}</title>
+<meta name="description" content="{{meta.description}}">
+<style>/*__CSS__*/</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="kicker">{{meta.kicker}}</span>
+      <h1 class="song-title">{{meta.titleLine1}}<br>{{meta.titleLine2}}</h1>
+      <div class="song-jp">
+        <span>{{meta.artist}}</span><span class="dot"></span><span>{{meta.subtitle}}</span><span class="dot"></span><span>{{meta.level}}</span>
+      </div>
+      <p class="hero-lead">{{meta.lead}}</p>
+      <div class="badges" id="badges"></div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#lines">{{cta.primary}}</a>
+        <a class="btn btn-ghost" href="{{cta.secondaryHref}}">{{cta.secondary}}</a>
+      </div>
+    </div>
+    <div class="hero-art" id="hero-art" aria-hidden="true">
+      <div class="disc">
+        <div class="disc-label"><b>{{meta.discLabel}}</b><i>{{meta.discSub}}</i></div>
+        <div class="disc-hole"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero-stats" id="hero-stats"></div>
+  </div>
+</header>
+
+<nav class="topnav" aria-label="章节导航">
+  <div class="wrap nav-inner" id="nav-inner"></div>
+</nav>
+
+<main id="main">
+  <!-- 01 学习地图 -->
+  <section class="section" id="map">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">{{sec.map.num}}</div>
+        <div>
+          <h2 class="sec-title">{{sec.map.title}}</h2>
+          <div class="sec-jp">{{sec.map.jp}}</div>
+          <p class="sec-lead">{{sec.map.lead}}</p>
+        </div>
+      </div>
+
+      <div class="map-grid">
+        <div class="card card-pad reveal">
+          <h3 style="font-size:.98rem;margin-bottom:.2rem">{{map.whyTitle}}</h3>
+          <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:.9rem">{{map.whySub}}</p>
+          <ul class="why-list" id="why-list"></ul>
+        </div>
+
+        <div class="card card-pad reveal">
+          <div class="struct-title">
+            <h3>{{map.structTitle}}</h3>
+            <span>{{map.structHint}}</span>
+          </div>
+          <div class="struct" id="struct"></div>
+          <div class="struct-legend" id="struct-legend"></div>
+          <p style="font-size:.8rem;color:var(--ink-3);line-height:1.75;margin-top:1rem;border-top:1px dashed var(--line);padding-top:.9rem">{{map.tip}}</p>
+        </div>
+      </div>
+
+      <div class="steps reveal" id="steps"></div>
+    </div>
+  </section>
+
+  <!-- 02 逐句精读 -->
+  <section class="section" id="lines">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">{{sec.lines.num}}</div>
+        <div>
+          <h2 class="sec-title">{{sec.lines.title}}</h2>
+          <div class="sec-jp">{{sec.lines.jp}}</div>
+          <p class="sec-lead">{{sec.lines.lead}}</p>
+        </div>
+      </div>
+
+      <div class="toolbar reveal">
+        <div id="sec-filters" style="display:flex;gap:.5rem;flex-wrap:wrap"></div>
+        <div class="toolbar-right">
+          <label class="toggle"><input type="checkbox" id="t-furi" checked> 显示假名</label>
+          <label class="toggle"><input type="checkbox" id="t-tr" checked> 显示中文</label>
+        </div>
+      </div>
+
+      <div class="lyric-list" id="lyric-list"></div>
+      <div class="empty" id="lyric-empty" hidden>这一段还没有卡片，换一个段落试试。</div>
+    </div>
+  </section>
+
+  <!-- 03 核心词汇 -->
+  <section class="section" id="vocab">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">{{sec.vocab.num}}</div>
+        <div>
+          <h2 class="sec-title">{{sec.vocab.title}}</h2>
+          <div class="sec-jp">{{sec.vocab.jp}}</div>
+          <p class="sec-lead">{{sec.vocab.lead}}</p>
+        </div>
+      </div>
+
+      <div class="vocab-tools reveal">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="v-search" placeholder="{{vocabTip.searchHint}}" aria-label="搜索词汇">
+        </div>
+        <div class="chips" id="v-levels">
+          <button class="chip is-on" data-lv="all">全部等级</button>
+          <button class="chip" data-lv="N5">N5</button>
+          <button class="chip" data-lv="N4">N4</button>
+          <button class="chip" data-lv="N3">N3</button>
+          <button class="chip" data-lv="N2">N2</button>
+          <button class="chip" data-lv="N1">N1</button>
+        </div>
+        <button class="chip" id="v-undone">只看未掌握</button>
+      </div>
+
+      <div class="table-wrap reveal">
+        <div class="table-scroll">
+          <table class="vocab">
+            <thead>
+              <tr>
+                <th style="width:44px">掌握</th>
+                <th>单词</th>
+                <th>读音</th>
+                <th>词性</th>
+                <th>意思</th>
+                <th>等级</th>
+                <th style="width:44px"><span class="sr-only">发音</span></th>
+              </tr>
+            </thead>
+            <tbody id="v-body"></tbody>
+          </table>
+        </div>
+        <div class="table-foot">
+          <span id="v-count">共 0 个词</span>
+          <div style="display:flex;gap:.5rem;align-items:center">
+            <span id="v-progress">已掌握 0</span>
+            <button class="mini-btn" id="v-reset">重置进度</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 语法图谱 -->
+  <section class="section" id="grammar">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">{{sec.grammar.num}}</div>
+        <div>
+          <h2 class="sec-title">{{sec.grammar.title}}</h2>
+          <div class="sec-jp">{{sec.grammar.jp}}</div>
+          <p class="sec-lead">{{sec.grammar.lead}}</p>
+        </div>
+      </div>
+      <div class="grammar-list" id="grammar-list"></div>
+    </div>
+  </section>
+
+  <!-- 05 听说训练 -->
+  <section class="section" id="listen">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">{{sec.listen.num}}</div>
+        <div>
+          <h2 class="sec-title">{{sec.listen.title}}</h2>
+          <div class="sec-jp">{{sec.listen.jp}}</div>
+          <p class="sec-lead">{{sec.listen.lead}}</p>
+        </div>
+      </div>
+      <div class="listen-grid" id="listen-grid"></div>
+    </div>
+  </section>
+
+  <!-- 06 歌词工作台 -->
+  <section class="section" id="studio">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">{{sec.studio.num}}</div>
+        <div>
+          <h2 class="sec-title">{{sec.studio.title}}</h2>
+          <div class="sec-jp">{{sec.studio.jp}}</div>
+          <p class="sec-lead">{{sec.studio.lead}}</p>
+        </div>
+      </div>
+
+      <div class="studio">
+        <div class="studio-panel reveal">
+          <div class="studio-head">
+            <b>粘贴区</b>
+            <span>仅本地保存 · 不上传</span>
+          </div>
+          <label for="paste" class="sr-only">粘贴歌词</label>
+          <textarea id="paste" placeholder="{{studio.placeholder}}" spellcheck="false"></textarea>
+          <div class="studio-actions">
+            <button class="mini-btn" id="studio-clear">清空</button>
+            <span style="font-size:.74rem;color:var(--ink-3);align-self:center">已标注 <b id="studio-count">0</b> 处</span>
+          </div>
+        </div>
+
+        <div class="studio-panel reveal">
+          <div class="studio-head">
+            <b>标注结果</b>
+            <span>橙色 = 词表里的词</span>
+          </div>
+          <div class="studio-out" id="studio-out">
+            <p class="tip">粘贴之后，这里会显示带标注的歌词。<br>标了底色的词，把鼠标停上去可以看到读音和释义。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 填空测验 -->
+  <section class="section" id="quiz">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">{{sec.quiz.num}}</div>
+        <div>
+          <h2 class="sec-title">{{sec.quiz.title}}</h2>
+          <div class="sec-jp">{{sec.quiz.jp}}</div>
+          <p class="sec-lead">{{sec.quiz.lead}}</p>
+        </div>
+      </div>
+
+      <div class="quiz-head reveal">
+        <div class="quiz-score">得分 <b id="quiz-score">0</b> / <span id="quiz-total">0</span></div>
+        <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap">
+          <span style="font-size:.76rem;color:var(--ink-3)">最佳成绩：<b id="quiz-best" style="color:var(--teal)">—</b></span>
+          <button class="mini-btn" id="quiz-reset">重做一遍</button>
+        </div>
+      </div>
+
+      <div class="quiz-list" id="quiz-list"></div>
+    </div>
+  </section>
+
+  <!-- 08 学习计划 -->
+  <section class="section" id="plan">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">{{sec.plan.num}}</div>
+        <div>
+          <h2 class="sec-title">{{sec.plan.title}}</h2>
+          <div class="sec-jp">{{sec.plan.jp}}</div>
+          <p class="sec-lead">{{sec.plan.lead}}</p>
+        </div>
+      </div>
+      <div class="plan" id="plan-grid"></div>
+      <p style="font-size:.78rem;color:var(--ink-3);margin-top:1rem;line-height:1.8">{{plan.note}}</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap foot-grid">
+    <div>
+      <div class="foot-title">{{footer.title}}</div>
+      <p class="foot-note">{{footer.note}}</p>
+    </div>
+    <div class="foot-meta">{{footer.meta}}</div>
+  </div>
+</footer>
+
+<script>window.SONG = __SONG_JSON__;</script>
+<script>/*__RENDER_JS__*/</script>
+</body>
+</html>

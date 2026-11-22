@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>brave heart 歌詞精読 · JLPT N3 日语歌词学习</title>
+<meta name="description" content="以宮崎歩「brave heart」为例的 JLPT N3 日语歌词精读：逐句注音拆解、核心词汇表、语法图谱，以及全曲结构地图。">
+<style>
+/* ============================================================
+   0. 设计变量
+   ============================================================ */
+:root{
+  --bg:#FBF6EF;
+  --bg-deep:#F4EADD;
+  --surface:#FFFFFF;
+  --surface-warm:#FFFCF7;
+  --ink:#1F232A;
+  --ink-2:#4C525C;
+  --ink-3:#828893;
+  --ink-4:#A9AEB7;
+  --line:#E8DCCB;
+  --line-soft:#F1E8DB;
+  --orange:#D9541F;
+  --orange-2:#E8622B;
+  --orange-3:#F59A4B;
+  --amber:#F2B33D;
+  --teal:#1E8A7E;
+  --teal-soft:#E4F2EE;
+  --blue:#33598F;
+  --blue-soft:#E8EEF8;
+  --rose:#B94E66;
+  --rose-soft:#FAE9ED;
+
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP","PingFang SC","Microsoft YaHei",sans-serif;
+  --font-serif:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",Georgia,"Songti SC",serif;
+  --font-display:"Didot","Bodoni 72",Georgia,"Times New Roman",serif;
+
+  --shadow-xs:0 1px 2px rgba(84,56,24,.05);
+  --shadow-sm:0 1px 2px rgba(84,56,24,.05),0 4px 12px -6px rgba(84,56,24,.14);
+  --shadow-md:0 2px 4px rgba(84,56,24,.05),0 14px 34px -14px rgba(84,56,24,.22);
+  --shadow-lg:0 30px 60px -30px rgba(84,56,24,.30);
+
+  --r-sm:10px;
+  --r-md:16px;
+  --r-lg:22px;
+  --r-xl:30px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+
+html{
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+  scroll-padding-top:86px;
+}
+
+body{
+  margin:0;
+  font-family:var(--font-sans);
+  font-size:1rem;
+  line-height:1.75;
+  color:var(--ink);
+  background:
+    radial-gradient(1100px 560px at 88% -12%, rgba(255,224,190,.85) 0%, rgba(255,224,190,0) 62%),
+    radial-gradient(820px 480px at -8% 4%, rgba(214,238,231,.75) 0%, rgba(214,238,231,0) 58%),
+    var(--bg);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+
+/* 细网格底纹 */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background-image:
+    linear-gradient(to right, rgba(120,86,48,.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(120,86,48,.055) 1px, transparent 1px);
+  background-size:72px 72px;
+  -webkit-mask-image:radial-gradient(circle at 50% 12%, #000 0%, transparent 72%);
+  mask-image:radial-gradient(circle at 50% 12%, #000 0%, transparent 72%);
+}
+
+h1,h2,h3,h4{margin:0;line-height:1.28;font-weight:700;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit}
+img,svg{display:block}
+
+.wrap{
+  width:min(1160px, calc(100% - 2.6rem));
+  margin-inline:auto;
+  position:relative;
+  z-index:1;
+}
+@media (max-width:620px){
+  .wrap{width:calc(100% - 1.9rem)}
+}
+
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+.hide-tr .lyric-tr{display:none}
+
+.skip{
+  position:absolute;left:-9999px;top:0;
+  background:var(--ink);color:#fff;padding:.7rem 1.1rem;border-radius:0 0 10px 0;z-index:99;
+}
+.skip:focus{left:0}
+:focus-visible{outline:2.5px solid var(--orange-2);outline-offset:3px;border-radius:4px}
+
+/* ============================================================
+   1. Hero
+   ============================================================ */
+.hero{
+  position:relative;
+  padding:clamp(2.4rem,5vw,4.2rem) 0 0;
+  overflow:hidden;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr);
+  gap:clamp(1.6rem,4vw,3.4rem);
+  align-items:center;
+}
+@media (max-width:880px){
+  .hero-grid{grid-template-columns:1fr;gap:2.4rem}
+}
+
+.kicker{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-size:.72rem;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--orange);
+}
+.kicker::before{
+  content:"";width:34px;height:1.5px;background:currentColor;display:block;
+}
+
+.song-title{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-weight:400;
+  font-size:clamp(4rem,12.5vw,8.4rem);
+  line-height:.84;
+  letter-spacing:-.035em;
+  margin:.9rem 0 0 -.06em;
+  color:var(--orange-2);
+  text-wrap:balance;
+}
+@supports (background-clip:text) or (-webkit-background-clip:text){
+  .song-title{
+    background:linear-gradient(118deg,#C64A1A 0%,#E8622B 28%,#F7A94F 62%,#DD5B23 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+}
+
+.song-jp{
+  font-family:var(--font-serif);
+  font-size:clamp(1rem,2.1vw,1.22rem);
+  color:var(--ink-2);
+  letter-spacing:.22em;
+  margin-top:1.05rem;
+  display:flex;align-items:center;gap:.85rem;flex-wrap:wrap;
+}
+.song-jp span.dot{width:5px;height:5px;border-radius:50%;background:var(--orange-3);display:block}
+
+.hero-lead{
+  max-width:46ch;
+  color:var(--ink-2);
+  font-size:1.02rem;
+  line-height:1.85;
+  margin-top:1.35rem;
+  text-wrap:pretty;
+}
+.hero-lead b{color:var(--ink);font-weight:700}
+
+.badges{
+  display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.6rem;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:.42rem;
+  padding:.34rem .78rem;
+  border-radius:999px;
+  font-size:.78rem;font-weight:600;
+  letter-spacing:.02em;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.72);
+  color:var(--ink-2);
+  backdrop-filter:blur(6px);
+}
+.badge--level{border-color:#F3C9A2;background:#FFF1E2;color:#A8430F}
+.badge--dot::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--teal);display:block}
+
+.hero-cta{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.1rem}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:.82rem 1.5rem;
+  border-radius:999px;
+  font-size:.92rem;font-weight:700;
+  border:1.5px solid transparent;
+  cursor:pointer;
+  text-decoration:none;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  min-block-size:44px;
+}
+.btn-primary{
+  background:linear-gradient(135deg,#E8622B,#D0451A);
+  color:#fff;
+  box-shadow:0 10px 22px -12px rgba(208,69,26,.85);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 28px -14px rgba(208,69,26,.9)}
+.btn-ghost{
+  background:rgba(255,255,255,.8);
+  border-color:var(--line);
+  color:var(--ink);
+}
+.btn-ghost:hover{background:#fff;border-color:#D9C7AE;transform:translateY(-2px)}
+
+/* CD 装饰 */
+.hero-art{
+  position:relative;
+  display:grid;place-items:center;
+  min-block-size:clamp(240px,30vw,360px);
+}
+.hero-art::before{
+  content:"";
+  position:absolute;
+  width:78%;aspect-ratio:1;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(249,193,133,.45),rgba(249,193,133,0) 68%);
+  filter:blur(18px);
+}
+.disc{
+  position:relative;
+  width:min(100%,320px);
+  aspect-ratio:1;
+  border-radius:50%;
+  background:conic-gradient(from 200deg,#F9CFA9,#FCE7CD,#CFE9E1,#DBDDF3,#F7D3DC,#F6C79E,#F9CFA9);
+  box-shadow:
+    0 24px 50px -22px rgba(120,74,30,.45),
+    inset 0 0 0 1px rgba(255,255,255,.6);
+  animation:spin 34s linear infinite;
+}
+.disc::before{
+  content:"";
+  position:absolute;inset:0;border-radius:50%;
+  background:repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.55) 0 1px, rgba(255,255,255,0) 1px 4px);
+  opacity:.55;
+}
+.disc::after{
+  content:"";
+  position:absolute;inset:12%;border-radius:50%;
+  background:linear-gradient(140deg,rgba(255,255,255,.85),rgba(255,255,255,0) 42%),
+             conic-gradient(from 20deg,rgba(255,255,255,.5),rgba(255,255,255,0) 40%,rgba(255,255,255,.35));
+  mix-blend-mode:screen;
+}
+.disc-label{
+  position:absolute;inset:35%;
+  border-radius:50%;
+  background:linear-gradient(150deg,#FFF7EC,#FFE7C9);
+  box-shadow:inset 0 0 0 1px rgba(180,130,80,.25), 0 4px 12px rgba(140,90,40,.18);
+  display:grid;place-content:center;text-align:center;gap:.05rem;
+  z-index:2;
+}
+.disc-label b{
+  font-family:var(--font-display);font-style:italic;font-weight:400;
+  font-size:clamp(.9rem,1.9vw,1.15rem);color:var(--orange);letter-spacing:-.02em;line-height:1;
+}
+.disc-label i{
+  display:block;font-style:normal;font-size:.55rem;letter-spacing:.24em;
+  color:var(--ink-3);margin-top:.28rem;text-transform:uppercase;
+}
+.disc-hole{
+  position:absolute;inset:49%;border-radius:50%;
+  background:var(--bg);box-shadow:inset 0 1px 3px rgba(80,50,20,.3);
+  z-index:3;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* 封面（优先于 CD：song.json 里给了 meta.cover 就显示封面） */
+.cover{
+  position:relative;
+  width:min(100%,368px);
+  aspect-ratio:1;
+  margin:0;
+  border-radius:16px;
+  overflow:hidden;
+  background:linear-gradient(150deg,#F7C9A3,#EFAE7C);
+  box-shadow:
+    0 34px 64px -32px rgba(96,48,12,.55),
+    0 6px 18px -8px rgba(96,48,12,.28);
+  transform:rotate(-1.5deg);
+  transition:transform .45s cubic-bezier(.2,.7,.3,1), box-shadow .45s ease;
+}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.cover::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(155deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,0) 40%);
+  mix-blend-mode:screen;
+}
+/* 真实封面不叠高光：那层光泽是给排版封面的塑料质感，盖在图片上会洗白左上角 */
+.cover--img::after{display:none}
+.cover--img{background:#1B2A30}
+.cover:hover{transform:rotate(0deg) translateY(-5px);box-shadow:0 42px 74px -32px rgba(96,48,12,.6),0 8px 22px -8px rgba(96,48,12,.3)}
+@media (prefers-reduced-motion:reduce){
+  .cover{transform:none}
+  .cover:hover{transform:none}
+}
+@media (max-width:620px){
+  .cover{width:min(74vw,300px)}
+}
+
+/* 排版式封面：没有任何图片，纯 CSS + 文字，随歌名自动生成 */
+.cover--type{
+  background:
+    radial-gradient(125% 95% at 24% 8%, #2E8379 0%, #1C5D5B 30%, #123C45 64%, #08222C 100%);
+  color:#FBF1E0;
+  overflow:hidden;
+}
+.cover--type::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(to right, rgba(255,240,215,.11) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,240,215,.11) 1px, transparent 1px);
+  background-size:34px 34px;
+  -webkit-mask-image:radial-gradient(circle at 34% 22%, #000 0%, transparent 74%);
+  mask-image:radial-gradient(circle at 34% 22%, #000 0%, transparent 74%);
+}
+.cover--type::after{
+  content:"";position:absolute;pointer-events:none;
+  inset:0;border:0;
+  background:linear-gradient(158deg,rgba(255,255,255,.20) 0%,rgba(255,255,255,0) 46%);
+  mix-blend-mode:screen;
+}
+.cover-ring{
+  position:absolute;z-index:1;pointer-events:none;
+  width:52%;aspect-ratio:1;border-radius:50%;
+  right:-22%;top:30%;
+  border:1px solid rgba(255,232,196,.17);
+  box-shadow:0 0 0 18px rgba(255,232,196,.042), 0 0 0 42px rgba(255,232,196,.022);
+}
+.cover-inner{
+  position:relative;z-index:2;
+  height:100%;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(1rem,5.2%,1.6rem);
+}
+.cover-row{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+.cover-tag,.cover-year,.cover-foot span{
+  font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  opacity:.82;white-space:nowrap;
+}
+.cover-mid{display:flex;flex-direction:column;gap:.55rem;margin-top:auto;margin-bottom:auto}
+.cover-work{
+  font-size:.55rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  opacity:.72;
+}
+.cover-title{
+  font-family:var(--font-display);
+  font-style:italic;font-weight:400;
+  font-size:clamp(2.3rem,7.6vw,3.15rem);
+  line-height:.86;letter-spacing:-.02em;
+  color:#FFFBF0;
+  text-shadow:0 2px 20px rgba(0,18,24,.38);
+}
+.cover-artist{
+  font-size:.78rem;letter-spacing:.28em;opacity:.9;margin-top:.15rem;
+}
+.cover-foot{
+  display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+  padding-top:.7rem;
+  border-top:1px solid rgba(255,232,196,.24);
+}
+@media (prefers-reduced-motion:reduce){
+  .disc{animation:none}
+  html{scroll-behavior:auto}
+  *{transition-duration:.01ms !important;animation-duration:.01ms !important}
+}
+
+/* 数据条 */
+.hero-stats{
+  margin-top:clamp(2.4rem,5vw,3.6rem);
+  display:grid;
+  grid-template-columns:repeat(var(--stat-cols,4),minmax(0,1fr));
+  background:rgba(255,255,255,.66);
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  backdrop-filter:blur(10px);
+  box-shadow:var(--shadow-sm);
+  overflow:hidden;
+}
+@media (max-width:640px){
+  .hero-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat:last-child:nth-child(odd){grid-column:1 / -1;border-right:0}
+}
+.stat{
+  padding:1.15rem 1.25rem 1.2rem;
+  border-right:1px solid var(--line-soft);
+  position:relative;
+}
+.stat:last-child{border-right:0}
+@media (max-width:640px){
+  .stat:nth-child(2n){border-right:0}
+  .stat:nth-child(-n+2){border-bottom:1px solid var(--line-soft)}
+}
+.stat b{
+  display:block;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-weight:400;
+  font-size:clamp(1.8rem,3.6vw,2.5rem);
+  line-height:1;
+  color:var(--orange-2);
+  letter-spacing:-.02em;
+}
+.stat b small{font-size:.45em;font-family:var(--font-sans);font-style:normal;font-weight:600;color:var(--ink-3);margin-left:.18em;letter-spacing:0}
+.stat span{
+  display:block;margin-top:.45rem;
+  font-size:.76rem;color:var(--ink-3);
+  letter-spacing:.1em;
+}
+
+/* ============================================================
+   2. 顶部导航
+   ============================================================ */
+@media (max-width:620px){
+  .kicker{font-size:.63rem;letter-spacing:.15em;gap:.55rem}
+  .kicker::before{width:22px}
+  .hero-art{min-block-size:auto;padding-block:.4rem}
+  .disc{width:min(58vw,210px)}
+  .hero-lead{font-size:.96rem}
+  .badge{font-size:.74rem;padding:.3rem .68rem}
+  .hero-cta{gap:.55rem}
+  .btn{padding:.78rem 1.25rem;font-size:.88rem}
+}
+.topnav{
+  position:sticky;top:0;z-index:50;
+  margin-top:clamp(2rem,4vw,2.8rem);
+  background:rgba(251,246,239,.82);
+  backdrop-filter:blur(14px) saturate(1.4);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  display:flex;align-items:center;gap:.4rem;
+  overflow-x:auto;
+  scrollbar-width:none;
+  padding-block:.55rem;
+}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-link{
+  flex:0 0 auto;
+  padding:.42rem .78rem;
+  border-radius:999px;
+  font-size:.82rem;
+  font-weight:600;
+  color:var(--ink-3);
+  text-decoration:none;
+  white-space:nowrap;
+  transition:background .16s ease,color .16s ease;
+}
+.nav-link:hover{background:rgba(232,98,43,.08);color:var(--orange)}
+.nav-link.is-active{background:var(--ink);color:#FFF8EF}
+/* 返回合集：指向合集索引页，href 由 meta.backHref 控制 */
+.nav-back{
+  flex:0 0 auto;
+  display:inline-flex;align-items:center;gap:.3rem;
+  padding:.42rem .2rem;
+  font-size:.78rem;font-weight:600;
+  color:var(--ink-3);text-decoration:none;white-space:nowrap;
+  transition:color .16s ease;
+}
+.nav-back:hover{color:var(--orange)}
+.nav-back svg{width:13px;height:13px;flex:0 0 auto}
+.nav-back::after{
+  content:"";inline-size:1px;block-size:14px;margin-left:.55rem;
+  background:var(--line);
+}
+.nav-spacer{flex:1 1 auto}
+.nav-progress{
+  flex:0 0 auto;display:flex;align-items:center;gap:.55rem;
+  font-size:.74rem;color:var(--ink-3);white-space:nowrap;
+  padding-left:.4rem;
+}
+@media (max-width:900px){.nav-progress{display:none}}
+.bar{
+  width:82px;height:5px;border-radius:99px;background:var(--line);
+  overflow:hidden;
+}
+.bar i{display:block;height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--amber),var(--orange));transition:width .35s ease}
+
+/* ============================================================
+   3. 章节骨架
+   ============================================================ */
+.section{padding:clamp(2.8rem,6vw,4.6rem) 0}
+.section + .section{border-top:1px solid var(--line-soft)}
+.sec-head{
+  display:grid;
+  grid-template-columns:3.2rem minmax(0,1fr);
+  gap:1.1rem;
+  margin-bottom:clamp(1.6rem,3vw,2.4rem);
+}
+@media (max-width:600px){
+  .sec-head{grid-template-columns:1fr;gap:.5rem}
+}
+.sec-num{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:1.05rem;
+  color:var(--orange);
+  border-top:1.5px solid var(--orange);
+  padding-top:.55rem;
+  letter-spacing:.02em;
+}
+.sec-title{
+  font-size:clamp(1.45rem,3.2vw,2.05rem);
+  text-wrap:balance;
+}
+.sec-jp{
+  font-family:var(--font-serif);
+  font-size:.86rem;
+  letter-spacing:.24em;
+  color:var(--ink-3);
+  margin-top:.5rem;
+}
+.sec-lead{
+  max-width:66ch;
+  color:var(--ink-2);
+  margin-top:.9rem;
+  text-wrap:pretty;
+}
+
+/* 通用卡片 */
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  box-shadow:var(--shadow-sm);
+}
+.card-pad{padding:1.4rem 1.5rem}
+
+/* ============================================================
+   4. 学习地图
+   ============================================================ */
+.map-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:1.1rem;
+  align-items:start;
+}
+@media (max-width:820px){.map-grid{grid-template-columns:minmax(0,1fr)}}
+.card{min-width:0}
+
+.why-list{display:grid;gap:0;margin:0;padding:0;list-style:none}
+.why-item{
+  display:grid;
+  grid-template-columns:2.1rem minmax(0,1fr);
+  gap:.9rem;
+  padding:1.05rem 0;
+  border-bottom:1px dashed var(--line);
+}
+.why-item:last-child{border-bottom:0;padding-bottom:0}
+.why-item:first-child{padding-top:0}
+.why-item b{color:var(--ink);font-size:.95rem}
+.why-item p{color:var(--ink-2);font-size:.9rem;margin-top:.2rem;line-height:1.7}
+.why-idx{
+  width:2.1rem;height:2.1rem;border-radius:50%;
+  display:grid;place-items:center;
+  font-family:var(--font-display);font-style:italic;font-size:.95rem;
+  background:#FFF0E1;color:var(--orange);border:1px solid #F6D3B4;
+}
+
+/* 结构图 */
+.struct-title{
+  display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
+  margin-bottom:.9rem;
+}
+.struct-title h3{font-size:.98rem}
+.struct-title span{font-size:.75rem;color:var(--ink-3)}
+.struct{
+  display:flex;
+  gap:3px;
+  border-radius:var(--r-sm);
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:var(--line);
+}
+.struct button{
+  flex:1 1 0;
+  flex-grow:var(--w,1);
+  border:0;
+  padding:.8rem .2rem 1.6rem;
+  text-align:center;
+  cursor:pointer;
+  position:relative;
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:.01em;
+  white-space:nowrap;
+  transition:filter .18s ease;
+  min-block-size:74px;
+}
+.struct button:hover{filter:brightness(.96)}
+.struct button small{
+  display:block;font-weight:500;font-size:.62rem;opacity:.7;margin-top:.15rem;letter-spacing:0;
+}
+.struct button::after{
+  content:attr(data-min);
+  position:absolute;left:0;right:0;bottom:.4rem;
+  font-family:var(--font-display);font-style:italic;
+  font-size:.66rem;font-weight:400;opacity:.55;letter-spacing:.02em;
+}
+.st-a{background:#E7F3EF;color:#176C63}
+.st-b{background:#FFF0DF;color:#A8440F}
+.st-s{background:#FDECEF;color:#94364B}
+.st-c{background:#E9EFF9;color:#2C4E80}
+.st-i{background:#F1EEE8;color:#8A8378}
+
+@media (max-width:600px){
+  .struct{flex-wrap:wrap;gap:4px;border:0;background:transparent;border-radius:0}
+  .struct button{
+    flex:1 1 calc(50% - 4px);
+    border-radius:9px;
+    min-block-size:64px;
+    padding:.7rem .3rem 1.5rem;
+  }
+  .struct button small{font-size:.68rem;opacity:.75}
+  .struct button::after{font-size:.7rem}
+}
+
+.struct-legend{
+  display:flex;flex-wrap:wrap;gap:.9rem;
+  margin-top:.85rem;font-size:.74rem;color:var(--ink-3);
+}
+.struct-legend span{display:inline-flex;align-items:center;gap:.34rem}
+.struct-legend i{width:9px;height:9px;border-radius:3px;display:block}
+
+/* 三步学习法 */
+.steps{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:.7rem;
+  margin-top:1.35rem;
+}
+@media (max-width:700px){.steps{grid-template-columns:1fr}}
+.step{
+  background:var(--surface-warm);
+  border:1px solid var(--line-soft);
+  border-radius:var(--r-sm);
+  padding:.95rem 1rem;
+}
+.step em{
+  display:block;font-style:normal;font-size:.66rem;letter-spacing:.18em;
+  color:var(--orange);font-weight:700;margin-bottom:.3rem;
+}
+.step b{display:block;font-size:.9rem}
+.step p{font-size:.8rem;color:var(--ink-3);line-height:1.6;margin-top:.25rem}
+
+/* ============================================================
+   5. 逐句精读
+   ============================================================ */
+.toolbar{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;
+  margin-bottom:1.4rem;
+}
+.filter{
+  padding:.4rem .9rem;border-radius:999px;
+  border:1px solid var(--line);background:#fff;
+  font-size:.8rem;font-weight:600;color:var(--ink-2);
+  cursor:pointer;transition:all .16s ease;
+  min-block-size:36px;
+}
+.filter:hover{border-color:#DCC9AF;color:var(--ink)}
+.filter.is-on{background:var(--ink);border-color:var(--ink);color:#FFF8EF}
+.toolbar-right{margin-left:auto;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.toggle{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.78rem;color:var(--ink-2);cursor:pointer;
+  padding:.34rem .7rem;border-radius:999px;
+  border:1px dashed var(--line);background:transparent;
+  min-block-size:34px;
+}
+.toggle input{accent-color:var(--orange);margin:0}
+
+.lyric-list{display:grid;gap:.9rem}
+
+.lyric{
+  position:relative;
+  background:linear-gradient(180deg,#FFFFFF,#FFFCF8);
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  padding:1.55rem 1.5rem 1.4rem;
+  box-shadow:var(--shadow-xs);
+  transition:box-shadow .2s ease, transform .2s ease, border-color .2s ease;
+}
+.lyric:hover{box-shadow:var(--shadow-sm);border-color:#DFCEB4;transform:translateY(-1px)}
+.lyric::before{
+  content:"";position:absolute;left:0;top:1.1rem;bottom:1.1rem;width:3px;
+  border-radius:0 3px 3px 0;background:var(--teal);
+}
+.lyric[data-sec="b"]::before{background:var(--orange-3)}
+.lyric[data-sec="s"]::before{background:var(--rose)}
+.lyric[data-sec="c"]::before{background:var(--blue)}
+
+.lyric-main{min-width:0;display:flex;flex-direction:column;justify-content:center}
+.lyric-side{min-width:0;margin-top:1.05rem;display:grid;gap:.85rem;align-content:start}
+@media (min-width:1000px){
+  .lyric{
+    display:grid;
+    grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+    column-gap:2.1rem;
+    align-items:start;
+  }
+  .lyric-main{grid-column:1}
+  .lyric-side{grid-column:2;margin-top:.15rem}
+}
+
+.lyric-top{display:flex;align-items:center;gap:.9rem}
+.lyric-jp{
+  font-family:var(--font-serif);
+  font-size:clamp(1.22rem,2.7vw,1.62rem);
+  line-height:2.15;
+  letter-spacing:.03em;
+  color:#23262C;
+  flex:0 1 auto;
+  min-width:0;
+}
+ruby{ruby-position:over}
+rt{
+  font-family:var(--font-sans);
+  font-size:.44em;
+  font-weight:500;
+  color:#B08C68;
+  letter-spacing:.02em;
+  line-height:1.2;
+}
+body.hide-furi rt{display:none}
+
+.icon-btn{
+  flex:0 0 auto;
+  width:34px;height:34px;border-radius:50%;
+  display:grid;place-items:center;
+  border:1px solid var(--line);background:#fff;
+  cursor:pointer;color:var(--ink-3);
+  transition:all .16s ease;
+}
+.icon-btn:hover{color:var(--orange);border-color:#EFC7A9;background:#FFF6EC}
+.lyric .icon-btn{width:30px;height:30px;border-color:transparent;background:transparent;color:var(--ink-4);opacity:.85}
+.lyric .icon-btn:hover{background:#FFF3E7;border-color:#F2D8BE;color:var(--orange);opacity:1}
+.icon-btn svg{width:15px;height:15px}
+
+.lyric-tr{
+  color:var(--ink-2);font-size:.92rem;line-height:1.8;
+  margin-top:.55rem;
+  padding-left:.15rem;
+  text-wrap:pretty;
+}
+.words{
+  display:flex;flex-wrap:wrap;gap:.4rem;margin-top:0;
+}
+.wchip{
+  display:inline-flex;align-items:baseline;gap:.34rem;
+  padding:.26rem .62rem;
+  background:#FCF7F0;
+  border:1px solid var(--line-soft);
+  border-radius:8px;
+  font-size:.78rem;
+  line-height:1.5;
+}
+.wchip b{font-weight:700;color:var(--ink)}
+.wchip i{font-style:normal;color:var(--teal);font-size:.72rem;font-family:var(--font-serif)}
+.wchip em{font-style:normal;color:var(--ink-3);font-size:.74rem}
+
+.note{
+  margin-top:0;
+  padding:.7rem .85rem;
+  background:#FFF8EC;
+  border-left:2px solid var(--amber);
+  border-radius:0 8px 8px 0;
+  font-size:.83rem;
+  line-height:1.75;
+  color:#6B573E;
+}
+.nuance{
+  font-size:.82rem;
+  line-height:1.8;
+  color:var(--ink-3);
+  margin:0;
+  padding-left:.15rem;
+}
+.note b{color:#8A4A16;font-weight:700}
+.note code{
+  font-family:var(--font-serif);
+  background:rgba(255,255,255,.7);
+  padding:.05em .3em;border-radius:4px;
+  color:#5C4327;font-size:.95em;
+}
+
+.empty{
+  text-align:center;padding:3rem 1rem;color:var(--ink-3);font-size:.9rem;
+}
+
+/* ============================================================
+   6. 词汇表
+   ============================================================ */
+.vocab-tools{
+  display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;
+  margin-bottom:1rem;
+}
+.search{
+  position:relative;flex:1 1 240px;max-width:340px;
+}
+.search input{
+  width:100%;
+  padding:.62rem .9rem .62rem 2.3rem;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:#fff;
+  font-size:.86rem;
+  color:var(--ink);
+  transition:border-color .16s ease, box-shadow .16s ease;
+}
+.search input:focus{outline:none;border-color:var(--orange-3);box-shadow:0 0 0 3px rgba(245,154,75,.18)}
+.search svg{
+  position:absolute;left:.82rem;top:50%;transform:translateY(-50%);
+  width:14px;height:14px;color:var(--ink-3);
+}
+.chips{display:flex;gap:.4rem;flex-wrap:wrap}
+.chip{
+  padding:.34rem .72rem;border-radius:999px;border:1px solid var(--line);
+  background:#fff;font-size:.75rem;font-weight:600;color:var(--ink-2);
+  cursor:pointer;transition:all .16s ease;min-block-size:32px;
+}
+.chip:hover{border-color:#DCC9AF}
+.chip.is-on{background:#FFF0E1;border-color:#F0C49C;color:#A8430F}
+
+.table-wrap{
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  background:#fff;
+  overflow:hidden;
+  box-shadow:var(--shadow-xs);
+}
+.table-scroll{overflow-x:auto;max-block-size:min(72vh,760px);overflow-y:auto}
+table.vocab{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  font-size:.87rem;
+}
+table.vocab thead th{
+  position:sticky;top:0;z-index:2;
+  background:#FBF5EC;
+  text-align:left;
+  font-size:.72rem;
+  letter-spacing:.12em;
+  color:var(--ink-3);
+  font-weight:700;
+  padding:.72rem .9rem;
+  border-bottom:1px solid var(--line);
+  white-space:nowrap;
+}
+table.vocab tbody td{
+  padding:.7rem .9rem;
+  border-bottom:1px solid var(--line-soft);
+  vertical-align:middle;
+}
+table.vocab tbody tr:last-child td{border-bottom:0}
+table.vocab tbody tr:hover{background:#FEFAF4}
+table.vocab tbody tr.done{background:#F6FBF8}
+table.vocab tbody tr.done .v-word{color:var(--ink-3);text-decoration:line-through;text-decoration-color:#A9C9BF}
+
+table.vocab th:nth-child(2){width:24%}
+table.vocab th:nth-child(3){width:16%}
+table.vocab th:nth-child(4){width:9%}
+table.vocab th:nth-child(6){width:8%}
+table.vocab th:nth-child(7){width:56px}
+
+.v-word{
+  font-family:var(--font-serif);
+  font-size:1rem;font-weight:700;color:var(--ink);
+  white-space:nowrap;
+}
+.v-read{color:var(--teal);font-size:.78rem;white-space:nowrap}
+.v-pos{color:var(--ink-3);font-size:.76rem;white-space:nowrap}
+.v-cn{color:var(--ink-2)}
+.lv{
+  display:inline-block;padding:.1rem .45rem;border-radius:5px;
+  font-size:.68rem;font-weight:800;letter-spacing:.04em;
+  border:1px solid transparent;
+}
+.lv-N5{background:#F2F1EE;color:#78736B;border-color:#E3E1DB}
+.lv-N4{background:#E9F3F0;color:#1D7568;border-color:#CFE6E0}
+.lv-N3{background:#FFF0E1;color:#A8430F;border-color:#F5D2B2}
+.lv-N2{background:#ECEBF8;color:#4B4694;border-color:#DAD7F0}
+.lv-N1{background:#FBEAEE;color:#94364B;border-color:#F0D2D9}
+
+.v-check{
+  width:19px;height:19px;border-radius:5px;
+  border:1.5px solid #D6C4AC;background:#fff;
+  display:grid;place-items:center;cursor:pointer;
+  transition:all .15s ease;padding:0;
+}
+.v-check svg{width:11px;height:11px;opacity:0;color:#fff}
+.v-check[aria-checked="true"]{background:var(--teal);border-color:var(--teal)}
+.v-check[aria-checked="true"] svg{opacity:1}
+
+.table-foot{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:.6rem;padding:.75rem 1rem;
+  border-top:1px solid var(--line-soft);
+  background:#FDFAF5;
+  font-size:.78rem;color:var(--ink-3);
+}
+.mini-btn{
+  border:1px solid var(--line);background:#fff;border-radius:8px;
+  padding:.3rem .7rem;font-size:.75rem;color:var(--ink-2);cursor:pointer;
+}
+.mini-btn:hover{border-color:#DCC9AF;color:var(--ink)}
+
+/* ============================================================
+   7. 语法图谱
+   ============================================================ */
+.grammar-list{display:grid;gap:.65rem}
+details.g{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  box-shadow:var(--shadow-xs);
+  overflow:hidden;
+  transition:border-color .18s ease, box-shadow .18s ease;
+}
+details.g[open]{border-color:#E4C9A9;box-shadow:var(--shadow-sm)}
+details.g summary{
+  list-style:none;
+  cursor:pointer;
+  padding:1.05rem 1.25rem;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:1rem;
+  align-items:center;
+  user-select:none;
+}
+details.g summary::-webkit-details-marker{display:none}
+.g-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem}
+.g-pattern{
+  font-family:var(--font-serif);
+  font-size:1.06rem;font-weight:700;color:var(--ink);
+  letter-spacing:.02em;
+}
+.g-sub{font-size:.8rem;color:var(--ink-3)}
+.g-plus{
+  width:26px;height:26px;border-radius:50%;
+  border:1px solid var(--line);
+  display:grid;place-items:center;flex:0 0 auto;
+  color:var(--ink-3);font-size:.9rem;
+  transition:transform .2s ease, background .2s ease;
+}
+details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:#F0C49C;color:var(--orange)}
+.g-body{padding:0 1.25rem 1.25rem;display:grid;gap:.75rem}
+.g-row{display:grid;grid-template-columns:4.2rem minmax(0,1fr);gap:.8rem;font-size:.86rem;line-height:1.75}
+@media (max-width:520px){.g-row{grid-template-columns:1fr;gap:.15rem}}
+.g-row dt{color:var(--ink-3);font-size:.75rem;letter-spacing:.08em;padding-top:.15rem}
+.g-row dd{margin:0;color:var(--ink-2)}
+.g-eg{
+  font-family:var(--font-serif);
+  font-size:.98rem;color:var(--ink);
+  background:#FCF7F0;border-radius:8px;padding:.5rem .7rem;
+  display:inline-block;
+}
+.g-warn{
+  font-size:.8rem;color:#8A4A16;background:#FFF8EC;
+  border-left:2px solid var(--amber);border-radius:0 8px 8px 0;
+  padding:.55rem .75rem;line-height:1.7;max-width:84ch;
+}
+
+/* ============================================================
+   8. 听说训练
+   ============================================================ */
+.listen-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(298px,1fr));
+  gap:.8rem;
+}
+.lcard{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:1.15rem 1.2rem;box-shadow:var(--shadow-xs)}
+.lcard em{
+  display:inline-block;font-style:normal;font-size:.64rem;letter-spacing:.16em;
+  color:var(--teal);background:var(--teal-soft);padding:.15rem .5rem;border-radius:5px;
+  font-weight:800;margin-bottom:.55rem;
+}
+.lcard b{display:block;font-size:.95rem;margin-bottom:.3rem}
+.lcard p{font-size:.84rem;color:var(--ink-2);line-height:1.75}
+.lcard .ex{
+  font-family:var(--font-serif);font-size:.95rem;color:#2A2D33;
+  margin-top:.5rem;padding-left:.6rem;border-left:2px solid var(--line);
+  word-break:keep-all;overflow-wrap:anywhere;
+}
+.hl-o{color:var(--orange);font-weight:700}
+.hl-t{color:var(--teal);font-weight:700}
+
+/* ============================================================
+   9. 歌词工作台
+   ============================================================ */
+.studio{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
+  gap:1rem;align-items:stretch;
+}
+@media (max-width:880px){.studio{grid-template-columns:1fr}}
+.studio-panel{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-md);
+  box-shadow:var(--shadow-xs);overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.studio-head{
+  display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+  padding:.8rem 1rem;border-bottom:1px solid var(--line-soft);background:#FDFAF5;
+}
+.studio-head b{font-size:.85rem}
+.studio-head span{font-size:.72rem;color:var(--ink-3)}
+#paste{
+  width:100%;border:0;resize:vertical;
+  flex:1 1 auto;
+  min-block-size:300px;
+  padding:1rem;
+  font-family:var(--font-serif);
+  font-size:.95rem;line-height:2;
+  color:var(--ink);
+  background:#fff;
+}
+#paste:focus{outline:none;background:#FFFDF9}
+#paste::placeholder{color:var(--ink-4)}
+.studio-out{
+  padding:1rem 1.15rem;
+  flex:1 1 auto;
+  min-block-size:300px;
+  max-block-size:520px;
+  overflow-y:auto;
+  font-family:var(--font-serif);
+  font-size:.98rem;
+  line-height:2.35;
+  color:var(--ink);
+}
+.studio-out .line{padding:.1rem 0;border-bottom:1px dashed rgba(232,220,203,.55)}
+.studio-out .line:last-child{border-bottom:0}
+.studio-out .tip{font-family:var(--font-sans);font-size:.82rem;color:var(--ink-3);line-height:1.8}
+.hl{
+  background:linear-gradient(180deg,transparent 52%,#FFD8A4 52%);
+  border-radius:3px;padding:0 .04em;cursor:help;position:relative;
+}
+.hl::after{
+  content:attr(data-tip);
+  position:absolute;left:50%;bottom:135%;
+  transform:translateX(-50%) translateY(4px);
+  background:#2B2723;color:#FFF6E9;
+  font-family:var(--font-sans);font-size:.74rem;line-height:1.45;font-weight:500;
+  padding:.4rem .6rem;border-radius:8px;white-space:nowrap;
+  opacity:0;pointer-events:none;transition:opacity .16s ease, transform .16s ease;
+  z-index:30;box-shadow:0 8px 20px -8px rgba(0,0,0,.35);
+}
+.hl:hover::after,.hl:focus::after{opacity:1;transform:translateX(-50%) translateY(0)}
+.studio-actions{display:flex;gap:.5rem;padding:.75rem 1rem;border-top:1px solid var(--line-soft);background:#FDFAF5;flex-wrap:wrap}
+
+/* ============================================================
+   10. 测验
+   ============================================================ */
+.quiz-head{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:1rem;margin-bottom:1.2rem;
+  padding:1rem 1.2rem;
+  background:linear-gradient(135deg,#FFF6EA,#FFFDFA);
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+}
+.quiz-score{font-size:.85rem;color:var(--ink-2)}
+.quiz-score b{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:1.7rem;color:var(--orange-2);margin-right:.15rem}
+.quiz-list{display:grid;gap:1rem}
+.q{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-md);
+  padding:1.2rem 1.3rem;box-shadow:var(--shadow-xs);
+}
+@media (min-width:880px){
+  .q{
+    display:grid;
+    grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);
+    column-gap:1.8rem;
+    align-items:center;
+    padding:1.25rem 1.5rem;
+  }
+  .q .q-num{grid-column:1 / -1}
+  .q .q-text{grid-column:1;margin-bottom:0}
+  .q .q-opts{grid-column:2;display:grid;grid-template-columns:1fr 1fr;gap:.45rem}
+  .q .q-why{grid-column:1 / -1}
+}
+.q-num{
+  font-size:.68rem;font-weight:800;letter-spacing:.16em;color:var(--orange);
+  display:block;margin-bottom:.45rem;
+}
+.q-text{
+  font-family:var(--font-serif);font-size:1.12rem;line-height:2;
+  color:var(--ink);margin-bottom:.9rem;
+}
+.q-text u{
+  text-decoration:none;
+  display:inline-block;min-width:3.2em;
+  border-bottom:2px solid var(--orange-3);
+  text-align:center;color:var(--orange);
+  font-weight:700;
+}
+.q-opts{display:flex;flex-wrap:wrap;gap:.5rem}
+.opt{
+  padding:.5rem 1.15rem;border-radius:10px;
+  border:1.5px solid var(--line);background:#fff;
+  font-size:.9rem;font-family:var(--font-serif);
+  cursor:pointer;transition:all .16s ease;min-block-size:42px;
+}
+.opt:hover:not(:disabled){border-color:#E2BE9B;background:#FFFBF4}
+.opt:disabled{cursor:default}
+.opt.correct{border-color:#4FA898;background:#E9F5F1;color:#146B5E;font-weight:700}
+.opt.wrong{border-color:#E0A1AE;background:#FCEDF0;color:#9C3B51}
+.q-why{
+  margin-top:.85rem;font-size:.83rem;line-height:1.8;color:var(--ink-2);
+  padding:.7rem .85rem;background:#FBF7F1;border-radius:8px;
+  display:none;
+}
+.q.answered .q-why{display:block}
+.q-why b{color:var(--orange)}
+
+/* ============================================================
+   11. 计划
+   ============================================================ */
+.plan{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  box-shadow:var(--shadow-sm);
+  overflow:hidden;
+}
+.day{
+  display:grid;
+  grid-template-columns:104px minmax(0,1fr) auto;
+  gap:1.3rem;
+  align-items:center;
+  padding:1.05rem 1.4rem;
+  border-bottom:1px solid var(--line-soft);
+  transition:background .18s ease;
+}
+.day:last-child{border-bottom:0}
+.day:hover{background:#FFFCF7}
+.day.done{background:#F6FBF8}
+.day-d{display:flex;flex-direction:column;gap:.05rem}
+.day-d em{
+  font-style:normal;font-family:var(--font-display);
+  font-size:1.05rem;color:var(--orange);letter-spacing:-.01em;
+}
+.day-d small{font-size:.68rem;letter-spacing:.06em;color:var(--ink-3)}
+.day-mid b{display:block;font-size:.93rem;letter-spacing:-.005em}
+.day-mid p{font-size:.81rem;color:var(--ink-3);line-height:1.7;margin-top:.18rem}
+.day-check{
+  display:inline-flex;align-items:center;gap:.42rem;
+  font-size:.74rem;color:var(--ink-3);cursor:pointer;white-space:nowrap;
+  border:1px solid var(--line);padding:.32rem .7rem;border-radius:999px;
+  background:#fff;transition:all .16s ease;
+}
+.day-check:hover{border-color:#C9BCA6}
+.day.done .day-check{border-color:#BFDED6;color:var(--teal);background:#EFF9F5}
+.day-check input{accent-color:var(--teal);margin:0}
+@media (max-width:660px){
+  .day{grid-template-columns:1fr auto;gap:.55rem 1rem;padding:1rem 1.1rem}
+  .day-d{grid-column:1;grid-row:1}
+  .day-check{grid-column:2;grid-row:1;align-self:start}
+  .day-mid{grid-column:1 / -1;grid-row:2}
+}
+
+/* ============================================================
+   12. Footer
+   ============================================================ */
+.footer{
+  border-top:1px solid var(--line);
+  padding:2.2rem 0 3rem;
+  margin-top:1rem;
+  background:rgba(255,255,255,.4);
+}
+.foot-grid{
+  display:flex;flex-wrap:wrap;gap:1.4rem;justify-content:space-between;align-items:flex-start;
+}
+.foot-title{
+  font-family:var(--font-display);font-style:italic;
+  font-size:1.35rem;color:var(--orange-2);line-height:1;
+}
+.foot-note{
+  max-width:58ch;font-size:.78rem;line-height:1.85;color:var(--ink-2);margin-top:.6rem;
+}
+.foot-meta{font-size:.72rem;color:var(--ink-4);letter-spacing:.1em;text-align:right}
+@media (max-width:640px){.foot-meta{text-align:left}}
+
+/* 动效 */
+@media (prefers-reduced-motion:no-preference){
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease, transform .55s ease}
+  .reveal.in{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="kicker">Digimon Adventure · Insert Song · 1999</span>
+      <h1 class="song-title">brave<br>heart</h1>
+      <div class="song-jp">
+        <span>宮崎歩</span><span class="dot"></span><span>歌詞精読</span><span class="dot"></span><span>N3</span>
+      </div>
+      <p class="hero-lead">一首只有 <b>二十几行歌词</b>、却把日语 N4–N3 核心句型用了个遍的歌。命令形、意志形、假定形、可能形轮番上阵，而单词几乎都是「夢・勇気・自分」这类高频词。拿它当第一首精读的日文歌，性价比很高。</p>
+      <div class="badges" id="badges"></div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#lines">开始逐句精读</a>
+        <a class="btn btn-ghost" href="#grammar">先看语法图谱</a>
+      </div>
+    </div>
+    <div class="hero-art" id="hero-art" aria-hidden="true">
+      <div class="disc">
+        <div class="disc-label"><b>1999</b><i>single</i></div>
+        <div class="disc-hole"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero-stats" id="hero-stats"></div>
+  </div>
+</header>
+
+<nav class="topnav" aria-label="章节导航">
+  <div class="wrap nav-inner" id="nav-inner"></div>
+</nav>
+
+<main id="main">
+  <!-- 01 学习地图 -->
+  <section class="section" id="map">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">01</div>
+        <div>
+          <h2 class="sec-title">先看懂这首歌的骨架，再逐句拆</h2>
+          <div class="sec-jp">きょくの こうぞう</div>
+          <p class="sec-lead">这首歌的结构非常标准：Aメロ 铺陈 → Bメロ 命令形推进 → サビ 情感爆发 → 大サビ 收束。知道每一段在干什么，背词的时候就有位置可挂。</p>
+        </div>
+      </div>
+
+      <div class="map-grid">
+        <div class="card card-pad reveal">
+          <h3 style="font-size:.98rem;margin-bottom:.2rem">为什么它适合 N3 学习者</h3>
+          <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:.9rem">四个理由，按重要性排</p>
+          <ul class="why-list" id="why-list"></ul>
+        </div>
+
+        <div class="card card-pad reveal">
+          <div class="struct-title">
+            <h3>全曲结构与时间轴</h3>
+            <span>点一段可筛选下方精读</span>
+          </div>
+          <div class="struct" id="struct"></div>
+          <div class="struct-legend" id="struct-legend"></div>
+          <p style="font-size:.8rem;color:var(--ink-3);line-height:1.75;margin-top:1rem;border-top:1px dashed var(--line);padding-top:.9rem"><b style="color:var(--ink-2)">记位置的小技巧：</b>Aメロ 讲「现在很难」，Bメロ 喊「动起来」，サビ 说「你本来就做得到」。三段其实是同一条心理曲线：<em style="font-style:normal;color:var(--orange)">承认困境 → 采取行动 → 确认自我</em>。</p>
+        </div>
+      </div>
+
+      <div class="steps reveal" id="steps"></div>
+    </div>
+  </section>
+
+  <!-- 02 逐句精读 -->
+  <section class="section" id="lines">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">02</div>
+        <div>
+          <h2 class="sec-title">逐句精读：一句一个语法点</h2>
+          <div class="sec-jp">いちぎょうずつ よむ</div>
+          <p class="sec-lead">每张卡片包含：原句（带假名注音）、中文意思、句中单词、语法点、以及一个只有唱的时候才会注意到的细节。按段落筛选，效果比从头背到尾好。</p>
+        </div>
+      </div>
+
+      <div class="toolbar reveal">
+        <div id="sec-filters" style="display:flex;gap:.5rem;flex-wrap:wrap"></div>
+        <div class="toolbar-right">
+          <label class="toggle"><input type="checkbox" id="t-furi" checked> 显示假名</label>
+          <label class="toggle"><input type="checkbox" id="t-tr" checked> 显示中文</label>
+        </div>
+      </div>
+
+      <div class="lyric-list" id="lyric-list"></div>
+      <div class="empty" id="lyric-empty" hidden>这一段还没有卡片，换一个段落试试。</div>
+    </div>
+  </section>
+
+  <!-- 03 核心词汇 -->
+  <section class="section" id="vocab">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">03</div>
+        <div>
+          <h2 class="sec-title">核心词汇：勾掉你已经会的</h2>
+          <div class="sec-jp">たんごリスト</div>
+          <p class="sec-lead">按歌词出现顺序排列。点左侧方框标记「已掌握」，进度会同步到页面顶部。支持搜索汉字、假名或中文意思；按 JLPT 等级筛选可以先啃 N4–N3。</p>
+        </div>
+      </div>
+
+      <div class="vocab-tools reveal">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="v-search" placeholder="搜索：夢 / ゆめ / 梦想" aria-label="搜索词汇">
+        </div>
+        <div class="chips" id="v-levels">
+          <button class="chip is-on" data-lv="all">全部等级</button>
+          <button class="chip" data-lv="N5">N5</button>
+          <button class="chip" data-lv="N4">N4</button>
+          <button class="chip" data-lv="N3">N3</button>
+          <button class="chip" data-lv="N2">N2</button>
+          <button class="chip" data-lv="N1">N1</button>
+        </div>
+        <button class="chip" id="v-undone">只看未掌握</button>
+      </div>
+
+      <div class="table-wrap reveal">
+        <div class="table-scroll">
+          <table class="vocab">
+            <thead>
+              <tr>
+                <th style="width:44px">掌握</th>
+                <th>单词</th>
+                <th>读音</th>
+                <th>词性</th>
+                <th>意思</th>
+                <th>等级</th>
+                <th style="width:44px"><span class="sr-only">发音</span></th>
+              </tr>
+            </thead>
+            <tbody id="v-body"></tbody>
+          </table>
+        </div>
+        <div class="table-foot">
+          <span id="v-count">共 0 个词</span>
+          <div style="display:flex;gap:.5rem;align-items:center">
+            <span id="v-progress">已掌握 0</span>
+            <button class="mini-btn" id="v-reset">重置进度</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 语法图谱 -->
+  <section class="section" id="grammar">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">04</div>
+        <div>
+          <h2 class="sec-title">语法图谱：16 个句型，撑起整首歌</h2>
+          <div class="sec-jp">ぶんぽうマップ</div>
+          <p class="sec-lead">展开每一条可以看到「接续 / 意思 / 歌中原句 / 注意点」。建议先看接续，再看原句，最后自己造一句和数码宝贝无关的句子——那样才算真的会了。</p>
+        </div>
+      </div>
+      <div class="grammar-list" id="grammar-list"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap foot-grid">
+    <div>
+      <div class="foot-title">brave heart</div>
+      <p class="foot-note">本页为日语学习用途的语言分析作品，不提供完整歌词。歌词著作权归作词 大森祥子、作曲・编曲 太田美知彦、演唱 宮崎歩 及相关权利方所有；页面仅引用极短片段用于语法与词汇讲解。请通过正版音源与官方歌词页对照收听。</p>
+    </div>
+    <div class="foot-meta">DIGIMON ADVENTURE<br>歌詞精読ノート<br>JLPT N3</div>
+  </div>
+</footer>
+
+<script>window.SONG = {"meta":{"slug":"brave-heart","pageTitle":"brave heart 歌詞精読 · JLPT N3 日语歌词学习","description":"以宮崎歩「brave heart」为例的 JLPT N3 日语歌词精读：逐句注音拆解、核心词汇表、语法图谱，以及全曲结构地图。","kicker":"Digimon Adventure · Insert Song · 1999","titleLine1":"brave","titleLine2":"heart","artist":"宮崎歩","subtitle":"歌詞精読","level":"N3","lead":"一首只有 \u003cb>二十几行歌词\u003c/b>、却把日语 N4–N3 核心句型用了个遍的歌。命令形、意志形、假定形、可能形轮番上阵，而单词几乎都是「夢・勇気・自分」这类高频词。拿它当第一首精读的日文歌，性价比很高。","badges":["JLPT N3","进化曲","语速中等 · 咬字清晰","适合影子跟读"],"discLabel":"1999","discSub":"single"},"stats":[{"key":"lines","label":"精 读 句 数"},{"key":"vocab","label":"核 心 词 汇"},{"key":"grammar","label":"语 法 点"}],"cta":{"primary":"开始逐句精读","secondary":"先看语法图谱","secondaryHref":"#grammar"},"nav":[{"id":"map","label":"学习地图"},{"id":"lines","label":"逐句精读"},{"id":"vocab","label":"核心词汇"},{"id":"grammar","label":"语法图谱"}],"segments":[{"key":"a","label":"Aメロ"},{"key":"b","label":"Bメロ"},{"key":"s","label":"サビ"},{"key":"c","label":"大サビ"}],"map":{"whyTitle":"为什么它适合 N3 学习者","whySub":"四个理由，按重要性排","why":[{"t":"语法密度极高，但都在 N4–N3 范围内","d":"整首歌二十几行里出现了命令形、意志形「〜よう」、假定形「〜ば」、条件形「〜たら」、可能形、「〜にしか〜ない」、「〜ばかりじゃない」。这些正是 N3 考试的高频语法。"},{"t":"单词重复率高，记忆成本低","d":"「自分」「夢」「勇気」「ハート」反复出现。同一个词在不同段落听到三四次，比背单词书十遍有效。"},{"t":"咬字清楚，语速不刁难","d":"宮崎歩 的发音位置靠前、辅音清晰，句尾也不吞音。比起快嘴饶舌的 J-POP，这首更适合做听写和跟读。"},{"t":"情绪强，适合影子跟读","d":"跟读最怕「念得对但没感情」。这首歌天然带情绪推力，你会不自觉地把语气跟上，而语气正是日语的自然度所在。"}],"structTitle":"全曲结构与时间轴","structHint":"点一段可筛选下方精读","blocks":[{"label":"Aメロ①","role":"铺陈","time":"0:32","key":"a","tone":"a","weight":28},{"label":"Bメロ①","role":"推进","time":"1:00","key":"b","tone":"b","weight":14},{"label":"サビ①","role":"爆发","time":"1:14","key":"s","tone":"s","weight":20},{"label":"Aメロ②","role":"转折","time":"1:50","key":"a","tone":"a","weight":28},{"label":"Bメロ②","role":"加速","time":"2:18","key":"b","tone":"b","weight":14},{"label":"サビ②","role":"重复","time":"2:32","key":"s","tone":"s","weight":34},{"label":"大サビ","role":"收束","time":"3:06","key":"c","tone":"c","weight":24}],"legend":[{"tone":"a","label":"Aメロ · 低音叙述"},{"tone":"b","label":"Bメロ · 命令形"},{"tone":"s","label":"サビ · 主题句"},{"tone":"c","label":"大サビ · 升华"}],"tip":"\u003cb style=\"color:var(--ink-2)\">记位置的小技巧：\u003c/b>Aメロ 讲「现在很难」，Bメロ 喊「动起来」，サビ 说「你本来就做得到」。三段其实是同一条心理曲线：\u003cem style=\"font-style:normal;color:var(--orange)\">承认困境 → 采取行动 → 确认自我\u003c/em>。"},"steps":[{"k":"STEP 01","t":"先听，别查词","d":"整曲循环三遍，只抓「哪里换段了」。耳朵先熟悉旋律，后面背词才挂得住。"},{"k":"STEP 02","t":"再读，逐句拆","d":"用下面的「逐句精读」，一句一句过。每句只记一个语法点，别贪多。"},{"k":"STEP 03","t":"最后过词表","d":"回到「核心词汇」，把还没勾的词对着精读卡再看一遍。勾完一轮，就记住了。"}],"sec":{"map":{"num":"01","title":"先看懂这首歌的骨架，再逐句拆","jp":"きょくの こうぞう","lead":"这首歌的结构非常标准：Aメロ 铺陈 → Bメロ 命令形推进 → サビ 情感爆发 → 大サビ 收束。知道每一段在干什么，背词的时候就有位置可挂。"},"lines":{"num":"02","title":"逐句精读：一句一个语法点","jp":"いちぎょうずつ よむ","lead":"每张卡片包含：原句（带假名注音）、中文意思、句中单词、语法点、以及一个只有唱的时候才会注意到的细节。按段落筛选，效果比从头背到尾好。"},"vocab":{"num":"03","title":"核心词汇：勾掉你已经会的","jp":"たんごリスト","lead":"按歌词出现顺序排列。点左侧方框标记「已掌握」，进度会同步到页面顶部。支持搜索汉字、假名或中文意思；按 JLPT 等级筛选可以先啃 N4–N3。"},"grammar":{"num":"04","title":"语法图谱：16 个句型，撑起整首歌","jp":"ぶんぽうマップ","lead":"展开每一条可以看到「接续 / 意思 / 歌中原句 / 注意点」。建议先看接续，再看原句，最后自己造一句和数码宝贝无关的句子——那样才算真的会了。"}},"vocab":[{"k":"逃げる","r":"にげる","p":"動I","cn":"逃跑；逃避","lv":"N4"},{"k":"あきらめる","r":"あきらめる","p":"動II","cn":"放弃，死心","lv":"N3"},{"k":"一瞬","r":"いっしゅん","p":"名","cn":"一瞬间","lv":"N2"},{"k":"歩く","r":"あるく","p":"動I","cn":"走，步行","lv":"N5"},{"k":"続ける","r":"つづける","p":"動II","cn":"继续","lv":"N4"},{"k":"青い","r":"あおい","p":"形I","cn":"蓝色的","lv":"N5"},{"k":"星","r":"ほし","p":"名","cn":"星星；星球","lv":"N5"},{"k":"光","r":"ひかり","p":"名","cn":"光，光芒","lv":"N3"},{"k":"失くす","r":"なくす","p":"動I","cn":"失去，弄丢","lv":"N3"},{"k":"つかむ","r":"つかむ","p":"動I","cn":"抓住","lv":"N3"},{"k":"描く","r":"えがく","p":"動I","cn":"描绘，画出","lv":"N2"},{"k":"夢","r":"ゆめ","p":"名","cn":"梦；梦想","lv":"N4"},{"k":"守る","r":"まもる","p":"動I","cn":"守护","lv":"N3"},{"k":"大事","r":"だいじ","p":"形II","cn":"重要的","lv":"N4"},{"k":"友","r":"とも","p":"名","cn":"朋友（书面）","lv":"N3"},{"k":"たくましい","r":"たくましい","p":"形I","cn":"坚韧，强壮","lv":"N2"},{"k":"自分","r":"じぶん","p":"名","cn":"自己","lv":"N4"},{"k":"宿る","r":"やどる","p":"動I","cn":"寄宿，蕴藏","lv":"N1"},{"k":"火","r":"ひ","p":"名","cn":"火","lv":"N5"},{"k":"願い","r":"ねがい","p":"名","cn":"愿望","lv":"N3"},{"k":"嘘","r":"うそ","p":"名","cn":"谎言","lv":"N4"},{"k":"叶う","r":"かなう","p":"動I","cn":"（愿望）实现","lv":"N2"},{"k":"晴れ","r":"はれ","p":"名","cn":"晴天","lv":"N4"},{"k":"たまに","r":"たまに","p":"副","cn":"偶尔","lv":"N3"},{"k":"冷たい","r":"つめたい","p":"形I","cn":"冰冷的","lv":"N5"},{"k":"雨","r":"あめ","p":"名","cn":"雨","lv":"N5"},{"k":"降る","r":"ふる","p":"動I","cn":"下（雨雪）","lv":"N5"},{"k":"傘","r":"かさ","p":"名","cn":"伞","lv":"N4"},{"k":"広げる","r":"ひろげる","p":"動II","cn":"撑开，展开","lv":"N3"},{"k":"生き方","r":"いきかた","p":"名","cn":"活法，生活方式","lv":"N3"},{"k":"地図","r":"ちず","p":"名","cn":"地图","lv":"N4"},{"k":"自由","r":"じゆう","p":"名/形II","cn":"自由","lv":"N4"},{"k":"走る","r":"はしる","p":"動I","cn":"跑","lv":"N5"},{"k":"風","r":"かぜ","p":"名","cn":"风","lv":"N5"},{"k":"速い","r":"はやい","p":"形I","cn":"快的","lv":"N5"},{"k":"目指す","r":"めざす","p":"動I","cn":"以…为目标","lv":"N3"},{"k":"空","r":"そら","p":"名","cn":"天空","lv":"N5"},{"k":"遠い","r":"とおい","p":"形I","cn":"远的","lv":"N5"},{"k":"新しい","r":"あたらしい","p":"形I","cn":"新的","lv":"N5"},{"k":"逢う","r":"あう","p":"動I","cn":"相逢（文学）","lv":"N2"},{"k":"勇気","r":"ゆうき","p":"名","cn":"勇气","lv":"N3"},{"k":"眠る","r":"ねむる","p":"動I","cn":"沉睡","lv":"N3"},{"k":"気づく","r":"きづく","p":"動I","cn":"注意到","lv":"N3"},{"k":"胸","r":"むね","p":"名","cn":"胸口","lv":"N3"},{"k":"どしゃ降り","r":"どしゃぶり","p":"名","cn":"倾盆大雨","lv":"N2"},{"k":"止む","r":"やむ","p":"動I","cn":"停（雨雪）","lv":"N2"},{"k":"眩しい","r":"まぶしい","p":"形I","cn":"耀眼的","lv":"N3"},{"k":"明日","r":"あした","p":"名","cn":"明天","lv":"N5"},{"k":"愛する","r":"あいする","p":"動III","cn":"爱","lv":"N3"},{"k":"弱気","r":"よわき","p":"名/形II","cn":"怯懦，没底气","lv":"N2"},{"k":"壊す","r":"こわす","p":"動I","cn":"破坏，摧毁","lv":"N3"},{"k":"崩す","r":"くずす","p":"動I","cn":"拆掉，瓦解","lv":"N2"},{"k":"ぶつかる","r":"ぶつかる","p":"動I","cn":"撞上；碰上","lv":"N3"},{"k":"壁","r":"かべ","p":"名","cn":"墙壁；障碍","lv":"N4"},{"k":"熱い","r":"あつい","p":"形I","cn":"热的；炽热的","lv":"N5"},{"k":"鼓動","r":"こどう","p":"名","cn":"心跳，搏动","lv":"N1"},{"k":"武器","r":"ぶき","p":"名","cn":"武器","lv":"N2"},{"k":"信じる","r":"しんじる","p":"動II","cn":"相信","lv":"N4"},{"k":"ハート","r":"ハート","p":"名","cn":"心","lv":"N3"},{"k":"パワー","r":"パワー","p":"名","cn":"力量","lv":"N4"},{"k":"誰も","r":"だれも","p":"代","cn":"谁都（肯定句）","lv":"N5"}],"vocabTip":{"searchHint":"搜索：夢 / ゆめ / 梦想"},"lines":[{"sec":"a","jp":"逃[に]げたり あきらめるコトは 誰[だれ]も","tr":"逃避也好、放弃也好，谁都能在一瞬间做到——","words":[["逃げる","にげる","逃跑"],["あきらめる","あきらめる","放弃"],["誰も","だれも","谁都（肯定句）"]],"g":"\u003cb>〜たり〜たりする\u003c/b>：从一堆动作里挑两三个举例，暗示「还有别的」。歌词只留了一个「たり」，第二个被省略了。","n":"「コト」特意写成片假名，不是错字，是为了让这个词在视觉上被顶出来，唱到这里语气也更实。"},{"sec":"a","jp":"一瞬[いっしゅん]あれば できるから","tr":"因为只要有一瞬间，就做得到","words":[["一瞬","いっしゅん","一瞬间"],["できる","できる","能做到"]],"g":"\u003cb>〜ば\u003c/b>：假定形。五段动词把词尾变え段再加「ば」——ある → あれ＋ば → あれば。","n":"「あれば」唱得很短，几乎和「一瞬」粘在一起；跟读时别在这里换气。"},{"sec":"a","jp":"歩[ある]き続[つづ]けよう","tr":"那就继续走下去吧","words":[["歩く","あるく","走"],["続ける","つづける","继续"]],"g":"\u003cb>ます形＋続ける\u003c/b>：两个动词粘成一个，表示动作不间断地持续。同类：降り続ける、走り続ける。","n":"句尾的「〜けよう」是意志形，这里不是「我们一起」，更像对自己下的决心，所以语气比「〜ましょう」硬。"},{"sec":"a","jp":"君[きみ]にしかできないコトがある","tr":"有些事，只有你才做得到","words":[["君","きみ","你"],["できる","できる","能做到"]],"g":"\u003cb>〜にしか〜ない\u003c/b>：「に」限定对象，「しか」必须跟否定呼应。少了否定就错。","n":"比较一下：「君だけができる」是中性陈述；「君にしかできない」带「非你不可」的重量。这首歌整首都在说这句话。"},{"sec":"a","jp":"青[あお]い星[ほし]に 光[ひかり]がなくせぬように","tr":"为了让这颗蓝色星球，不失去它的光","words":[["青い","あおい","蓝色的"],["星","ほし","星球"],["光","ひかり","光"],["失くす","なくす","失去"]],"g":"\u003cb>〜ように\u003c/b> 表目的或祈愿；\u003cb>〜ぬ\u003c/b> 是「ない」的文言否定。这里前面接的是可能形否定，所以是「希望不要失去」。","n":"全曲最「绕」的一句，三层变化叠在一起：なくす → なくせる（可能）→ なくせぬ（可能＋文言否定）。拆开就懂了。"},{"sec":"b","jp":"つかめ! 描[えが]いた夢[ゆめ]を","tr":"抓住！你描绘过的梦想","words":[["つかむ","つかむ","抓住"],["描く","えがく","描绘"],["夢","ゆめ","梦想"]],"g":"\u003cb>命令形\u003c/b>：五段动词把词尾变え段——つかむ → つかめ。","n":"注意语序：中文是「抓住梦想」，日语这里把「夢を」甩到句末。歌词为了卡节奏经常这样倒装。"},{"sec":"b","jp":"まもれ! 大事[だいじ]な友[とも]を","tr":"守护！你重要的朋友","words":[["守る","まもる","守护"],["大事","だいじ","重要"],["友","とも","朋友"]],"g":"\u003cb>な形容词＋な＋名词\u003c/b>：大事（な）＋友。「な」是连接名词时不能丢的尾巴。","n":"「友」比「友達」书面得多，是典型的「歌词腔」。日常说话还是说「友達」。"},{"sec":"b","jp":"たくましい自分[じぶん]になれるさ","tr":"你一定能成为更坚强的自己","words":[["たくましい","たくましい","坚韧、强壮"],["自分","じぶん","自己"]],"g":"\u003cb>〜になる\u003c/b> 表变化结果；\u003cb>なれる\u003c/b> 是「なる」的可能形；\u003cb>〜さ\u003c/b> 把断言说得很轻松。","n":"「さ」很像中文的「嘛」——「当然能行嘛」。只能用在口语和歌词，写进正式文书会失礼。"},{"sec":"s","jp":"知[し]らないパワーが宿[やど]る","tr":"未知的力量，寄宿在你心里","words":[["知る","しる","知道"],["宿る","やどる","寄宿、蕴藏"]],"g":"\u003cb>连体修饰\u003c/b>：动词普通形直接放在名词前——知らない＋パワー。","n":"「宿る」是拟人说法，主语多是「力・魂・神」。中文很难一一对应，理解成「住着」就对了。"},{"sec":"s","jp":"ハートに火[ひ]がついたら","tr":"一旦心里燃起火来","words":[["火","ひ","火"],["つく","つく","（火）燃起"]],"g":"\u003cb>〜たら\u003c/b>：接た形，表「一…就…」。这里强调「火点着了之后」。","n":"「火がつく」是自动词搭配（火自己燃起来），「火をつける」才是他动词（人去点火）。别混。"},{"sec":"s","jp":"どんな願[ねが]いも 嘘[うそ]じゃない","tr":"无论什么愿望，都不是假的","words":[["願い","ねがい","愿望"],["嘘","うそ","谎言"]],"g":"\u003cb>どんな＋名词＋も\u003c/b>：无论怎样的…都。后面常跟肯定或否定的全称判断。","n":"「嘘じゃない」直译是「不是谎话」，实际意思是「都是真的」。日语否定句常常要转个弯来译。"},{"sec":"s","jp":"きっとかなうから…","tr":"因为，一定会实现的","words":[["きっと","きっと","一定"],["叶う","かなう","（愿望）实现"]],"g":"\u003cb>〜から\u003c/b> 放在句末，后面省略了半句。日语歌极爱这种收尾。","n":"它不是句号，是省略号——把「所以你也要相信」留给听众自己补。唱到这里要收得轻。"},{"sec":"a","jp":"晴[は]れの日[ひ]ばかりじゃないから たまに","tr":"因为不总是晴天，偶尔——","words":[["晴れ","はれ","晴天"],["たまに","たまに","偶尔"]],"g":"\u003cb>〜ばかりじゃない\u003c/b>：ばかり表「尽是」，否定后变成「不总是」。别漏掉「ばかり」，否则意思会变成「不是晴天」。","n":"「たまに」被甩到句尾，是为了跟下一句的「冷たい雨」接上，唱起来像一口气没换。"},{"sec":"a","jp":"冷[つめ]たい雨[あめ]も降[ふ]るけれど 傘[かさ]ひろげよう","tr":"也会下冷冷的雨，那就把伞撑开吧","words":[["冷たい","つめたい","冰冷的"],["降る","ふる","下（雨雪）"],["傘","かさ","伞"],["広げる","ひろげる","撑开"]],"g":"\u003cb>〜も\u003c/b> 表「也」；\u003cb>〜けれど\u003c/b> 表转折；\u003cb>〜よう\u003c/b> 表提议。三个语法点挤在一句里。","n":"日语说「雨が降る」，不说「雨を降る」。下雨的主语是雨自己，这点和中文的「下雨」直觉不同。"},{"sec":"a","jp":"生[い]き方[かた]に地図[ちず]なんかないけど だから自由[じゆう]","tr":"活法这种东西没有地图，所以才自由","words":[["生き方","いきかた","活法"],["地図","ちず","地图"],["自由","じゆう","自由"]],"g":"\u003cb>〜なんかない\u003c/b>：なんか（＝など）把对象往下压，配合否定加强「压根没有」的语气。","n":"「生き方」＝生きる＋方（かた）。「〜方」造词力极强：読み方、使い方、考え方。记住一个后缀，能多认十个词。"},{"sec":"b","jp":"はしれ! 風[かぜ]より速[はや]く","tr":"跑起来！比风还快","words":[["走る","はしる","跑"],["風","かぜ","风"],["速い","はやい","快"]],"g":"\u003cb>〜より\u003c/b> 表比较基准；\u003cb>形容词く形\u003c/b> 当副词用，修饰后面的动词。","n":"「速く」回答的是「跑得多快」。中文说「比风还快地跑」，日语把副词放在命令形后面，更干脆。"},{"sec":"b","jp":"めざせ! 空[そら]より遠[とお]く","tr":"以比天空更远的地方为目标","words":[["目指す","めざす","以…为目标"],["空","そら","天空"],["遠い","とおい","远"]],"g":"\u003cb>命令形\u003c/b>：めざす → めざせ。原本要说「空をめざせ」，这里省略了动词，只剩副词。","n":"「めざせ」比「がんばれ」具体——不是「加油」，是「朝着那个方向去」。"},{"sec":"b","jp":"新[あたら]しい自分[じぶん]に逢[あ]えるさ","tr":"你会遇见一个全新的自己","words":[["新しい","あたらしい","新的"],["逢う","あう","相逢"]],"g":"\u003cb>可能形\u003c/b>：逢う → 逢える（五段变え段＋る）；\u003cb>〜に逢う\u003c/b> 用「に」提示相遇的对象。","n":"「逢う」比「会う」多一层「命运般的相遇」的味道，所以歌词几乎都用「逢う」。"},{"sec":"s","jp":"胸[むね]の中[なか]のどしゃ降[ぶ]りも きっと止[や]むから","tr":"心里的倾盆大雨，也一定会停","words":[["胸","むね","胸口"],["どしゃ降り","どしゃぶり","倾盆大雨"],["止む","やむ","停（雨）"]],"g":"\u003cb>〜も\u003c/b> 在这里是「连…也」；\u003cb>〜から\u003c/b> 又是句末留白。","n":"把「どしゃ降り」用在心情上，是整首歌最漂亮的一处比喻。中文的「心里下暴雨」几乎是同一个意象。"},{"sec":"c","jp":"こわせ! 弱気[よわき]な君[きみ]を","tr":"打碎！那个怯懦的你","words":[["壊す","こわす","打破"],["弱気","よわき","怯懦"]],"g":"\u003cb>命令形\u003c/b>：壊す → こわせ；\u003cb>な形容词＋な\u003c/b>：弱気な＋君。","n":"「弱気」既是名词也是な形容词。中文的「怂」大概是最接近的翻译。"},{"sec":"c","jp":"くずせ! ぶつかる壁[かべ]を","tr":"拆掉！挡在面前的那堵墙","words":[["崩す","くずす","拆毁"],["ぶつかる","ぶつかる","撞上"],["壁","かべ","墙、障碍"]],"g":"\u003cb>连体修饰\u003c/b>：ぶつかる＋壁＝「（你）会撞上的墙」。动词普通形直接贴名词。","n":"「壊す」是把东西打得粉碎，「崩す」是把结构一点点拆掉。两个命令形连着喊，层次不一样。"},{"sec":"c","jp":"熱[あつ]い鼓動[こどう] 武器[ぶき]になるから","tr":"因为炽热的心跳，会变成你的武器","words":[["熱い","あつい","炽热的"],["鼓動","こどう","心跳"],["武器","ぶき","武器"]],"g":"\u003cb>〜になる\u003c/b>：名词直接接「に」表变化结果。","n":"「鼓動」是心跳的书面说法，日常多说「動悸（どうき）」或「心臓の音」。歌词要的就是这层正式感。"}],"grammar":[{"p":"〜たり〜たりする","sub":"列举代表性动作","form":"V-た形 ＋ り、（V-た形 ＋ り）する","mean":"…啦…啦；又是…又是…","eg":"逃げたり あきらめるコトは","warn":"歌词里只出现一个「たり」，第二个被省略了。口语常见，但正式写作最好补全：逃げたり、あきらめたりするコト。"},{"p":"〜ば","sub":"假定条件","form":"V-仮定形 ＋ ば（五段：词尾变え段；ある→あれば）","mean":"只要…就…；如果…","eg":"一瞬あれば できるから","warn":"「ば」偏书面、条件性强。口语里同样的意思更常用「たら」。"},{"p":"ます形 ＋ 続ける","sub":"动作持续","form":"V-ます（去ます）＋ 続ける","mean":"一直…下去","eg":"歩き続けよう","warn":"「歩く」和「続ける」粘成一个动词，重音落在「つづ」。同类：降り続ける、走り続ける、使い続ける。"},{"p":"意志形 〜よう / 〜う","sub":"意志・劝诱","form":"一段・サ変：未然形＋よう ／ 五段：え段＋う","mean":"…吧；我要…","eg":"歩き続けよう ／ 傘ひろげよう","warn":"这里的「〜よう」不是「我们一起」，更像对自己下的决心，所以语气比「〜ましょう」硬。"},{"p":"〜にしか〜ない","sub":"唯一限定","form":"名詞 ＋ にしか ＋ 否定形","mean":"只有…才…","eg":"君にしかできないコトがある","warn":"「しか」必须跟否定呼应，缺了否定就错句。「君だけができる」是中性陈述，「君にしかできない」带「非你不可」的重量。"},{"p":"〜ように","sub":"目的・祈愿","form":"V-辞書形 / V-ない形 ＋ ように","mean":"为了…；希望…","eg":"光がなくせぬように","warn":"前面接否定形时意思是「希望不要…」。它和「ために」不同：ために前面只能接意志动词。"},{"p":"〜ぬ","sub":"文言否定","form":"V-未然形 ＋ ぬ（する→せぬ）","mean":"不…（＝ない）","eg":"なくせぬ","warn":"「なくせぬ」＝「なくせない」。三层叠在一起：なくす → なくせる（可能）→ なくせぬ（可能＋否定）。"},{"p":"命令形","sub":"命令","form":"五段：词尾变え段 ／ 一段：＋ろ ／ する：しろ・せよ","mean":"去做…！","eg":"つかめ / まもれ / はしれ / めざせ / こわせ / くずせ","warn":"日语命令形日常用会显得粗暴，但歌词里是「对自己喊话」，所以完全不违和。"},{"p":"〜さ","sub":"语气助词","form":"各种词 ＋ さ","mean":"当然…啊（轻描淡写的断定）","eg":"なれるさ / 逢えるさ","warn":"很像中文的「嘛」。只能用在口语和歌词里，写进正式文书会显得轻浮。"},{"p":"〜たら","sub":"条件・先后","form":"V-た形 ＋ ら","mean":"一…就…；如果…","eg":"火がついたら / 気がついたら","warn":"「たら」比「ば」口语，也更强调「前项发生了，后项才发生」的先后感。"},{"p":"どんな〜も / 疑问词＋だって","sub":"全称","form":"どんな ＋ 名詞 ＋ も ／ どこへ ＋ だって","mean":"无论…都…","eg":"どんな願いも / どこへだって行ける","warn":"「だって」＝「でも」的口语形，接在疑问词后表「无论哪儿 / 谁 / 什么」。"},{"p":"〜ばかりじゃない","sub":"部分否定","form":"名詞 ＋ ばかり ＋ じゃない","mean":"不全是…；不总是…","eg":"晴れの日ばかりじゃないから","warn":"「ばかり」表「尽是」，否定后才是「不总是」。说成「晴れの日じゃない」就变成「不是晴天」了。"},{"p":"〜より ＋ 形容词く形","sub":"比较＋状语","form":"A ＋ より ＋ B-く（＋動詞）","mean":"比 A 更…地（做）","eg":"風より速く / 空より遠く","warn":"形容词去「い」变「く」就能当副词。「速く」修饰「はしれ」，回答的是「跑得多快」。"},{"p":"〜けれど（も）/ 〜けど","sub":"转折","form":"句子 ＋ けれど / けど","mean":"虽然…但是…","eg":"降るけれど / ないけど","warn":"「けれど」偏书面，「けど」偏口语。歌里两句都用了，可以听一下语气的差别。"},{"p":"〜なんか（＋否定）","sub":"强调否定","form":"名詞 ＋ なんか ＋ 否定","mean":"根本没有什么…","eg":"地図なんかないけど","warn":"「なんか」是「など」的口语形，把对象往下压，加强「压根不存在」的语气。"},{"p":"〜になる","sub":"变化结果","form":"名詞 ＋ になる ／ 形II（去な）＋ になる ／ 形I → 〜くなる","mean":"变成…；成为…","eg":"武器になる / たくましい自分になれる","warn":"名词直接接「に」；な形容词要去掉「な」；い形容词则变成「〜く」。三种接法别混。"}],"footer":{"title":"brave heart","note":"本页为日语学习用途的语言分析作品，不提供完整歌词。歌词著作权归作词 大森祥子、作曲・编曲 太田美知彦、演唱 宮崎歩 及相关权利方所有；页面仅引用极短片段用于语法与词汇讲解。请通过正版音源与官方歌词页对照收听。","meta":["DIGIMON ADVENTURE","歌詞精読ノート","JLPT N3"]},"modules":{"listen":false,"studio":false,"quiz":false,"plan":false}};</script>
+<script>/* ============================================================
+   render.js — 由 song.json 驱动整页渲染
+   约定：window.SONG 由 build 注入；所有文案在 JSON 里，脚本不含任何歌曲内容
+   板块开关：SONG.modules 里把某项设为 false，该 section 会被移除
+             （导航、章节编号、顶部数据条自动跟随）
+   ============================================================ */
+(function () {
+  'use strict';
+
+  const SONG   = window.SONG || {};
+  const META   = SONG.meta || {};
+  const LYRIC  = SONG.lines || [];
+  const VOCAB  = SONG.vocab || [];
+  const GRAM   = SONG.grammar || [];
+  const QUIZ   = SONG.quiz || [];
+  const PLAN   = (SONG.plan && SONG.plan.days) || [];
+  const SEGS   = SONG.segments || [];
+  const NS     = 'jss.' + (META.slug || 'default') + '.';
+
+  const ALL_SECTIONS = ['map', 'lines', 'vocab', 'grammar', 'listen', 'studio', 'quiz', 'plan'];
+  const MODULES = Object.assign({}, ...ALL_SECTIONS.map(k => ({ [k]: true })), SONG.modules || {});
+  const on = k => MODULES[k] !== false;
+
+  /* ---------------- 基础工具 ---------------- */
+  const $  = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem(NS + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(NS + k, JSON.stringify(v)); } catch (e) {} }
+  };
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, c =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+  const escapeAttr = escapeHtml;
+
+  /* 把 漢字[かな] 转成 ruby */
+  function ruby(s) {
+    return escapeHtml(s).replace(/([\u4e00-\u9fff々〆]+)\[([^\]]+)\]/g,
+      (m, kanji, kana) => '<ruby>' + kanji + '<rt>' + kana + '</rt></ruby>');
+  }
+  function plain(s) { return String(s || '').replace(/\[([^\]]+)\]/g, ''); }
+
+  function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  const SPEAKER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+  const CHECK   = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>';
+
+  const TONE_COLOR = { a: '#BFE0D8', b: '#F7CFA6', s: '#F3C3CC', c: '#C4D3EB', i: '#E3DFD6' };
+
+  /* ---------------- 语音 ---------------- */
+  let jaVoice = null;
+  function pickVoice() {
+    if (!('speechSynthesis' in window)) return;
+    const vs = speechSynthesis.getVoices() || [];
+    jaVoice = vs.find(v => v.lang === 'ja-JP') || vs.find(v => (v.lang || '').indexOf('ja') === 0) || null;
+  }
+  function speak(text) {
+    if (!('speechSynthesis' in window) || !text) return;
+    try {
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'ja-JP';
+      u.rate = 0.82;
+      if (jaVoice) u.voice = jaVoice;
+      speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+  if ('speechSynthesis' in window) {
+    pickVoice();
+    speechSynthesis.addEventListener('voiceschanged', pickVoice);
+  }
+
+  /* ---------------- 板块卸载 + 章节编号重排 ---------------- */
+  ALL_SECTIONS.forEach(k => {
+    if (!on(k)) {
+      const el = document.getElementById(k);
+      if (el) el.remove();
+    }
+  });
+  $$('main > section').forEach((s, i) => {
+    const n = s.querySelector('.sec-num');
+    if (n) n.textContent = String(i + 1).padStart(2, '0');
+  });
+
+  /* ---------------- 首屏右侧：封面 ----------------
+     meta.cover = "disc"  → 用模板里的 CD 图形
+     meta.cover = 图片路径 → 图片封面
+     不填（默认）        → 排版式封面（纯 CSS + 文字，随歌名生成）
+  */
+  function renderHeroArt() {
+    const box = $('#hero-art');
+    if (!box) return;
+    const cover = META.cover;
+
+    if (cover === 'disc') return;
+
+    if (cover && cover !== 'type') {
+      const alt = META.coverAlt || ((META.titleLine1 || '') + ' ' + (META.titleLine2 || '') + ' 封面').trim();
+      box.innerHTML = '<figure class="cover cover--img"><img src="' + escapeAttr(cover) + '" alt="' + escapeAttr(alt) + '"'
+        + ' loading="eager" decoding="async"></figure>';
+      return;
+    }
+
+    const work = String(META.kicker || '').split('·')[0].trim().toUpperCase();
+    const title = escapeHtml(META.titleLine1 || '')
+      + (META.titleLine2 ? '<br>' + escapeHtml(META.titleLine2) : '');
+
+    box.innerHTML = '<figure class="cover cover--type">'
+      + '<span class="cover-ring" aria-hidden="true"></span>'
+      + '<div class="cover-inner">'
+      +   '<div class="cover-row">'
+      +     '<span class="cover-tag">' + escapeHtml(META.coverTag || 'Single') + '</span>'
+      +     '<span class="cover-year">' + escapeHtml(META.discLabel || '') + '</span>'
+      +   '</div>'
+      +   '<div class="cover-mid">'
+      +     (work ? '<span class="cover-work">' + escapeHtml(work) + '</span>' : '')
+      +     '<span class="cover-title">' + title + '</span>'
+      +     '<span class="cover-artist">' + escapeHtml(META.artist || '') + '</span>'
+      +   '</div>'
+      +   '<div class="cover-foot">'
+      +     '<span>' + escapeHtml(META.subtitle || '歌詞精読') + '</span>'
+      +     '<span>' + escapeHtml(META.level || '') + '</span>'
+      +   '</div>'
+      + '</div></figure>';
+  }
+
+  /* ---------------- 导航 ---------------- */
+  const BACK_ARROW = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">'
+    + '<path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.7" '
+    + 'stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  /* 返回合集入口：meta.backHref 不填默认 ../index.html，显式写空则不显示 */
+  function backLink() {
+    const href = META.backHref === undefined ? '../index.html' : META.backHref;
+    if (!href) return '';
+    return '<a class="nav-back" href="' + escapeAttr(href) + '">' + BACK_ARROW
+      + escapeHtml(META.backLabel || '合集') + '</a>';
+  }
+
+  function renderNav() {
+    const items = (SONG.nav || []).filter(n => document.getElementById(n.id));
+    const links = items.map((n, i) =>
+      '<a class="nav-link' + (i === 0 ? ' is-active' : '') + '" href="#' + escapeAttr(n.id) + '">' + escapeHtml(n.label) + '</a>').join('');
+    $('#nav-inner').innerHTML = backLink() + links
+      + '<div class="nav-spacer"></div>'
+      + '<div class="nav-progress"><span id="nav-progress-text">已掌握 0 / 0</span><span class="bar"><i id="nav-progress-bar"></i></span></div>';
+  }
+
+  /* ---------------- 顶部数据条 ---------------- */
+  const STAT_VALUE = {
+    lines: () => LYRIC.length,
+    vocab: () => VOCAB.length,
+    grammar: () => GRAM.length,
+    quiz: () => QUIZ.length
+  };
+
+  function renderStats() {
+    const box = $('#hero-stats');
+    if (!box) return;
+    const items = (SONG.stats || []).filter(s => !s.module || on(s.module));
+    box.style.setProperty('--stat-cols', items.length || 1);
+    box.innerHTML = items.map(s => {
+      const v = STAT_VALUE[s.key] ? STAT_VALUE[s.key]() : (s.value != null ? s.value : 0);
+      return '<div class="stat"><b>' + v + '</b><span>' + escapeHtml(s.label) + '</span></div>';
+    }).join('');
+  }
+
+  /* ---------------- 徽章 / 为什么 / 结构 / 步骤 ---------------- */
+  function renderBadges() {
+    const el = $('#badges');
+    if (!el) return;
+    el.innerHTML = (META.badges || []).map((b, i) =>
+      '<span class="badge ' + (i === 0 ? 'badge--level' : 'badge--dot') + '">' + escapeHtml(b) + '</span>').join('');
+  }
+
+  function renderWhy() {
+    const el = $('#why-list');
+    if (!el) return;
+    el.innerHTML = ((SONG.map && SONG.map.why) || []).map((w, i) =>
+      '<li class="why-item"><span class="why-idx">' + (i + 1) + '</span>'
+      + '<div><b>' + escapeHtml(w.t) + '</b><p>' + escapeHtml(w.d) + '</p></div></li>').join('');
+  }
+
+  function renderStructure() {
+    const box = $('#struct');
+    if (!box) return;
+    const blocks = (SONG.map && SONG.map.blocks) || [];
+    box.innerHTML = blocks.map(b =>
+      '<button class="st-' + escapeAttr(b.tone || 'a') + '" data-filter="' + escapeAttr(b.key || '') + '"'
+      + ' data-min="' + escapeAttr(b.time || '') + '" style="--w:' + (b.weight || 10) + '">'
+      + escapeHtml(b.label) + '<small>' + escapeHtml(b.role || '') + '</small></button>').join('');
+
+    const lg = $('#struct-legend');
+    if (lg) {
+      lg.innerHTML = ((SONG.map && SONG.map.legend) || []).map(l =>
+        '<span><i style="background:' + (TONE_COLOR[l.tone] || TONE_COLOR.i) + '"></i>' + escapeHtml(l.label) + '</span>').join('');
+    }
+  }
+
+  function renderSteps() {
+    const el = $('#steps');
+    if (!el) return;
+    el.innerHTML = (SONG.steps || []).map(s =>
+      '<div class="step"><em>' + escapeHtml(s.k) + '</em><b>' + escapeHtml(s.t) + '</b><p>' + escapeHtml(s.d) + '</p></div>').join('');
+  }
+
+  /* ---------------- 逐句精读 ---------------- */
+  function initLines() {
+    const list = $('#lyric-list');
+    const empty = $('#lyric-empty');
+    if (!list) return;
+
+    let currentSec = 'all';
+
+    function render() {
+      const items = currentSec === 'all' ? LYRIC : LYRIC.filter(x => x.sec === currentSec);
+      list.innerHTML = items.map(it => {
+        const words = (it.words || []).map(w =>
+          '<span class="wchip"><b>' + escapeHtml(w[0]) + '</b><i>' + escapeHtml(w[1]) + '</i><em>' + escapeHtml(w[2]) + '</em></span>'
+        ).join('');
+        const say = escapeAttr(plain(it.jp));
+        return '<article class="lyric reveal in" data-sec="' + escapeAttr(it.sec) + '">'
+          + '<div class="lyric-main">'
+          +   '<div class="lyric-top">'
+          +     '<p class="lyric-jp" lang="ja">' + ruby(it.jp) + '</p>'
+          +     '<button class="icon-btn" data-say="' + say + '" aria-label="朗读这一句">' + SPEAKER + '</button>'
+          +   '</div>'
+          +   '<p class="lyric-tr">' + escapeHtml(it.tr) + '</p>'
+          + '</div>'
+          + '<div class="lyric-side">'
+          +   '<div class="words">' + words + '</div>'
+          +   '<div class="note"><b>语法</b> ' + (it.g || '') + '</div>'
+          +   '<p class="nuance">▸ ' + (it.n || '') + '</p>'
+          + '</div>'
+          + '</article>';
+      }).join('');
+      if (empty) empty.hidden = items.length > 0;
+    }
+
+    const filters = $('#sec-filters');
+    if (filters) {
+      filters.innerHTML = '<button class="filter is-on" data-sec="all">全部</button>'
+        + SEGS.map(s => '<button class="filter" data-sec="' + escapeAttr(s.key) + '">' + escapeHtml(s.label) + '</button>').join('');
+      filters.addEventListener('click', e => {
+        const btn = e.target.closest('.filter');
+        if (!btn) return;
+        $$('.filter', filters).forEach(b => b.classList.remove('is-on'));
+        btn.classList.add('is-on');
+        currentSec = btn.dataset.sec;
+        render();
+      });
+    }
+
+    const struct = $('#struct');
+    if (struct) {
+      struct.addEventListener('click', e => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        currentSec = btn.dataset.filter;
+        if (filters) $$('.filter', filters).forEach(b => b.classList.toggle('is-on', b.dataset.sec === currentSec));
+        render();
+        const target = document.getElementById('lines');
+        if (target) target.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      });
+    }
+
+    const furi = $('#t-furi');
+    if (furi) {
+      const saved = store.get('furi', true);
+      furi.checked = saved;
+      document.body.classList.toggle('hide-furi', !saved);
+      furi.addEventListener('change', e => {
+        document.body.classList.toggle('hide-furi', !e.target.checked);
+        store.set('furi', e.target.checked);
+      });
+    }
+
+    const tr = $('#t-tr');
+    if (tr) {
+      const saved = store.get('tr', true);
+      tr.checked = saved;
+      document.body.classList.toggle('hide-tr', !saved);
+      tr.addEventListener('change', e => {
+        document.body.classList.toggle('hide-tr', !e.target.checked);
+        store.set('tr', e.target.checked);
+      });
+    }
+
+    render();
+  }
+
+  /* ---------------- 词汇表 ---------------- */
+  function initVocab() {
+    const body = $('#v-body');
+    const search = $('#v-search');
+    if (!body || !search) return;
+
+    const keyOf = v => v.k + '|' + v.r;
+    const mastery = new Set(store.get('mastery', []));
+    let level = 'all';
+    let undone = false;
+
+    function updateProgress() {
+      const total = VOCAB.length;
+      const done = mastery.size;
+      const pct = total ? Math.round(done / total * 100) : 0;
+      const t = $('#nav-progress-text');
+      if (t) t.textContent = '已掌握 ' + done + ' / ' + total;
+      const bar = $('#nav-progress-bar');
+      if (bar) bar.style.width = pct + '%';
+      const vp = $('#v-progress');
+      if (vp) vp.textContent = '已掌握 ' + done + '（' + pct + '%）';
+    }
+
+    function render() {
+      const q = search.value.trim().toLowerCase();
+      const rows = VOCAB.filter(v => {
+        if (level !== 'all' && v.lv !== level) return false;
+        if (undone && mastery.has(keyOf(v))) return false;
+        if (!q) return true;
+        return (v.k + v.r + v.cn + v.p).toLowerCase().indexOf(q) > -1;
+      });
+
+      body.innerHTML = rows.length ? rows.map(v => {
+        const k = keyOf(v);
+        const done = mastery.has(k);
+        return '<tr' + (done ? ' class="done"' : '') + '>'
+          + '<td><button class="v-check" role="switch" aria-checked="' + done + '" aria-label="标记 ' + escapeAttr(v.k) + ' 已掌握" data-key="' + escapeAttr(k) + '">' + CHECK + '</button></td>'
+          + '<td class="v-word" lang="ja">' + escapeHtml(v.k) + '</td>'
+          + '<td class="v-read" lang="ja">' + escapeHtml(v.r) + '</td>'
+          + '<td class="v-pos">' + escapeHtml(v.p || '') + '</td>'
+          + '<td class="v-cn">' + escapeHtml(v.cn) + '</td>'
+          + '<td><span class="lv lv-' + v.lv + '">' + v.lv + '</span></td>'
+          + '<td><button class="icon-btn" data-say="' + escapeAttr(v.k) + '" aria-label="朗读 ' + escapeAttr(v.k) + '">' + SPEAKER + '</button></td>'
+          + '</tr>';
+      }).join('') : '<tr><td colspan="7" style="text-align:center;padding:2.4rem 1rem;color:var(--ink-3);font-size:.86rem">没有匹配的词，换个关键词试试。</td></tr>';
+
+      $('#v-count').textContent = '共 ' + VOCAB.length + ' 个词，当前显示 ' + rows.length + ' 个';
+      updateProgress();
+    }
+
+    body.addEventListener('click', e => {
+      const btn = e.target.closest('.v-check');
+      if (!btn) return;
+      const k = btn.dataset.key;
+      if (mastery.has(k)) mastery.delete(k); else mastery.add(k);
+      store.set('mastery', Array.from(mastery));
+      render();
+    });
+
+    search.addEventListener('input', render);
+
+    $$('#v-levels .chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        $$('#v-levels .chip').forEach(c => c.classList.remove('is-on'));
+        chip.classList.add('is-on');
+        level = chip.dataset.lv;
+        render();
+      });
+    });
+
+    const undoneBtn = $('#v-undone');
+    if (undoneBtn) {
+      undoneBtn.addEventListener('click', e => {
+        undone = !undone;
+        e.currentTarget.classList.toggle('is-on', undone);
+        render();
+      });
+    }
+
+    const reset = $('#v-reset');
+    if (reset) {
+      reset.addEventListener('click', () => {
+        mastery.clear();
+        store.set('mastery', []);
+        render();
+      });
+    }
+
+    render();
+  }
+
+  /* ---------------- 语法 ---------------- */
+  function initGrammar() {
+    const el = $('#grammar-list');
+    if (!el) return;
+    el.innerHTML = GRAM.map(g =>
+      '<details class="g reveal">'
+      + '<summary>'
+      +   '<div class="g-head"><span class="g-pattern" lang="ja">' + escapeHtml(g.p) + '</span><span class="g-sub">' + escapeHtml(g.sub) + '</span></div>'
+      +   '<span class="g-plus" aria-hidden="true">+</span>'
+      + '</summary>'
+      + '<div class="g-body">'
+      +   '<dl style="display:grid;gap:.55rem;margin:0">'
+      +     '<div class="g-row"><dt>接续</dt><dd><span class="g-eg">' + escapeHtml(g.form) + '</span></dd></div>'
+      +     '<div class="g-row"><dt>意思</dt><dd>' + escapeHtml(g.mean) + '</dd></div>'
+      +     '<div class="g-row"><dt>原句</dt><dd><span class="g-eg" lang="ja">' + escapeHtml(g.eg) + '</span></dd></div>'
+      +   '</dl>'
+      +   '<p class="g-warn"><b>注意</b> ' + escapeHtml(g.warn) + '</p>'
+      + '</div>'
+      + '</details>').join('');
+  }
+
+  /* ---------------- 听说训练 ---------------- */
+  function initListen() {
+    const el = $('#listen-grid');
+    if (!el) return;
+    el.innerHTML = (SONG.listen || []).map(c =>
+      '<div class="lcard reveal"><em>' + escapeHtml(c.tag) + '</em><b>' + escapeHtml(c.t) + '</b>'
+      + '<p>' + escapeHtml(c.d) + '</p><div class="ex">' + (c.ex || '') + '</div></div>').join('');
+  }
+
+  /* ---------------- 填空测验 ---------------- */
+  function initQuiz() {
+    const list = $('#quiz-list');
+    if (!list) return;
+
+    let score = 0;
+    let answered = 0;
+    let best = store.get('best', null);
+
+    function paintBest() {
+      const el = $('#quiz-best');
+      if (el) el.textContent = best === null ? '—' : best + ' / ' + QUIZ.length;
+    }
+
+    function render() {
+      score = 0; answered = 0;
+      $('#quiz-score').textContent = '0';
+      $('#quiz-total').textContent = QUIZ.length;
+
+      list.innerHTML = QUIZ.map((q, i) => {
+        const opts = shuffle(q.opts.slice()).map(o =>
+          '<button class="opt" data-opt="' + escapeAttr(o) + '" lang="ja">' + escapeHtml(o) + '</button>').join('');
+        return '<div class="q" data-i="' + i + '">'
+          + '<span class="q-num">Q ' + String(i + 1).padStart(2, '0') + '</span>'
+          + '<p class="q-text" lang="ja">' + escapeHtml(q.q).replace('【】', '<u></u>') + '</p>'
+          + '<div class="q-opts">' + opts + '</div>'
+          + '<div class="q-why"><b>解析</b> ' + escapeHtml(q.why) + '</div>'
+          + '</div>';
+      }).join('');
+      paintBest();
+    }
+
+    list.addEventListener('click', e => {
+      const btn = e.target.closest('.opt');
+      if (!btn) return;
+      const card = btn.closest('.q');
+      if (card.classList.contains('answered')) return;
+
+      const q = QUIZ[Number(card.dataset.i)];
+      card.classList.add('answered');
+      answered++;
+
+      $$('.opt', card).forEach(b => {
+        b.disabled = true;
+        if (b.dataset.opt === q.a) b.classList.add('correct');
+      });
+      if (btn.dataset.opt !== q.a) btn.classList.add('wrong');
+      else score++;
+
+      $('#quiz-score').textContent = score;
+
+      if (answered === QUIZ.length && (best === null || score > best)) {
+        best = score;
+        store.set('best', best);
+        paintBest();
+      }
+    });
+
+    const reset = $('#quiz-reset');
+    if (reset) reset.addEventListener('click', render);
+
+    render();
+  }
+
+  /* ---------------- 学习计划 ---------------- */
+  function initPlan() {
+    const grid = $('#plan-grid');
+    if (!grid) return;
+
+    const done = new Set(store.get('plan', []));
+
+    grid.innerHTML = PLAN.map((d, i) => {
+      const isDone = done.has(i);
+      return '<div class="day' + (isDone ? ' done' : '') + '" data-i="' + i + '">'
+        + '<div class="day-d"><em>' + escapeHtml(d.d) + '</em><small>' + escapeHtml(d.m || '') + '</small></div>'
+        + '<div class="day-mid"><b>' + escapeHtml(d.t) + '</b><p>' + escapeHtml(d.p) + '</p></div>'
+        + '<label class="day-check"><input type="checkbox" data-day="' + i + '"' + (isDone ? ' checked' : '') + '> 完成</label>'
+        + '</div>';
+    }).join('');
+
+    grid.addEventListener('change', e => {
+      const cb = e.target.closest('input[data-day]');
+      if (!cb) return;
+      const i = Number(cb.dataset.day);
+      if (cb.checked) done.add(i); else done.delete(i);
+      store.set('plan', Array.from(done));
+      cb.closest('.day').classList.toggle('done', cb.checked);
+    });
+  }
+
+  /* ---------------- 歌词工作台 ---------------- */
+  function initStudio() {
+    const paste = $('#paste');
+    const out = $('#studio-out');
+    if (!paste || !out) return;
+
+    const SURF = new Map();
+    VOCAB.forEach(v => {
+      const put = s => { if (s && s.length >= 1 && !SURF.has(s)) SURF.set(s, v); };
+      put(v.k);
+      if (v.k.length >= 2) {
+        if (/[るうくすむぶつぬぐ]$/.test(v.k)) put(v.k.slice(0, -1));
+        if (/い$/.test(v.k)) put(v.k.slice(0, -1));
+      }
+    });
+    const keys = Array.from(SURF.keys()).sort((a, b) => b.length - a.length);
+    const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp(keys.map(reEsc).join('|'), 'g');
+
+    const TIP_HTML = '<p class="tip">粘贴之后，这里会显示带标注的歌词。<br>标了底色的词，把鼠标停上去可以看到读音和释义。</p>';
+
+    function annotate(text) {
+      let total = 0;
+      const html = text.split(/\r?\n/).slice(0, 260).map(line => {
+        if (!line.trim()) return '<div class="line">&nbsp;</div>';
+        const marked = escapeHtml(line).replace(re, m => {
+          const v = SURF.get(m);
+          if (!v) return m;
+          total++;
+          const tip = v.k + '（' + v.r + '） ' + v.cn;
+          return '<span class="hl" tabindex="0" data-tip="' + escapeAttr(tip) + '" title="' + escapeAttr(tip) + '">' + m + '</span>';
+        });
+        return '<div class="line">' + marked + '</div>';
+      }).join('');
+      return { html, total };
+    }
+
+    let timer = null;
+
+    function render() {
+      if (!paste.value.trim()) {
+        out.innerHTML = TIP_HTML;
+        $('#studio-count').textContent = '0';
+        return;
+      }
+      const r = annotate(paste.value);
+      out.innerHTML = r.html;
+      $('#studio-count').textContent = String(r.total);
+    }
+
+    const saved = store.get('lyrics', '');
+    if (saved) paste.value = saved;
+
+    paste.addEventListener('input', () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        render();
+        store.set('lyrics', paste.value);
+      }, 180);
+    });
+
+    const clear = $('#studio-clear');
+    if (clear) {
+      clear.addEventListener('click', () => {
+        paste.value = '';
+        store.set('lyrics', '');
+        render();
+      });
+    }
+
+    render();
+  }
+
+  /* ---------------- 启动 ---------------- */
+  renderNav();
+  renderStats();
+  renderHeroArt();
+  renderBadges();
+  renderWhy();
+  renderStructure();
+  renderSteps();
+  initLines();
+  initVocab();
+  initGrammar();
+  initListen();
+  initQuiz();
+  initPlan();
+  initStudio();
+
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('[data-say]');
+    if (btn) speak(btn.dataset.say);
+  });
+
+  /* 滚动高亮 */
+  const navLinks = $$('.nav-link');
+  const sections = navLinks.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+
+  if ('IntersectionObserver' in window) {
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          navLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + en.target.id));
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+    sections.forEach(s => spy.observe(s));
+
+    const revealer = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          revealer.unobserve(en.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    $$('.reveal').forEach(el => revealer.observe(el));
+  } else {
+    $$('.reveal').forEach(el => el.classList.add('in'));
+  }
+})();
+</script>
+</body>
+</html>
