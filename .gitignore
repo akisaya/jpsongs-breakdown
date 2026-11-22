@@ -8,8 +8,9 @@ Thumbs.db
 # ============================================================
 # 依赖
 # ============================================================
-# 技能包里 check.js 用的 playwright-core（约 14M），需要时
-# 在 .workbuddy/skills/jp-song-study-page/ 下执行 npm i 即可
+# 技能本体在 .agents/skills/jp-song-study-page（项目级，随仓库走）
+# WorkBuddy 不读 .agents，靠软链 .workbuddy/skills/jp-song-study-page 接入
+# check.js 用的 playwright-core（约 14M）不入库，需要时在技能目录下 npm i
 node_modules/
 
 # ============================================================

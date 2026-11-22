@@ -295,20 +295,15 @@ function fill(tpl, data) {
 }
 
 let html = read(TEMPLATE, 'template.html');
-const filled = fill(html, song);
-if (filled.missing.size) {
-  console.error('✗ 模板里有数据没提供的占位符：');
-  [...filled.missing].forEach(k => console.error('  · {{' + k + '}}'));
-  process.exit(1);
-}
-html = filled.out;
 
-/* 按 modules 裁剪未启用的板块：产物里直接不含这些 section，而不是靠运行时删除。
-   lyrics 额外看数据：没写歌词就一起裁掉，避免留下空板块。 */
-const dropSections = new Set(
-  ['lyrics', 'listen', 'studio', 'quiz', 'plan'].filter(k => MODULES[k] === false)
-);
-if (!song.lyrics || !Array.isArray(song.lyrics.blocks) || !song.lyrics.blocks.length) {
+/* 板块裁剪：产物里直接不含未启用的 section，而不是靠运行时删除。
+   lyrics 额外看数据：没写歌词就一起裁掉，避免留下空板块。
+   顺序必须在 fill() 之前——否则被裁板块的 {{sec.xxx.*}} 会先触发「占位符缺失」。 */
+/* 裁掉未启用的板块。lyrics 是唯一「可以不写数据」的板块：没写就裁掉，不留空板块。
+   其余四块一旦在 modules 里开着就必须有数据，缺数据由前面的校验拦下（更早报错、更好定位）。 */
+const OPTIONAL = ['lyrics', 'listen', 'studio', 'quiz', 'plan'];
+const dropSections = new Set(OPTIONAL.filter(k => MODULES[k] === false));
+if (!(Array.isArray(song.lyrics?.blocks) && song.lyrics.blocks.length)) {
   dropSections.add('lyrics');
 }
 dropSections.forEach(k => {
@@ -322,15 +317,23 @@ dropSections.forEach(k => {
 });
 
 /* 关闭的板块连数据一起剔除，避免无用的 JSON 占体积、源码里露出来 */
-['lyrics', 'listen', 'studio', 'quiz', 'plan'].forEach(k => {
+OPTIONAL.forEach(k => {
   if (dropSections.has(k)) {
     delete song[k];
     if (song.sec) delete song.sec[k];
   }
 });
 if (Array.isArray(song.nav)) {
-  song.nav = song.nav.filter(n => MODULES[n.id] !== false);
+  song.nav = song.nav.filter(n => !dropSections.has(n.id));
 }
+
+const filled = fill(html, song);
+if (filled.missing.size) {
+  console.error('✗ 模板里有数据没提供的占位符：');
+  [...filled.missing].forEach(k => console.error('  · {{' + k + '}}'));
+  process.exit(1);
+}
+html = filled.out;
 
 /* 注入资源（在占位符替换之后做，避免资源内容被二次替换） */
 const safeJson = JSON.stringify(song).replace(/</g, '\\u003c');

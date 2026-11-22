@@ -217,6 +217,11 @@ sec.map / sec.lyrics / sec.lines / sec.vocab / sec.grammar / sec.listen / sec.st
 
 注音只标汉字，假名和助词不标。括号必须是半角 `[ ]`。
 
+```
+逃[に]げたり あきらめるコトは 誰[だれ]も
+生[い]き方[かた]に地図[ちず]なんかないけど
+```
+
 ## vocab（必填，50–70）
 
 ```json
@@ -266,7 +271,7 @@ sec.map / sec.lyrics / sec.lines / sec.vocab / sec.grammar / sec.listen / sec.st
 ```json
 "footer": {
   "title": "brave heart",
-  "note": "版权句，见 SKILL.md",
+  "note": "版权句，模板见 editorial-guide.md 的版权一节",
   "meta": ["DIGIMON ADVENTURE", "歌詞精読ノート", "JLPT N3"]
 }
 ```
