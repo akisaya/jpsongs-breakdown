@@ -270,6 +270,8 @@ a{color:inherit;text-decoration:none}
 .song-desc{
   margin:.6rem 0 0;
   font-size:.78rem;line-height:1.72;color:var(--ink-3);
+  /* 固定 3 行高度：两列并排时描述长短不一也不会让下半部错位 */
+  min-block-size:5.16em;
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;
   overflow:hidden;
 }
