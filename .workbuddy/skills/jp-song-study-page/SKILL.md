@@ -21,7 +21,7 @@ agent_created: true
 |---|---|---|
 | 板块 | **4 块**：map / lines / vocab / grammar | 「要测验」「要七天计划」「八块全要」→ 开对应 `modules` |
 | 难度 | N3 | 「N4」「N2」→ 调 `vocab[].lv` 分布与语法条难度 |
-| 输出 | `~/code/me/jsongs/<slug>/index.html` | 给了路径就用给的；同名文件存在时先问 |
+| 输出 | `~/code/me/jsongs/<slug>/{index.html,<slug>.song.json}` | 给了路径就用给的；同名文件存在时先问 |
 | 配色 | 奶油纸底 + 橙/青 | 「换个蓝色系」→ 改 `assets/base.css` 顶部的 `--orange` / `--teal` |
 | 封面 | **排版式封面**（纯 CSS，随歌名自动生成） | 「用我的封面图」→ 图片路径写进 `meta.cover`，build 自动内联 |
 | 卡片量 | 16–24 张 | 「做细一点」→ 24+；「一页就够」→ 12 左右 |
@@ -32,29 +32,46 @@ agent_created: true
 2. 找不到权威歌词来源，或两个来源差异大到影响讲解。
 3. 这首歌明显不适合（饶舌、方言、通篇拟声词）——直接说"这首做不出教学价值"，并给替代建议。
 
-**做完要主动报**：用了哪些板块、共几张卡/几个词/几条语法、文件路径、有没有触发版权裁剪。
+**做完要主动报**：用了哪些板块、共几张卡/几个词/几条语法、文件路径、有没有触发版权裁剪，以及**有没有把它加进根目录合集页的 `SONGS` 数组**。
 
 ## 30 秒上手
 
 本技能是**项目级**的，随 `~/code/me/jsongs` 一起走；下面的命令都在项目根目录执行。
 
 ```bash
-cd .workbuddy/skills/jp-song-study-page
+SKILL=.workbuddy/skills/jp-song-study-page
 
-# 1. 复制样板，改成新歌
-cp examples/brave-heart.song.json ~/songs/butterfly.song.json
+# 1. 复制样板，改成新歌（数据源放在歌曲自己的目录里，自包含）
+cp $SKILL/examples/brave-heart.song.json <slug>/<slug>.song.json
 
 # 2. 只校验，不产出（改 JSON 时反复跑）
-node scripts/build.js --check ~/songs/butterfly.song.json
+node $SKILL/scripts/build.js --check <slug>/<slug>.song.json
 
 # 3. 出页面
-node scripts/build.js ~/songs/butterfly.song.json ~/songs/butterfly/index.html
+node $SKILL/scripts/build.js <slug>/<slug>.song.json <slug>/index.html
 
 # 4. 验收（无头 Chrome：交互 + 多断点溢出 + 截图）
-node scripts/check.js ~/songs/butterfly/index.html --shots
+node $SKILL/scripts/check.js <slug>/index.html --shots
 ```
 
 `check.js` 依赖 `playwright-core`（本 skill 目录已装）。缺失时会自动降级为静态检查并提示。
+
+### 项目目录约定
+
+```
+jsongs/
+├── index.html              ← 合集索引页（曲目卡片列表）
+├── brave-heart/            ← 一首歌一个目录
+│   ├── index.html          ← 构建产物
+│   └── brave-heart.song.json  ← 数据源，自包含
+└── again/
+    ├── index.html
+    └── again.song.json
+```
+
+**新歌出页后还有一步**：在根 `index.html` 的 `SONGS` 数组里追加一条（slug / href / kicker / title / artist / year / tone / desc / scale）。否则新歌不会出现在合集页上。`tone` 取 `teal` 或 `rust`，同色系别连排。
+
+歌曲页顶栏的「‹ 合集」默认指向 `../index.html`，正好是合集页；单独使用（没有合集页）时在 `meta.backHref` 写 `""` 关掉。
 
 ## 板块开关（先决定这一页做几块）
 

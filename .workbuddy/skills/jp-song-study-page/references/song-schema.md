@@ -72,6 +72,8 @@ node scripts/build.js --check song.json   # 改的时候反复跑这个
 | `cover` | 首屏封面，三种写法见下。**不填 = 排版式封面** |
 | `coverTag` | 排版封面左上角的小字，默认 `Single` |
 | `coverAlt` | 图片封面的 alt，不填则用「歌名 封面」 |
+| `backHref` | 顶栏「‹ 合集」的链接。不填默认 `../index.html`（对应 `<slug>/index.html` 的结构）；显式写 `""` 则不显示该入口 |
+| `backLabel` | 返回链接的文案，默认 `合集` |
 
 ### 封面（meta.cover）
 
