@@ -1,0 +1,150 @@
+# 日文歌歌词拆解
+
+把一首日文歌做成**一整页可以照着学**的歌词精读页：逐句注音拆解、核心词汇表（可勾选掌握度）、语法图谱、难度档标注。
+每首歌是一个自包含目录，产物是**单文件 HTML**——零依赖、双击即开、离线可用、手机上也能看。
+
+根目录的 [`index.html`](./index.html) 是合集页：曲目卡片 + 汇总统计 + 各曲掌握进度。
+**当前收录了哪几首、各自什么规模，见 [`SONGS.md`](./SONGS.md)。**
+
+## 目录结构
+
+```
+.
+├── README.md                           本文件：怎么加一首新歌
+├── SONGS.md                            曲目清单（给人看的那份）
+├── index.html                          合集索引页（手写，曲目清单在 SONGS 数组里）
+├── <slug>/                             一首歌一个目录
+│   ├── index.html                      构建产物（不要手改，重跑 build 会覆盖）
+│   └── <slug>.song.json                数据源，页面全部内容都在这里
+└── .agents/skills/jp-song-study-page/  生成器技能
+    ├── SKILL.md                        技能说明（给 Agent 看的工作流）
+    ├── assets/                         模板 HTML / CSS / 渲染脚本
+    ├── scripts/build.js                song.json → index.html，含字段校验
+    ├── scripts/check.js                无头浏览器验收（交互 + 溢出 + 截图）
+    ├── examples/                       骨架与完整范例
+    └── references/                     字段字典、内容口径、坑表
+```
+
+`.workbuddy/skills/jp-song-study-page` 是指向该目录的相对软链——WorkBuddy 只扫 `.workbuddy/skills/`，靠它装载技能。
+
+## 环境
+
+- Node.js 18+
+- `playwright-core` 只有跑 `check.js` 时才需要（约 14M，不入库）：
+
+```bash
+cd .agents/skills/jp-song-study-page && npm i
+```
+
+不装也能用，`check.js` 会自动降级为静态检查。
+
+## 加一首新歌
+
+### 方式一：让 Agent 做（推荐）
+
+用支持技能的客户端（WorkBuddy 等）把本仓库作为工作目录打开，说一句：
+
+> 做一首《Butterfly》的学习页
+
+技能会自己走完：判断值不值得做 → 交叉核对歌词 → 切段落 → 抽卡 → 词表 → 语法 → 构建 → 验收 → 追加到合集页。
+你只需要拍板三件事：**歌名 / 演唱者 / 出处对得上吗**、**要不要收录完整歌词**、**输出到哪个目录**。
+
+### 方式二：手动
+
+```bash
+SKILL=.agents/skills/jp-song-study-page
+SLUG=butterfly
+
+mkdir -p $SLUG
+cp $SKILL/examples/_skeleton.song.json $SLUG/$SLUG.song.json   # 6 卡 / 20 词的骨架
+
+# 先填 meta，再填 lines / vocab / grammar
+node $SKILL/scripts/build.js --check $SLUG/$SLUG.song.json     # 改一点校一点，反复跑
+node $SKILL/scripts/build.js $SLUG/$SLUG.song.json $SLUG/index.html
+node $SKILL/scripts/check.js $SLUG/index.html --shots          # 交互 + 四档断点溢出 + 截图
+```
+
+产物是 `$SLUG/index.html`，截图在 `preview/`（已 gitignore，看完可删）。
+
+## song.json 怎么写
+
+一份 song.json 就是一个页面。**五个必填**：`meta` / `sec` / `lines` / `vocab` / `grammar`；
+**五个可选**：`lyrics`（完整歌词）/ `listen`（听说训练）/ `studio`（歌词粘贴标注器）/ `quiz`（填空）/ `plan`（七天计划）。
+
+可选板块写了数据就出、没写就不出；要关掉已有数据的板块，在 `modules` 里写 `false`，并把数据一并删掉。
+
+| 想查什么 | 看哪里 |
+|---|---|
+| 每个字段长什么样、有哪些默认值 | [references/song-schema.md](./.agents/skills/jp-song-study-page/references/song-schema.md) |
+| 选句标准、词汇分级、出题口径、文案要求 | [references/editorial-guide.md](./.agents/skills/jp-song-study-page/references/editorial-guide.md) |
+| 最小可跑骨架 | [examples/_skeleton.song.json](./.agents/skills/jp-song-study-page/examples/_skeleton.song.json) |
+| 完整范例（22 卡 / 61 词 / 16 语法 / 12 题） | [examples/brave-heart.song.json](./.agents/skills/jp-song-study-page/examples/brave-heart.song.json) |
+
+两条最容易踩的规则：
+
+- **`meta.slug` 全站唯一**。页面用它给 localStorage 加前缀（`jss.<slug>.mastery`），重复了掌握度会串歌。
+- **目录名和 slug 可以是两个东西**（比如目录 `again/`、slug `again-yui`），但合集页 `SONGS[].slug`
+  必须和 `meta.slug` 一字不差，否则合集页上的进度条不显示。
+
+## 收尾：加进合集页
+
+编辑根目录 `index.html` 里的 `SONGS` 数组，追加一条：
+
+```js
+{
+  slug: 'butterfly',                                  // 必须等于 song.json 的 meta.slug
+  href: './butterfly/index.html',                     // 写全 index.html，file:// 下 ./butterfly/ 打不开
+  kicker: 'Digimon Adventure · OP · 1999',
+  work: 'Digimon',
+  title: ['butterfly'],
+  artist: '和田光司',
+  year: '1999',
+  level: 'N4 上下',
+  tone: 'teal',                                       // teal / rust 两色，同色系别连排
+  desc: '两句话说明这首为什么值得逐句拆开听。',
+  scale: { lyr: 0, lines: 0, vocab: 0, grammar: 0 }   // 填实际数量
+}
+```
+
+`scale` 的数字从 build 输出里抄（`✓ 校验通过 22 句 / 61 词 / 16 语法 / 12 题`）；
+`lyr` 是完整歌词的行数，没收录就写 0。
+
+改完 `SONGS`，顺手在 [`SONGS.md`](./SONGS.md) 里补一行、加一小节——那份是给人看的清单，和代码里的数组各管一头。
+
+## 验收
+
+`check.js` 会自动检查：板块数与导航项一致、章节编号连续、数据条数值非 0、段落筛选、掌握度、
+答题高亮与解析、歌词标注、计划勾选、390/768/1024/1440 四档无横向溢出。
+
+人工只需要看两点：`preview/` 截图里的**注音有没有串行**、**长句有没有在小屏被拆断**。
+
+## 常见问题
+
+**`✗ 模板里有数据没提供的占位符：{{sec.xxx.*}}`**
+该板块在 `modules` 里开着但没写数据，或字段名拼错了。按提示的 key 补数据，或在 `modules` 里写 `false`。
+
+**`check.js` 报找不到 playwright-core**
+到 `.agents/skills/jp-song-study-page` 下 `npm i`。
+
+**页面顶栏「‹ 合集」点了没反应**
+`meta.backHref` 默认指向 `../index.html`；歌不在 `<slug>/index.html` 这层时，显式写相对路径，或写 `""` 关掉。
+
+**合集页上看不到新歌 / 没有进度条**
+新歌必须先加进 `SONGS` 数组才会出现；进度条还要求 `SONGS[].slug` 与 `meta.slug` 完全一致。
+
+**WorkBuddy 里看不到这个技能**
+软链断了。`ls -l .workbuddy/skills/` 若显示红字，重建：
+
+```bash
+ln -s ../../.agents/skills/jp-song-study-page .workbuddy/skills/jp-song-study-page
+```
+
+**手机/平板上点词朗读没声音**
+用的是浏览器 `speechSynthesis`，需要系统装有日语语音包（iOS 要在「设置 → 辅助功能 → 朗读内容」里先下载日语）。
+
+## 版权
+
+页面是个人日语学习用途的歌词解析作品。收录完整歌词时，`footer.note` 要写全作词 / 作曲 / 演唱，
+并注明「仅供学习参考，请勿用于商业用途」。
+
+**挂到公开域名之前先想一下**：本地双击打开是个人使用，公开传播是另一回事。封面同理——不主动去图站抓官方图。

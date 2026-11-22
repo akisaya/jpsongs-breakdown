@@ -74,7 +74,8 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 ```
 
 **有合集页时，新歌出页后还要多做一步**：在根 `index.html` 的 `SONGS` 数组里追加一条
-（slug / href / kicker / title / artist / year / tone / desc / scale），否则新歌不会出现在合集页上。
+（slug / href / kicker / work / title / artist / year / level / tone / desc / scale），否则新歌不会出现在合集页上。
+`slug` 必须与 `meta.slug` 一字不差（合集页靠它读 `jss.<slug>.mastery`）；`href` 要写全 `./<slug>/index.html`。
 `tone` 取 `teal` 或 `rust`，同色系别连排。没有合集页就跳过，并在 `meta.backHref` 写 `""` 关掉顶栏「‹ 合集」。
 
 ## 板块开关
