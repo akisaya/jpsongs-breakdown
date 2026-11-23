@@ -1,6 +1,6 @@
 # song.json 字段字典
 
-一份 `song.json` 就是一个页面。顶层 15 个键，除 `meta` / `sec` / `lines` / `vocab` / `grammar` / `quiz` 外都有默认值。
+一份 `song.json` 就是一个页面。正文章节为学习重点、完整歌词（默认必填）、逐句精读、词汇表、语法图谱。语法图谱是最后一节。
 
 ```bash
 node scripts/build.js --check song.json   # 改的时候反复跑这个
@@ -11,48 +11,37 @@ node scripts/build.js --check song.json   # 改的时候反复跑这个
 ```json
 {
   "extends": "另一份.json",   // 可选：继承母版，只写差异
-  "modules": { "quiz": false, "plan": false },  // 可选：关掉某些板块
+  "modules": { "lyrics": true },  // 默认值，可省略整个 modules
 
   "meta":   { ... },          // 必填
-  "stats":  [ 3–4 项 ],       // 顶部数据条
+  "stats":  [ 3 项 ],       // 顶部数据条
   "cta":    { ... },          // 两个按钮
-  "nav":    [ 5–9 项 ],       // 章节导航
-  "segments": [ 4 项 ],       // 段落（筛选按钮 + 卡片配色）
+  "nav":    [ 默认 5 项 ],       // 章节导航
   "map":    { ... },          // 学习地图
   "steps":  [ 3 项 ],
-  "sec":    { map, lyrics, lines, vocab, grammar, listen, studio, quiz, plan },  // 必填
-  "lyrics": { "blocks": [...] },  // 可选（modules.lyrics）：完整歌词
+  "sec":    { map, lyrics, lines, vocab, grammar },  // 必填
+  "lyrics": { "blocks": [...] },  // 默认必填：完整歌词
   "lines":  [ 卡片 ],          // 必填
   "vocab":  [ 词 ],            // 必填
   "grammar":[ 语法 ],          // 必填
-  "listen": [ 6 张卡 ],        // 可选（modules.listen）
-  "studio": { "placeholder": "..." },
-  "quiz":   [ 题 ],            // 可选（modules.quiz）
-  "plan":   { "days": [...], "note": "..." },  // 可选（modules.plan）
   "footer": { "title", "note", "meta": [3 行] }
 }
 ```
 
 ## modules（可选）
 
-控制 9 个板块的开关。**核心四块 `map / lines / vocab / grammar` 不能关**（build 会报错）；
-`lyrics`（完整歌词）默认为开，但没写歌词数据时会自动裁掉，也可以显式关掉。
-
-```json
-"modules": { "lyrics": false, "listen": false, "studio": false, "quiz": false, "plan": false }
-```
-
-`build.js` 在生成阶段就把对应 `<section>` 从 HTML 里裁掉；导航项、章节编号、顶部数据条项数会自动跟随，不需要改模板。
+默认五块 `map / lyrics / lines / vocab / grammar`。完整歌词默认必填；只有用户明确要求不要全文时，才通过 `"modules": {"lyrics": false}` 关闭。默认缺少 `lyrics.blocks`、空段落或空歌词行会构建失败。
+导航和章节编号自动跟随，正文始终结束于语法图谱。
 
 ## extends（可选）
 
 ```json
-{ "extends": "brave-heart.song.json", "modules": { "quiz": false } }
+{ "extends": "brave-heart.song.json", "meta": { "level": "N3 上下" } }
 ```
 
 - 路径**相对于当前文件**，最多 5 层。
 - 合并规则：对象递归合并，**数组整体替换**（所以要改 `stats` 就得写全数组）。
-- 典型用法：母版写全量内容，lite 版只写 `modules` / `stats` / `cta` / `steps` 的差异。
+- 典型用法：继承同一首歌的基础数据，仅调整标题、难度文案或学习步骤。
 
 ---
 
@@ -97,20 +86,18 @@ node scripts/build.js --check song.json   # 改的时候反复跑这个
 
 ## stats
 
-3–4 项，`label` 是文案，数字由脚本按 `key` 自动填。项数会决定数据条的列数。
+3 项，`label` 是文案，数字由脚本按 `key` 自动填。项数会决定数据条的列数。
 
 ```json
 "stats": [
   {"key":"lines","label":"精 读 句 数"},
   {"key":"vocab","label":"核 心 词 汇"},
-  {"key":"grammar","label":"语 法 点"},
-  {"key":"quiz","label":"填 空 练 习","module":"quiz"}
+  {"key":"grammar","label":"语 法 点"}
 ]
 ```
 
-- `key` 只能是 `lines / vocab / grammar / quiz`（脚本里有对应取数逻辑）。
-- `module` 可选：写了就跟随该板块开关，板块关掉时这一项自动不显示。所以**关掉 quiz 时不用手工删掉第 4 项**。
-- 项数可以是 1–4 任意值；窄屏 2 列，奇数个时最后一项自动跨两列。
+- `key` 只能是 `lines / vocab / grammar`。
+- 窄屏两列，第三项自动跨两列。
 
 ## cta
 
@@ -118,22 +105,7 @@ node scripts/build.js --check song.json   # 改的时候反复跑这个
 "cta": { "primary": "开始逐句精读", "secondary": "先看语法图谱", "secondaryHref": "#grammar" }
 ```
 
-`secondaryHref` 必须指向页面上真实存在的锚点。**关掉 studio 后不能再写 `#studio`**（build 不校验这个，但点了会没反应）。
-
-## segments
-
-```json
-"segments": [
-  {"key":"a","label":"Aメロ"},
-  {"key":"b","label":"Bメロ"},
-  {"key":"s","label":"サビ"},
-  {"key":"c","label":"大サビ"}
-]
-```
-
-- `key` 只用 `a / b / s / c`——卡片左侧竖条和结构图色块的颜色是按 key 写死在 CSS 里的（青 / 橙 / 玫红 / 蓝）。
-- 段落少于 4 个就删掉多余项，不要改 key 名。
-- `lines[].sec` 必须是这里的某个 key。
+`secondaryHref` 必须指向页面上真实存在的锚点，默认 `#grammar`。
 
 ## map
 
@@ -141,22 +113,10 @@ node scripts/build.js --check song.json   # 改的时候反复跑这个
 
 | 字段 | 说明 |
 |---|---|
-| `whyTitle` / `whySub` | 左卡标题与副标 |
+| `whyTitle` / `whySub` | 学习理由的标题与副标 |
 | `why` | 4 条 `{t, d}`，说明"为什么适合 N3" |
-| `structTitle` / `structHint` | 右卡标题与提示 |
-| `blocks` | 结构图色块，见下 |
-| `legend` | 图例，4 项 `{tone, label}`，tone 取 `a/b/s/c` |
-| `tip` | **允许 HTML**。结构图下方的"记位置技巧" |
 
-`blocks[]`：
-
-```json
-{"label":"Aメロ①","role":"铺陈","time":"0:32","key":"a","tone":"a","weight":28}
-```
-
-- `weight` = 该段秒数，决定色块宽度比例（不用精确，相对值对就行）。
-- `time` 显示在色块底部。
-- `role` 是功能词，2–4 字：铺陈 / 推进 / 爆发 / 转折 / 加速 / 重复 / 收束。
+学习地图只展示学习理由与三步学习法，不需要曲式分类、结构时间轴或配色数据。
 
 ## steps
 
@@ -164,41 +124,39 @@ node scripts/build.js --check song.json   # 改的时候反复跑这个
 "steps": [{"k":"STEP 01","t":"先听，别查词","d":"..."}]
 ```
 
-固定 3 条：听 → 读 → 测。
+固定 3 条：听 → 精读 → 回看词汇或语法例句。
 
-## lyrics（可选，`modules.lyrics`）
+## lyrics（默认必填）
 
-完整歌词，按段落分组。没有这个字段时，整块会自动从产物里裁掉。
+完整歌词，按来源的空行分段，保留原文顺序。默认必须提供非空 `blocks`，每段必须有非空歌词行。只有明确设置 `modules.lyrics = false` 时才省略；缺数据不会自动关闭。
 
 ```json
 "lyrics": {
-  "foot": "点任意一行可以朗读。注音与逐句讲解在下一节「逐句精读」。",
+  "foot": "点击行末的喇叭可以朗读。注音与逐句讲解在下一节「逐句精读」。",
   "blocks": [
-    { "label": "Aメロ①", "tone": "a", "lines": [
+    { "lines": [
         "逃げたりあきらめるコトは 誰も",
         "一瞬あればできるから 歩き続けよう"
     ]},
-    { "label": "サビ①", "tone": "s", "lines": ["どんな願いも 嘘じゃない"] }
+    { "lines": ["どんな願いも 嘘じゃない"] }
   ]
 }
 ```
 
 | 字段 | 说明 |
 |---|---|
-| `label` | 段落标签，如 `Aメロ①` / `サビ②` / `大サビ` / `ラスサビ` |
-| `tone` | 左侧色条，`a` 琥珀 / `b` 青 / `s` 橙 / `c` 蓝 / `d` 玫瑰 |
 | `lines` | 每行一句，日文原文。**不要写注音括号**——这一块是给人对着听的，标了反而看不清 |
 | `foot` | 区块下方的一行提示 |
 
-**分段以副歌重复为锚点**，不写时间戳（时间点容易对不准，标签够定位）。
-每行点一下就朗读（走 `data-say`），不需要额外按钮。
+页面自动编号「段落 01 / 02…」，无需填写段落名称、类型、颜色或时间戳。
+歌词在一张连续纸面中展示，每行末尾有原生朗读按钮，支持鼠标与键盘。
 
 ## sec（必填）
 
-8–9 个章节的标题区，字段统一 `num / title / jp / lead`：
+默认 5 个章节的标题区；明确省略全文时为 4 个章节，字段统一 `num / title / jp / lead`：
 
 ```
-sec.map / sec.lyrics / sec.lines / sec.vocab / sec.grammar / sec.listen / sec.studio / sec.quiz / sec.plan
+sec.map / sec.lyrics / sec.lines / sec.vocab / sec.grammar
 ```
 
 `num` 从 `01` 顺排；插入或裁掉板块时**不用手改**，运行时会按实际顺序重排。
@@ -208,7 +166,6 @@ sec.map / sec.lyrics / sec.lines / sec.vocab / sec.grammar / sec.listen / sec.st
 
 | 字段 | 说明 |
 |---|---|
-| `sec` | 段落 key |
 | `jp` | 原文 + `漢字[かな]` 注音 |
 | `tr` | 中文 |
 | `words` | `[[汉字, 假名, 中文], ...]`，2–4 组 |
@@ -230,41 +187,30 @@ sec.map / sec.lyrics / sec.lines / sec.vocab / sec.grammar / sec.listen / sec.st
 
 - `p` 词性：`名 / 動I / 動II / 動III / 形I / 形II / 副 / 代 / 名/形II`。
 - `lv` 只能是 `N1`–`N5`，给保守值。
-- **`k` 同时是歌词标注器的匹配键**。标注器会额外匹配动词/形容词词干（`逃げる→逃げ`、`冷たい→冷た`），所以 k 必须写辞书形，不要写歌词里的活用形。
+- `k` 写词典中的辞书形，歌词中的活用形式在精读卡里说明。
 
 ## grammar（必填，12–16）
 
 ```json
-{"p":"〜にしか〜ない","sub":"唯一限定","form":"名詞 ＋ にしか ＋ 否定形",
- "mean":"只有…才…","eg":"君にしかできないコトがある","warn":"..."}
-```
-
-`eg` 放歌里的原句（不带注音），`warn` 写易错点。
-
-## listen（可选，`modules.listen`）
-
-6 张卡：`{"tag":"長音","t":"标题","d":"说明","ex":"例子"}`。`ex` **允许 HTML**（高亮用 `<span class="hl-o">` / `<span class="hl-t">`）。
-
-## quiz（可选，`modules.quiz`，8–12）
-
-```json
-{"q":"一瞬あ【】ば できるから","opts":["れ","る","り","ら"],"a":"れ","why":"..."}
-```
-
-- `q` 里**必须有且只有一个 `【】`**，渲染成下划线空格。
-- `a` 必须是 `opts` 里的某一项（字符串完全相等）。
-- 选项 4 个。运行时自动打乱，作者侧仍要打散正确答案的位置。
-
-## plan（可选，`modules.plan`）
-
-```json
-"plan": {
-  "days": [{"d":"Day 1","t":"拆结构，别查词","p":"...","m":"20 分钟"}],
-  "note": "七天之后..."
+{
+  "p": "〜にしか〜ない",
+  "sub": "唯一限定",
+  "form": "名詞 ＋ にしか ＋ 否定形",
+  "mean": "只有…才…",
+  "eg": "君にしかできないコトがある",
+  "examples": [
+    {"jp":"この仕事[しごと]は彼[かれ]にしかできない。","tr":"这项工作只有他能做。"},
+    {"jp":"この秘密[ひみつ]は君[きみ]にしか話[はな]せない。","tr":"这个秘密我只能告诉你。"}
+  ],
+  "warn": "しか必须与否定呼应；に保留原句的格关系。"
 }
 ```
 
-7 天。`m` 是时长文案。
+- `eg` 保留歌里的原句（不带注音）。
+- `examples` **必填 2–3 项**，每项包含日文 `jp`（汉字用 `漢字[かな]` 注音）和中文 `tr`。
+- 例句独立于歌词原句，使用不同语境说明对应句型。并列介绍多个用法时，覆盖这些用法。
+- `warn` 写易错点。页面顺序：接续 → 意思 → 原句 → 例句 → 注意。
+- 构建会校验例句数量、必填字段、注音括号与重复句子。
 
 ## footer
 
@@ -283,6 +229,6 @@ sec.map / sec.lyrics / sec.lines / sec.vocab / sec.grammar / sec.listen / sec.st
 ## 渲染约定（改 render.js 时看）
 
 - `{{a.b.c}}` 由 build.js 用点路径取值；数组值默认 `join('<br>')`；缺字段直接构建失败。
-- 富文本字段（`meta.lead`、`map.tip`、`lines[].g`、`lines[].n`、`listen[].ex`）**原样插入**，不转义——作者要自己保证只有安全标签。
-- 其余字段一律 `escapeHtml`。
+- 富文本字段（`meta.lead`、`lines[].g`、`lines[].n`）**原样插入**，不转义——作者要自己保证只有安全标签。
+- 其余字段一律 `escapeHtml`；例句日文先转义，再把注音转成 ruby。
 - 卡片与词的渲染顺序完全按数组顺序，不做排序。

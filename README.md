@@ -47,7 +47,7 @@ cd .agents/skills/jp-song-study-page && npm i
 > 做一首《Butterfly》的学习页
 
 技能会自己走完：判断值不值得做 → 交叉核对歌词 → 切段落 → 抽卡 → 词表 → 语法 → 构建 → 验收 → 追加到合集页。
-你只需要拍板三件事：**歌名 / 演唱者 / 出处对得上吗**、**要不要收录完整歌词**、**输出到哪个目录**。
+默认收录完整歌词，无需额外确认。歌名、演唱者和出处对得上后，按默认位置或你指定的目录输出；只有明确说「不要完整歌词」时才省略。
 
 ### 方式二：手动
 
@@ -68,17 +68,17 @@ node $SKILL/scripts/check.js $SLUG/index.html --shots          # 交互 + 四档
 
 ## song.json 怎么写
 
-一份 song.json 就是一个页面。**五个必填**：`meta` / `sec` / `lines` / `vocab` / `grammar`；
-**五个可选**：`lyrics`（完整歌词）/ `listen`（听说训练）/ `studio`（歌词粘贴标注器）/ `quiz`（填空）/ `plan`（七天计划）。
+一份 song.json 就是一个页面。**六个默认必填**：`meta` / `sec` / `lyrics` / `lines` / `vocab` / `grammar`；
+完整歌词默认收录；正文固定结束于语法图谱，每条语法附 2–3 个注音例句和中文译文。
 
-可选板块写了数据就出、没写就不出；要关掉已有数据的板块，在 `modules` 里写 `false`，并把数据一并删掉。
+默认缺少完整歌词会构建失败。只有用户明确要求不要全文时，才写 `"modules": {"lyrics": false}`。
 
 | 想查什么 | 看哪里 |
 |---|---|
 | 每个字段长什么样、有哪些默认值 | [references/song-schema.md](./.agents/skills/jp-song-study-page/references/song-schema.md) |
-| 选句标准、词汇分级、出题口径、文案要求 | [references/editorial-guide.md](./.agents/skills/jp-song-study-page/references/editorial-guide.md) |
+| 选句标准、词汇分级、语法例句、文案要求 | [references/editorial-guide.md](./.agents/skills/jp-song-study-page/references/editorial-guide.md) |
 | 最小可跑骨架 | [examples/_skeleton.song.json](./.agents/skills/jp-song-study-page/examples/_skeleton.song.json) |
-| 完整范例（22 卡 / 61 词 / 16 语法 / 12 题） | [examples/brave-heart.song.json](./.agents/skills/jp-song-study-page/examples/brave-heart.song.json) |
+| 完整范例（22 卡 / 61 词 / 16 语法） | [examples/brave-heart.song.json](./.agents/skills/jp-song-study-page/examples/brave-heart.song.json) |
 
 两条最容易踩的规则：
 
@@ -106,22 +106,24 @@ node $SKILL/scripts/check.js $SLUG/index.html --shots          # 交互 + 四档
 }
 ```
 
-`scale` 的数字从 build 输出里抄（`✓ 校验通过 22 句 / 61 词 / 16 语法 / 12 题`）；
+`scale` 的数字从 build 输出里抄（`✓ 校验通过 22 句 / 61 词 / 16 语法`）；
 `lyr` 是完整歌词的行数，没收录就写 0。
 
 改完 `SONGS`，顺手在 [`SONGS.md`](./SONGS.md) 里补一行、加一小节——那份是给人看的清单，和代码里的数组各管一头。
 
 ## 验收
 
-`check.js` 会自动检查：板块数与导航项一致、章节编号连续、数据条数值非 0、段落筛选、掌握度、
-答题高亮与解析、歌词标注、计划勾选、390/768/1024/1440 四档无横向溢出。
+`check.js` 会自动检查：板块数与导航项一致、章节编号连续、数据条数值非 0、假名与中文显示切换、掌握度、
+每条语法的例句数量与展开显示、正文结束位置、390/768/1024/1440 四档无横向溢出。
 
 人工只需要看两点：`preview/` 截图里的**注音有没有串行**、**长句有没有在小屏被拆断**。
+
+模板不要求判断曲式或填写时间轴。完整歌词按来源的换行与空行写入 `lyrics.blocks[].lines`，页面自动显示「段落 01 / 02…」；精读卡不需要段落分类，默认全部展示。
 
 ## 常见问题
 
 **`✗ 模板里有数据没提供的占位符：{{sec.xxx.*}}`**
-该板块在 `modules` 里开着但没写数据，或字段名拼错了。按提示的 key 补数据，或在 `modules` 里写 `false`。
+按提示的 key 补齐字段。完整歌词默认必填；只有明确要求省略全文时，才设置 `"modules": {"lyrics": false}`。
 
 **`check.js` 报找不到 playwright-core**
 到 `.agents/skills/jp-song-study-page` 下 `npm i`。

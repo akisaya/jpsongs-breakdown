@@ -1,7 +1,8 @@
 ---
 name: jp-song-study-page
-description: 把一首日文歌做成单文件、可离线打开的歌词精读页：逐句注音拆解、核心词汇表（可勾选掌握度）、语法图谱、难度档标注；可选完整歌词、听说训练、歌词粘贴标注器、填空测验、七天计划。内容写进一份 song.json，用自带脚本按「模板 + 数据」编译成 HTML，换歌只需换数据。
-agent_created: true
+description: 把一首日文歌做成单文件、可离线打开的歌词精读页：学习重点、逐句注音拆解、可勾选的词汇表和语法图谱（每条含 2–3 个注音例句及中文译文），默认收录完整歌词。用模板与 song.json 编译成 HTML，适用于新建或维护日语歌曲学习页。
+metadata:
+  agent_created: true
 ---
 
 # 日语歌词精读页 · 模板化流水线
@@ -13,8 +14,8 @@ agent_created: true
 | 字段怎么写 | `references/song-schema.md` |
 | 内容怎么选、怎么写 | `references/editorial-guide.md` |
 | 模板侧的坑 | `references/pitfalls.md` |
-| 完整范例（22 卡 / 61 词 / 16 语法 / 12 题） | `examples/brave-heart.song.json`——**只看结构，别当起点** |
-| 起步骨架（6 卡 / 20 词，8 板块齐全） | `examples/_skeleton.song.json` |
+| 完整范例（22 卡 / 61 词 / 16 语法） | `examples/brave-heart.song.json`——**只看结构，别当起点** |
+| 起步骨架（6 卡 / 20 词 / 6 语法） | `examples/_skeleton.song.json` |
 
 ## 用户一句话进来，默认这么接
 
@@ -22,7 +23,7 @@ agent_created: true
 
 | 项目 | 默认 | 用户怎么说会改 |
 |---|---|---|
-| 板块 | **4 块**：map / lines / vocab / grammar | 「要测验」「要七天计划」→ 写对应板块的数据；要关掉某块才写 `modules.* = false` |
+| 板块 | **5 块**：map / lyrics / lines / vocab / grammar，默认收录完整歌词，正文结束于语法图谱 | 只有用户明确说「不要完整歌词」时，设置 `modules.lyrics = false` |
 | 难度 | 页面标「N3 上下」这类**大致档位**，不写成 JLPT 等级判定 | 「N4」「N2」→ 调 `vocab[].lv` 分布与语法条难度，同时改 `meta.level` |
 | 输出 | **当前工作目录**下的 `<slug>/{index.html,<slug>.song.json}` | 给了路径就用给的；同名文件存在时先问 |
 | 配色 | 奶油纸底 + 橙/青 | 「换个蓝色系」→ 改 `assets/base.css` 顶部的 `--orange` / `--teal` |
@@ -44,6 +45,7 @@ SKILL=.agents/skills/jp-song-study-page
 
 # 1. 从骨架起步
 cp $SKILL/examples/_skeleton.song.json <slug>/<slug>.song.json
+# 骨架中的歌词是格式范例；换歌时整体替换 meta、完整歌词和教学内容
 
 # 2. 只校验，不产出（改 JSON 时反复跑）
 node $SKILL/scripts/build.js --check <slug>/<slug>.song.json
@@ -78,28 +80,24 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 `slug` 必须与 `meta.slug` 一字不差（合集页靠它读 `jss.<slug>.mastery`）；`href` 要写全 `./<slug>/index.html`。
 `tone` 取 `teal` 或 `rust`，同色系别连排。没有合集页就跳过，并在 `meta.backHref` 写 `""` 关掉顶栏「‹ 合集」。
 
-## 板块开关
+## 页面范围
 
-页面共 9 个板块：核心四块 `map` / `lines` / `vocab` / `grammar` 永远保留，
-另外五块 `lyrics` / `listen` / `studio` / `quiz` / `plan` 可选。
+默认五块：`map` / `lyrics` / `lines` / `vocab` / `grammar`。**完整歌词默认必填，不需要另外询问是否收录。** 只有用户明确要求省略时，才设置 `modules.lyrics = false`；默认缺失或空歌词数据会被构建校验拦下。
 
-`lyrics` 是唯一**可以不写数据**的（没写就自动裁掉，不留空板块）；其余四块一旦开着就必须有数据，
-缺数据会被校验拦下。要关掉某块，在 `modules` 里写 `false`，并把 `song.json` 里对应数据一并删掉。
-完整规则与 `extends` 继承见 `references/song-schema.md`。
+**语法图谱是最后一个正文章节。** 每条语法除了接续、意思、歌词原句与注意点，还必须有 2–3 个独立例句，包含日文注音和中文译文。字段与继承规则见 `references/song-schema.md`。
 
 ## 流程（顺序不要跳）
 
 | # | 做什么 | 细节在哪 |
 |---|---|---|
 | 0 | **判断值不值得做**：适合中低速、咬字清晰、副歌有重复句式；饶舌、大量方言古语、满篇拟声词做不出教学 | editorial「选句」开头 |
-| 1 | **核歌词（只核，不抄）**：至少两个来源交叉核对；记下作词 / 作曲编曲 / 演唱 / 年份出处；核完不要留在笔记或中间稿里。要不要进页面，由 `lyrics` 板块单独决定 | — |
-| 2 | **切段落**：听 2–3 遍标 Aメロ / Bメロ / サビ 的时间点，每段给一个功能词，写进 `segments` 与 `map.blocks` | schema「segments」「map」 |
+| 1 | **核对完整歌词**：至少两个来源交叉核对；记下作词 / 作曲编曲 / 演唱 / 年份出处；将核对后的全词写入 `lyrics.blocks`，保留原有顺序与换行 | — |
+| 2 | **保留原有段落**：按歌词来源的换行与空行组织 `lyrics.blocks`；只填 `lines`，页面自动编号。不判断曲式，不标时间轴，不填写段落配色或精读卡分类 | schema「lyrics」 |
 | 3 | **抽卡** 16–24 张：一句一个语法点，优先挑语法挤在一起的句子 | editorial「选句」「卡片」 |
 | 4 | **词表** 50–70：按歌词出现顺序排，`lv` 给保守值 | editorial「词表」 |
-| 5 | **语法** 12–16：`form` 写完整接续，`warn` 写会错在哪 | editorial「语法条」 |
-| 6 | **测验** 8–12 题：唯一解优先 | editorial「出题」（关掉 quiz 就整段跳过） |
-| 7 | **写文案**：`map.why` 四条理由、`steps` 三步，每首重写；页面上没有的板块不要提 | editorial「文案」 |
-| 8 | **构建 + 验收** | 命令见上、清单见下 |
+| 5 | **语法** 12–16：`form` 写完整接续，`warn` 写易错点，`examples` 写 2–3 个对应例句（注音 + 中文） | editorial「语法条」 |
+| 6 | **写文案**：`map.why` 四条理由、`steps` 三步，每首重写；页面上没有的板块不要提 | editorial「文案」 |
+| 7 | **构建 + 验收** | 命令见上、清单见下 |
 
 口径不要在这里猜：内容标准全在 `references/editorial-guide.md`，字段全在 `references/song-schema.md`。
 
@@ -108,19 +106,18 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 - [ ] 静态：无未替换占位符、关键容器齐全
 - [ ] **板块数与 `modules` 配置一致，章节编号连续（01…0N），导航项数 == 板块数**
 - [ ] 控制台无错误
+- [ ] 语法图谱是最后一节；每条语法展开后有 2–3 个注音例句和中文译文
 - [ ] 顶部数据条项数正确、数值非 0
-- [ ] 段落筛选能筛出子集
+- [ ] 全部精读卡可见，假名与中文显示开关生效
+- [ ] 完整歌词按原顺序显示，段落自动编号，行末朗读按钮可通过键盘操作
 - [ ] 掌握度点击后进度变化
-- [ ] 答题后正确项高亮 + 解析出现（仅当开了 quiz）
-- [ ] 粘贴歌词能标注出词（仅当开了 studio）
-- [ ] 计划勾选生效（仅当开了 plan）
 - [ ] 390 / 768 / 1024 / 1440 四个宽度无横向溢出
 
 再人工扫一遍 `preview/` 里的截图：重点看**注音有没有串行**、**长句有没有在小屏把词拆断**。
 
 ## 版权底线
 
-- **默认不主动加**完整歌词；用户明确要，才做 `lyrics` 板块。
+- **默认收录完整歌词**；只有用户明确要求不要全文时才省略。
 - 加了就在 `footer.note` 写全作词 / 作曲 / 演唱，并注明「仅供学习参考，请勿用于商业用途」，
   句式模板见 `editorial-guide.md` 的版权一节。
 - 页面要挂公开域名（GitHub Pages、个人站）时**先提醒用户**：公开传播和个人本地学习不是一回事，选择权交给用户。
@@ -128,7 +125,7 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 
 ## 改模板时
 
-只改 `assets/base.css`（样式）与 `assets/render.js`（交互），**不要在生成的 index.html 上改**，下次 build 会覆盖。
+在 `assets/template.html`（骨架）、`assets/base.css`（样式）与 `assets/render.js`（交互）中修改，**不要在生成的 index.html 上改**，下次 build 会覆盖。字段变化时同步更新校验、范例与字段说明。
 媒体查询顺序、内联 `flex-grow`、`1fr` 隐式最小宽这类模板侧的坑见 `references/pitfalls.md`。
 
 ## 维护

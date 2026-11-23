@@ -4,8 +4,8 @@
  *
  *   node check.js <index.html> [--shots]
  *
- * 检查项：控制台错误 / 板块是否按配置裁剪 / 结构完整性 / 筛选 / 掌握进度 /
- *         答题（有 quiz 时）/ 标注（有 studio 时）/ 计划勾选（有 plan 时）/ 多断点横向溢出
+ * 检查项：控制台错误 / 板块是否按配置裁剪 / 结构完整性 / 显示切换 / 掌握进度 /
+ *         语法例句 / 多断点横向溢出
  * 依赖：playwright-core。缺失时自动降级为静态检查。
  */
 'use strict';
@@ -36,7 +36,7 @@ const sp = (ok, msg) => statics.push((ok ? '✓ ' : '✗ ') + msg);
 
 ['map', 'lines', 'vocab', 'grammar'].forEach(k => sp(has(k), `含板块 ${k}`));
 sp(html.includes('id="lyric-list"'), '含 id="lyric-list"');
-/* 完整歌词是可选板块：有就检查容器，段落数在浏览器检查里验 */
+/* 默认包含完整歌词；显式关闭时才省略 */
 if (has('lyrics')) {
   sp(html.includes('id="lyrics-body"'), '含完整歌词容器 id="lyrics-body"');
 }
@@ -45,12 +45,9 @@ sp(html.includes('id="grammar-list"'), '含 id="grammar-list"');
 sp(html.includes('window.SONG'), '含 window.SONG');
 sp(!/__SONG_JSON__|__CSS__|__RENDER_JS__/.test(html), '无未替换的构建占位符');
 sp(!/\{\{[\w.]+\}\}/.test(html), '无未替换的 {{}} 占位符');
+sp(!/id="(?:struct|struct-legend|sec-filters)"/.test(html), '无曲式时间轴、图例或筛选器');
 
-if (has('quiz')) sp(html.includes('id="quiz-list"'), '含 id="quiz-list"');
-if (has('studio')) sp(html.includes('id="studio-out"'), '含 id="studio-out"');
-if (has('plan')) sp(html.includes('id="plan-grid"'), '含 id="plan-grid"');
-if (has('listen')) sp(html.includes('id="listen-grid"'), '含 id="listen-grid"');
-
+sp([...present].every(k => ['map', 'lyrics', 'lines', 'vocab', 'grammar'].includes(k)), '章节范围正确');
 const fails = statics.filter(s => s.startsWith('✗'));
 console.log(`静态检查  ${target}  (${kb} KB)  板块: ${[...present].join(' / ')}`);
 statics.forEach(s => console.log('  ' + s));
@@ -115,37 +112,55 @@ async function launch() {
       lyrLines: q('#lyrics-body .lyr-line'),
       words: q('#v-body tr'),
       gram: q('#grammar-list details'),
-      quiz: q('#quiz-list .q'),
-      plan: q('#plan-grid .day'),
       nums: Array.from(document.querySelectorAll('.sec-num')).map(e => e.textContent)
     };
   });
 
   ok(errs.length === 0, '控制台无错误' + (errs.length ? ': ' + errs.slice(0, 3).join(' | ') : ''));
   ok(counts.sections === present.size, `板块数一致（HTML ${present.size} / 运行 ${counts.sections}）`);
+  const wantsLyrics = await p.evaluate(() => window.SONG.modules?.lyrics !== false);
+  ok(has('lyrics') === wantsLyrics, '默认包含全文，显式关闭时省略');
   ok(counts.nav === counts.sections, `导航项与板块数一致（${counts.nav} 项）`);
   ok(counts.lines > 0 && counts.words > 0 && counts.gram > 0,
-     `结构完整 ${counts.lines} 卡 / ${counts.words} 词 / ${counts.gram} 语法`
-     + (has('quiz') ? ` / ${counts.quiz} 题` : '') + (has('plan') ? ` / ${counts.plan} 天` : ''));
+     `结构完整 ${counts.lines} 卡 / ${counts.words} 词 / ${counts.gram} 语法`);
   ok(counts.statValues.length === counts.stats && counts.statValues.every(v => v > 0),
      `数据条 ${counts.stats} 项，数值均非 0（${counts.statValues.join(' / ')}）`);
   if (has('lyrics')) {
-    ok(counts.lyrBlocks > 0 && counts.lyrLines >= counts.lyrBlocks,
+    const lyrics = await p.evaluate(() => {
+      const blocks = window.SONG.lyrics.blocks;
+      return {
+        blocks: blocks.length,
+        lines: blocks.reduce((n, b) => n + b.lines.length, 0),
+        headings: Array.from(document.querySelectorAll('.lyr-head')).map(e => e.textContent),
+        buttons: document.querySelectorAll('.lyr-line button[data-say]').length
+      };
+    });
+    ok(counts.lyrBlocks === lyrics.blocks && counts.lyrLines === lyrics.lines,
        `完整歌词 ${counts.lyrBlocks} 段 / ${counts.lyrLines} 行`);
+    ok(lyrics.headings.every((n, i) => n === '段落 ' + String(i + 1).padStart(2, '0')),
+       '歌词段落自动编号');
+    ok(lyrics.buttons === counts.lyrLines, '每行歌词都有原生朗读按钮');
+    await p.evaluate(() => {
+      window.__spokenText = '';
+      window.speechSynthesis.speak = utterance => { window.__spokenText = utterance.text; };
+    });
+    const voice = p.locator('.lyr-line button[data-say]').first();
+    await voice.focus();
+    await voice.press('Enter');
+    const spoken = await p.evaluate(() => window.__spokenText);
+    ok(spoken === await voice.getAttribute('data-say'), '键盘可触发歌词朗读');
   }
   ok(counts.nums.every((n, i) => n === String(i + 1).padStart(2, '0')),
      `章节编号连续（${counts.nums.join(' ')}）`);
 
-  // 段落筛选
-  const filters = await p.$$eval('#sec-filters .filter', els => els.map(e => e.dataset.sec));
-  ok(filters.length >= 2, `段落筛选 ${filters.length} 个（${filters.join('/')}）`);
-  if (filters.length > 1) {
-    await p.click(`#sec-filters .filter[data-sec="${filters[1]}"]`);
-    await p.waitForTimeout(150);
-    const n = await p.$$eval('#lyric-list .lyric', e => e.length);
-    ok(n > 0 && n < counts.lines, `筛选「${filters[1]}」→ ${n} 张卡`);
-    await p.click('#sec-filters .filter[data-sec="all"]');
-    await p.waitForTimeout(100);
+  // 全部精读卡可见，切换显示不改变内容数量
+  const sourceLines = await p.evaluate(() => window.SONG.lines.length);
+  ok(counts.lines === sourceLines, `完整显示 ${sourceLines} 张精读卡`);
+  for (const [id, cls, label] of [['t-furi', 'hide-furi', '假名'], ['t-tr', 'hide-tr', '中文']]) {
+    await p.uncheck('#' + id);
+    ok(await p.evaluate(c => document.body.classList.contains(c), cls), `${label}可隐藏`);
+    await p.check('#' + id);
+    ok(!(await p.evaluate(c => document.body.classList.contains(c), cls)), `${label}可恢复`);
   }
 
   // 掌握进度
@@ -156,34 +171,21 @@ async function launch() {
   await p.click('#v-body tr:nth-child(1) .v-check');
   await p.waitForTimeout(100);
 
-  // 条件项
-  if (has('quiz')) {
-    await p.click('#quiz-list .q:nth-child(1) .opt:nth-child(1)');
-    await p.waitForTimeout(150);
-    const a = await p.evaluate(() => {
-      const c = document.querySelector('#quiz-list .q');
-      return { correct: !!c.querySelector('.opt.correct'), why: getComputedStyle(c.querySelector('.q-why')).display };
-    });
-    ok(a.correct, '答题后正确项高亮');
-    ok(a.why !== 'none', '答题后显示解析');
-  }
-
-  if (has('studio')) {
-    await p.fill('#paste', '夢を つかめ 光の ように');
-    await p.waitForTimeout(450);
-    const hit = Number(await p.textContent('#studio-count'));
-    ok(hit > 0, `歌词标注命中 ${hit} 处`);
-    await p.fill('#paste', '');
-    await p.waitForTimeout(300);
-  }
-
-  if (has('plan')) {
-    await p.click('#plan-grid .day-check input');
-    await p.waitForTimeout(150);
-    const done = await p.$eval('#plan-grid .day', e => e.className.includes('done'));
-    ok(done, '计划勾选生效');
-    await p.click('#plan-grid .day-check input');
-  }
+  // 例句完整显示，展开后可阅读；语法是最后一个正文章节
+  const grammar = await p.evaluate(() => ({
+    rows: Array.from(document.querySelectorAll('#grammar-list details')).map((el, i) => ({
+      count: el.querySelectorAll('.g-examples li').length,
+      expected: window.SONG.grammar[i].examples.length,
+      translated: Array.from(el.querySelectorAll('.g-example-tr')).every(e => e.textContent.trim()),
+      japanese: Array.from(el.querySelectorAll('.g-example-jp')).every(e => e.lang === 'ja' && e.textContent.trim())
+    })),
+    lastSection: document.querySelector('main > section:last-child').id
+  }));
+  ok(grammar.rows.length === counts.gram && grammar.rows.every(g => g.count === g.expected && g.count >= 2 && g.count <= 3 && g.translated && g.japanese),
+     '每条语法包含 2–3 个日文例句和中文译文');
+  ok(grammar.lastSection === 'grammar', '正文在语法图谱结束');
+  await p.locator('#grammar-list details').first().locator('summary').click();
+  ok(await p.locator('#grammar-list details').first().locator('.g-examples').isVisible(), '展开语法后例句可见');
 
   if (shots) {
     const dir = path.join(path.dirname(target), 'preview');
@@ -205,6 +207,15 @@ async function launch() {
     await m.evaluate(() => document.querySelectorAll('.reveal').forEach(e => e.classList.add('in')));
     await m.waitForTimeout(200);
     await m.screenshot({ path: path.join(dir, 'mobile-hero.png') });
+    if (has('lyrics')) {
+      await m.$eval('#lyrics', e => e.scrollIntoView({ block: 'start', behavior: 'instant' }));
+      await m.waitForTimeout(200);
+      await m.screenshot({ path: path.join(dir, 'mobile-lyrics.png') });
+    }
+    await m.locator('#grammar-list details').first().locator('summary').click();
+    await m.$eval('#grammar', e => e.scrollIntoView({ block: 'start', behavior: 'instant' }));
+    await m.waitForTimeout(200);
+    await m.screenshot({ path: path.join(dir, 'mobile-grammar.png') });
     await m.close();
     results.push('✓ 截图已输出到 ' + dir);
   } else {
@@ -216,6 +227,7 @@ async function launch() {
     const q = await browser.newPage({ viewport: { width: w, height: 900 } });
     await q.goto(url);
     await q.waitForTimeout(250);
+    await q.locator('#grammar-list details').evaluateAll(els => els.forEach(e => { e.open = true; }));
     const r = await q.evaluate(() => ({ sw: document.documentElement.scrollWidth, vw: document.documentElement.clientWidth }));
     ok(r.sw <= r.vw + 1, `${w}px 无横向溢出（scrollW ${r.sw}）`);
     await q.close();

@@ -549,13 +549,6 @@ img,svg{display:block}
 /* ============================================================
    4. 学习地图
    ============================================================ */
-.map-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
-  gap:1.1rem;
-  align-items:start;
-}
-@media (max-width:820px){.map-grid{grid-template-columns:minmax(0,1fr)}}
 .card{min-width:0}
 
 .why-list{display:grid;gap:0;margin:0;padding:0;list-style:none}
@@ -576,71 +569,6 @@ img,svg{display:block}
   font-family:var(--font-display);font-style:italic;font-size:.95rem;
   background:#FFF0E1;color:var(--orange);border:1px solid #F6D3B4;
 }
-
-/* 结构图 */
-.struct-title{
-  display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
-  margin-bottom:.9rem;
-}
-.struct-title h3{font-size:.98rem}
-.struct-title span{font-size:.75rem;color:var(--ink-3)}
-.struct{
-  display:flex;
-  gap:3px;
-  border-radius:var(--r-sm);
-  overflow:hidden;
-  border:1px solid var(--line);
-  background:var(--line);
-}
-.struct button{
-  flex:1 1 0;
-  flex-grow:var(--w,1);
-  border:0;
-  padding:.8rem .2rem 1.6rem;
-  text-align:center;
-  cursor:pointer;
-  position:relative;
-  font-size:.7rem;
-  font-weight:700;
-  letter-spacing:.01em;
-  white-space:nowrap;
-  transition:filter .18s ease;
-  min-block-size:74px;
-}
-.struct button:hover{filter:brightness(.96)}
-.struct button small{
-  display:block;font-weight:500;font-size:.62rem;opacity:.7;margin-top:.15rem;letter-spacing:0;
-}
-.struct button::after{
-  content:attr(data-min);
-  position:absolute;left:0;right:0;bottom:.4rem;
-  font-family:var(--font-display);font-style:italic;
-  font-size:.66rem;font-weight:400;opacity:.55;letter-spacing:.02em;
-}
-.st-a{background:#E7F3EF;color:#176C63}
-.st-b{background:#FFF0DF;color:#A8440F}
-.st-s{background:#FDECEF;color:#94364B}
-.st-c{background:#E9EFF9;color:#2C4E80}
-.st-i{background:#F1EEE8;color:#8A8378}
-
-@media (max-width:600px){
-  .struct{flex-wrap:wrap;gap:4px;border:0;background:transparent;border-radius:0}
-  .struct button{
-    flex:1 1 calc(50% - 4px);
-    border-radius:9px;
-    min-block-size:64px;
-    padding:.7rem .3rem 1.5rem;
-  }
-  .struct button small{font-size:.68rem;opacity:.75}
-  .struct button::after{font-size:.7rem}
-}
-
-.struct-legend{
-  display:flex;flex-wrap:wrap;gap:.9rem;
-  margin-top:.85rem;font-size:.74rem;color:var(--ink-3);
-}
-.struct-legend span{display:inline-flex;align-items:center;gap:.34rem}
-.struct-legend i{width:9px;height:9px;border-radius:3px;display:block}
 
 /* 三步学习法 */
 .steps{
@@ -667,64 +595,44 @@ img,svg{display:block}
    完整歌词
    ============================================================ */
 .lyr-wrap{
-  display:grid;
-  gap:.7rem;
   max-width:46rem;
-}
-.lyr-block{
-  position:relative;
+  margin-inline:auto;
+  padding:clamp(1.25rem,3vw,2rem);
   background:var(--surface-warm);
   border:1px solid var(--line);
   border-radius:var(--r-md);
-  padding:1rem 1.25rem 1.1rem 1.35rem;
-  overflow:hidden;
 }
-.lyr-block::before{
-  content:"";position:absolute;inset-block:0;inset-inline-start:0;
-  inline-size:3px;background:var(--tone,var(--orange-3));
-}
-/* 色条用饱和度高的品牌色，标签文字另给一档深色（原色对比度不够） */
-.lyr-block[data-tone="a"]{--tone:var(--amber);--tone-ink:#96660F}
-.lyr-block[data-tone="b"]{--tone:var(--teal);--tone-ink:#12675D}
-.lyr-block[data-tone="s"]{--tone:var(--orange);--tone-ink:#B2431A}
-.lyr-block[data-tone="c"]{--tone:var(--blue);--tone-ink:#2A4A78}
-.lyr-block[data-tone="d"]{--tone:var(--rose);--tone-ink:#923347}
-
+.lyr-block{padding-block:1.1rem}
+.lyr-block+.lyr-block{border-top:1px solid var(--line-soft)}
+.lyr-block:first-child{padding-top:0}
+.lyr-block:last-child{padding-bottom:0}
 .lyr-head{
-  display:flex;align-items:baseline;justify-content:space-between;gap:.7rem;
-  margin-bottom:.35rem;
-}
-.lyr-head span{
-  font-size:.66rem;font-weight:700;letter-spacing:.16em;
-  color:var(--tone-ink,var(--orange));
-}
-.lyr-head em{
-  font-style:normal;font-size:.62rem;letter-spacing:.08em;
-  color:var(--ink-4);
+  margin-bottom:.5rem;
+  font-size:.7rem;font-weight:500;letter-spacing:.1em;
+  color:var(--ink-3);
   font-variant-numeric:tabular-nums;
 }
 .lyr-line{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 30px;
+  align-items:start;
+  gap:.65rem;
   margin:0;
-  padding-inline:.22rem;margin-inline:-.22rem;
-  border-radius:6px;
   font-family:var(--font-serif);
   font-size:1.06rem;
   line-height:2.05;
   letter-spacing:.02em;
   color:#2A2D33;
-  cursor:pointer;
-  text-wrap:pretty;
-  transition:background .16s ease,color .16s ease;
+  overflow-wrap:anywhere;
 }
-.lyr-line:hover{background:rgba(242,179,61,.14);color:#14171B}
-.lyr-line:active{background:rgba(242,179,61,.22)}
 .lyr-foot{
-  margin:.85rem 0 0;
+  max-width:46rem;
+  margin:.85rem auto 0;
   font-size:.74rem;line-height:1.8;
   color:var(--ink-3);
 }
 @media (max-width:600px){
-  .lyr-block{padding:.85rem 1rem .95rem 1.1rem}
+  .lyr-wrap{padding:1rem}
   .lyr-line{font-size:.96rem;line-height:2}
 }
 
@@ -735,16 +643,7 @@ img,svg{display:block}
   display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;
   margin-bottom:1.4rem;
 }
-.filter{
-  padding:.4rem .9rem;border-radius:999px;
-  border:1px solid var(--line);background:#fff;
-  font-size:.8rem;font-weight:600;color:var(--ink-2);
-  cursor:pointer;transition:all .16s ease;
-  min-block-size:36px;
-}
-.filter:hover{border-color:#DCC9AF;color:var(--ink)}
-.filter.is-on{background:var(--ink);border-color:var(--ink);color:#FFF8EF}
-.toolbar-right{margin-left:auto;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.toolbar-right{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
 .toggle{
   display:inline-flex;align-items:center;gap:.4rem;
   font-size:.78rem;color:var(--ink-2);cursor:pointer;
@@ -770,9 +669,6 @@ img,svg{display:block}
   content:"";position:absolute;left:0;top:1.1rem;bottom:1.1rem;width:3px;
   border-radius:0 3px 3px 0;background:var(--teal);
 }
-.lyric[data-sec="b"]::before{background:var(--orange-3)}
-.lyric[data-sec="s"]::before{background:var(--rose)}
-.lyric[data-sec="c"]::before{background:var(--blue)}
 
 .lyric-main{min-width:0;display:flex;flex-direction:column;justify-content:center}
 .lyric-side{min-width:0;margin-top:1.05rem;display:grid;gap:.85rem;align-content:start}
@@ -817,8 +713,8 @@ body.hide-furi rt{display:none}
   transition:all .16s ease;
 }
 .icon-btn:hover{color:var(--orange);border-color:#EFC7A9;background:#FFF6EC}
-.lyric .icon-btn{width:30px;height:30px;border-color:transparent;background:transparent;color:var(--ink-4);opacity:.85}
-.lyric .icon-btn:hover{background:#FFF3E7;border-color:#F2D8BE;color:var(--orange);opacity:1}
+.lyric .icon-btn,.lyr-line .icon-btn{width:30px;height:30px;border-color:transparent;background:transparent;color:var(--ink-3);opacity:.85}
+.lyric .icon-btn:hover,.lyr-line .icon-btn:hover{background:#FFF3E7;border-color:#F2D8BE;color:var(--orange);opacity:1}
 .icon-btn svg{width:15px;height:15px}
 
 .lyric-tr{
@@ -1038,8 +934,15 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
   font-family:var(--font-serif);
   font-size:.98rem;color:var(--ink);
   background:#FCF7F0;border-radius:8px;padding:.5rem .7rem;
-  display:inline-block;
+  display:inline-block;max-width:100%;overflow-wrap:anywhere;
 }
+.g-examples{border-top:1px solid var(--line-soft);padding-top:.85rem}
+.g-examples h4{font-size:.78rem;font-weight:600;color:var(--ink-3);margin-bottom:.7rem}
+.g-examples ol{margin:0;padding-left:1.5rem;display:grid;gap:.9rem}
+.g-examples li{padding-left:.3rem;min-width:0}
+.g-examples li::marker{font-size:.75rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.g-example-jp{font-family:var(--font-serif);font-size:1rem;line-height:2.2;overflow-wrap:anywhere}
+.g-example-tr{font-size:.84rem;color:var(--ink-2);line-height:1.75;margin-top:.15rem}
 .g-warn{
   font-size:.8rem;color:#8A4A16;background:#FFF8EC;
   border-left:2px solid var(--amber);border-radius:0 8px 8px 0;
@@ -1047,203 +950,7 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
 }
 
 /* ============================================================
-   8. 听说训练
-   ============================================================ */
-.listen-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(298px,1fr));
-  gap:.8rem;
-}
-.lcard{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:1.15rem 1.2rem;box-shadow:var(--shadow-xs)}
-.lcard em{
-  display:inline-block;font-style:normal;font-size:.64rem;letter-spacing:.16em;
-  color:var(--teal);background:var(--teal-soft);padding:.15rem .5rem;border-radius:5px;
-  font-weight:800;margin-bottom:.55rem;
-}
-.lcard b{display:block;font-size:.95rem;margin-bottom:.3rem}
-.lcard p{font-size:.84rem;color:var(--ink-2);line-height:1.75}
-.lcard .ex{
-  font-family:var(--font-serif);font-size:.95rem;color:#2A2D33;
-  margin-top:.5rem;padding-left:.6rem;border-left:2px solid var(--line);
-  word-break:keep-all;overflow-wrap:anywhere;
-}
-.hl-o{color:var(--orange);font-weight:700}
-.hl-t{color:var(--teal);font-weight:700}
-
-/* ============================================================
-   9. 歌词工作台
-   ============================================================ */
-.studio{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
-  gap:1rem;align-items:stretch;
-}
-@media (max-width:880px){.studio{grid-template-columns:1fr}}
-.studio-panel{
-  background:#fff;border:1px solid var(--line);border-radius:var(--r-md);
-  box-shadow:var(--shadow-xs);overflow:hidden;
-  display:flex;flex-direction:column;
-}
-.studio-head{
-  display:flex;align-items:center;justify-content:space-between;gap:.6rem;
-  padding:.8rem 1rem;border-bottom:1px solid var(--line-soft);background:#FDFAF5;
-}
-.studio-head b{font-size:.85rem}
-.studio-head span{font-size:.72rem;color:var(--ink-3)}
-#paste{
-  width:100%;border:0;resize:vertical;
-  flex:1 1 auto;
-  min-block-size:300px;
-  padding:1rem;
-  font-family:var(--font-serif);
-  font-size:.95rem;line-height:2;
-  color:var(--ink);
-  background:#fff;
-}
-#paste:focus{outline:none;background:#FFFDF9}
-#paste::placeholder{color:var(--ink-4)}
-.studio-out{
-  padding:1rem 1.15rem;
-  flex:1 1 auto;
-  min-block-size:300px;
-  max-block-size:520px;
-  overflow-y:auto;
-  font-family:var(--font-serif);
-  font-size:.98rem;
-  line-height:2.35;
-  color:var(--ink);
-}
-.studio-out .line{padding:.1rem 0;border-bottom:1px dashed rgba(232,220,203,.55)}
-.studio-out .line:last-child{border-bottom:0}
-.studio-out .tip{font-family:var(--font-sans);font-size:.82rem;color:var(--ink-3);line-height:1.8}
-.hl{
-  background:linear-gradient(180deg,transparent 52%,#FFD8A4 52%);
-  border-radius:3px;padding:0 .04em;cursor:help;position:relative;
-}
-.hl::after{
-  content:attr(data-tip);
-  position:absolute;left:50%;bottom:135%;
-  transform:translateX(-50%) translateY(4px);
-  background:#2B2723;color:#FFF6E9;
-  font-family:var(--font-sans);font-size:.74rem;line-height:1.45;font-weight:500;
-  padding:.4rem .6rem;border-radius:8px;white-space:nowrap;
-  opacity:0;pointer-events:none;transition:opacity .16s ease, transform .16s ease;
-  z-index:30;box-shadow:0 8px 20px -8px rgba(0,0,0,.35);
-}
-.hl:hover::after,.hl:focus::after{opacity:1;transform:translateX(-50%) translateY(0)}
-.studio-actions{display:flex;gap:.5rem;padding:.75rem 1rem;border-top:1px solid var(--line-soft);background:#FDFAF5;flex-wrap:wrap}
-
-/* ============================================================
-   10. 测验
-   ============================================================ */
-.quiz-head{
-  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
-  gap:1rem;margin-bottom:1.2rem;
-  padding:1rem 1.2rem;
-  background:linear-gradient(135deg,#FFF6EA,#FFFDFA);
-  border:1px solid var(--line);
-  border-radius:var(--r-md);
-}
-.quiz-score{font-size:.85rem;color:var(--ink-2)}
-.quiz-score b{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:1.7rem;color:var(--orange-2);margin-right:.15rem}
-.quiz-list{display:grid;gap:1rem}
-.q{
-  background:#fff;border:1px solid var(--line);border-radius:var(--r-md);
-  padding:1.2rem 1.3rem;box-shadow:var(--shadow-xs);
-}
-@media (min-width:880px){
-  .q{
-    display:grid;
-    grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);
-    column-gap:1.8rem;
-    align-items:center;
-    padding:1.25rem 1.5rem;
-  }
-  .q .q-num{grid-column:1 / -1}
-  .q .q-text{grid-column:1;margin-bottom:0}
-  .q .q-opts{grid-column:2;display:grid;grid-template-columns:1fr 1fr;gap:.45rem}
-  .q .q-why{grid-column:1 / -1}
-}
-.q-num{
-  font-size:.68rem;font-weight:800;letter-spacing:.16em;color:var(--orange);
-  display:block;margin-bottom:.45rem;
-}
-.q-text{
-  font-family:var(--font-serif);font-size:1.12rem;line-height:2;
-  color:var(--ink);margin-bottom:.9rem;
-}
-.q-text u{
-  text-decoration:none;
-  display:inline-block;min-width:3.2em;
-  border-bottom:2px solid var(--orange-3);
-  text-align:center;color:var(--orange);
-  font-weight:700;
-}
-.q-opts{display:flex;flex-wrap:wrap;gap:.5rem}
-.opt{
-  padding:.5rem 1.15rem;border-radius:10px;
-  border:1.5px solid var(--line);background:#fff;
-  font-size:.9rem;font-family:var(--font-serif);
-  cursor:pointer;transition:all .16s ease;min-block-size:42px;
-}
-.opt:hover:not(:disabled){border-color:#E2BE9B;background:#FFFBF4}
-.opt:disabled{cursor:default}
-.opt.correct{border-color:#4FA898;background:#E9F5F1;color:#146B5E;font-weight:700}
-.opt.wrong{border-color:#E0A1AE;background:#FCEDF0;color:#9C3B51}
-.q-why{
-  margin-top:.85rem;font-size:.83rem;line-height:1.8;color:var(--ink-2);
-  padding:.7rem .85rem;background:#FBF7F1;border-radius:8px;
-  display:none;
-}
-.q.answered .q-why{display:block}
-.q-why b{color:var(--orange)}
-
-/* ============================================================
-   11. 计划
-   ============================================================ */
-.plan{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:var(--r-lg);
-  box-shadow:var(--shadow-sm);
-  overflow:hidden;
-}
-.day{
-  display:grid;
-  grid-template-columns:104px minmax(0,1fr) auto;
-  gap:1.3rem;
-  align-items:center;
-  padding:1.05rem 1.4rem;
-  border-bottom:1px solid var(--line-soft);
-  transition:background .18s ease;
-}
-.day:last-child{border-bottom:0}
-.day:hover{background:#FFFCF7}
-.day.done{background:#F6FBF8}
-.day-d{display:flex;flex-direction:column;gap:.05rem}
-.day-d em{
-  font-style:normal;font-family:var(--font-display);
-  font-size:1.05rem;color:var(--orange);letter-spacing:-.01em;
-}
-.day-d small{font-size:.68rem;letter-spacing:.06em;color:var(--ink-3)}
-.day-mid b{display:block;font-size:.93rem;letter-spacing:-.005em}
-.day-mid p{font-size:.81rem;color:var(--ink-3);line-height:1.7;margin-top:.18rem}
-.day-check{
-  display:inline-flex;align-items:center;gap:.42rem;
-  font-size:.74rem;color:var(--ink-3);cursor:pointer;white-space:nowrap;
-  border:1px solid var(--line);padding:.32rem .7rem;border-radius:999px;
-  background:#fff;transition:all .16s ease;
-}
-.day-check:hover{border-color:#C9BCA6}
-.day.done .day-check{border-color:#BFDED6;color:var(--teal);background:#EFF9F5}
-.day-check input{accent-color:var(--teal);margin:0}
-@media (max-width:660px){
-  .day{grid-template-columns:1fr auto;gap:.55rem 1rem;padding:1rem 1.1rem}
-  .day-d{grid-column:1;grid-row:1}
-  .day-check{grid-column:2;grid-row:1;align-self:start}
-  .day-mid{grid-column:1 / -1;grid-row:2}
-}
-
-/* ============================================================
-   12. Footer
+   8. Footer
    ============================================================ */
 .footer{
   border-top:1px solid var(--line);
@@ -1313,28 +1020,16 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
       <div class="sec-head reveal">
         <div class="sec-num">01</div>
         <div>
-          <h2 class="sec-title">先看懂骨架：三段副歌，一条败犬</h2>
-          <div class="sec-jp">きょくの こうぞう</div>
-          <p class="sec-lead">这首歌没有桥段式的转折，全靠副歌回来。「アイムアルーザー」唱三次，每次的前提都不一样；Aメロ 则是一段比一段长的独白。先把三次副歌的位置记住，剩下的都是填充。</p>
+          <h2 class="sec-title">学习重点：把快嘴里的缩约读顺</h2>
+          <div class="sec-jp">がくしゅうの ポイント</div>
+          <p class="sec-lead">「ちゃ」「たって」「からすりゃ」在快速的句子里接连出现。先把它们还原，再比较重复句里的「たら」「なら」与句尾语气。</p>
         </div>
       </div>
 
-      <div class="map-grid">
-        <div class="card card-pad reveal">
-          <h3 style="font-size:.98rem;margin-bottom:.2rem">为什么值得逐句拆开听</h3>
-          <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:.9rem">四个理由，按重要性排</p>
-          <ul class="why-list" id="why-list"></ul>
-        </div>
-
-        <div class="card card-pad reveal">
-          <div class="struct-title">
-            <h3>全曲结构与时间轴</h3>
-            <span>时间为单曲版（4:03）大致位置，点一段可筛选下方精读</span>
-          </div>
-          <div class="struct" id="struct"></div>
-          <div class="struct-legend" id="struct-legend"></div>
-          <p style="font-size:.8rem;color:var(--ink-3);line-height:1.75;margin-top:1rem;border-top:1px dashed var(--line);padding-top:.9rem"><b>一条线记住全曲：</b>副歌那句「アイムアルーザー」唱了三次，每次的条件都不一样——第一次「どうせだったら」，第二次「なんもないなら」，第三次「きっといつかって」。同一句口号，从「反正都这样」推到「反正一无所有」，最后推到「总有一天」。另一条线索是人称：Aメロ 里一直是「僕ら」，到「深く転がる 俺は負け犬」突然变成「俺」，ラスサビ 又回到「僕らの声」——一个人的独白，最后变成了合唱。</p>
-        </div>
+      <div class="card card-pad reveal">
+        <h3 style="font-size:.98rem;margin-bottom:.2rem">为什么值得逐句拆开听</h3>
+        <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:.9rem">四个理由，按重要性排</p>
+        <ul class="why-list" id="why-list"></ul>
       </div>
 
       <div class="steps reveal" id="steps"></div>
@@ -1347,9 +1042,9 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
       <div class="sec-head reveal">
         <div class="sec-num">02</div>
         <div>
-          <h2 class="sec-title">完整歌词：按段落对着听</h2>
+          <h2 class="sec-title">完整歌词：对着听，连着读</h2>
           <div class="sec-jp">かんぜん かし</div>
-          <p class="sec-lead">按副歌位置分段，不标时间戳。点任意一行可以朗读；注音和逐句讲解在下一节。</p>
+          <p class="sec-lead">保留原有换行与段落顺序。点击行末的喇叭可以朗读；注音与逐句讲解见下一节。</p>
         </div>
       </div>
 
@@ -1366,12 +1061,11 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
         <div>
           <h2 class="sec-title">逐句精读：一句一个语法点</h2>
           <div class="sec-jp">いちぎょうずつ よむ</div>
-          <p class="sec-lead">24 张卡片，优先挑语法挤在一起的句子。快嘴段落不要求背，只要求「读得顺、听得出」。按段落筛选，效果比从头背到尾好。</p>
+          <p class="sec-lead">24 张卡片，优先挑语法挤在一起的句子。快嘴段落不要求背，只要求「读得顺、听得出」。可以从头读，也可以挑不懂的句子精读。</p>
         </div>
       </div>
 
       <div class="toolbar reveal">
-        <div id="sec-filters" style="display:flex;gap:.5rem;flex-wrap:wrap"></div>
         <div class="toolbar-right">
           <label class="toggle"><input type="checkbox" id="t-furi" checked> 显示假名</label>
           <label class="toggle"><input type="checkbox" id="t-tr" checked> 显示中文</label>
@@ -1379,7 +1073,6 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
       </div>
 
       <div class="lyric-list" id="lyric-list"></div>
-      <div class="empty" id="lyric-empty" hidden>这一段还没有卡片，换一个段落试试。</div>
     </div>
   </section>
 
@@ -1447,12 +1140,13 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
         <div>
           <h2 class="sec-title">语法图谱：16 个句型，撑起整首歌</h2>
           <div class="sec-jp">ぶんぽうマップ</div>
-          <p class="sec-lead">从「〜のに」到「〜ていちゃ」，按歌里出现的顺序排。重点看 warn：那里写的是中国人最容易错的地方，不是词典释义。</p>
+          <p class="sec-lead">展开每条语法，先看接续与歌词原句，再读 2–3 个带注音和中文解释的例句，最后留意易错点。</p>
         </div>
       </div>
       <div class="grammar-list" id="grammar-list"></div>
     </div>
   </section>
+
 </main>
 
 <footer class="footer">
@@ -1465,12 +1159,11 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
   </div>
 </footer>
 
-<script>window.SONG = {"modules":{"listen":false,"studio":false,"quiz":false,"plan":false},"meta":{"slug":"loser","pageTitle":"LOSER 歌詞精読 · 米津玄師","description":"米津玄師「LOSER」（2016）的日语歌词精读：完整歌词、24 句逐句拆解、68 个核心词汇、16 条语法图谱，重点讲清口语缩约「ちゃ／たって／ていちゃ」与命令形。","kicker":"LOSER / ナンバーナイン · 両A面シングル · 2016","titleLine1":"loser","titleLine2":"","artist":"米津玄師","subtitle":"歌詞精読","level":"N3–N2","lead":"「アイムアルーザー」唱了三次，每次的前提都不一样——\u003cb>どうせだったら\u003c/b>、\u003cb>なんもないなら\u003c/b>、\u003cb>きっといつかって\u003c/b>。这首歌的语法点几乎全在这三次重复里，而词汇直接顶到 N2 上限：四半世紀、摩天楼、磨耗、輪廻。想练「快嘴读顺」和「副歌跟唱」，很难找到比它更合适的。","badges":["JLPT N3–N2","米津玄師 · 2016","快嘴 Aメロ","副歌重复三次"],"discLabel":"2016","discSub":"single"},"stats":[{"key":"lines","label":"精 读 句 数"},{"key":"vocab","label":"核 心 词 汇"},{"key":"grammar","label":"语 法 点"}],"cta":{"primary":"开始逐句精读","secondary":"先看语法图谱","secondaryHref":"#grammar"},"nav":[{"id":"map","label":"学习地图"},{"id":"lyrics","label":"完整歌词"},{"id":"lines","label":"逐句精读"},{"id":"vocab","label":"核心词汇"},{"id":"grammar","label":"语法图谱"}],"segments":[{"key":"a","label":"Aメロ"},{"key":"b","label":"Bメロ"},{"key":"s","label":"サビ"},{"key":"c","label":"大サビ"}],"map":{"whyTitle":"为什么值得逐句拆开听","whySub":"四个理由，按重要性排","why":[{"t":"快嘴段落，是现成的「读速」训练","d":"Aメロ 有一段一口气十四行，几乎没有换气口：「ああだのこうだの」「イアンもカートも」「デカイ自意識抱え込んではもう」。先把这几句读顺，再回去听原曲，会发现每个音突然都听得见了。"},{"t":"口语缩约一次集齐","d":"「今となっちゃ」「からすりゃ」「どうなったって」「フラフラしていちゃ」「聞こえてんなら」——教材只教「〜ては」「〜ても」「〜のなら」，这首歌给你它们在嘴里的样子。"},{"t":"副歌重复三次，只换一个条件","d":"「どうせだったら」「なんもないなら」「きっといつかって」——旋律一样、句尾一样，只换前半句。跟唱一遍，等于把三组条件表达一起复习了。"},{"t":"词汇偏文学，正好顶到 N2 上限","d":"四半世紀、摩天楼、磨耗、すり減る、輪廻、淑女、アイオライト。这些词平时只在小说里遇见，放进歌里却一下就记住了——因为它们押在拍子上。"}],"structTitle":"全曲结构与时间轴","structHint":"时间为单曲版（4:03）大致位置，点一段可筛选下方精读","blocks":[{"label":"Aメロ①","role":"铺陈","time":"≈0:08","key":"a","tone":"a","weight":22},{"label":"Bメロ①","role":"推进","time":"≈0:32","key":"b","tone":"b","weight":20},{"label":"サビ①","role":"爆发","time":"≈0:52","key":"s","tone":"s","weight":22},{"label":"Aメロ②","role":"加速","time":"≈1:18","key":"a","tone":"a","weight":42},{"label":"Cメロ","role":"转折","time":"≈2:00","key":"c","tone":"c","weight":26},{"label":"サビ②","role":"重复","time":"≈3:00","key":"s","tone":"s","weight":22},{"label":"大サビ","role":"收束","time":"≈3:22","key":"c","tone":"c","weight":24},{"label":"ラスサビ","role":"爆发","time":"≈3:46","key":"s","tone":"s","weight":18}],"legend":[{"tone":"a","label":"Aメロ · 快嘴独白"},{"tone":"b","label":"Bメロ · 自我盘点"},{"tone":"s","label":"サビ · 副歌口号"},{"tone":"c","label":"Cメロ · 视角收窄"}],"tip":"\u003cb>一条线记住全曲：\u003c/b>副歌那句「アイムアルーザー」唱了三次，每次的条件都不一样——第一次「どうせだったら」，第二次「なんもないなら」，第三次「きっといつかって」。同一句口号，从「反正都这样」推到「反正一无所有」，最后推到「总有一天」。另一条线索是人称：Aメロ 里一直是「僕ら」，到「深く転がる 俺は負け犬」突然变成「俺」，ラスサビ 又回到「僕らの声」——一个人的独白，最后变成了合唱。"},"steps":[{"k":"STEP 01","t":"先听，只抓副歌","d":"整曲循环三遍，别查词。只做一件事：数「アイムアルーザー」出现了几次、每次后面接的是哪半句。位置记住了，后面读词才有地方挂。"},{"k":"STEP 02","t":"再读，专攻快嘴","d":"Aメロ 的句子一句十几个音，先别追速度。把「ちゃ」「たって」「ていちゃ」「からすりゃ」认出来，再跟着念三遍——念顺比看懂更值钱。"},{"k":"STEP 03","t":"最后跟副歌，别背单词","d":"副歌三段用的是同一套语法。把「どうせだったら／なんもないなら／きっといつかって」连着唱下来，比单独背「〜たら」「〜なら」有用得多。"}],"sec":{"map":{"num":"01","title":"先看懂骨架：三段副歌，一条败犬","jp":"きょくの こうぞう","lead":"这首歌没有桥段式的转折，全靠副歌回来。「アイムアルーザー」唱三次，每次的前提都不一样；Aメロ 则是一段比一段长的独白。先把三次副歌的位置记住，剩下的都是填充。"},"lyrics":{"num":"02","title":"完整歌词：按段落对着听","jp":"かんぜん かし","lead":"按副歌位置分段，不标时间戳。点任意一行可以朗读；注音和逐句讲解在下一节。"},"lines":{"num":"03","title":"逐句精读：一句一个语法点","jp":"いちぎょうずつ よむ","lead":"24 张卡片，优先挑语法挤在一起的句子。快嘴段落不要求背，只要求「读得顺、听得出」。按段落筛选，效果比从头背到尾好。"},"vocab":{"num":"04","title":"核心词汇：68 个，按出场顺序","jp":"たんごリスト","lead":"按歌词出现顺序排列，点左侧方框标记「已掌握」，进度会同步到页首。这首歌的词汇偏文学，N2 以上的词明显多于一般 J-POP，遇到不认识的先跳过，回头再补。"},"grammar":{"num":"05","title":"语法图谱：16 个句型，撑起整首歌","jp":"ぶんぽうマップ","lead":"从「〜のに」到「〜ていちゃ」，按歌里出现的顺序排。重点看 warn：那里写的是中国人最容易错的地方，不是词典释义。"}},"lyrics":{"foot":"点任意一行可以朗读。注音与逐句讲解在下一节「逐句精读」。","blocks":[{"label":"Aメロ①","tone":"a","lines":["いつもどおりの通り独り","こんな日々もはや懲り懲り","もうどこにも行けやしないのに","夢見ておやすみ"]},{"label":"Aメロ②","tone":"a","lines":["いつでも僕らはこんな風に","ぼんくらな夜に飽き飽き","また踊り踊り出す明日に","出会うためにさよなら"]},{"label":"Bメロ①","tone":"b","lines":["歩き回ってやっとついた","ここはどうだ楽園か？","今となっちゃもうわからない","四半世紀の結果出来た","青い顔のスーパースターがお腹すかしては待ってる"]},{"label":"サビ①","tone":"s","lines":["アイムアルーザー どうせだったら遠吠えだっていいだろう","もう一回もう一回行こうぜ 僕らの声","アイムアルーザー ずっと前から聞こえてた","いつかポケットに隠した声が"]},{"label":"Aメロ③","tone":"a","lines":["ああだのこうだの知ったもんか","幸先の空は悪天候","ほら窓から覗いた摩天楼","からすりゃ塵のよう","イアンもカートも昔の人よ","中指立ててもしょうがないの","今勝ち上がるためのお勉強","朗らかな表情"]},{"label":"Aメロ④","tone":"a","lines":["踊る阿呆に見る阿呆","我らそれを端から笑う阿呆","デカイ自意識抱え込んではもう 磨耗","すり減って残る酸っぱい葡萄","膝抱えてもなんもねえ","ほら長い前髪で前が見えねえ"]},{"label":"Cメロ","tone":"d","lines":["笑っちまうねパッと沸き立って フワッと消えちゃえるこんな輪廻","愛されたいならそう言おうぜ","思ってるだけじゃ伝わらないね","永遠の淑女もそっぽ向いて","天国は遠く向こうのほうへ"]},{"label":"Aメロ⑤","tone":"a","lines":["ああわかってるって","深く転がる 俺は負け犬","ただどこでもいいから遠くへ行きたいんだ","それだけなんだ"]},{"label":"Bメロ②","tone":"b","lines":["耳をすませ遠くで今響きだした音を逃すな","呼吸を整えて","いつかは出会えるはずの 黄金の色したアイオライトを","きっと掴んで離すな"]},{"label":"サビ②","tone":"s","lines":["アイムアルーザー なんもないならどうなったっていいだろう","うだうだしてフラフラしていちゃ今に 灰 左様なら","アイムアルーザー きっといつかって願うまま","進め ロスタイムのそのまた奥へ行け"]},{"label":"大サビ","tone":"c","lines":["愛されたいならそう言おうぜ","思ってるだけじゃ伝わらないね","永遠の淑女もそっぽ向いて","天国は遠く向こうのほうへ","ここいらでひとつ踊ってみようぜ","夜が明けるまで転がっていこうぜ","聞こえてんなら声出していこうぜ"]},{"label":"ラスサビ","tone":"s","lines":["アイムアルーザー どうせだったら遠吠えだっていいだろう","もう一回もう一回行こうぜ 僕らの声","アイムアルーザー ずっと前から聞こえてた","いつかポケットに隠した声が","ここいらでひとつ踊ってみようぜ","夜が明けるまで転がっていこうぜ","聞こえてんなら声出していこうぜ"]}]},"lines":[{"sec":"a","jp":"いつもどおりの通[とお]り 独[ひと]り","tr":"一如往常的那条街上，只有我一个人","words":[["いつもどおり","いつもどおり","一如往常"],["通り","とおり","大街"],["独り","ひとり","独自一人"]],"g":"\u003cb>〜どおり\u003c/b>：名词＋どおり，表示「照…的样子」。いつも＋どおり → いつもどおり；同类还有 予定どおり、説明どおり、時間どおり。","n":"「独り」写成汉字而不是「一人」，视觉上更冷；唱到「ひとり」两个字时音压得很低，像说给自己听。"},{"sec":"a","jp":"こんな日[ひ]々[び]も はや懲[こ]り懲[こ]り","tr":"这样的日子，我也早就受够了","words":[["日々","ひび","每天，日日"],["懲りる","こりる","吃够苦头而不敢再试"],["はや","はや","已经（文语）"]],"g":"\u003cb>懲り懲り\u003c/b>：把「懲りる」的词干叠一遍，表示「受够了、再也不想碰」。前面常配「もう」「はや」。","n":"「はや」是「もう」的文言说法，一个字把厌烦推到头；这一句咬字极快，四个音一组往外吐。"},{"sec":"a","jp":"もうどこにも行[い]けやしないのに","tr":"明明已经哪儿都去不了了","words":[["どこにも","どこにも","哪里都（接否定）"],["行く","いく","去"],["のに","のに","明明…却"]],"g":"\u003cb>〜やしない\u003c/b>：「〜はしない」的口语强调形，接在动词后表示强烈否定。这里是可能形「行ける」＋やしない＝「根本去不了」。","n":"「やしない」比「ない」多一层破罐破摔的倔；句尾「のに」不往上扬反而往下掉，这是这句最好听的地方。"},{"sec":"a","jp":"ぼんくらな夜[よる]に 飽[あ]き飽[あ]き","tr":"对这种浑浑噩噩的夜晚，已经腻透了","words":[["ぼんくら","ぼんくら","糊涂虫；愚钝"],["夜","よる","夜晚"],["飽きる","あきる","腻，厌倦"]],"g":"\u003cb>ます形词干叠用\u003c/b>：飽きる → 飽き＋飽き，把程度拉满。这是固定说法，不要自己造「疲れ疲れ」。","n":"「ぼんくら」原意是骂人脑子笨，这里骂的是夜晚，也顺带骂自己；两个「飽き」之间不要停。"},{"sec":"a","jp":"出会[であ]うために さよなら","tr":"为了和明天相遇，先说一声再见","words":[["出会う","であう","遇见"],["ために","ために","为了"],["さよなら","さよなら","再见"]],"g":"\u003cb>〜ために\u003c/b>：表目的，前接意志动词的辞书形。「出会うために」＝为了遇见。","n":"完整语序是「明日に出会うためにさよならする」，「する」被砍掉，「さよなら」直接当句尾——日语歌词最常见的省略收尾。"},{"sec":"a","jp":"中指[なかゆび]立[た]てても しょうがないの","tr":"就算竖起中指，也没什么用啊","words":[["中指","なかゆび","中指"],["立てる","たてる","竖起"],["しょうがない","しょうがない","没办法，无济于事"]],"g":"\u003cb>〜てもしょうがない\u003c/b>：即使…也没意义、没办法。书面一点的说法是「〜ても仕方がない」。","n":"句尾「の」是轻声的断定，比「よ」软得多，像在说给自己听；唱到这里音量明显收了一下。"},{"sec":"a","jp":"からすりゃ 塵[ちり]のよう","tr":"从上面看下来，不过是灰尘一样","words":[["からすりゃ","からすりゃ","从…来看（口语）"],["塵","ちり","灰尘"],["よう","よう","像…一样"]],"g":"\u003cb>〜からすりゃ\u003c/b>：「〜からすれば」的口语缩约，表「从…的角度来说」。同族缩约还有 〜りゃ（＝れば）、〜ちゃ（＝ては）。","n":"这句的主语是省掉的：不是摩天楼像灰尘，是「从摩天楼看下去，人和事像灰尘」。句子越短，省掉的主语越多，这一处最典型。"},{"sec":"b","jp":"歩[ある]き回[まわ]って やっとついた","tr":"四处走到最后，总算到了","words":[["歩く","あるく","走"],["回る","まわる","转；到处…"],["やっと","やっと","终于"]],"g":"\u003cb>ます形＋回る\u003c/b>：表示「到处…、四处…」。歩き回る、走り回る、探し回る、逃げ回る。","n":"「ついた」是「到了（某地）」，汉字也可写「着いた」；两个音唱得干、短，把「走累了」压在里面。"},{"sec":"b","jp":"今[いま]となっちゃ もうわからない","tr":"事到如今，已经搞不清了","words":[["今","いま","现在"],["なる","なる","变成"],["わかる","わかる","明白，搞清"]],"g":"\u003cb>〜となっちゃ\u003c/b>：「〜となっては」的口语缩约，表「到了…这个地步」。ちゃ＝ては。","n":"上一句还在问「是乐园吗」，这一句自己把答案撤了；「わからない」唱得平，没有起伏，像放弃。"},{"sec":"b","jp":"お腹[なか]すかしては 待[ま]ってる","tr":"饿着肚子，一直在等","words":[["お腹","おなか","肚子"],["すかす","すかす","使空腹"],["待つ","まつ","等"]],"g":"\u003cb>〜ては\u003c/b>：表动作反复或状态持续。「すかしては待ってる」＝饿着等、一直等。口语常缩成「ちゃ」。","n":"「お腹すかして」是「お腹をすかして」省掉「を」；「スーパースター」中间那个「ー」要唱满一拍，吞掉就成「スーパスタ」。堂堂 superstar 饿着肚子，画面感全在这个反差里。"},{"sec":"b","jp":"響[ひび]き出[だ]した音[おと]を逃[のが]すな","tr":"别放过此刻响起来的那个声音","words":[["響く","ひびく","回响"],["音","おと","声音"],["逃す","のがす","错过，放过"]],"g":"\u003cb>辞书形＋な\u003c/b>：禁止形，「不要…」。逃す → 逃すな（别放过）。它和命令形「逃せ」方向正好相反。","n":"前半「耳をすませ」是命令形，后半「逃すな」是禁止形，一正一反连着下指令，像有人在耳边喊。"},{"sec":"b","jp":"いつかは出会[であ]えるはずの 黄金[こがね]の色[いろ]したアイオライトを","tr":"那颗迟早会遇见的、泛着金光的堇青石","words":[["出会う","であう","遇见"],["はず","はず","理应"],["黄金","こがね","黄金"]],"g":"\u003cb>〜はずの\u003c/b>：「理应…的」，修饰后面的名词。出会えるはずのアイオライト＝「应该会遇到的那颗石头」。","n":"アイオライト（iolite）就是堇青石，本身蓝紫，转动时泛出一层金黄——「黄金の色した」不是随便的比喻，是它真实的特征。"},{"sec":"b","jp":"きっと掴[つか]んで 離[はな]すな","tr":"一定要抓住，别松手","words":[["掴む","つかむ","抓住"],["離す","はなす","放开"],["きっと","きっと","一定"]],"g":"\u003cb>掴む／離す\u003c/b>：一对反义动词，用「て」连起来＝「抓住了，并且别放」。句尾用禁止形「離すな」收紧。","n":"全曲到这里才第一次给出明确指令；「きっと」落在拍点上，像是给前面所有自嘲的一个回答。"},{"sec":"s","jp":"遠吠[とおぼえ]だって いいだろう","tr":"反正都是输，就算只是远远地吠两声也无所谓吧","words":[["遠吠え","とおぼえ","（狗在远处）吠"],["だって","だって","即使…也"],["どうせ","どうせ","反正"]],"g":"\u003cb>〜だって\u003c/b>：口语的「即使…也」，等于「〜でも」。遠吠えだっていい＝就算是远吠也没关系。","n":"「負け犬の遠吠え」是固定说法：打不过，只能在远处虚张声势地叫。这句等于给歌名下了注脚。"},{"sec":"s","jp":"もう一回[いっかい] もう一回 行[い]こうぜ","tr":"再来一次，再来一次，上啊，我们的声音","words":[["もう一回","もういっかい","再一次"],["行く","いく","去，上"],["ぜ","ぜ","（男性口语）啊、吧"]],"g":"\u003cb>意志形＋ぜ\u003c/b>：行く → 行こう＋ぜ，招呼同伴、语气粗。「〜ましょう」是礼貌版，这个是街头版。","n":"两个「もう一回」是连击，第二遍音更高；「声」收在短促的「え」上，别拖长。"},{"sec":"s","jp":"ずっと前[まえ]から 聞[き]こえてた","tr":"很久以前，就一直听得见","words":[["ずっと","ずっと","一直"],["聞こえる","きこえる","听得见"],["前","まえ","以前"]],"g":"\u003cb>聞こえる／見える\u003c/b>：自动词，表示「自然而然地听得见／看得见」，不是主动去听。他动词是「聞く／見る」。","n":"「聞こえてた」用过去进行，暗示这声音一直在，只是自己没接住；唱得平，尾音几乎不收。"},{"sec":"s","jp":"いつかポケットに 隠[かく]した声[こえ]が","tr":"那个不知什么时候藏进口袋里的声音","words":[["いつか","いつか","不知何时"],["隠す","かくす","藏"],["声","こえ","声音"]],"g":"\u003cb>连体修饰\u003c/b>：「ポケットに隠した」修饰「声」。日语的修饰语一律放在名词前，可以很长。","n":"这句没有谓语，句子悬着不落地，下一段才接上——歌词常用这种「未完成句」留出换气的空隙。"},{"sec":"s","jp":"なんもないなら どうなったっていいだろう","tr":"反正什么都没有，变成什么样都无所谓吧","words":[["なんも","なんも","什么也（口语）"],["なる","なる","变成"],["どうなったって","どうなったって","无论变成怎样"]],"g":"\u003cb>〜たって\u003c/b>：「〜ても」的口语缩约。どうなったって＝どうなっても。","n":"副歌①用的是「どうせだったら」，这里换成「なんもないなら」——同一个「无所谓」，前提从「反正都输」变成「反正一无所有」。"},{"sec":"s","jp":"うだうだして フラフラしていちゃ 今[いま]に灰[はい]","tr":"磨磨蹭蹭、晃晃悠悠的话，早晚变成一把灰","words":[["うだうだ","うだうだ","磨磨蹭蹭"],["フラフラ","ふらふら","晃悠，摇摆"],["灰","はい","灰"]],"g":"\u003cb>〜ていちゃ\u003c/b>：「〜ていては」的缩约，表「如果一直保持…的状态（就会糟）」。","n":"「今に」＝不久、早晚。整句把「消失」说成一个物理结果——不是抒情，是通知。"},{"sec":"s","jp":"進[すす]め ロスタイムの そのまた奥[おく]へ行[い]け","tr":"前进——去往伤停补时的更深处","words":[["進む","すすむ","前进"],["奥","おく","深处"],["ロスタイム","ろすたいむ","伤停补时"]],"g":"\u003cb>命令形\u003c/b>：五段动词词尾变え段——進む→進め、行く→行け。两个命令形叠在一起，一句比一句硬。","n":"「ロスタイム」是足球的伤停补时：比赛时间用完了，额外补给你的那几分钟。「そのまた奥」＝连那几分钟之后都还要往前。"},{"sec":"c","jp":"愛[あい]されたいなら そう言[い]おうぜ","tr":"想被爱的话，就直说啊","words":[["愛する","あいする","爱"],["言う","いう","说"],["なら","なら","如果"]],"g":"\u003cb>〜たいなら\u003c/b>：希望助动词「たい」的辞书形＋なら，表条件。「想…的话，就…」。","n":"「言おうぜ」是意志形，但这句话的对象其实是他自己；全曲唱了两次，第二次比第一次更轻、更不像在劝人。"},{"sec":"c","jp":"思[おも]ってるだけじゃ 伝[つた]わらないね","tr":"光是在心里想，是传不到的","words":[["思う","おもう","想，认为"],["伝わる","つたわる","传达"],["だけ","だけ","只"]],"g":"\u003cb>〜だけじゃ\u003c/b>：「只有…的话（不够）」，后面常省略「だめだ」。思ってるだけじゃ（だめだ）。","n":"「ね」不是问句，是寻求同意；这句是全曲的结论，唱得最平、最不带情绪，反而最重。"},{"sec":"c","jp":"ここいらで ひとつ 踊[おど]ってみようぜ","tr":"就在这儿，来跳一支舞吧","words":[["ここいら","ここいら","这一带；这时候"],["踊る","おどる","跳舞"],["ひとつ","ひとつ","（语气）来一个"]],"g":"\u003cb>〜てみよう\u003c/b>：「てみる」＝试着做；＋意志形「よう」＝「来试试…吧」。","n":"「ここいらで」是「就在这一带／到这一步」的口语说法；「ひとつ」不是数量，是「来一个」的语气词。"},{"sec":"c","jp":"聞[き]こえてんなら 声[こえ]出[だ]していこうぜ","tr":"听得见的话，就出声一起往前走","words":[["聞こえる","きこえる","听得见"],["声","こえ","声音"],["出す","だす","发出"]],"g":"\u003cb>〜んなら\u003c/b>：「〜のなら」的缩约。聞こえているのなら → 聞こえてんなら。","n":"最后三句全部以「〜ぜ」收尾，这一句最高；「声出していこう」把听众也拖进歌里——不是独唱，是合唱。"}],"vocabTip":{"searchHint":"搜索：夢 / ゆめ / 梦想"},"vocab":[{"k":"いつもどおり","r":"いつもどおり","p":"副","cn":"一如往常","lv":"N3"},{"k":"独り","r":"ひとり","p":"名","cn":"独自一人","lv":"N4"},{"k":"日々","r":"ひび","p":"名","cn":"日日，每天","lv":"N3"},{"k":"懲りる","r":"こりる","p":"動II","cn":"吃够苦头，不敢再试","lv":"N2"},{"k":"夢見る","r":"ゆめみる","p":"動II","cn":"做梦","lv":"N3"},{"k":"僕ら","r":"ぼくら","p":"代","cn":"我们","lv":"N4"},{"k":"ぼんくら","r":"ぼんくら","p":"名","cn":"糊涂虫；愚钝","lv":"N2"},{"k":"夜","r":"よる","p":"名","cn":"夜晚","lv":"N5"},{"k":"飽きる","r":"あきる","p":"動II","cn":"腻，厌倦","lv":"N3"},{"k":"踊る","r":"おどる","p":"動I","cn":"跳舞","lv":"N4"},{"k":"出会う","r":"であう","p":"動I","cn":"遇见","lv":"N3"},{"k":"楽園","r":"らくえん","p":"名","cn":"乐园","lv":"N3"},{"k":"四半世紀","r":"しはんせいき","p":"名","cn":"四分之一个世纪，25 年","lv":"N2"},{"k":"結果","r":"けっか","p":"名","cn":"结果","lv":"N3"},{"k":"青い","r":"あおい","p":"形I","cn":"青的；脸色发青","lv":"N5"},{"k":"お腹","r":"おなか","p":"名","cn":"肚子","lv":"N5"},{"k":"空かす","r":"すかす","p":"動I","cn":"使饿（お腹をすかす）","lv":"N2"},{"k":"遠吠え","r":"とおぼえ","p":"名","cn":"（狗在远处）吠叫","lv":"N2"},{"k":"もう一回","r":"もういっかい","p":"副","cn":"再一次","lv":"N4"},{"k":"声","r":"こえ","p":"名","cn":"声音","lv":"N5"},{"k":"聞こえる","r":"きこえる","p":"動II","cn":"听得见","lv":"N4"},{"k":"隠す","r":"かくす","p":"動I","cn":"藏起来","lv":"N3"},{"k":"幸先","r":"さいさき","p":"名","cn":"兆头","lv":"N2"},{"k":"悪天候","r":"あくてんこう","p":"名","cn":"坏天气","lv":"N2"},{"k":"覗く","r":"のぞく","p":"動I","cn":"窥视，探头看","lv":"N2"},{"k":"摩天楼","r":"まてんろう","p":"名","cn":"摩天楼","lv":"N1"},{"k":"塵","r":"ちり","p":"名","cn":"灰尘","lv":"N2"},{"k":"中指","r":"なかゆび","p":"名","cn":"中指","lv":"N3"},{"k":"しょうがない","r":"しょうがない","p":"形I","cn":"没办法，无济于事","lv":"N3"},{"k":"勝ち上がる","r":"かちあがる","p":"動I","cn":"往上爬，晋级","lv":"N2"},{"k":"お勉強","r":"おべんきょう","p":"名","cn":"学习（带调侃）","lv":"N4"},{"k":"朗らか","r":"ほがらか","p":"形II","cn":"开朗，爽朗","lv":"N2"},{"k":"表情","r":"ひょうじょう","p":"名","cn":"表情","lv":"N3"},{"k":"阿呆","r":"あほ","p":"名","cn":"傻瓜","lv":"N3"},{"k":"自意識","r":"じいしき","p":"名","cn":"自我意识","lv":"N2"},{"k":"抱え込む","r":"かかえこむ","p":"動I","cn":"抱在怀里；独自扛","lv":"N2"},{"k":"磨耗","r":"まもう","p":"名","cn":"磨损","lv":"N1"},{"k":"すり減る","r":"すりへる","p":"動I","cn":"磨薄，磨掉","lv":"N2"},{"k":"酸っぱい","r":"すっぱい","p":"形I","cn":"酸的","lv":"N3"},{"k":"葡萄","r":"ぶどう","p":"名","cn":"葡萄","lv":"N3"},{"k":"膝","r":"ひざ","p":"名","cn":"膝盖","lv":"N3"},{"k":"前髪","r":"まえがみ","p":"名","cn":"刘海","lv":"N3"},{"k":"輪廻","r":"りんね","p":"名","cn":"轮回","lv":"N1"},{"k":"愛する","r":"あいする","p":"動III","cn":"爱","lv":"N3"},{"k":"伝わる","r":"つたわる","p":"動I","cn":"传达到","lv":"N3"},{"k":"永遠","r":"えいえん","p":"名","cn":"永远","lv":"N3"},{"k":"淑女","r":"しゅくじょ","p":"名","cn":"淑女","lv":"N2"},{"k":"そっぽ","r":"そっぽ","p":"名","cn":"别处（そっぽを向く）","lv":"N2"},{"k":"天国","r":"てんごく","p":"名","cn":"天国","lv":"N3"},{"k":"転がる","r":"ころがる","p":"動I","cn":"滚；跌倒","lv":"N3"},{"k":"俺","r":"おれ","p":"代","cn":"我（男性自称）","lv":"N4"},{"k":"負け犬","r":"まけいぬ","p":"名","cn":"败犬，输家","lv":"N2"},{"k":"響く","r":"ひびく","p":"動I","cn":"回响","lv":"N2"},{"k":"逃す","r":"のがす","p":"動I","cn":"错过，放过","lv":"N2"},{"k":"呼吸","r":"こきゅう","p":"名","cn":"呼吸","lv":"N2"},{"k":"整える","r":"ととのえる","p":"動II","cn":"调整，整理","lv":"N2"},{"k":"黄金","r":"こがね","p":"名","cn":"黄金","lv":"N1"},{"k":"掴む","r":"つかむ","p":"動I","cn":"抓住","lv":"N3"},{"k":"離す","r":"はなす","p":"動I","cn":"放开","lv":"N2"},{"k":"願う","r":"ねがう","p":"動I","cn":"祈愿","lv":"N3"},{"k":"進む","r":"すすむ","p":"動I","cn":"前进","lv":"N4"},{"k":"ここいら","r":"ここいら","p":"代","cn":"这一带；这时候","lv":"N2"},{"k":"明ける","r":"あける","p":"動II","cn":"天亮","lv":"N2"},{"k":"灰","r":"はい","p":"名","cn":"灰","lv":"N3"},{"k":"フラフラ","r":"ふらふら","p":"副","cn":"晃晃悠悠","lv":"N3"},{"k":"ロスタイム","r":"ろすたいむ","p":"名","cn":"伤停补时（足球）","lv":"N2"},{"k":"アイオライト","r":"あいおらいと","p":"名","cn":"堇青石","lv":"N1"},{"k":"うだうだ","r":"うだうだ","p":"副","cn":"磨磨蹭蹭","lv":"N2"}],"grammar":[{"p":"〜のに","sub":"逆接・不满","form":"用言连体形 ＋ のに（ナ形：〜なのに／名詞：〜なのに）","mean":"明明…却…","eg":"もうどこにも行けやしないのに","warn":"口语里常把后半句整个省掉，只留「のに」收尾，语气就从陈述变成抱怨。别和「〜ので」（原因）混：のに逆接，ので顺接。"},{"p":"〜やしない","sub":"强调否定","form":"V-ます（去ます）／可能形 ＋ やしない（行きやしない・行けやしない）","mean":"根本不…；才不会…","eg":"もうどこにも行けやしないのに","warn":"「行けやしない」是可能形「行ける」＋やしない，不是「行く」的否定。写成「行きやしない」意思就变成「我才不去」。"},{"p":"ます形 ＋ 出す","sub":"动作突然开始","form":"V-ます（去ます）＋ 出す","mean":"…起来；突然开始…","eg":"また踊り踊り出す明日に","warn":"「出す」在这里是复合动词的补助部分，不是「拿出来」。同族：泣き出す、走り出す、降り出す、笑い出す。"},{"p":"〜ために","sub":"目的","form":"V-辞书形 ／ 名詞＋の ＋ ために","mean":"为了…","eg":"出会うためにさよなら","warn":"前接意志动词才表目的。前接名词时是「Nのために」，可以表「为了…（人）」，也可以表原因，要靠上下文分辨。"},{"p":"〜ては","sub":"反复・条件","form":"V-て形 ＋ は（口语缩约：〜ちゃ）","mean":"老是…；一…就…","eg":"お腹すかしては待ってる","warn":"口语里几乎都缩成「ちゃ」：すかしては→すかしちゃ。这里的「ちゃ」是「ては」，和「ちゃう」（＝てしまう）不是一回事。"},{"p":"〜となっちゃ","sub":"到了…地步","form":"名詞 ／ V-た ＋ となっちゃ（＝となっては）","mean":"到了…的地步就…","eg":"今となっちゃもうわからない","warn":"「ちゃ」＝「ては」。同一个「ちゃ」也可能是「ちゃう」（＝てしまう）的缩约，判断方法是看后面接的是否定还是完了。"},{"p":"ます形 ＋ 回る","sub":"到处…","form":"V-ます（去ます）＋ 回る","mean":"到处…、四处…","eg":"歩き回ってやっとついた","warn":"重心在「回る」的绕圈子，不是「旋转」。同族：走り回る、探し回る、逃げ回る、飲み回る。"},{"p":"〜だって","sub":"即使…也（口语）","form":"名詞 ＋ だって（＝でも）；動詞・イ形用「〜たって」","mean":"就算…也…","eg":"遠吠えだっていいだろう","warn":"「だって」在句首是「因为」，接在名词后才是「即使」。位置不同、意思完全不同，这是最容易听错的一处。"},{"p":"意志形 ＋ ぜ","sub":"招呼・劝诱","form":"五段：え段＋う ／ 一段：＋よう ／ する：しよう ／ 来る：来よう","mean":"…吧；走啊","eg":"もう一回もう一回行こうぜ","warn":"「ぜ」是男性向的终助词，把「〜ましょう」扔到街上。对长辈、上司绝对不能用。"},{"p":"聞こえる／見える","sub":"自然感知（自他对应）","form":"自动词：聞こえる・見える ／ 他动词：聞く・見る","mean":"听得见／看得见","eg":"ずっと前から聞こえてた","warn":"「聞こえる」是声音自己进耳朵，「聞く」是主动去听。「見える」还额外表示「视力上看得见」，和「見られる」（有机会看到）不同。"},{"p":"〜たって","sub":"即使（＝ても）","form":"V-た形 ／ イ形く ＋ たって；名詞・ナ形 ＋ だって","mean":"就算…也","eg":"どうなったっていいだろう","warn":"「たって」是「ても」的口语形，语感更随便。动词用「たって」，名词用「だって」，别混。"},{"p":"〜ていちゃ","sub":"如果一直…","form":"V-て形 ＋ いちゃ（＝ていては）","mean":"老是…的话（就糟了）","eg":"フラフラしていちゃ今に灰","warn":"「ちゃ」＝「ては」。这句是「していては」→「していちゃ」，后面接「今に（早晚）」，整句是「再晃下去早晚成灰」。"},{"p":"〜まま","sub":"保持原状・随心","form":"V-た／V-ない ＋ まま ／ 名詞＋の ＋ まま","mean":"就那样…；顺着…","eg":"きっといつかって願うまま","warn":"「〜たまま」是「保持…的状态」；「願うまま」是「顺着愿望」，属于「随心」用法。两种意思要靠前面动词的时态分辨。"},{"p":"命令形・禁止形","sub":"命令","form":"命令：五段→え段／一段→＋ろ／する→しろ・せよ；禁止：V-辞书形＋な","mean":"去…！／别…！","eg":"進め ロスタイムのそのまた奥へ行け ／ 音を逃すな","warn":"命令形和禁止形是一对：「逃せ」是「放它走」，「逃すな」是「别放它走」，一字之差方向完全相反。"},{"p":"〜てみよう","sub":"尝试・提议","form":"V-て形 ＋ みる ＋ 意志形よう（＝てみよう）","mean":"来试试…吧","eg":"ここいらでひとつ踊ってみようぜ","warn":"「てみる」是「试着做」，「てみよう」是「试试吧」。和「〜ようとする」（正要…／试图…）不同，后者是意志的瞬间，不是尝试。"},{"p":"〜ていく","sub":"朝向未来的持续","form":"V-て形 ＋ いく","mean":"…下去；逐渐…","eg":"夜が明けるまで転がっていこうぜ","warn":"「ていく」朝未来走，「てくる」朝现在走来。这里的「転がっていく」既是真滚，也是「一路跌着走下去」的双关。"}],"footer":{"title":"loser","note":"本页为个人日语学习用途的歌词解析作品，非官方发布。歌词著作权归作词・作曲 米津玄師、编曲 米津玄師・蔦谷好位置、演唱 米津玄師 及相关权利方所有；页面内容仅供学习参考，请勿用于商业用途，并请通过正版音源与官方歌词页对照收听。","meta":["LOSER / ナンバーナイン","歌詞精読ノート","JLPT N3–N2"]}};</script>
+<script>window.SONG = {"meta":{"slug":"loser","pageTitle":"LOSER 歌詞精読 · 米津玄師","description":"米津玄師「LOSER」（2016）的日语歌词精读：完整歌词、24 句逐句拆解、68 个核心词汇、16 条语法图谱，重点讲清口语缩约「ちゃ／たって／ていちゃ」与命令形。","kicker":"LOSER / ナンバーナイン · 両A面シングル · 2016","titleLine1":"loser","titleLine2":"","artist":"米津玄師","subtitle":"歌詞精読","level":"N3–N2","lead":"「アイムアルーザー」唱了三次，每次的前提都不一样——\u003cb>どうせだったら\u003c/b>、\u003cb>なんもないなら\u003c/b>、\u003cb>きっといつかって\u003c/b>。这首歌的语法点几乎全在这三次重复里，而词汇直接顶到 N2 上限：四半世紀、摩天楼、磨耗、輪廻。想练「快嘴读顺」和「副歌跟唱」，很难找到比它更合适的。","badges":["JLPT N3–N2","米津玄師 · 2016","快嘴跟读","副歌重复三次"],"discLabel":"2016","discSub":"single"},"stats":[{"key":"lines","label":"精 读 句 数"},{"key":"vocab","label":"核 心 词 汇"},{"key":"grammar","label":"语 法 点"}],"cta":{"primary":"开始逐句精读","secondary":"先看语法图谱","secondaryHref":"#grammar"},"nav":[{"id":"map","label":"学习地图"},{"id":"lyrics","label":"完整歌词"},{"id":"lines","label":"逐句精读"},{"id":"vocab","label":"核心词汇"},{"id":"grammar","label":"语法图谱"}],"map":{"whyTitle":"为什么值得逐句拆开听","whySub":"四个理由，按重要性排","why":[{"t":"快嘴段落，是现成的「读速」训练","d":"歌词中有一段一口气十四行，几乎没有换气口：「ああだのこうだの」「イアンもカートも」「デカイ自意識抱え込んではもう」。先把这几句读顺，再回去听原曲，会发现每个音突然都听得见了。"},{"t":"口语缩约一次集齐","d":"「今となっちゃ」「からすりゃ」「どうなったって」「フラフラしていちゃ」「聞こえてんなら」——教材只教「〜ては」「〜ても」「〜のなら」，这首歌给你它们在嘴里的样子。"},{"t":"副歌重复三次，只换一个条件","d":"「どうせだったら」「なんもないなら」「きっといつかって」——旋律一样、句尾一样，只换前半句。跟唱一遍，等于把三组条件表达一起复习了。"},{"t":"词汇偏文学，正好顶到 N2 上限","d":"四半世紀、摩天楼、磨耗、すり減る、輪廻、淑女、アイオライト。这些词平时只在小说里遇见，放进歌里却一下就记住了——因为它们押在拍子上。"}]},"steps":[{"k":"STEP 01","t":"先听，只抓副歌","d":"整曲循环三遍，别查词。只做一件事：数「アイムアルーザー」出现了几次、每次后面接的是哪半句。位置记住了，后面读词才有地方挂。"},{"k":"STEP 02","t":"再读，专攻快嘴","d":"这些快速的句子一句十几个音，先别追速度。把「ちゃ」「たって」「ていちゃ」「からすりゃ」认出来，再跟着念三遍——念顺比看懂更值钱。"},{"k":"STEP 03","t":"最后跟副歌，别背单词","d":"副歌三段用的是同一套语法。把「どうせだったら／なんもないなら／きっといつかって」连着唱下来，比单独背「〜たら」「〜なら」有用得多。"}],"sec":{"map":{"num":"01","title":"学习重点：把快嘴里的缩约读顺","jp":"がくしゅうの ポイント","lead":"「ちゃ」「たって」「からすりゃ」在快速的句子里接连出现。先把它们还原，再比较重复句里的「たら」「なら」与句尾语气。"},"lyrics":{"num":"02","title":"完整歌词：对着听，连着读","jp":"かんぜん かし","lead":"保留原有换行与段落顺序。点击行末的喇叭可以朗读；注音与逐句讲解见下一节。"},"lines":{"num":"03","title":"逐句精读：一句一个语法点","jp":"いちぎょうずつ よむ","lead":"24 张卡片，优先挑语法挤在一起的句子。快嘴段落不要求背，只要求「读得顺、听得出」。可以从头读，也可以挑不懂的句子精读。"},"vocab":{"num":"04","title":"核心词汇：68 个，按出场顺序","jp":"たんごリスト","lead":"按歌词出现顺序排列，点左侧方框标记「已掌握」，进度会同步到页首。这首歌的词汇偏文学，N2 以上的词明显多于一般 J-POP，遇到不认识的先跳过，回头再补。"},"grammar":{"num":"05","title":"语法图谱：16 个句型，撑起整首歌","jp":"ぶんぽうマップ","lead":"展开每条语法，先看接续与歌词原句，再读 2–3 个带注音和中文解释的例句，最后留意易错点。"}},"lyrics":{"foot":"点击行末的喇叭可以朗读。注音与逐句讲解在下一节「逐句精读」。","blocks":[{"lines":["いつもどおりの通り独り","こんな日々もはや懲り懲り","もうどこにも行けやしないのに","夢見ておやすみ"]},{"lines":["いつでも僕らはこんな風に","ぼんくらな夜に飽き飽き","また踊り踊り出す明日に","出会うためにさよなら"]},{"lines":["歩き回ってやっとついた","ここはどうだ楽園か？","今となっちゃもうわからない","四半世紀の結果出来た","青い顔のスーパースターがお腹すかしては待ってる"]},{"lines":["アイムアルーザー どうせだったら遠吠えだっていいだろう","もう一回もう一回行こうぜ 僕らの声","アイムアルーザー ずっと前から聞こえてた","いつかポケットに隠した声が"]},{"lines":["ああだのこうだの知ったもんか","幸先の空は悪天候","ほら窓から覗いた摩天楼","からすりゃ塵のよう","イアンもカートも昔の人よ","中指立ててもしょうがないの","今勝ち上がるためのお勉強","朗らかな表情"]},{"lines":["踊る阿呆に見る阿呆","我らそれを端から笑う阿呆","デカイ自意識抱え込んではもう 磨耗","すり減って残る酸っぱい葡萄","膝抱えてもなんもねえ","ほら長い前髪で前が見えねえ"]},{"lines":["笑っちまうねパッと沸き立って フワッと消えちゃえるこんな輪廻","愛されたいならそう言おうぜ","思ってるだけじゃ伝わらないね","永遠の淑女もそっぽ向いて","天国は遠く向こうのほうへ"]},{"lines":["ああわかってるって","深く転がる 俺は負け犬","ただどこでもいいから遠くへ行きたいんだ","それだけなんだ"]},{"lines":["耳をすませ遠くで今響きだした音を逃すな","呼吸を整えて","いつかは出会えるはずの 黄金の色したアイオライトを","きっと掴んで離すな"]},{"lines":["アイムアルーザー なんもないならどうなったっていいだろう","うだうだしてフラフラしていちゃ今に 灰 左様なら","アイムアルーザー きっといつかって願うまま","進め ロスタイムのそのまた奥へ行け"]},{"lines":["愛されたいならそう言おうぜ","思ってるだけじゃ伝わらないね","永遠の淑女もそっぽ向いて","天国は遠く向こうのほうへ","ここいらでひとつ踊ってみようぜ","夜が明けるまで転がっていこうぜ","聞こえてんなら声出していこうぜ"]},{"lines":["アイムアルーザー どうせだったら遠吠えだっていいだろう","もう一回もう一回行こうぜ 僕らの声","アイムアルーザー ずっと前から聞こえてた","いつかポケットに隠した声が","ここいらでひとつ踊ってみようぜ","夜が明けるまで転がっていこうぜ","聞こえてんなら声出していこうぜ"]}]},"lines":[{"jp":"いつもどおりの通[とお]り 独[ひと]り","tr":"一如往常的那条街上，只有我一个人","words":[["いつもどおり","いつもどおり","一如往常"],["通り","とおり","大街"],["独り","ひとり","独自一人"]],"g":"\u003cb>〜どおり\u003c/b>：名词＋どおり，表示「照…的样子」。いつも＋どおり → いつもどおり；同类还有 予定どおり、説明どおり、時間どおり。","n":"「独り」写成汉字而不是「一人」，视觉上更冷；唱到「ひとり」两个字时音压得很低，像说给自己听。"},{"jp":"こんな日[ひ]々[び]も はや懲[こ]り懲[こ]り","tr":"这样的日子，我也早就受够了","words":[["日々","ひび","每天，日日"],["懲りる","こりる","吃够苦头而不敢再试"],["はや","はや","已经（文语）"]],"g":"\u003cb>懲り懲り\u003c/b>：把「懲りる」的词干叠一遍，表示「受够了、再也不想碰」。前面常配「もう」「はや」。","n":"「はや」是「もう」的文言说法，一个字把厌烦推到头；这一句咬字极快，四个音一组往外吐。"},{"jp":"もうどこにも行[い]けやしないのに","tr":"明明已经哪儿都去不了了","words":[["どこにも","どこにも","哪里都（接否定）"],["行く","いく","去"],["のに","のに","明明…却"]],"g":"\u003cb>〜やしない\u003c/b>：「〜はしない」的口语强调形，接在动词后表示强烈否定。这里是可能形「行ける」＋やしない＝「根本去不了」。","n":"「やしない」比「ない」多一层破罐破摔的倔；句尾「のに」不往上扬反而往下掉，这是这句最好听的地方。"},{"jp":"ぼんくらな夜[よる]に 飽[あ]き飽[あ]き","tr":"对这种浑浑噩噩的夜晚，已经腻透了","words":[["ぼんくら","ぼんくら","糊涂虫；愚钝"],["夜","よる","夜晚"],["飽きる","あきる","腻，厌倦"]],"g":"\u003cb>ます形词干叠用\u003c/b>：飽きる → 飽き＋飽き，把程度拉满。这是固定说法，不要自己造「疲れ疲れ」。","n":"「ぼんくら」原意是骂人脑子笨，这里骂的是夜晚，也顺带骂自己；两个「飽き」之间不要停。"},{"jp":"出会[であ]うために さよなら","tr":"为了和明天相遇，先说一声再见","words":[["出会う","であう","遇见"],["ために","ために","为了"],["さよなら","さよなら","再见"]],"g":"\u003cb>〜ために\u003c/b>：表目的，前接意志动词的辞书形。「出会うために」＝为了遇见。","n":"完整语序是「明日に出会うためにさよならする」，「する」被砍掉，「さよなら」直接当句尾——日语歌词最常见的省略收尾。"},{"jp":"中指[なかゆび]立[た]てても しょうがないの","tr":"就算竖起中指，也没什么用啊","words":[["中指","なかゆび","中指"],["立てる","たてる","竖起"],["しょうがない","しょうがない","没办法，无济于事"]],"g":"\u003cb>〜てもしょうがない\u003c/b>：即使…也没意义、没办法。书面一点的说法是「〜ても仕方がない」。","n":"句尾「の」是轻声的断定，比「よ」软得多，像在说给自己听；唱到这里音量明显收了一下。"},{"jp":"からすりゃ 塵[ちり]のよう","tr":"从上面看下来，不过是灰尘一样","words":[["からすりゃ","からすりゃ","从…来看（口语）"],["塵","ちり","灰尘"],["よう","よう","像…一样"]],"g":"\u003cb>〜からすりゃ\u003c/b>：「〜からすれば」的口语缩约，表「从…的角度来说」。同族缩约还有 〜りゃ（＝れば）、〜ちゃ（＝ては）。","n":"这句的主语是省掉的：不是摩天楼像灰尘，是「从摩天楼看下去，人和事像灰尘」。句子越短，省掉的主语越多，这一处最典型。"},{"jp":"歩[ある]き回[まわ]って やっとついた","tr":"四处走到最后，总算到了","words":[["歩く","あるく","走"],["回る","まわる","转；到处…"],["やっと","やっと","终于"]],"g":"\u003cb>ます形＋回る\u003c/b>：表示「到处…、四处…」。歩き回る、走り回る、探し回る、逃げ回る。","n":"「ついた」是「到了（某地）」，汉字也可写「着いた」；两个音唱得干、短，把「走累了」压在里面。"},{"jp":"今[いま]となっちゃ もうわからない","tr":"事到如今，已经搞不清了","words":[["今","いま","现在"],["なる","なる","变成"],["わかる","わかる","明白，搞清"]],"g":"\u003cb>〜となっちゃ\u003c/b>：「〜となっては」的口语缩约，表「到了…这个地步」。ちゃ＝ては。","n":"上一句还在问「是乐园吗」，这一句自己把答案撤了；「わからない」唱得平，没有起伏，像放弃。"},{"jp":"お腹[なか]すかしては 待[ま]ってる","tr":"饿着肚子，一直在等","words":[["お腹","おなか","肚子"],["すかす","すかす","使空腹"],["待つ","まつ","等"]],"g":"\u003cb>〜ては\u003c/b>：表动作反复或状态持续。「すかしては待ってる」＝饿着等、一直等。口语常缩成「ちゃ」。","n":"「お腹すかして」是「お腹をすかして」省掉「を」；「スーパースター」中间那个「ー」要唱满一拍，吞掉就成「スーパスタ」。堂堂 superstar 饿着肚子，画面感全在这个反差里。"},{"jp":"響[ひび]き出[だ]した音[おと]を逃[のが]すな","tr":"别放过此刻响起来的那个声音","words":[["響く","ひびく","回响"],["音","おと","声音"],["逃す","のがす","错过，放过"]],"g":"\u003cb>辞书形＋な\u003c/b>：禁止形，「不要…」。逃す → 逃すな（别放过）。它和命令形「逃せ」方向正好相反。","n":"前半「耳をすませ」是命令形，后半「逃すな」是禁止形，一正一反连着下指令，像有人在耳边喊。"},{"jp":"いつかは出会[であ]えるはずの 黄金[こがね]の色[いろ]したアイオライトを","tr":"那颗迟早会遇见的、泛着金光的堇青石","words":[["出会う","であう","遇见"],["はず","はず","理应"],["黄金","こがね","黄金"]],"g":"\u003cb>〜はずの\u003c/b>：「理应…的」，修饰后面的名词。出会えるはずのアイオライト＝「应该会遇到的那颗石头」。","n":"アイオライト（iolite）就是堇青石，本身蓝紫，转动时泛出一层金黄——「黄金の色した」不是随便的比喻，是它真实的特征。"},{"jp":"きっと掴[つか]んで 離[はな]すな","tr":"一定要抓住，别松手","words":[["掴む","つかむ","抓住"],["離す","はなす","放开"],["きっと","きっと","一定"]],"g":"\u003cb>掴む／離す\u003c/b>：一对反义动词，用「て」连起来＝「抓住了，并且别放」。句尾用禁止形「離すな」收紧。","n":"全曲到这里才第一次给出明确指令；「きっと」落在拍点上，像是给前面所有自嘲的一个回答。"},{"jp":"遠吠[とおぼえ]だって いいだろう","tr":"反正都是输，就算只是远远地吠两声也无所谓吧","words":[["遠吠え","とおぼえ","（狗在远处）吠"],["だって","だって","即使…也"],["どうせ","どうせ","反正"]],"g":"\u003cb>〜だって\u003c/b>：口语的「即使…也」，等于「〜でも」。遠吠えだっていい＝就算是远吠也没关系。","n":"「負け犬の遠吠え」是固定说法：打不过，只能在远处虚张声势地叫。这句等于给歌名下了注脚。"},{"jp":"もう一回[いっかい] もう一回 行[い]こうぜ","tr":"再来一次，再来一次，上啊，我们的声音","words":[["もう一回","もういっかい","再一次"],["行く","いく","去，上"],["ぜ","ぜ","（男性口语）啊、吧"]],"g":"\u003cb>意志形＋ぜ\u003c/b>：行く → 行こう＋ぜ，招呼同伴、语气粗。「〜ましょう」是礼貌版，这个是街头版。","n":"两个「もう一回」是连击，第二遍音更高；「声」收在短促的「え」上，别拖长。"},{"jp":"ずっと前[まえ]から 聞[き]こえてた","tr":"很久以前，就一直听得见","words":[["ずっと","ずっと","一直"],["聞こえる","きこえる","听得见"],["前","まえ","以前"]],"g":"\u003cb>聞こえる／見える\u003c/b>：自动词，表示「自然而然地听得见／看得见」，不是主动去听。他动词是「聞く／見る」。","n":"「聞こえてた」用过去进行，暗示这声音一直在，只是自己没接住；唱得平，尾音几乎不收。"},{"jp":"いつかポケットに 隠[かく]した声[こえ]が","tr":"那个不知什么时候藏进口袋里的声音","words":[["いつか","いつか","不知何时"],["隠す","かくす","藏"],["声","こえ","声音"]],"g":"\u003cb>连体修饰\u003c/b>：「ポケットに隠した」修饰「声」。日语的修饰语一律放在名词前，可以很长。","n":"这句没有谓语，句子悬着不落地，下一段才接上——歌词常用这种「未完成句」留出换气的空隙。"},{"jp":"なんもないなら どうなったっていいだろう","tr":"反正什么都没有，变成什么样都无所谓吧","words":[["なんも","なんも","什么也（口语）"],["なる","なる","变成"],["どうなったって","どうなったって","无论变成怎样"]],"g":"\u003cb>〜たって\u003c/b>：「〜ても」的口语缩约。どうなったって＝どうなっても。","n":"副歌①用的是「どうせだったら」，这里换成「なんもないなら」——同一个「无所谓」，前提从「反正都输」变成「反正一无所有」。"},{"jp":"うだうだして フラフラしていちゃ 今[いま]に灰[はい]","tr":"磨磨蹭蹭、晃晃悠悠的话，早晚变成一把灰","words":[["うだうだ","うだうだ","磨磨蹭蹭"],["フラフラ","ふらふら","晃悠，摇摆"],["灰","はい","灰"]],"g":"\u003cb>〜ていちゃ\u003c/b>：「〜ていては」的缩约，表「如果一直保持…的状态（就会糟）」。","n":"「今に」＝不久、早晚。整句把「消失」说成一个物理结果——不是抒情，是通知。"},{"jp":"進[すす]め ロスタイムの そのまた奥[おく]へ行[い]け","tr":"前进——去往伤停补时的更深处","words":[["進む","すすむ","前进"],["奥","おく","深处"],["ロスタイム","ろすたいむ","伤停补时"]],"g":"\u003cb>命令形\u003c/b>：五段动词词尾变え段——進む→進め、行く→行け。两个命令形叠在一起，一句比一句硬。","n":"「ロスタイム」是足球的伤停补时：比赛时间用完了，额外补给你的那几分钟。「そのまた奥」＝连那几分钟之后都还要往前。"},{"jp":"愛[あい]されたいなら そう言[い]おうぜ","tr":"想被爱的话，就直说啊","words":[["愛する","あいする","爱"],["言う","いう","说"],["なら","なら","如果"]],"g":"\u003cb>〜たいなら\u003c/b>：希望助动词「たい」的辞书形＋なら，表条件。「想…的话，就…」。","n":"「言おうぜ」是意志形，但这句话的对象其实是他自己；全曲唱了两次，第二次比第一次更轻、更不像在劝人。"},{"jp":"思[おも]ってるだけじゃ 伝[つた]わらないね","tr":"光是在心里想，是传不到的","words":[["思う","おもう","想，认为"],["伝わる","つたわる","传达"],["だけ","だけ","只"]],"g":"\u003cb>〜だけじゃ\u003c/b>：「只有…的话（不够）」，后面常省略「だめだ」。思ってるだけじゃ（だめだ）。","n":"「ね」不是问句，是寻求同意；这句是全曲的结论，唱得最平、最不带情绪，反而最重。"},{"jp":"ここいらで ひとつ 踊[おど]ってみようぜ","tr":"就在这儿，来跳一支舞吧","words":[["ここいら","ここいら","这一带；这时候"],["踊る","おどる","跳舞"],["ひとつ","ひとつ","（语气）来一个"]],"g":"\u003cb>〜てみよう\u003c/b>：「てみる」＝试着做；＋意志形「よう」＝「来试试…吧」。","n":"「ここいらで」是「就在这一带／到这一步」的口语说法；「ひとつ」不是数量，是「来一个」的语气词。"},{"jp":"聞[き]こえてんなら 声[こえ]出[だ]していこうぜ","tr":"听得见的话，就出声一起往前走","words":[["聞こえる","きこえる","听得见"],["声","こえ","声音"],["出す","だす","发出"]],"g":"\u003cb>〜んなら\u003c/b>：「〜のなら」的缩约。聞こえているのなら → 聞こえてんなら。","n":"最后三句全部以「〜ぜ」收尾，这一句最高；「声出していこう」把听众也拖进歌里——不是独唱，是合唱。"}],"vocabTip":{"searchHint":"搜索：夢 / ゆめ / 梦想"},"vocab":[{"k":"いつもどおり","r":"いつもどおり","p":"副","cn":"一如往常","lv":"N3"},{"k":"独り","r":"ひとり","p":"名","cn":"独自一人","lv":"N4"},{"k":"日々","r":"ひび","p":"名","cn":"日日，每天","lv":"N3"},{"k":"懲りる","r":"こりる","p":"動II","cn":"吃够苦头，不敢再试","lv":"N2"},{"k":"夢見る","r":"ゆめみる","p":"動II","cn":"做梦","lv":"N3"},{"k":"僕ら","r":"ぼくら","p":"代","cn":"我们","lv":"N4"},{"k":"ぼんくら","r":"ぼんくら","p":"名","cn":"糊涂虫；愚钝","lv":"N2"},{"k":"夜","r":"よる","p":"名","cn":"夜晚","lv":"N5"},{"k":"飽きる","r":"あきる","p":"動II","cn":"腻，厌倦","lv":"N3"},{"k":"踊る","r":"おどる","p":"動I","cn":"跳舞","lv":"N4"},{"k":"出会う","r":"であう","p":"動I","cn":"遇见","lv":"N3"},{"k":"楽園","r":"らくえん","p":"名","cn":"乐园","lv":"N3"},{"k":"四半世紀","r":"しはんせいき","p":"名","cn":"四分之一个世纪，25 年","lv":"N2"},{"k":"結果","r":"けっか","p":"名","cn":"结果","lv":"N3"},{"k":"青い","r":"あおい","p":"形I","cn":"青的；脸色发青","lv":"N5"},{"k":"お腹","r":"おなか","p":"名","cn":"肚子","lv":"N5"},{"k":"空かす","r":"すかす","p":"動I","cn":"使饿（お腹をすかす）","lv":"N2"},{"k":"遠吠え","r":"とおぼえ","p":"名","cn":"（狗在远处）吠叫","lv":"N2"},{"k":"もう一回","r":"もういっかい","p":"副","cn":"再一次","lv":"N4"},{"k":"声","r":"こえ","p":"名","cn":"声音","lv":"N5"},{"k":"聞こえる","r":"きこえる","p":"動II","cn":"听得见","lv":"N4"},{"k":"隠す","r":"かくす","p":"動I","cn":"藏起来","lv":"N3"},{"k":"幸先","r":"さいさき","p":"名","cn":"兆头","lv":"N2"},{"k":"悪天候","r":"あくてんこう","p":"名","cn":"坏天气","lv":"N2"},{"k":"覗く","r":"のぞく","p":"動I","cn":"窥视，探头看","lv":"N2"},{"k":"摩天楼","r":"まてんろう","p":"名","cn":"摩天楼","lv":"N1"},{"k":"塵","r":"ちり","p":"名","cn":"灰尘","lv":"N2"},{"k":"中指","r":"なかゆび","p":"名","cn":"中指","lv":"N3"},{"k":"しょうがない","r":"しょうがない","p":"形I","cn":"没办法，无济于事","lv":"N3"},{"k":"勝ち上がる","r":"かちあがる","p":"動I","cn":"往上爬，晋级","lv":"N2"},{"k":"お勉強","r":"おべんきょう","p":"名","cn":"学习（带调侃）","lv":"N4"},{"k":"朗らか","r":"ほがらか","p":"形II","cn":"开朗，爽朗","lv":"N2"},{"k":"表情","r":"ひょうじょう","p":"名","cn":"表情","lv":"N3"},{"k":"阿呆","r":"あほ","p":"名","cn":"傻瓜","lv":"N3"},{"k":"自意識","r":"じいしき","p":"名","cn":"自我意识","lv":"N2"},{"k":"抱え込む","r":"かかえこむ","p":"動I","cn":"抱在怀里；独自扛","lv":"N2"},{"k":"磨耗","r":"まもう","p":"名","cn":"磨损","lv":"N1"},{"k":"すり減る","r":"すりへる","p":"動I","cn":"磨薄，磨掉","lv":"N2"},{"k":"酸っぱい","r":"すっぱい","p":"形I","cn":"酸的","lv":"N3"},{"k":"葡萄","r":"ぶどう","p":"名","cn":"葡萄","lv":"N3"},{"k":"膝","r":"ひざ","p":"名","cn":"膝盖","lv":"N3"},{"k":"前髪","r":"まえがみ","p":"名","cn":"刘海","lv":"N3"},{"k":"輪廻","r":"りんね","p":"名","cn":"轮回","lv":"N1"},{"k":"愛する","r":"あいする","p":"動III","cn":"爱","lv":"N3"},{"k":"伝わる","r":"つたわる","p":"動I","cn":"传达到","lv":"N3"},{"k":"永遠","r":"えいえん","p":"名","cn":"永远","lv":"N3"},{"k":"淑女","r":"しゅくじょ","p":"名","cn":"淑女","lv":"N2"},{"k":"そっぽ","r":"そっぽ","p":"名","cn":"别处（そっぽを向く）","lv":"N2"},{"k":"天国","r":"てんごく","p":"名","cn":"天国","lv":"N3"},{"k":"転がる","r":"ころがる","p":"動I","cn":"滚；跌倒","lv":"N3"},{"k":"俺","r":"おれ","p":"代","cn":"我（男性自称）","lv":"N4"},{"k":"負け犬","r":"まけいぬ","p":"名","cn":"败犬，输家","lv":"N2"},{"k":"響く","r":"ひびく","p":"動I","cn":"回响","lv":"N2"},{"k":"逃す","r":"のがす","p":"動I","cn":"错过，放过","lv":"N2"},{"k":"呼吸","r":"こきゅう","p":"名","cn":"呼吸","lv":"N2"},{"k":"整える","r":"ととのえる","p":"動II","cn":"调整，整理","lv":"N2"},{"k":"黄金","r":"こがね","p":"名","cn":"黄金","lv":"N1"},{"k":"掴む","r":"つかむ","p":"動I","cn":"抓住","lv":"N3"},{"k":"離す","r":"はなす","p":"動I","cn":"放开","lv":"N2"},{"k":"願う","r":"ねがう","p":"動I","cn":"祈愿","lv":"N3"},{"k":"進む","r":"すすむ","p":"動I","cn":"前进","lv":"N4"},{"k":"ここいら","r":"ここいら","p":"代","cn":"这一带；这时候","lv":"N2"},{"k":"明ける","r":"あける","p":"動II","cn":"天亮","lv":"N2"},{"k":"灰","r":"はい","p":"名","cn":"灰","lv":"N3"},{"k":"フラフラ","r":"ふらふら","p":"副","cn":"晃晃悠悠","lv":"N3"},{"k":"ロスタイム","r":"ろすたいむ","p":"名","cn":"伤停补时（足球）","lv":"N2"},{"k":"アイオライト","r":"あいおらいと","p":"名","cn":"堇青石","lv":"N1"},{"k":"うだうだ","r":"うだうだ","p":"副","cn":"磨磨蹭蹭","lv":"N2"}],"grammar":[{"p":"〜のに","sub":"逆接・不满","form":"用言连体形 ＋ のに（ナ形：〜なのに／名詞：〜なのに）","mean":"明明…却…","eg":"もうどこにも行けやしないのに","warn":"口语里常把后半句整个省掉，只留「のに」收尾，语气就从陈述变成抱怨。别和「〜ので」（原因）混：のに逆接，ので顺接。","examples":[{"jp":"早[はや]く寝[ね]たのに、まだ眠[ねむ]い。","tr":"明明很早就睡了，却还是困。"},{"jp":"日曜日[にちようび]なのに、仕事[しごと]がある。","tr":"明明是星期天，却还要工作。"}]},{"p":"〜やしない","sub":"强调否定","form":"V-ます（去ます）／可能形 ＋ やしない（行きやしない・行けやしない）","mean":"根本不…；才不会…","eg":"もうどこにも行けやしないのに","warn":"「行けやしない」是可能形「行ける」＋やしない，不是「行く」的否定。写成「行きやしない」意思就变成「我才不去」。","examples":[{"jp":"何度[なんど]呼[よ]んでも、返事[へんじ]をしやしない。","tr":"不管叫多少次，他就是不回应。"},{"jp":"こんな大[おお]きな荷物[にもつ]、一人[ひとり]じゃ持[も]てやしない。","tr":"这么大件的行李，一个人根本拿不动。"}]},{"p":"ます形 ＋ 出す","sub":"动作突然开始","form":"V-ます（去ます）＋ 出す","mean":"…起来；突然开始…","eg":"また踊り踊り出す明日に","warn":"「出す」在这里是复合动词的补助部分，不是「拿出来」。同族：泣き出す、走り出す、降り出す、笑い出す。","examples":[{"jp":"急[きゅう]に雨[あめ]が降[ふ]り出[だ]した。","tr":"突然下起雨来了。"},{"jp":"その話[はなし]を聞[き]いて、みんなが笑[わら]い出[だ]した。","tr":"听到那件事，大家一下子笑了起来。"}]},{"p":"〜ために","sub":"目的","form":"V-辞书形 ／ 名詞＋の ＋ ために","mean":"为了…","eg":"出会うためにさよなら","warn":"前接意志动词才表目的。前接名词时是「Nのために」，可以表「为了…（人）」，也可以表原因，要靠上下文分辨。","examples":[{"jp":"留学[りゅうがく]するために、お金[かね]を貯[た]めている。","tr":"为了留学，我正在攒钱。"},{"jp":"家族[かぞく]のために、夕飯[ゆうはん]を作[つく]った。","tr":"我为家人做了晚饭。"}]},{"p":"〜ては","sub":"反复・条件","form":"V-て形 ＋ は（口语缩约：〜ちゃ）","mean":"老是…；一…就…","eg":"お腹すかしては待ってる","warn":"口语里几乎都缩成「ちゃ」：すかしては→すかしちゃ。这里的「ちゃ」是「ては」，和「ちゃう」（＝てしまう）不是一回事。","examples":[{"jp":"書[か]いては消[け]し、消[け]しては書[か]いている。","tr":"我写了又擦、擦了又写。"},{"jp":"約束[やくそく]を忘[わす]れては困[こま]る。","tr":"要是忘了约定，就麻烦了。"}]},{"p":"〜となっちゃ","sub":"到了…地步","form":"名詞 ／ V-た ＋ となっちゃ（＝となっては）","mean":"到了…的地步就…","eg":"今となっちゃもうわからない","warn":"「ちゃ」＝「ては」。同一个「ちゃ」也可能是「ちゃう」（＝てしまう）的缩约，判断方法是看后面接的是否定还是完了。","examples":[{"jp":"今[いま]となっちゃ、もう手遅[ておく]れだ。","tr":"事到如今，已经太迟了。"},{"jp":"ここまで来[き]たとなっちゃ、引[ひ]き返[かえ]せない。","tr":"既然都已经走到这里了，就不能回头了。"}]},{"p":"ます形 ＋ 回る","sub":"到处…","form":"V-ます（去ます）＋ 回る","mean":"到处…、四处…","eg":"歩き回ってやっとついた","warn":"重心在「回る」的绕圈子，不是「旋转」。同族：走り回る、探し回る、逃げ回る、飲み回る。","examples":[{"jp":"一日[いちにち]中[じゅう]、町[まち]を歩[ある]き回[まわ]った。","tr":"我在城里到处走了一整天。"},{"jp":"なくした鍵[かぎ]を探[さが]し回[まわ]った。","tr":"我到处找那把丢失的钥匙。"}]},{"p":"〜だって","sub":"即使…也（口语）","form":"名詞 ＋ だって（＝でも）；動詞・イ形用「〜たって」","mean":"就算…也…","eg":"遠吠えだっていいだろう","warn":"「だって」在句首是「因为」，接在名词后才是「即使」。位置不同、意思完全不同，这是最容易听错的一处。","examples":[{"jp":"子供[こども]だって、そのくらい分[わ]かる。","tr":"就连小孩子也懂这点道理。"},{"jp":"初心者[しょしんしゃ]だって、練習[れんしゅう]すればできる。","tr":"即使是初学者，只要练习也能做到。"}]},{"p":"意志形 ＋ ぜ","sub":"招呼・劝诱","form":"五段：え段＋う ／ 一段：＋よう ／ する：しよう ／ 来る：来よう","mean":"…吧；走啊","eg":"もう一回もう一回行こうぜ","warn":"「ぜ」是男性向的终助词，把「〜ましょう」扔到街上。对长辈、上司绝对不能用。","examples":[{"jp":"次[つぎ]の試合[しあい]も勝[か]とうぜ。","tr":"下一场比赛也一起赢下来吧！"},{"jp":"今夜[こんや]はみんなで楽[たの]しもうぜ。","tr":"今晚大家一起尽兴吧！（熟人间的粗犷口语）"}]},{"p":"聞こえる／見える","sub":"自然感知（自他对应）","form":"自动词：聞こえる・見える ／ 他动词：聞く・見る","mean":"听得见／看得见","eg":"ずっと前から聞こえてた","warn":"「聞こえる」是声音自己进耳朵，「聞く」是主动去听。「見える」还额外表示「视力上看得见」，和「見られる」（有机会看到）不同。","examples":[{"jp":"隣[となり]の部屋[へや]から音楽[おんがく]が聞[き]こえる。","tr":"能听见隔壁房间传来的音乐。"},{"jp":"窓[まど]から海[うみ]が見[み]える。","tr":"从窗户能看见海。"}]},{"p":"〜たって","sub":"即使（＝ても）","form":"V-た形 ／ イ形く ＋ たって；名詞・ナ形 ＋ だって","mean":"就算…也","eg":"どうなったっていいだろう","warn":"「たって」是「ても」的口语形，语感更随便。动词用「たって」，名词用「だって」，别混。","examples":[{"jp":"何度[なんど]失敗[しっぱい]したって、諦[あきら]めない。","tr":"无论失败多少次，我都不会放弃。"},{"jp":"今[いま]から急[いそ]いだって、間[ま]に合[あ]わない。","tr":"就算现在赶紧走，也来不及了。"}]},{"p":"〜ていちゃ","sub":"如果一直…","form":"V-て形 ＋ いちゃ（＝ていては）","mean":"老是…的话（就糟了）","eg":"フラフラしていちゃ今に灰","warn":"「ちゃ」＝「ては」。这句是「していては」→「していちゃ」，后面接「今に（早晚）」，整句是「再晃下去早晚成灰」。","examples":[{"jp":"ゲームばかりしていちゃ、宿題[しゅくだい]が終[お]わらない。","tr":"要是一直只顾着玩游戏，作业就做不完。"},{"jp":"そんなに心配[しんぱい]していちゃ、疲[つか]れるよ。","tr":"要是一直那么担心，会很累的。"}]},{"p":"〜まま","sub":"保持原状・随心","form":"V-た／V-ない ＋ まま ／ 名詞＋の ＋ まま","mean":"就那样…；顺着…","eg":"きっといつかって願うまま","warn":"「〜たまま」是「保持…的状态」；「願うまま」是「顺着愿望」，属于「随心」用法。两种意思要靠前面动词的时态分辨。","examples":[{"jp":"電気[でんき]をつけたまま、寝[ね]てしまった。","tr":"我开着灯就睡着了。"},{"jp":"思[おも]うままに、絵[え]を描[か]いてみよう。","tr":"顺着自己的想法，自由地画画看吧。"}]},{"p":"命令形・禁止形","sub":"命令","form":"命令：五段→え段／一段→＋ろ／する→しろ・せよ；禁止：V-辞书形＋な","mean":"去…！／别…！","eg":"進め ロスタイムのそのまた奥へ行け ／ 音を逃すな","warn":"命令形和禁止形是一对：「逃せ」是「放它走」，「逃すな」是「别放它走」，一字之差方向完全相反。","examples":[{"jp":"危[あぶ]ない！逃[に]げろ！","tr":"危险！快逃！"},{"jp":"ここで写真[しゃしん]を撮[と]るな。","tr":"别在这里拍照。"},{"jp":"落[お]ち着[つ]け。まだ諦[あきら]めるな。","tr":"冷静下来。现在还别放弃。"}]},{"p":"〜てみよう","sub":"尝试・提议","form":"V-て形 ＋ みる ＋ 意志形よう（＝てみよう）","mean":"来试试…吧","eg":"ここいらでひとつ踊ってみようぜ","warn":"「てみる」是「试着做」，「てみよう」是「试试吧」。和「〜ようとする」（正要…／试图…）不同，后者是意志的瞬间，不是尝试。","examples":[{"jp":"この料理[りょうり]を食[た]べてみよう。","tr":"尝尝这道菜吧。"},{"jp":"別[べつ]の方法[ほうほう]で考[かんが]えてみよう。","tr":"试着换个方法想想吧。"}]},{"p":"〜ていく","sub":"朝向未来的持续","form":"V-て形 ＋ いく","mean":"…下去；逐渐…","eg":"夜が明けるまで転がっていこうぜ","warn":"「ていく」朝未来走，「てくる」朝现在走来。这里的「転がっていく」既是真滚，也是「一路跌着走下去」的双关。","examples":[{"jp":"これからも、一緒[いっしょ]に頑張[がんば]っていこう。","tr":"今后也一起努力下去吧。"},{"jp":"少[すこ]しずつ、自信[じしん]がついていく。","tr":"自信会一点点积累起来。"}]}],"footer":{"title":"loser","note":"本页为个人日语学习用途的歌词解析作品，非官方发布。歌词著作权归作词・作曲 米津玄師、编曲 米津玄師・蔦谷好位置、演唱 米津玄師 及相关权利方所有；页面内容仅供学习参考，请勿用于商业用途，并请通过正版音源与官方歌词页对照收听。","meta":["LOSER / ナンバーナイン","歌詞精読ノート","JLPT N3–N2"]}};</script>
 <script>/* ============================================================
    render.js — 由 song.json 驱动整页渲染
    约定：window.SONG 由 build 注入；所有文案在 JSON 里，脚本不含任何歌曲内容
-   板块开关：SONG.modules 里把某项设为 false，该 section 会被移除
-             （导航、章节编号、顶部数据条自动跟随）
+   页面在语法图谱结束；完整歌词可省略，导航和章节编号自动跟随
    ============================================================ */
 (function () {
   'use strict';
@@ -1480,12 +1173,9 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
   const LYRIC  = SONG.lines || [];
   const VOCAB  = SONG.vocab || [];
   const GRAM   = SONG.grammar || [];
-  const QUIZ   = SONG.quiz || [];
-  const PLAN   = (SONG.plan && SONG.plan.days) || [];
-  const SEGS   = SONG.segments || [];
   const NS     = 'jss.' + (META.slug || 'default') + '.';
 
-  const ALL_SECTIONS = ['map', 'lyrics', 'lines', 'vocab', 'grammar', 'listen', 'studio', 'quiz', 'plan'];
+  const ALL_SECTIONS = ['map', 'lyrics', 'lines', 'vocab', 'grammar'];
   const MODULES = Object.assign({}, ...ALL_SECTIONS.map(k => ({ [k]: true })), SONG.modules || {});
   const on = k => MODULES[k] !== false;
 
@@ -1511,18 +1201,8 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
   }
   function plain(s) { return String(s || '').replace(/\[([^\]]+)\]/g, ''); }
 
-  function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const t = a[i]; a[i] = a[j]; a[j] = t;
-    }
-    return a;
-  }
-
   const SPEAKER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
   const CHECK   = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>';
-
-  const TONE_COLOR = { a: '#BFE0D8', b: '#F7CFA6', s: '#F3C3CC', c: '#C4D3EB', i: '#E3DFD6' };
 
   /* ---------------- 语音 ---------------- */
   let jaVoice = null;
@@ -1620,19 +1300,20 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
       return;
     }
 
-    box.innerHTML = blocks.map(b => {
-      const head = '<div class="lyr-head"><span>' + escapeHtml(b.label || '')
-        + '</span>' + (b.time ? '<em>' + escapeHtml(b.time) + '</em>' : '') + '</div>';
+    box.innerHTML = blocks.map((b, i) => {
+      const head = '<h3 class="lyr-head">段落 ' + String(i + 1).padStart(2, '0') + '</h3>';
       const lines = b.lines.map(l =>
-        '<p class="lyr-line" data-say="' + escapeAttr(plain(l)) + '">' + ruby(l) + '</p>').join('');
-      return '<div class="lyr-block" data-tone="' + escapeAttr(b.tone || 'a') + '">'
+        '<p class="lyr-line" lang="ja"><span>' + ruby(l) + '</span>'
+        + '<button class="icon-btn lyr-speak" data-say="' + escapeAttr(plain(l))
+        + '" aria-label="朗读这一行">' + SPEAKER + '</button></p>').join('');
+      return '<div class="lyr-block">'
         + head + lines + '</div>';
     }).join('');
 
     const foot = $('#lyrics-foot');
     if (foot) {
       foot.innerHTML = L.foot
-        || '点任意一行可以朗读。这一段是整首歌词，方便对照听唱；注音与逐句讲解见下一节。';
+        || '点击行末的喇叭可以朗读；注音与逐句讲解见下一节。';
     }
   }
 
@@ -1662,14 +1343,13 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
   const STAT_VALUE = {
     lines: () => LYRIC.length,
     vocab: () => VOCAB.length,
-    grammar: () => GRAM.length,
-    quiz: () => QUIZ.length
+    grammar: () => GRAM.length
   };
 
   function renderStats() {
     const box = $('#hero-stats');
     if (!box) return;
-    const items = (SONG.stats || []).filter(s => !s.module || on(s.module));
+    const items = SONG.stats || [];
     box.style.setProperty('--stat-cols', items.length || 1);
     box.innerHTML = items.map(s => {
       const v = STAT_VALUE[s.key] ? STAT_VALUE[s.key]() : (s.value != null ? s.value : 0);
@@ -1677,7 +1357,7 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
     }).join('');
   }
 
-  /* ---------------- 徽章 / 为什么 / 结构 / 步骤 ---------------- */
+  /* ---------------- 徽章 / 为什么 / 步骤 ---------------- */
   function renderBadges() {
     const el = $('#badges');
     if (!el) return;
@@ -1693,22 +1373,6 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
       + '<div><b>' + escapeHtml(w.t) + '</b><p>' + escapeHtml(w.d) + '</p></div></li>').join('');
   }
 
-  function renderStructure() {
-    const box = $('#struct');
-    if (!box) return;
-    const blocks = (SONG.map && SONG.map.blocks) || [];
-    box.innerHTML = blocks.map(b =>
-      '<button class="st-' + escapeAttr(b.tone || 'a') + '" data-filter="' + escapeAttr(b.key || '') + '"'
-      + ' data-min="' + escapeAttr(b.time || '') + '" style="--w:' + (b.weight || 10) + '">'
-      + escapeHtml(b.label) + '<small>' + escapeHtml(b.role || '') + '</small></button>').join('');
-
-    const lg = $('#struct-legend');
-    if (lg) {
-      lg.innerHTML = ((SONG.map && SONG.map.legend) || []).map(l =>
-        '<span><i style="background:' + (TONE_COLOR[l.tone] || TONE_COLOR.i) + '"></i>' + escapeHtml(l.label) + '</span>').join('');
-    }
-  }
-
   function renderSteps() {
     const el = $('#steps');
     if (!el) return;
@@ -1719,19 +1383,15 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
   /* ---------------- 逐句精读 ---------------- */
   function initLines() {
     const list = $('#lyric-list');
-    const empty = $('#lyric-empty');
     if (!list) return;
 
-    let currentSec = 'all';
-
     function render() {
-      const items = currentSec === 'all' ? LYRIC : LYRIC.filter(x => x.sec === currentSec);
-      list.innerHTML = items.map(it => {
+      list.innerHTML = LYRIC.map(it => {
         const words = (it.words || []).map(w =>
           '<span class="wchip"><b>' + escapeHtml(w[0]) + '</b><i>' + escapeHtml(w[1]) + '</i><em>' + escapeHtml(w[2]) + '</em></span>'
         ).join('');
         const say = escapeAttr(plain(it.jp));
-        return '<article class="lyric reveal in" data-sec="' + escapeAttr(it.sec) + '">'
+        return '<article class="lyric reveal in">'
           + '<div class="lyric-main">'
           +   '<div class="lyric-top">'
           +     '<p class="lyric-jp" lang="ja">' + ruby(it.jp) + '</p>'
@@ -1746,34 +1406,6 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
           + '</div>'
           + '</article>';
       }).join('');
-      if (empty) empty.hidden = items.length > 0;
-    }
-
-    const filters = $('#sec-filters');
-    if (filters) {
-      filters.innerHTML = '<button class="filter is-on" data-sec="all">全部</button>'
-        + SEGS.map(s => '<button class="filter" data-sec="' + escapeAttr(s.key) + '">' + escapeHtml(s.label) + '</button>').join('');
-      filters.addEventListener('click', e => {
-        const btn = e.target.closest('.filter');
-        if (!btn) return;
-        $$('.filter', filters).forEach(b => b.classList.remove('is-on'));
-        btn.classList.add('is-on');
-        currentSec = btn.dataset.sec;
-        render();
-      });
-    }
-
-    const struct = $('#struct');
-    if (struct) {
-      struct.addEventListener('click', e => {
-        const btn = e.target.closest('button');
-        if (!btn) return;
-        currentSec = btn.dataset.filter;
-        if (filters) $$('.filter', filters).forEach(b => b.classList.toggle('is-on', b.dataset.sec === currentSec));
-        render();
-        const target = document.getElementById('lines');
-        if (target) target.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-      });
     }
 
     const furi = $('#t-furi');
@@ -1908,181 +1540,13 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
       +     '<div class="g-row"><dt>意思</dt><dd>' + escapeHtml(g.mean) + '</dd></div>'
       +     '<div class="g-row"><dt>原句</dt><dd><span class="g-eg" lang="ja">' + escapeHtml(g.eg) + '</span></dd></div>'
       +   '</dl>'
+      +   '<div class="g-examples"><h4>例句</h4><ol>'
+      +     g.examples.map(e => '<li><p class="g-example-jp" lang="ja">' + ruby(e.jp) + '</p>'
+      +       '<p class="g-example-tr">' + escapeHtml(e.tr) + '</p></li>').join('')
+      +   '</ol></div>'
       +   '<p class="g-warn"><b>注意</b> ' + escapeHtml(g.warn) + '</p>'
       + '</div>'
       + '</details>').join('');
-  }
-
-  /* ---------------- 听说训练 ---------------- */
-  function initListen() {
-    const el = $('#listen-grid');
-    if (!el) return;
-    el.innerHTML = (SONG.listen || []).map(c =>
-      '<div class="lcard reveal"><em>' + escapeHtml(c.tag) + '</em><b>' + escapeHtml(c.t) + '</b>'
-      + '<p>' + escapeHtml(c.d) + '</p><div class="ex">' + (c.ex || '') + '</div></div>').join('');
-  }
-
-  /* ---------------- 填空测验 ---------------- */
-  function initQuiz() {
-    const list = $('#quiz-list');
-    if (!list) return;
-
-    let score = 0;
-    let answered = 0;
-    let best = store.get('best', null);
-
-    function paintBest() {
-      const el = $('#quiz-best');
-      if (el) el.textContent = best === null ? '—' : best + ' / ' + QUIZ.length;
-    }
-
-    function render() {
-      score = 0; answered = 0;
-      $('#quiz-score').textContent = '0';
-      $('#quiz-total').textContent = QUIZ.length;
-
-      list.innerHTML = QUIZ.map((q, i) => {
-        const opts = shuffle(q.opts.slice()).map(o =>
-          '<button class="opt" data-opt="' + escapeAttr(o) + '" lang="ja">' + escapeHtml(o) + '</button>').join('');
-        return '<div class="q" data-i="' + i + '">'
-          + '<span class="q-num">Q ' + String(i + 1).padStart(2, '0') + '</span>'
-          + '<p class="q-text" lang="ja">' + escapeHtml(q.q).replace('【】', '<u></u>') + '</p>'
-          + '<div class="q-opts">' + opts + '</div>'
-          + '<div class="q-why"><b>解析</b> ' + escapeHtml(q.why) + '</div>'
-          + '</div>';
-      }).join('');
-      paintBest();
-    }
-
-    list.addEventListener('click', e => {
-      const btn = e.target.closest('.opt');
-      if (!btn) return;
-      const card = btn.closest('.q');
-      if (card.classList.contains('answered')) return;
-
-      const q = QUIZ[Number(card.dataset.i)];
-      card.classList.add('answered');
-      answered++;
-
-      $$('.opt', card).forEach(b => {
-        b.disabled = true;
-        if (b.dataset.opt === q.a) b.classList.add('correct');
-      });
-      if (btn.dataset.opt !== q.a) btn.classList.add('wrong');
-      else score++;
-
-      $('#quiz-score').textContent = score;
-
-      if (answered === QUIZ.length && (best === null || score > best)) {
-        best = score;
-        store.set('best', best);
-        paintBest();
-      }
-    });
-
-    const reset = $('#quiz-reset');
-    if (reset) reset.addEventListener('click', render);
-
-    render();
-  }
-
-  /* ---------------- 学习计划 ---------------- */
-  function initPlan() {
-    const grid = $('#plan-grid');
-    if (!grid) return;
-
-    const done = new Set(store.get('plan', []));
-
-    grid.innerHTML = PLAN.map((d, i) => {
-      const isDone = done.has(i);
-      return '<div class="day' + (isDone ? ' done' : '') + '" data-i="' + i + '">'
-        + '<div class="day-d"><em>' + escapeHtml(d.d) + '</em><small>' + escapeHtml(d.m || '') + '</small></div>'
-        + '<div class="day-mid"><b>' + escapeHtml(d.t) + '</b><p>' + escapeHtml(d.p) + '</p></div>'
-        + '<label class="day-check"><input type="checkbox" data-day="' + i + '"' + (isDone ? ' checked' : '') + '> 完成</label>'
-        + '</div>';
-    }).join('');
-
-    grid.addEventListener('change', e => {
-      const cb = e.target.closest('input[data-day]');
-      if (!cb) return;
-      const i = Number(cb.dataset.day);
-      if (cb.checked) done.add(i); else done.delete(i);
-      store.set('plan', Array.from(done));
-      cb.closest('.day').classList.toggle('done', cb.checked);
-    });
-  }
-
-  /* ---------------- 歌词工作台 ---------------- */
-  function initStudio() {
-    const paste = $('#paste');
-    const out = $('#studio-out');
-    if (!paste || !out) return;
-
-    const SURF = new Map();
-    VOCAB.forEach(v => {
-      const put = s => { if (s && s.length >= 1 && !SURF.has(s)) SURF.set(s, v); };
-      put(v.k);
-      if (v.k.length >= 2) {
-        if (/[るうくすむぶつぬぐ]$/.test(v.k)) put(v.k.slice(0, -1));
-        if (/い$/.test(v.k)) put(v.k.slice(0, -1));
-      }
-    });
-    const keys = Array.from(SURF.keys()).sort((a, b) => b.length - a.length);
-    const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const re = new RegExp(keys.map(reEsc).join('|'), 'g');
-
-    const TIP_HTML = '<p class="tip">粘贴之后，这里会显示带标注的歌词。<br>标了底色的词，把鼠标停上去可以看到读音和释义。</p>';
-
-    function annotate(text) {
-      let total = 0;
-      const html = text.split(/\r?\n/).slice(0, 260).map(line => {
-        if (!line.trim()) return '<div class="line">&nbsp;</div>';
-        const marked = escapeHtml(line).replace(re, m => {
-          const v = SURF.get(m);
-          if (!v) return m;
-          total++;
-          const tip = v.k + '（' + v.r + '） ' + v.cn;
-          return '<span class="hl" tabindex="0" data-tip="' + escapeAttr(tip) + '" title="' + escapeAttr(tip) + '">' + m + '</span>';
-        });
-        return '<div class="line">' + marked + '</div>';
-      }).join('');
-      return { html, total };
-    }
-
-    let timer = null;
-
-    function render() {
-      if (!paste.value.trim()) {
-        out.innerHTML = TIP_HTML;
-        $('#studio-count').textContent = '0';
-        return;
-      }
-      const r = annotate(paste.value);
-      out.innerHTML = r.html;
-      $('#studio-count').textContent = String(r.total);
-    }
-
-    const saved = store.get('lyrics', '');
-    if (saved) paste.value = saved;
-
-    paste.addEventListener('input', () => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        render();
-        store.set('lyrics', paste.value);
-      }, 180);
-    });
-
-    const clear = $('#studio-clear');
-    if (clear) {
-      clear.addEventListener('click', () => {
-        paste.value = '';
-        store.set('lyrics', '');
-        render();
-      });
-    }
-
-    render();
   }
 
   /* ---------------- 启动 ---------------- */
@@ -2092,15 +1556,10 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
   renderHeroArt();
   renderBadges();
   renderWhy();
-  renderStructure();
   renderSteps();
   initLines();
   initVocab();
   initGrammar();
-  initListen();
-  initQuiz();
-  initPlan();
-  initStudio();
 
   document.addEventListener('click', e => {
     const btn = e.target.closest('[data-say]');

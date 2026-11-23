@@ -55,22 +55,10 @@
         </div>
       </div>
 
-      <div class="map-grid">
-        <div class="card card-pad reveal">
-          <h3 style="font-size:.98rem;margin-bottom:.2rem">{{map.whyTitle}}</h3>
-          <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:.9rem">{{map.whySub}}</p>
-          <ul class="why-list" id="why-list"></ul>
-        </div>
-
-        <div class="card card-pad reveal">
-          <div class="struct-title">
-            <h3>{{map.structTitle}}</h3>
-            <span>{{map.structHint}}</span>
-          </div>
-          <div class="struct" id="struct"></div>
-          <div class="struct-legend" id="struct-legend"></div>
-          <p style="font-size:.8rem;color:var(--ink-3);line-height:1.75;margin-top:1rem;border-top:1px dashed var(--line);padding-top:.9rem">{{map.tip}}</p>
-        </div>
+      <div class="card card-pad reveal">
+        <h3 style="font-size:.98rem;margin-bottom:.2rem">{{map.whyTitle}}</h3>
+        <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:.9rem">{{map.whySub}}</p>
+        <ul class="why-list" id="why-list"></ul>
       </div>
 
       <div class="steps reveal" id="steps"></div>
@@ -107,7 +95,6 @@
       </div>
 
       <div class="toolbar reveal">
-        <div id="sec-filters" style="display:flex;gap:.5rem;flex-wrap:wrap"></div>
         <div class="toolbar-right">
           <label class="toggle"><input type="checkbox" id="t-furi" checked> 显示假名</label>
           <label class="toggle"><input type="checkbox" id="t-tr" checked> 显示中文</label>
@@ -115,7 +102,6 @@
       </div>
 
       <div class="lyric-list" id="lyric-list"></div>
-      <div class="empty" id="lyric-empty" hidden>这一段还没有卡片，换一个段落试试。</div>
     </div>
   </section>
 
@@ -190,99 +176,6 @@
     </div>
   </section>
 
-  <!-- 06 听说训练 -->
-  <section class="section" id="listen">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-num">{{sec.listen.num}}</div>
-        <div>
-          <h2 class="sec-title">{{sec.listen.title}}</h2>
-          <div class="sec-jp">{{sec.listen.jp}}</div>
-          <p class="sec-lead">{{sec.listen.lead}}</p>
-        </div>
-      </div>
-      <div class="listen-grid" id="listen-grid"></div>
-    </div>
-  </section>
-
-  <!-- 07 歌词工作台 -->
-  <section class="section" id="studio">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-num">{{sec.studio.num}}</div>
-        <div>
-          <h2 class="sec-title">{{sec.studio.title}}</h2>
-          <div class="sec-jp">{{sec.studio.jp}}</div>
-          <p class="sec-lead">{{sec.studio.lead}}</p>
-        </div>
-      </div>
-
-      <div class="studio">
-        <div class="studio-panel reveal">
-          <div class="studio-head">
-            <b>粘贴区</b>
-            <span>仅本地保存 · 不上传</span>
-          </div>
-          <label for="paste" class="sr-only">粘贴歌词</label>
-          <textarea id="paste" placeholder="{{studio.placeholder}}" spellcheck="false"></textarea>
-          <div class="studio-actions">
-            <button class="mini-btn" id="studio-clear">清空</button>
-            <span style="font-size:.74rem;color:var(--ink-3);align-self:center">已标注 <b id="studio-count">0</b> 处</span>
-          </div>
-        </div>
-
-        <div class="studio-panel reveal">
-          <div class="studio-head">
-            <b>标注结果</b>
-            <span>橙色 = 词表里的词</span>
-          </div>
-          <div class="studio-out" id="studio-out">
-            <p class="tip">粘贴之后，这里会显示带标注的歌词。<br>标了底色的词，把鼠标停上去可以看到读音和释义。</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 08 填空测验 -->
-  <section class="section" id="quiz">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-num">{{sec.quiz.num}}</div>
-        <div>
-          <h2 class="sec-title">{{sec.quiz.title}}</h2>
-          <div class="sec-jp">{{sec.quiz.jp}}</div>
-          <p class="sec-lead">{{sec.quiz.lead}}</p>
-        </div>
-      </div>
-
-      <div class="quiz-head reveal">
-        <div class="quiz-score">得分 <b id="quiz-score">0</b> / <span id="quiz-total">0</span></div>
-        <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap">
-          <span style="font-size:.76rem;color:var(--ink-3)">最佳成绩：<b id="quiz-best" style="color:var(--teal)">—</b></span>
-          <button class="mini-btn" id="quiz-reset">重做一遍</button>
-        </div>
-      </div>
-
-      <div class="quiz-list" id="quiz-list"></div>
-    </div>
-  </section>
-
-  <!-- 09 学习计划 -->
-  <section class="section" id="plan">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-num">{{sec.plan.num}}</div>
-        <div>
-          <h2 class="sec-title">{{sec.plan.title}}</h2>
-          <div class="sec-jp">{{sec.plan.jp}}</div>
-          <p class="sec-lead">{{sec.plan.lead}}</p>
-        </div>
-      </div>
-      <div class="plan" id="plan-grid"></div>
-      <p style="font-size:.78rem;color:var(--ink-3);margin-top:1rem;line-height:1.8">{{plan.note}}</p>
-    </div>
-  </section>
 </main>
 
 <footer class="footer">
