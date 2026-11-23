@@ -31,7 +31,8 @@
   --rose:#B94E66;
   --rose-soft:#FAE9ED;
 
-  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP","PingFang SC","Microsoft YaHei",sans-serif;
+  --font-sans:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Noto Sans SC",sans-serif;
+  --font-sans-ja:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans CJK JP","Noto Sans JP",sans-serif;
   --font-serif:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",Georgia,"Songti SC",serif;
   --font-display:"Didot","Bodoni 72",Georgia,"Times New Roman",serif;
 
@@ -89,6 +90,7 @@ p{margin:0}
 a{color:inherit}
 button{font:inherit;color:inherit}
 img,svg{display:block}
+:where([lang="ja"]){font-family:var(--font-serif)}
 
 .wrap{
   width:min(1160px, calc(100% - 2.6rem));
@@ -162,7 +164,7 @@ img,svg{display:block}
 }
 
 .song-jp{
-  font-family:var(--font-serif);
+  font-family:var(--font-sans);
   font-size:clamp(1rem,2.1vw,1.22rem);
   color:var(--ink-2);
   letter-spacing:.22em;
@@ -695,7 +697,7 @@ img,svg{display:block}
 }
 ruby{ruby-position:over}
 rt{
-  font-family:var(--font-sans);
+  font-family:var(--font-sans-ja);
   font-size:.44em;
   font-weight:500;
   color:#B08C68;
@@ -758,7 +760,7 @@ body.hide-furi rt{display:none}
 }
 .note b{color:#8A4A16;font-weight:700}
 .note code{
-  font-family:var(--font-serif);
+  font-family:var(--font-sans);
   background:rgba(255,255,255,.7);
   padding:.05em .3em;border-radius:4px;
   color:#5C4327;font-size:.95em;
@@ -931,11 +933,12 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
 .g-row dt{color:var(--ink-3);font-size:.75rem;letter-spacing:.08em;padding-top:.15rem}
 .g-row dd{margin:0;color:var(--ink-2)}
 .g-eg{
-  font-family:var(--font-serif);
+  font-family:var(--font-sans);
   font-size:.98rem;color:var(--ink);
   background:#FCF7F0;border-radius:8px;padding:.5rem .7rem;
   display:inline-block;max-width:100%;overflow-wrap:anywhere;
 }
+.g-eg[lang="ja"]{font-family:var(--font-serif)}
 .g-examples{border-top:1px solid var(--line-soft);padding-top:.85rem}
 .g-examples h4{font-size:.78rem;font-weight:600;color:var(--ink-3);margin-bottom:.7rem}
 .g-examples ol{margin:0;padding-left:1.5rem;display:grid;gap:.9rem}
@@ -985,9 +988,9 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
   <div class="wrap hero-grid">
     <div>
       <span class="kicker">鋼の錬金術師 FULLMETAL ALCHEMIST · OP1 · 2009</span>
-      <h1 class="song-title">again<br></h1>
+      <h1 class="song-title" lang="ja">again<br></h1>
       <div class="song-jp">
-        <span>YUI</span><span class="dot"></span><span>歌詞精読</span><span class="dot"></span><span>N3–N2</span>
+        <span lang="ja">YUI</span><span class="dot"></span><span lang="ja">歌詞精読</span><span class="dot"></span><span>N3–N2</span>
       </div>
       <p class="hero-lead">这首歌几乎每一句都藏着一处口语缩约——<b style="display:inline-block">てく</b>、<b style="display:inline-block">ちゃ</b>、<b style="display:inline-block">ん</b>、<b style="display:inline-block">じゃん</b>。它们不在任何一本教材的语法表里，却在你戴上耳机的那一刻轮番出现。想从「看得懂」跨到「听得清」，跟着这首唱，比再刷十套题有用。</p>
       <div class="badges" id="badges"></div>
@@ -1021,7 +1024,7 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
         <div class="sec-num">01</div>
         <div>
           <h2 class="sec-title">学习重点：认出口语里的缩约</h2>
-          <div class="sec-jp">がくしゅうの ポイント</div>
+          <div class="sec-jp" lang="ja">がくしゅうの ポイント</div>
           <p class="sec-lead">这首歌把「ていく」「てしまう」「の」说成了「てく」「ちゃ」「ん」。先认出这些缩约，再读懂歌词里从回忆到决心的变化。</p>
         </div>
       </div>
@@ -1043,7 +1046,7 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
         <div class="sec-num">02</div>
         <div>
           <h2 class="sec-title">完整歌词：对着听，连着读</h2>
-          <div class="sec-jp">かし ぜんぶ</div>
+          <div class="sec-jp" lang="ja">かし ぜんぶ</div>
           <p class="sec-lead">保留原有换行与段落顺序。点击行末的喇叭可以朗读；注音与逐句讲解见下一节。</p>
         </div>
       </div>
@@ -1060,7 +1063,7 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
         <div class="sec-num">02</div>
         <div>
           <h2 class="sec-title">逐句精读：一句只讲一个点</h2>
-          <div class="sec-jp">いちぎょうずつ よむ</div>
+          <div class="sec-jp" lang="ja">いちぎょうずつ よむ</div>
           <p class="sec-lead">这首歌的难点不在句型，而在「原形被说短」。看到「てく」「ちゃ」「ん」不要当语气词跳过——那才是耳机里真正响着的音。可以从头读，也可以挑不懂的句子精读。</p>
         </div>
       </div>
@@ -1083,7 +1086,7 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
         <div class="sec-num">03</div>
         <div>
           <h2 class="sec-title">核心词汇：先勾掉已经会的</h2>
-          <div class="sec-jp">たんごリスト</div>
+          <div class="sec-jp" lang="ja">たんごリスト</div>
           <p class="sec-lead">按歌词出现顺序排。动词多数是复合动词，建议成对记：吐き出す／引き返す、やり残す／やり直す——记住一个就能推另一个。支持搜汉字、假名或中文。</p>
         </div>
       </div>
@@ -1139,7 +1142,7 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
         <div class="sec-num">04</div>
         <div>
           <h2 class="sec-title">语法图谱：16 条，一半教材不讲</h2>
-          <div class="sec-jp">ぶんぽうマップ</div>
+          <div class="sec-jp" lang="ja">ぶんぽうマップ</div>
           <p class="sec-lead">展开每条语法，先看接续与歌词原句，再读 2–3 个带注音和中文解释的例句，最后留意易错点。</p>
         </div>
       </div>
@@ -1275,11 +1278,11 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
       +   '</div>'
       +   '<div class="cover-mid">'
       +     (work ? '<span class="cover-work">' + escapeHtml(work) + '</span>' : '')
-      +     '<span class="cover-title">' + title + '</span>'
-      +     '<span class="cover-artist">' + escapeHtml(META.artist || '') + '</span>'
+      +     '<span class="cover-title" lang="ja">' + title + '</span>'
+      +     '<span class="cover-artist" lang="ja">' + escapeHtml(META.artist || '') + '</span>'
       +   '</div>'
       +   '<div class="cover-foot">'
-      +     '<span>' + escapeHtml(META.subtitle || '歌詞精読') + '</span>'
+      +     '<span lang="ja">' + escapeHtml(META.subtitle || '歌詞精読') + '</span>'
       +     '<span>' + escapeHtml(META.level || '') + '</span>'
       +   '</div>'
       + '</div></figure>';
@@ -1388,7 +1391,7 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
     function render() {
       list.innerHTML = LYRIC.map(it => {
         const words = (it.words || []).map(w =>
-          '<span class="wchip"><b>' + escapeHtml(w[0]) + '</b><i>' + escapeHtml(w[1]) + '</i><em>' + escapeHtml(w[2]) + '</em></span>'
+          '<span class="wchip"><b lang="ja">' + escapeHtml(w[0]) + '</b><i lang="ja">' + escapeHtml(w[1]) + '</i><em>' + escapeHtml(w[2]) + '</em></span>'
         ).join('');
         const say = escapeAttr(plain(it.jp));
         return '<article class="lyric reveal in">'

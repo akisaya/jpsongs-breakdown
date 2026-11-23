@@ -24,7 +24,8 @@
   --rose:#B94E66;
   --rose-soft:#FAE9ED;
 
-  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP","PingFang SC","Microsoft YaHei",sans-serif;
+  --font-sans:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Noto Sans SC",sans-serif;
+  --font-sans-ja:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans CJK JP","Noto Sans JP",sans-serif;
   --font-serif:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",Georgia,"Songti SC",serif;
   --font-display:"Didot","Bodoni 72",Georgia,"Times New Roman",serif;
 
@@ -82,6 +83,7 @@ p{margin:0}
 a{color:inherit}
 button{font:inherit;color:inherit}
 img,svg{display:block}
+:where([lang="ja"]){font-family:var(--font-serif)}
 
 .wrap{
   width:min(1160px, calc(100% - 2.6rem));
@@ -155,7 +157,7 @@ img,svg{display:block}
 }
 
 .song-jp{
-  font-family:var(--font-serif);
+  font-family:var(--font-sans);
   font-size:clamp(1rem,2.1vw,1.22rem);
   color:var(--ink-2);
   letter-spacing:.22em;
@@ -688,7 +690,7 @@ img,svg{display:block}
 }
 ruby{ruby-position:over}
 rt{
-  font-family:var(--font-sans);
+  font-family:var(--font-sans-ja);
   font-size:.44em;
   font-weight:500;
   color:#B08C68;
@@ -751,7 +753,7 @@ body.hide-furi rt{display:none}
 }
 .note b{color:#8A4A16;font-weight:700}
 .note code{
-  font-family:var(--font-serif);
+  font-family:var(--font-sans);
   background:rgba(255,255,255,.7);
   padding:.05em .3em;border-radius:4px;
   color:#5C4327;font-size:.95em;
@@ -924,11 +926,12 @@ details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:
 .g-row dt{color:var(--ink-3);font-size:.75rem;letter-spacing:.08em;padding-top:.15rem}
 .g-row dd{margin:0;color:var(--ink-2)}
 .g-eg{
-  font-family:var(--font-serif);
+  font-family:var(--font-sans);
   font-size:.98rem;color:var(--ink);
   background:#FCF7F0;border-radius:8px;padding:.5rem .7rem;
   display:inline-block;max-width:100%;overflow-wrap:anywhere;
 }
+.g-eg[lang="ja"]{font-family:var(--font-serif)}
 .g-examples{border-top:1px solid var(--line-soft);padding-top:.85rem}
 .g-examples h4{font-size:.78rem;font-weight:600;color:var(--ink-3);margin-bottom:.7rem}
 .g-examples ol{margin:0;padding-left:1.5rem;display:grid;gap:.9rem}

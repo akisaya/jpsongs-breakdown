@@ -113,11 +113,11 @@
       +   '</div>'
       +   '<div class="cover-mid">'
       +     (work ? '<span class="cover-work">' + escapeHtml(work) + '</span>' : '')
-      +     '<span class="cover-title">' + title + '</span>'
-      +     '<span class="cover-artist">' + escapeHtml(META.artist || '') + '</span>'
+      +     '<span class="cover-title" lang="ja">' + title + '</span>'
+      +     '<span class="cover-artist" lang="ja">' + escapeHtml(META.artist || '') + '</span>'
       +   '</div>'
       +   '<div class="cover-foot">'
-      +     '<span>' + escapeHtml(META.subtitle || '歌詞精読') + '</span>'
+      +     '<span lang="ja">' + escapeHtml(META.subtitle || '歌詞精読') + '</span>'
       +     '<span>' + escapeHtml(META.level || '') + '</span>'
       +   '</div>'
       + '</div></figure>';
@@ -226,7 +226,7 @@
     function render() {
       list.innerHTML = LYRIC.map(it => {
         const words = (it.words || []).map(w =>
-          '<span class="wchip"><b>' + escapeHtml(w[0]) + '</b><i>' + escapeHtml(w[1]) + '</i><em>' + escapeHtml(w[2]) + '</em></span>'
+          '<span class="wchip"><b lang="ja">' + escapeHtml(w[0]) + '</b><i lang="ja">' + escapeHtml(w[1]) + '</i><em>' + escapeHtml(w[2]) + '</em></span>'
         ).join('');
         const say = escapeAttr(plain(it.jp));
         return '<article class="lyric reveal in">'

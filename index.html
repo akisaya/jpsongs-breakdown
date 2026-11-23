@@ -22,6 +22,7 @@
   --teal-soft:#E4F2EE;
 
   --font-sans:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Noto Sans SC",sans-serif;
+  --font-sans-ja:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans CJK JP","Noto Sans JP",sans-serif;
   --font-serif:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",Georgia,"Songti SC",serif;
   --font-serif-zh:"Songti SC","SimSun","Noto Serif CJK SC","Noto Serif SC",serif;
   --font-display:"Didot","Bodoni 72",Georgia,"Times New Roman",serif;
@@ -57,6 +58,7 @@ body{
 @media (max-width:600px){.wrap{width:calc(100% - 1.8rem)}}
 
 a{color:inherit;text-decoration:none}
+:where([lang="ja"]){font-family:var(--font-sans-ja)}
 
 /* ============================================================
    1. 顶栏
@@ -509,14 +511,14 @@ a{color:inherit;text-decoration:none}
         +   '<div class="cov-mid">'
         +     '<span class="cov-work">' + esc(s.work) + '</span>'
         +     '<span class="cov-title">' + titleHtml + '</span>'
-        +     '<span class="cov-artist">' + esc(s.artist) + '</span>'
+        +     '<span class="cov-artist" lang="ja">' + esc(s.artist) + '</span>'
         +   '</div>'
-        +   '<div class="cov-foot"><span>歌詞精読</span><span>' + esc(s.level) + '</span></div>'
+        +   '<div class="cov-foot"><span lang="ja">歌詞精読</span><span>' + esc(s.level) + '</span></div>'
         + '</figure>'
         + '<div class="song-body">'
-        +   '<p class="song-kicker">' + esc(s.kicker) + '</p>'
-        +   '<h3 class="song-title">' + titleText + '</h3>'
-        +   '<p class="song-by">' + esc(s.artist) + ' · ' + esc(s.year)
+        +   '<p class="song-kicker" lang="ja">' + esc(s.kicker) + '</p>'
+        +   '<h3 class="song-title" lang="ja">' + titleText + '</h3>'
+        +   '<p class="song-by"><span lang="ja">' + esc(s.artist) + '</span> · ' + esc(s.year)
         +     '<span class="song-lv" title="大致难度参考，不是考试级别判定">' + esc(s.level) + '</span>'
         +     progHtml + '</p>'
         +   '<p class="song-desc">' + esc(s.desc) + '</p>'
