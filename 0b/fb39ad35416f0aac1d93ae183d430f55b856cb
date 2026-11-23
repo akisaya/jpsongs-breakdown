@@ -1,0 +1,31 @@
+loser/index.html
+  s_ca0ce2fc4f214f::t_4ea1eed3c3f44f 34-35,93,167,700,763,936,941,991,993,1027,1049,1066,1089,1145,1281-1282,1285,1394
+.agents/skills/jp-song-study-page/assets/render.js
+  s_ca0ce2fc4f214f::t_27c0980629bc52 116-117,120,229
+.agents/skills/jp-song-study-page/assets/template.html
+  s_ca0ce2fc4f214f::t_27c0980629bc52 17,19,53,75,92,115,171
+.agents/skills/jp-song-study-page/assets/base.css
+  s_ca0ce2fc4f214f::t_27c0980629bc52 27-28,86,160,693,756,929,934
+index.html
+  s_ca0ce2fc4f214f::t_6476a7734d34ee 25,61,514,516,519-521
+again/index.html
+  s_ca0ce2fc4f214f::t_4ea1eed3c3f44f 34-35,93,167,700,763,936,941,991,993,1027,1049,1066,1089,1145,1281-1282,1285,1394
+brave-heart/index.html
+  s_ca0ce2fc4f214f::t_4ea1eed3c3f44f 34-35,93,167,700,763,936,941,991,993,1027,1049,1066,1089,1145,1281-1282,1285,1394
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.52-trip",
+  "base_commit_sha": "0bfb39ad35416f0aac1d93ae183d430f55b856cb",
+  "prompts": {},
+  "sessions": {
+    "s_ca0ce2fc4f214f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a2071e-b48f-7f92-b292-b1e27607e54a",
+        "model": "gpt-6.1-terra[1M]"
+      },
+      "human_author": "akisaya <akikevinsama@gmail.com>"
+    }
+  }
+}
