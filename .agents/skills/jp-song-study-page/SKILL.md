@@ -1,6 +1,6 @@
 ---
 name: jp-song-study-page
-description: 把一首日文歌做成单文件、可离线打开的歌词精读页：学习重点、逐句注音拆解、可勾选的词汇表和语法图谱（每条含 2–3 个注音例句及中文译文），默认收录完整歌词。用模板与 song.json 编译成 HTML，适用于新建或维护日语歌曲学习页。
+description: 把一首日文歌做成单文件、可离线打开的歌词精读页：完整歌词、严格对应完整歌词行的逐句注音拆解、可勾选的词汇表和语法图谱（每条含 2–3 个注音例句及中文译文）。用模板与 song.json 编译成 HTML，适用于新建或维护日语歌曲学习页。
 metadata:
   agent_created: true
 ---
@@ -28,7 +28,7 @@ metadata:
 | 输出 | **当前工作目录**下的 `<slug>/{index.html,<slug>.song.json}` | 给了路径就用给的；同名文件存在时先问 |
 | 配色 | 奶油纸底 + 橙/青 | 「换个蓝色系」→ 改 `assets/base.css` 顶部的 `--orange` / `--teal` |
 | 封面 | **排版式封面**（纯 CSS，随歌名自动生成） | 「用我的封面图」→ 图片路径写进 `meta.cover`，build 自动内联 |
-| 卡片量 | 16–24 张 | 「做细一点」→ 24+；「一页就够」→ 12 左右 |
+| 卡片量 | 通常 16–24 张；每张必须对应一条**完整歌词行**，完全重复的行只做一张 | 「做细一点」→ 24+；「一页就够」→ 12 左右，但不得把来源行截成词组来凑数 |
 
 **必须先确认的三种情况**（其余都自己判断）：
 
@@ -48,10 +48,10 @@ cp $SKILL/examples/_skeleton.song.json <slug>/<slug>.song.json
 # 骨架中的歌词是格式范例；换歌时整体替换 meta、完整歌词和教学内容
 
 # 2. 只校验，不产出（改 JSON 时反复跑）
-node $SKILL/scripts/build.js --check <slug>/<slug>.song.json
+node $SKILL/scripts/build.js --check --strict-lines <slug>/<slug>.song.json
 
 # 3. 出页面
-node $SKILL/scripts/build.js <slug>/<slug>.song.json <slug>/index.html
+node $SKILL/scripts/build.js --strict-lines <slug>/<slug>.song.json <slug>/index.html
 
 # 4. 验收（无头 Chrome：交互 + 多断点溢出 + 截图）
 node $SKILL/scripts/check.js <slug>/index.html --shots
@@ -93,7 +93,7 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 | 0 | **判断值不值得做**：适合中低速、咬字清晰、副歌有重复句式；饶舌、大量方言古语、满篇拟声词做不出教学 | editorial「选句」开头 |
 | 1 | **核对完整歌词**：至少两个来源交叉核对；记下作词 / 作曲编曲 / 演唱 / 年份出处；将核对后的全词写入 `lyrics.blocks`，保留原有顺序与换行 | — |
 | 2 | **保留原有段落**：按歌词来源的换行与空行组织 `lyrics.blocks`；只填 `lines`，页面自动编号。不判断曲式，不标时间轴，不填写段落配色或精读卡分类 | schema「lyrics」 |
-| 3 | **抽卡** 16–24 张：一句一个语法点，优先挑语法挤在一起的句子 | editorial「选句」「卡片」 |
+| 3 | **逐句抽卡**：一张卡对应一条完整歌词来源行；一句即使包含多个语法，也仍保留整句，只选一个讲解重点。完全重复的行复用一张卡，不同措辞的变体行分别保留 | editorial「选句」「卡片」、schema「lines」 |
 | 4 | **词表** 50–70：按歌词出现顺序排，`lv` 给保守值 | editorial「词表」 |
 | 5 | **语法** 12–16：`form` 写完整接续，`warn` 写易错点，`examples` 写 2–3 个对应例句（注音 + 中文） | editorial「语法条」 |
 | 6 | **写文案**：`map.why` 四条理由、`steps` 三步，每首重写；页面上没有的板块不要提 | editorial「文案」 |
@@ -109,6 +109,8 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 - [ ] 语法图谱是最后一节；每条语法展开后有 2–3 个注音例句和中文译文
 - [ ] 顶部数据条项数正确、数值非 0
 - [ ] 全部精读卡可见，假名与中文显示开关生效
+- [ ] **每张 `lines[].jp` 去掉注音并忽略空白后，必须与一条 `lyrics.blocks[].lines` 完全相同；不能是词组、半句或跨行拼接**
+- [ ] **显示名称为「逐句精读」，`--strict-lines` 校验无错误；“短语精读”不能用来包装片段卡**
 - [ ] 完整歌词按原顺序显示，段落自动编号，行末朗读按钮可通过键盘操作
 - [ ] 掌握度点击后进度变化
 - [ ] 390 / 768 / 1024 / 1440 四个宽度无横向溢出

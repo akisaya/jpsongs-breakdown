@@ -4,6 +4,7 @@
  *
  *   node build.js <song.json> [out.html]
  *   node build.js --check <song.json>     # 只校验，不产出
+ *   node build.js --check --strict-lines <song.json>  # 逐句卡必须是完整来源行
  *
  * 依赖：Node 18+，零第三方依赖。
  */
@@ -19,12 +20,22 @@ const RENDER = path.join(ASSETS, 'render.js');
 
 /* ---------- 参数 ---------- */
 const argv = process.argv.slice(2);
-const checkOnly = argv[0] === '--check';
-const args = checkOnly ? argv.slice(1) : argv;
+const flags = new Set(argv.filter(a => a.startsWith('--')));
+const checkOnly = flags.has('--check');
+const strictLines = flags.has('--strict-lines');
+const args = argv.filter(a => !a.startsWith('--'));
+
+for (const flag of flags) {
+  if (!['--check', '--strict-lines'].includes(flag)) {
+    console.error(`未知参数: ${flag}`);
+    process.exit(1);
+  }
+}
 
 if (!args.length) {
   console.error('用法: node build.js <song.json> [out.html]');
   console.error('      node build.js --check <song.json>');
+  console.error('      node build.js --check --strict-lines <song.json>');
   process.exit(1);
 }
 
@@ -127,6 +138,10 @@ const lines = song.lines || [];
 const vocab = song.vocab || [];
 const grammar = song.grammar || [];
 
+function plainLyricText(text) {
+  return String(text || '').replace(/\[[^\]]*\]/g, '').replace(/[\s\u3000]+/g, '');
+}
+
 need(lines.length >= 6, `lines 至少 6 张卡（当前 ${lines.length}）`);
 need(vocab.length >= 20, `vocab 至少 20 词（当前 ${vocab.length}）`);
 need(grammar.length >= 6, `grammar 至少 6 条（当前 ${grammar.length}）`);
@@ -146,6 +161,7 @@ lines.forEach((l, i) => {
 /* 完整歌词 */
 if (on('lyrics')) {
   const L = song.lyrics;
+  const lyricTexts = [];
   if (!L || !Array.isArray(L.blocks) || !L.blocks.length) {
     errors.push('默认需要完整歌词：请填写非空的 lyrics.blocks；仅在明确不收录全文时设置 modules.lyrics=false');
   } else {
@@ -167,6 +183,49 @@ if (on('lyrics')) {
       });
     });
     if (total < 8) warns.push(`lyrics 只有 ${total} 行，确认是不是漏了段落`);
+    L.blocks.forEach(b => {
+      if (!Array.isArray(b.lines)) return;
+      b.lines.forEach(l => {
+        const text = plainLyricText(l);
+        if (text) lyricTexts.push({ original: l, text });
+      });
+    });
+
+    const lyricSet = new Set(lyricTexts.map(l => l.text));
+    const partial = [];
+    const seenCards = new Map();
+    lines.forEach((line, i) => {
+      const text = plainLyricText(line.jp);
+      if (!lyricSet.has(text)) partial.push(i);
+      if (seenCards.has(text)) {
+        errors.push(`lines[${i}] 与 lines[${seenCards.get(text)}] 指向同一句歌词；完全重复的歌词只保留一张卡`);
+      } else {
+        seenCards.set(text, i);
+      }
+    });
+
+    if (strictLines) {
+      partial.forEach(i => {
+        errors.push(`lines[${i}] 不是完整歌词行：${lines[i].jp}。逐句卡必须保留来源行的整句，不能缩小成词组或半句`);
+      });
+      if (song.nav?.find?.(n => n.id === 'lines')?.label !== '逐句精读') {
+        errors.push('--strict-lines 要求 nav 中的 lines 板块显示为「逐句精读」');
+      }
+      if (!String(song.sec?.lines?.title || '').includes('逐句精读')) {
+        errors.push('--strict-lines 要求 sec.lines.title 明确包含「逐句精读」');
+      }
+      if (!String(song.cta?.primary || '').includes('逐句精读')) {
+        errors.push('--strict-lines 要求 cta.primary 明确包含「逐句精读」');
+      }
+    } else if (partial.length) {
+      warns.push(`lines 中有 ${partial.length} 张卡不是完整歌词行；新建或重建逐句页时请运行 --strict-lines`);
+    }
+
+    const distinctLyrics = new Set(lyricTexts.map(l => l.text));
+    const uncovered = [...distinctLyrics].filter(text => !seenCards.has(text));
+    if (uncovered.length) {
+      warns.push(`还有 ${uncovered.length} 个不同歌词行没有对应卡片；重复句可以复用讲解`);
+    }
   }
 }
 

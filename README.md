@@ -59,8 +59,8 @@ mkdir -p $SLUG
 cp $SKILL/examples/_skeleton.song.json $SLUG/$SLUG.song.json   # 6 卡 / 20 词的骨架
 
 # 先填 meta，再填 lines / vocab / grammar
-node $SKILL/scripts/build.js --check $SLUG/$SLUG.song.json     # 改一点校一点，反复跑
-node $SKILL/scripts/build.js $SLUG/$SLUG.song.json $SLUG/index.html
+node $SKILL/scripts/build.js --check --strict-lines $SLUG/$SLUG.song.json
+node $SKILL/scripts/build.js --strict-lines $SLUG/$SLUG.song.json $SLUG/index.html
 node $SKILL/scripts/check.js $SLUG/index.html --shots          # 交互 + 四档断点溢出 + 截图
 ```
 
@@ -70,6 +70,9 @@ node $SKILL/scripts/check.js $SLUG/index.html --shots          # 交互 + 四档
 
 一份 song.json 就是一个页面。**六个默认必填**：`meta` / `sec` / `lyrics` / `lines` / `vocab` / `grammar`；
 完整歌词默认收录；正文固定结束于语法图谱，每条语法附 2–3 个注音例句和中文译文。
+
+`lines` 是逐句精读：每张卡的 `jp` 必须是 `lyrics.blocks[].lines` 中的一条完整原文，
+去掉注音、忽略空白后要完全一致。不能把词、半句或跨行拼接当作逐句卡；`--strict-lines` 会拦截这类错误。
 
 默认缺少完整歌词会构建失败。只有用户明确要求不要全文时，才写 `"modules": {"lyrics": false}`。
 
@@ -113,7 +116,7 @@ node $SKILL/scripts/check.js $SLUG/index.html --shots          # 交互 + 四档
 
 ## 验收
 
-`check.js` 会自动检查：板块数与导航项一致、章节编号连续、数据条数值非 0、假名与中文显示切换、掌握度、
+`--strict-lines` 会先检查每张逐句卡都对应完整歌词行、没有重复卡，并核对「逐句精读」相关文案。`check.js` 会自动检查：板块数与导航项一致、章节编号连续、数据条数值非 0、假名与中文显示切换、掌握度、
 每条语法的例句数量与展开显示、正文结束位置、390/768/1024/1440 四档无横向溢出。
 
 人工只需要看两点：`preview/` 截图里的**注音有没有串行**、**长句有没有在小屏被拆断**。
