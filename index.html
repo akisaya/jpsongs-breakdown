@@ -156,16 +156,146 @@ a{color:inherit;text-decoration:none}
 
 .list-head{
   display:flex;align-items:baseline;justify-content:space-between;
+  flex-wrap:wrap;
   gap:1rem;
   margin-bottom:1.15rem;
 }
+.list-title{display:flex;align-items:baseline;gap:.8rem}
 .list-head h2{
   margin:0;
   font-size:.72rem;font-weight:700;
   letter-spacing:.24em;text-transform:uppercase;
   color:var(--ink-2);
 }
-.list-head span{font-size:.72rem;color:var(--ink-3);letter-spacing:.06em}
+.list-count{font-size:.72rem;color:var(--ink-3);letter-spacing:.06em}
+
+.directory-tools{
+  display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;
+  gap:.55rem;
+  width:min(100%,710px);
+}
+.search-box,.artist-trigger{
+  min-width:0;height:40px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:rgba(255,255,255,.7);
+  color:var(--ink-2);
+  transition:border-color .18s ease,background .18s ease,box-shadow .18s ease;
+}
+.search-box{position:relative;display:flex;align-items:center;flex:1 1 220px;max-width:280px}
+.search-box:focus-within,.artist-trigger:focus-visible,.artist-trigger[aria-expanded="true"]{
+  border-color:var(--orange);
+  background:var(--surface);
+  box-shadow:0 0 0 3px rgba(217,84,31,.1);
+}
+.artist-trigger:focus-visible{outline:0}
+.search-box svg{
+  position:absolute;left:.72rem;
+  width:15px;height:15px;
+  color:var(--ink-2);
+  pointer-events:none;
+}
+.search-box input{
+  appearance:none;
+  width:100%;height:100%;
+  padding:0 .75rem 0 2.2rem;
+  border:0;border-radius:inherit;
+  background:transparent;outline:0;
+  color:var(--ink);font:inherit;font-size:.72rem;
+}
+.search-box input::placeholder{color:var(--ink-3);opacity:1}
+
+.artist-picker{position:relative;flex:0 1 220px;min-width:180px;height:40px}
+.artist-trigger{
+  display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+  width:100%;padding:0 .7rem 0 .75rem;
+  background:rgba(255,255,255,.7);
+  text-align:left;cursor:pointer;
+}
+.artist-trigger-copy{display:flex;align-items:center;gap:.52rem;min-width:0}
+.artist-trigger-copy small{
+  flex:0 0 auto;
+  font-size:.58rem;letter-spacing:.08em;color:var(--ink-3);
+}
+.artist-trigger-copy b{
+  min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-size:.7rem;font-weight:400;color:var(--ink-2);
+}
+.artist-trigger>svg{
+  flex:0 0 auto;width:14px;height:14px;
+  transition:transform .18s ease;
+}
+.artist-trigger[aria-expanded="true"]>svg{transform:rotate(180deg)}
+.artist-menu{
+  position:absolute;z-index:20;top:calc(100% + .45rem);left:0;right:0;
+  width:100%;
+  padding:.5rem;
+  border:1px solid var(--line);border-radius:16px;
+  background:rgba(255,252,247,.98);
+  box-shadow:0 18px 42px -18px rgba(59,35,14,.42),var(--shadow-sm);
+  backdrop-filter:blur(14px);
+}
+.artist-menu[hidden]{display:none}
+.artist-menu-search{
+  position:relative;display:flex;align-items:center;
+  height:34px;margin-bottom:.35rem;
+  border:1px solid var(--line);border-radius:10px;
+  background:#FFFCF7;
+}
+.artist-menu-search svg{
+  position:absolute;left:.6rem;width:13px;height:13px;color:var(--ink-3);pointer-events:none;
+}
+.artist-menu-search input{
+  appearance:none;width:100%;height:100%;
+  padding:0 .6rem 0 1.85rem;
+  border:0;border-radius:inherit;background:transparent;outline:0;
+  color:var(--ink);font:inherit;font-size:.68rem;
+}
+.artist-menu-search input::placeholder{color:var(--ink-3);opacity:1}
+.artist-options{max-height:260px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.artist-option{
+  display:flex;align-items:center;justify-content:space-between;gap:.7rem;
+  width:100%;padding:.54rem .58rem;
+  border:0;border-radius:9px;background:transparent;
+  color:var(--ink-2);font:inherit;font-size:.72rem;text-align:left;
+  cursor:pointer;
+}
+.artist-option>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.artist-option:hover,.artist-option:focus-visible{background:#F5EDE2;outline:0;color:var(--ink)}
+.artist-option[aria-selected="true"]{background:var(--teal-soft);color:#166D64;font-weight:600}
+.artist-option small{font-size:.62rem;font-weight:400;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.artist-option-empty{padding:.75rem .6rem;font-size:.68rem;color:var(--ink-3);text-align:center}
+
+.sort-toggle{
+  display:flex;align-items:center;flex:0 0 auto;height:40px;
+  padding:.22rem;gap:.1rem;
+  border:1px solid var(--line);border-radius:12px;
+  background:rgba(255,255,255,.62);
+}
+.sort-toggle>span{
+  padding:0 .35rem 0 .3rem;
+  font-size:.56rem;letter-spacing:.08em;color:var(--ink-3);
+}
+.sort-toggle button{
+  height:100%;padding:0 .48rem;
+  border:0;border-radius:8px;background:transparent;
+  color:var(--ink-3);font:inherit;font-size:.66rem;white-space:nowrap;cursor:pointer;
+}
+.sort-toggle button:hover{color:var(--ink)}
+.sort-toggle button[aria-pressed="true"]{background:var(--ink);color:#FFFDF8;box-shadow:var(--shadow-xs)}
+.sort-toggle button:focus-visible{outline:2px solid var(--orange);outline-offset:1px}
+
+@media (max-width:860px){
+  .directory-tools{display:grid;grid-template-columns:minmax(0,1fr) auto;width:100%}
+  .search-box{grid-column:1/-1;max-width:none;width:100%}
+  .artist-picker{width:100%}
+}
+@media (max-width:700px){.list-head{align-items:stretch}}
+@media (max-width:480px){
+  .directory-tools{grid-template-columns:1fr}
+  .sort-toggle{width:100%}
+  .sort-toggle button{flex:1 1 auto}
+}
 
 .songs{
   display:grid;
@@ -173,6 +303,48 @@ a{color:inherit;text-decoration:none}
   gap:.9rem;
 }
 @media (max-width:860px){.songs{grid-template-columns:minmax(0,1fr)}}
+
+.empty{
+  padding:2.5rem 1.25rem;
+  border:1px dashed #DECCB2;
+  border-radius:var(--r-lg);
+  background:rgba(255,255,255,.48);
+  text-align:center;
+}
+.empty[hidden]{display:none}
+.empty b{display:block;font-family:var(--font-serif);font-size:1rem;font-weight:600}
+.empty span{display:block;margin-top:.25rem;font-size:.74rem;color:var(--ink-3)}
+.empty button{
+  margin-top:1rem;padding:.42rem .75rem;
+  border:1px solid var(--line);border-radius:999px;
+  background:var(--surface);color:var(--orange);
+  font:inherit;font-size:.72rem;font-weight:600;cursor:pointer;
+}
+.empty button:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+
+.pager{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  margin-top:1.65rem;padding-top:1rem;
+  border-top:1px solid var(--line);
+}
+.pager[hidden]{display:none}
+.pager-summary{font-size:.66rem;color:var(--ink-3);letter-spacing:.02em;white-space:nowrap}
+.pager-pages{display:flex;align-items:center;justify-content:flex-end;gap:.28rem;flex-wrap:wrap}
+.pager button{
+  min-width:30px;height:30px;padding:0 .55rem;
+  border:1px solid var(--line);border-radius:9px;
+  background:rgba(255,255,255,.68);color:var(--ink-2);
+  font:inherit;font-size:.66rem;cursor:pointer;
+}
+.pager button:hover:not(:disabled){border-color:#DCC7AA;background:var(--surface);color:var(--ink)}
+.pager button:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+.pager button[aria-current="page"]{border-color:var(--ink);background:var(--ink);color:#FFFDF8}
+.pager button:disabled{opacity:.35;cursor:default}
+.pager-ellipsis{display:inline-grid;place-items:center;min-width:20px;height:30px;color:var(--ink-3);font-size:.72rem}
+@media (max-width:560px){
+  .pager{align-items:flex-start;flex-direction:column}
+  .pager-pages{width:100%;justify-content:flex-start}
+}
 
 .song{
   display:flex;align-items:stretch;gap:1rem;
@@ -379,10 +551,54 @@ a{color:inherit;text-decoration:none}
 
   <section class="list wrap">
     <div class="list-head">
-      <h2>曲目</h2>
-      <span id="list-count"></span>
+      <div class="list-title">
+        <h2>曲目</h2>
+        <span class="list-count" id="list-count" aria-live="polite"></span>
+      </div>
+      <div class="directory-tools">
+        <label class="search-box">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="m10.5 10.5 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <input id="song-search" type="search" autocomplete="off" placeholder="搜索歌曲、演唱者或作品" aria-label="搜索歌曲、演唱者或作品">
+        </label>
+        <div class="artist-picker" id="artist-picker">
+          <button class="artist-trigger" id="artist-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="artist-menu">
+            <span class="artist-trigger-copy">
+              <small>演唱者</small>
+              <b id="artist-trigger-label">全部演唱者</b>
+            </span>
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="artist-menu" id="artist-menu" hidden>
+            <label class="artist-menu-search">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+                <path d="m10.5 10.5 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <input id="artist-menu-search" type="search" autocomplete="off" placeholder="查找演唱者" aria-label="查找演唱者">
+            </label>
+            <div class="artist-options" id="artist-options" role="listbox" aria-label="选择演唱者"></div>
+          </div>
+        </div>
+        <div class="sort-toggle" role="group" aria-label="排序方式">
+          <span>排序</span>
+          <button type="button" data-sort="added" aria-pressed="true">添加顺序</button>
+          <button type="button" data-sort="artist" aria-pressed="false">演唱者</button>
+        </div>
+      </div>
     </div>
     <div class="songs" id="songs"></div>
+    <div class="empty" id="empty" hidden>
+      <b>没有找到匹配的曲目</b>
+      <span>试试其他歌曲名、演唱者或作品名。</span>
+      <button type="button" id="reset-directory">显示全部曲目</button>
+    </div>
+    <nav class="pager" id="pager" aria-label="曲目分页" hidden>
+      <span class="pager-summary" id="pager-summary" aria-live="polite"></span>
+      <div class="pager-pages" id="pager-pages"></div>
+    </nav>
   </section>
 </main>
 
@@ -463,6 +679,12 @@ a{color:inherit;text-decoration:none}
   ];
 
   var $ = function(s){ return document.querySelector(s); };
+  var activeArtist = '';
+  var searchQuery = '';
+  var sortMode = 'added';
+  var currentPage = 1;
+  var PAGE_SIZE = 6;
+  var collator = new Intl.Collator('ja', { numeric: true, sensitivity: 'base' });
 
   function esc(s){
     return String(s == null ? '' : s)
@@ -507,45 +729,306 @@ a{color:inherit;text-decoration:none}
     }).join('');
   }
 
-  function renderSongs(){
-    $('#songs').innerHTML = SONGS.map(function(s){
-      var lines = s.title.filter(Boolean);
-      var titleHtml = lines.map(esc).join('<br>');
-      var titleText = lines.map(esc).join(' ');
-      var prog = progress(s.slug, s.scale.vocab);
-      var progHtml = prog === null ? '' :
-        '<span class="song-prog" title="已标记掌握的词汇"><i><b style="width:'
-        + Math.round(prog / s.scale.vocab * 100) + '%"></b></i>'
-        + prog + '/' + s.scale.vocab + '</span>';
+  function normalize(text){
+    return String(text == null ? '' : text).normalize('NFKC')
+      .toLocaleLowerCase().replace(/\s+/g, ' ').trim();
+  }
 
-      return '<a class="song" href="' + esc(s.href) + '">'
-        + '<figure class="cov t-' + esc(s.tone) + '">'
-        +   '<div class="cov-top"><span>SINGLE</span><span>' + esc(s.year) + '</span></div>'
-        +   '<div class="cov-mid">'
-        +     '<span class="cov-work">' + esc(s.work) + '</span>'
-        +     '<span class="cov-title">' + titleHtml + '</span>'
-        +     '<span class="cov-artist" lang="ja">' + esc(s.artist) + '</span>'
-        +   '</div>'
-        +   '<div class="cov-foot"><span lang="ja">歌詞精読</span><span>' + esc(s.level) + '</span></div>'
-        + '</figure>'
-        + '<div class="song-body">'
-        +   '<p class="song-kicker" lang="ja">' + esc(s.kicker) + '</p>'
-        +   '<h3 class="song-title" lang="ja">' + titleText + '</h3>'
-        +   '<p class="song-by"><span lang="ja">' + esc(s.artist) + '</span> · ' + esc(s.year)
-        +     '<span class="song-lv" title="大致难度参考，不是考试级别判定">' + esc(s.level) + '</span>'
-        +     progHtml + '</p>'
-        +   '<p class="song-desc">' + esc(s.desc) + '</p>'
-        +   '<div class="song-foot">'
-        +     '<span class="song-scale">' + s.scale.lines + ' 句 · ' + s.scale.vocab + ' 词 · ' + s.scale.grammar + ' 语法</span>'
-        +     '<span class="song-go">进入 ' + ARROW + '</span>'
-        +   '</div>'
-        + '</div>'
-        + '</a>';
+  function songArtists(){
+    return SONGS.reduce(function(list, song){
+      if (list.indexOf(song.artist) === -1) list.push(song.artist);
+      return list;
+    }, []).sort(collator.compare);
+  }
+
+  function artistStats(){
+    return songArtists().map(function(artist){
+      return {
+        artist: artist,
+        count: SONGS.filter(function(song){ return song.artist === artist; }).length
+      };
+    });
+  }
+
+  function renderArtistTrigger(){
+    var count = activeArtist
+      ? SONGS.filter(function(song){ return song.artist === activeArtist; }).length
+      : SONGS.length;
+    $('#artist-trigger-label').textContent = (activeArtist || '全部演唱者') + ' · ' + count + ' 首';
+  }
+
+  function renderArtistOptions(){
+    var query = normalize($('#artist-menu-search').value);
+    var artists = artistStats().filter(function(item){
+      return !query || normalize(item.artist).indexOf(query) !== -1;
+    });
+    var options = query ? '' :
+      '<button type="button" class="artist-option" role="option" data-artist="" aria-selected="'
+        + String(activeArtist === '') + '"><span>全部演唱者</span><small>' + SONGS.length + ' 首</small></button>';
+
+    options += artists.map(function(item){
+      return '<button type="button" class="artist-option" role="option" data-artist="' + esc(item.artist) + '"'
+        + ' aria-selected="' + String(item.artist === activeArtist) + '">'
+        + '<span lang="ja">' + esc(item.artist) + '</span><small>' + item.count + ' 首</small></button>';
     }).join('');
 
-    $('#list-count').textContent = SONGS.length + ' 首';
+    if (!artists.length) {
+      options += '<p class="artist-option-empty">没有匹配的演唱者</p>';
+    }
+    $('#artist-options').innerHTML = options;
+  }
+
+  function setArtistMenu(open, restoreFocus){
+    $('#artist-menu').hidden = !open;
+    $('#artist-trigger').setAttribute('aria-expanded', String(open));
+    if (open) {
+      $('#artist-menu-search').value = '';
+      renderArtistOptions();
+      $('#artist-menu-search').focus();
+    } else if (restoreFocus) {
+      $('#artist-trigger').focus();
+    }
+  }
+
+  function matchesSearch(song, query){
+    if (!query) return true;
+    return [
+      song.title.join(' '), song.artist, song.work, song.year,
+      song.level, song.kicker, song.desc
+    ].some(function(value){
+      return normalize(value).indexOf(query) !== -1;
+    });
+  }
+
+  function songCard(s){
+    var lines = s.title.filter(Boolean);
+    var titleHtml = lines.map(esc).join('<br>');
+    var titleText = lines.map(esc).join(' ');
+    var prog = progress(s.slug, s.scale.vocab);
+    var progHtml = prog === null ? '' :
+      '<span class="song-prog" title="已标记掌握的词汇"><i><b style="width:'
+      + Math.round(prog / s.scale.vocab * 100) + '%"></b></i>'
+      + prog + '/' + s.scale.vocab + '</span>';
+
+    return '<a class="song" href="' + esc(s.href) + '">'
+      + '<figure class="cov t-' + esc(s.tone) + '">'
+      +   '<div class="cov-top"><span>SINGLE</span><span>' + esc(s.year) + '</span></div>'
+      +   '<div class="cov-mid">'
+      +     '<span class="cov-work">' + esc(s.work) + '</span>'
+      +     '<span class="cov-title">' + titleHtml + '</span>'
+      +     '<span class="cov-artist" lang="ja">' + esc(s.artist) + '</span>'
+      +   '</div>'
+      +   '<div class="cov-foot"><span lang="ja">歌詞精読</span><span>' + esc(s.level) + '</span></div>'
+      + '</figure>'
+      + '<div class="song-body">'
+      +   '<p class="song-kicker" lang="ja">' + esc(s.kicker) + '</p>'
+      +   '<h3 class="song-title" lang="ja">' + titleText + '</h3>'
+      +   '<p class="song-by"><span lang="ja">' + esc(s.artist) + '</span> · ' + esc(s.year)
+      +     '<span class="song-lv" title="大致难度参考，不是考试级别判定">' + esc(s.level) + '</span>'
+      +     progHtml + '</p>'
+      +   '<p class="song-desc">' + esc(s.desc) + '</p>'
+      +   '<div class="song-foot">'
+      +     '<span class="song-scale">' + s.scale.lines + ' 句 · ' + s.scale.vocab + ' 词 · ' + s.scale.grammar + ' 语法</span>'
+      +     '<span class="song-go">进入 ' + ARROW + '</span>'
+      +   '</div>'
+      + '</div>'
+      + '</a>';
+  }
+
+  function pageItems(page, totalPages){
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, function(_, index){ return index + 1; });
+    }
+
+    var items = [1];
+    var startPage = Math.max(2, page - 1);
+    var endPage = Math.min(totalPages - 1, page + 1);
+
+    if (page <= 3) {
+      startPage = 2;
+      endPage = 4;
+    } else if (page >= totalPages - 2) {
+      startPage = totalPages - 3;
+      endPage = totalPages - 1;
+    }
+
+    if (startPage > 2) items.push('ellipsis-start');
+    for (var item = startPage; item <= endPage; item++) items.push(item);
+    if (endPage < totalPages - 1) items.push('ellipsis-end');
+    items.push(totalPages);
+    return items;
+  }
+
+  function renderPager(totalSongs, totalPages){
+    var showPager = totalPages > 1;
+    $('#pager').hidden = !showPager;
+    if (!showPager) {
+      $('#pager-summary').textContent = '';
+      $('#pager-pages').innerHTML = '';
+      return;
+    }
+
+    $('#pager-summary').textContent = '第 ' + currentPage + ' / ' + totalPages
+      + ' 页 · 本页 ' + Math.min(PAGE_SIZE, totalSongs - (currentPage - 1) * PAGE_SIZE) + ' 首';
+
+    var pagesHtml = '<button type="button" data-page="' + (currentPage - 1) + '"'
+      + (currentPage === 1 ? ' disabled' : '') + ' aria-label="上一页">上一页</button>';
+    pagesHtml += pageItems(currentPage, totalPages).map(function(item){
+      if (typeof item === 'string') return '<span class="pager-ellipsis" aria-hidden="true">…</span>';
+      return '<button type="button" data-page="' + item + '"'
+        + (item === currentPage ? ' aria-current="page"' : '')
+        + ' aria-label="第 ' + item + ' 页">' + item + '</button>';
+    }).join('');
+    pagesHtml += '<button type="button" data-page="' + (currentPage + 1) + '"'
+      + (currentPage === totalPages ? ' disabled' : '') + ' aria-label="下一页">下一页</button>';
+    $('#pager-pages').innerHTML = pagesHtml;
+  }
+
+  function renderSongs(){
+    var query = normalize(searchQuery);
+    var visibleSongs = SONGS.filter(function(song){
+      return (!activeArtist || song.artist === activeArtist) && matchesSearch(song, query);
+    });
+
+    if (sortMode === 'artist') {
+      var order = Object.create(null);
+      SONGS.forEach(function(song, index){ order[song.slug] = index; });
+      visibleSongs.sort(function(a, b){
+        return collator.compare(a.artist, b.artist) || order[a.slug] - order[b.slug];
+      });
+    }
+
+    var totalPages = Math.ceil(visibleSongs.length / PAGE_SIZE);
+    currentPage = Math.min(Math.max(1, currentPage), Math.max(1, totalPages));
+    var pageStart = (currentPage - 1) * PAGE_SIZE;
+    var pageSongs = visibleSongs.slice(pageStart, pageStart + PAGE_SIZE);
+
+    $('#songs').innerHTML = pageSongs.map(songCard).join('');
+    $('#empty').hidden = visibleSongs.length !== 0;
+    renderPager(visibleSongs.length, totalPages);
+
+    var artistsOnPage = visibleSongs.reduce(function(list, song){
+      if (list.indexOf(song.artist) === -1) list.push(song.artist);
+      return list;
+    }, []).length;
+    var filtering = Boolean(activeArtist || query);
+    var count = filtering
+      ? visibleSongs.length + ' / ' + SONGS.length + ' 首'
+      : visibleSongs.length + ' 首';
+    $('#list-count').textContent = count + ' · ' + artistsOnPage + ' 位演唱者';
     $('#foot-year').textContent = new Date().getFullYear();
   }
+
+  renderArtistTrigger();
+
+  $('#artist-trigger').addEventListener('click', function(){
+    setArtistMenu($('#artist-menu').hidden, false);
+  });
+
+  $('#artist-trigger').addEventListener('keydown', function(event){
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      setArtistMenu(true, false);
+    } else if (event.key === 'Escape') {
+      setArtistMenu(false, true);
+    }
+  });
+
+  $('#artist-menu-search').addEventListener('input', renderArtistOptions);
+  $('#artist-menu-search').addEventListener('keydown', function(event){
+    var options = Array.prototype.slice.call(document.querySelectorAll('#artist-options .artist-option'));
+    if (event.key === 'ArrowDown' && options.length) {
+      event.preventDefault();
+      options[0].focus();
+    } else if (event.key === 'ArrowUp' && options.length) {
+      event.preventDefault();
+      options[options.length - 1].focus();
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      setArtistMenu(false, true);
+    }
+  });
+
+  $('#artist-options').addEventListener('click', function(event){
+    var option = event.target.closest('.artist-option');
+    if (!option) return;
+    activeArtist = option.getAttribute('data-artist');
+    currentPage = 1;
+    renderArtistTrigger();
+    setArtistMenu(false, true);
+    renderSongs();
+  });
+
+  $('#artist-options').addEventListener('keydown', function(event){
+    var options = Array.prototype.slice.call(this.querySelectorAll('.artist-option'));
+    var index = options.indexOf(document.activeElement);
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      var direction = event.key === 'ArrowDown' ? 1 : -1;
+      var nextIndex = index < 0 ? 0 : (index + direction + options.length) % options.length;
+      options[nextIndex].focus();
+    } else if (event.key === 'Home' && options.length) {
+      event.preventDefault();
+      options[0].focus();
+    } else if (event.key === 'End' && options.length) {
+      event.preventDefault();
+      options[options.length - 1].focus();
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      setArtistMenu(false, true);
+    }
+  });
+
+  document.addEventListener('click', function(event){
+    if (!$('#artist-picker').contains(event.target)) setArtistMenu(false, false);
+  });
+  document.addEventListener('focusin', function(event){
+    if (!$('#artist-menu').hidden && !$('#artist-picker').contains(event.target)) {
+      setArtistMenu(false, false);
+    }
+  });
+
+  $('#song-search').addEventListener('input', function(event){
+    searchQuery = event.target.value;
+    currentPage = 1;
+    renderSongs();
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('.sort-toggle button'), function(button){
+    button.addEventListener('click', function(){
+      sortMode = button.getAttribute('data-sort');
+      currentPage = 1;
+      Array.prototype.forEach.call(document.querySelectorAll('.sort-toggle button'), function(item){
+        item.setAttribute('aria-pressed', String(item === button));
+      });
+      renderSongs();
+    });
+  });
+
+  $('#pager').addEventListener('click', function(event){
+    var button = event.target.closest('button[data-page]');
+    if (!button || button.disabled) return;
+    currentPage = Number(button.getAttribute('data-page'));
+    renderSongs();
+    var currentButton = $('#pager-pages button[aria-current="page"]');
+    if (currentButton) currentButton.focus({ preventScroll: true });
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelector('.list').scrollIntoView({ block: 'start', behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+
+  $('#reset-directory').addEventListener('click', function(){
+    activeArtist = '';
+    searchQuery = '';
+    sortMode = 'added';
+    currentPage = 1;
+    $('#song-search').value = '';
+    renderArtistTrigger();
+    Array.prototype.forEach.call(document.querySelectorAll('.sort-toggle button'), function(button){
+      button.setAttribute('aria-pressed', String(button.getAttribute('data-sort') === 'added'));
+    });
+    renderSongs();
+    $('#song-search').focus();
+  });
 
   renderTally();
   renderSongs();
