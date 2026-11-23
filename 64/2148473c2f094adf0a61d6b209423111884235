@@ -1,0 +1,25 @@
+README.md
+  s_df40dcb18a8d30::t_6cf3ab2a94c5ef 6-7
+index.html
+  s_df40dcb18a8d30::t_a187ff3231ff6e 566-590,593-601
+  s_df40dcb18a8d30::t_81181615835bde 230-231,263
+  s_df40dcb18a8d30::t_e30cebf0d464c4 684-687,732-764,767-880,882-908,910-918,922-1028
+  s_df40dcb18a8d30::t_3b5234672220a2 173-229,232-260,264-298,307-347
+  s_df40dcb18a8d30::t_01b52d4c867c6f 765-766
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.52-trip",
+  "base_commit_sha": "642148473c2f094adf0a61d6b209423111884235",
+  "prompts": {},
+  "sessions": {
+    "s_df40dcb18a8d30": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a20823-1b49-7440-ac29-d68a6349eaf4",
+        "model": "deepseek-v4.1-flash[1M]"
+      },
+      "human_author": "akisaya <akikevinsama@gmail.com>"
+    }
+  }
+}
