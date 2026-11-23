@@ -22,3 +22,10 @@
 | 15 | THERE IS A REASON | ノーゲーム・ノーライフ ゼロ · 主題歌 | 鈴木このみ | 2017 | N2 上下 | 24 句 / 55 词 / 14 语法 / 46 行歌词 | 5 块 | [打开](./there-is-a-reason/index.html) |
 | 16 | 前前前世 | 君の名は。 · 主題歌 | RADWIMPS | 2016 | N3 上下 | 26 句 / 66 词 / 14 语法 / 36 行歌词 | 5 块 | [打开](./zenzenzense/index.html) |
 | 17 | unravel | 東京喰種 · OP | TK from 凛として時雨 | 2014 | N2 上下 | 29 句 / 55 词 / 14 语法 / 40 行歌词 | 5 块 | [打开](./unravel/index.html) |
+| 18 | 春雷 | BOOTLEG · Album Track | 米津玄師 | 2017 | N2 上下 | 26 句 / 70 词 / 16 语法 / 61 行歌词 | 5 块 | [打开](./shunrai/index.html) |
+| 19 | 君が好きだと叫びたい | SLAM DUNK · OP1 | BAAD | 1993 | N3 上下 | 21 句 / 63 词 / 15 语法 / 26 行歌词 | 5 块 | [打开](./sakebitai/index.html) |
+| 20 | 世界が終わるまでは… | SLAM DUNK · ED2 | WANDS | 1994 | N3 上下 | 19 句 / 62 词 / 16 语法 / 24 行歌词 | 5 块 | [打开](./sekai-ga-owaru-made/index.html) |
+| 21 | secret base 〜君がくれたもの〜 | あの花 · ED（原曲 2001） | ZONE | 2001 | N3 上下 | 23 句 / 67 词 / 16 语法 / 36 行歌词 | 5 块 | [打开](./secret-base/index.html) |
+| 22 | One more time, One more chance | 秒速5センチメートル · 主題歌（原曲 1997） | 山崎まさよし | 1997 | N3 上下 | 24 句 / 70 词 / 16 语法 / 44 行歌词 | 5 块 | [打开](./one-more-time/index.html) |
+| 23 | ブルーバード | NARUTO 疾風伝 · OP3 | いきものがかり | 2008 | N3–N2 | 24 句 / 60 词 / 16 语法 / 33 行歌词 | 5 块 | [打开](./blue-bird/index.html) |
+| 24 | 東京 | COVER 70's · 翻唱（原曲 マイ・ペース 1975） | 柴田淳 | 2012 | N3 上下 | 19 句 / 51 词 / 14 语法 / 24 行歌词 | 5 块 | [打开](./tokyo-shibata/index.html) |
