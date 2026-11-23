@@ -73,6 +73,9 @@ node scripts/build.js --check --strict-lines song.json   # 新建/维护逐句�
 
 **默认改用官方封面**：跑一次 `node scripts/cover.js <song.json>`。脚本按「歌名 + 歌手」检索 iTunes，打分挑原版单曲（排除 LIVE／翻唱／カラオケ／オルゴール／inst），取 1000px 图，方图缩到 800×800，非方图用模糊底衬补成方形，写入 `covers/cover.jpg`、另出一张 320px 的 `covers/thumb.jpg`（合集页卡片用），并把 `meta.cover` 指过去。已有封面会跳过，`--force` 重抓，`--query "歌名 歌手"` 手动指定检索词，`--dry-run` 只看选哪张。
 
+日区 iTunes 查不到某些动画盘，或只返回翻唱（例：RADWIMPS「前前前世」日区只有 Aruvn 的翻唱单曲）。这时从美区 iTunes 或其他官方渠道拿到图后直接喂给脚本：
+`node scripts/cover.js <song.json> --force --artwork "<图片URL>"`，后面的补边、缩略图、`meta.cover` 流程照常。拿到图后看一眼是不是原唱官方图。
+
 | 写法 | 效果 |
 |---|---|
 | 不填 | 排版式封面（不跑 `cover.js` 时的兜底，零文件） |

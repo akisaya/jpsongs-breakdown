@@ -28,7 +28,7 @@ metadata:
 | 难度 | 页面标「N3 上下」这类**大致档位**，不写成 JLPT 等级判定 | 「N4」「N2」→ 调 `vocab[].lv` 分布与语法条难度，同时改 `meta.level` |
 | 输出 | **当前工作目录**下的 `<slug>/{index.html,<slug>.song.json}` | 给了路径就用给的；同名文件存在时先问 |
 | 配色 | 奶油纸底 + 橙/青 | 「换个蓝色系」→ 改 `assets/base.css` 顶部的 `--orange` / `--teal` |
-| 封面 | **自动取官方封面**：`node scripts/cover.js <slug>/<slug>.song.json`（iTunes 检索 → 800px → 非方图自动补边 → build 内联） | 「不要图片」→ 不跑脚本，`meta.cover` 留空走排版式封面；「用我的图」→ 路径写进 `meta.cover` |
+| 封面 | **自动取官方封面**：`node scripts/cover.js <slug>/<slug>.song.json`（iTunes 检索 → 800px → 非方图自动补边 → build 内联） | 「不要图片」→ 不跑脚本，`meta.cover` 留空走排版式封面；日区缺盘／搜到翻唱 → `--artwork <官方图URL>` 跳过检索 |
 | MV 链接 | **自动搜 B 站**：`node scripts/mv.js <slug>/<slug>.song.json --write`，取「歌名+作者」检索后评分最高的一条写进 `meta.lead` | 「用这个链接」→ `--pick BV1xxx`；「不要视频」→ 不跑，手工删掉 lead 里的 `<a>` 即可 |
 | 卡片量 | 通常 16–24 张；每张必须对应一条**完整歌词行**，完全重复的行只做一张 | 「做细一点」→ 24+；「一页就够」→ 12 左右，但不得把来源行截成词组来凑数 |
 

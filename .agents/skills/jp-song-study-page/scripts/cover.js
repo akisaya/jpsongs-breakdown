@@ -5,6 +5,7 @@
  *   node scripts/cover.js <slug>/<slug>.song.json            # 已有封面则跳过
  *   node scripts/cover.js <song.json> --force                # 重新抓
  *   node scripts/cover.js <song.json> --query "群青 YOASOBI"  # 手动指定检索词
+ *   node scripts/cover.js <song.json> --artwork <图片URL>     # 跳过检索，直接用这张图
  *   node scripts/cover.js <song.json> --size 1000 --dry-run  # 只看选哪张，不写盘
  *
  * 流程：iTunes Search API 检索 → 打分挑最像「原版单曲」的一张 →
@@ -36,6 +37,7 @@ if (!file) {
 const SIZE = Number(opt('size', 800));
 const DRY = flag('dry-run');
 const FORCE = flag('force');
+const ARTWORK = opt('artwork', '');
 
 /* ---------- 文本归一化与打分 ---------- */
 
@@ -221,24 +223,32 @@ function makeThumb(src, dest, size) {
     return;
   }
 
-  console.log(`检索：${title} / ${artist}`);
-  const found = await resolveTrack(title, artist, opt('query', ''));
-  if (!found) {
-    throw new Error('没找到匹配封面。用 --query "歌名 歌手" 手动指定检索词，或 --title/--artist 覆盖字段');
-  }
+  let coverSrc;
+  if (ARTWORK) {
+    /* 日区 iTunes 常缺动画盘，或只有翻唱版；这时用 --artwork 直接给官方图地址 */
+    console.log(`指定封面：${ARTWORK}`);
+    coverSrc = artworkUrl(ARTWORK);
+  } else {
+    console.log(`检索：${title} / ${artist}`);
+    const found = await resolveTrack(title, artist, opt('query', ''));
+    if (!found) {
+      throw new Error('没找到匹配封面。用 --query "歌名 歌手" 手动指定检索词，或 --title/--artist 覆盖字段，或 --artwork <图片URL>');
+    }
 
-  const it = found.item;
-  console.log(`选中：${it.trackName || it.collectionName} — ${it.artistName}｜${it.collectionName}｜${(it.releaseDate || '').slice(0, 10)}（${found.via}，得分 ${found.score.toFixed(1)}）`);
+    const it = found.item;
+    console.log(`选中：${it.trackName || it.collectionName} — ${it.artistName}｜${it.collectionName}｜${(it.releaseDate || '').slice(0, 10)}（${found.via}，得分 ${found.score.toFixed(1)}）`);
+    coverSrc = artworkUrl(it.artworkUrl100);
+  }
 
   if (DRY) {
     console.log('--dry-run：不下载、不写 song.json');
-    console.log('封面地址：' + artworkUrl(it.artworkUrl100));
+    console.log('封面地址：' + coverSrc);
     return;
   }
 
   fs.mkdirSync(outDir, { recursive: true });
   const tmp = path.join(outDir, '.cover-src');
-  const bytes = await download(artworkUrl(it.artworkUrl100), tmp);
+  const bytes = await download(coverSrc, tmp);
   const result = toSquareJpg(tmp, outFile, SIZE);
   fs.unlinkSync(tmp);
 

@@ -35,7 +35,7 @@ node $SKILL/scripts/build.js --strict-lines <slug>/<slug>.song.json <slug>/index
 
 1. 用「歌名 + 作者」调 B 站 `search/type`，取 2 页共 40 条，按综合排序编号。
 2. **过滤**：标题必须含歌名（主标题 / 副标题 / 拼起来 / `meta.aliases` 任一），且含作者或 UP 名是作者本人。
-3. **淘汰**：命中 `tab / 谱 / 指弹 / 伴奏 / カラオケ / KTV / 翻唱 / cover / 教学 / MMD / 8D / remix / acoustic / 弾き語り / arrange` 等。
+3. **淘汰**：命中 `tab / 谱 / 指弹 / 伴奏 / カラオケ / KTV / 翻唱 / cover / 教学 / MMD / 8D / remix / acoustic / 弾き語り / arrange`，以及笛、箫、二胡、吉他、bass、踊ってみた、歌い方、解説 等二创／教学词。
 4. **打分**：对上歌名 +8、对上作者 +5、UP 是作者本人 +6、厂牌号 +2、官方/主题曲 +3、MV +2；播放量取对数最多 +4；时长 <2:10 扣 7（切片）；排名越靠前微加分。
 5. 取得分最高的一条，写进 `meta.lead`（已有链接就替换，没有就追加在末尾）。
 
@@ -72,8 +72,11 @@ node $SKILL/scripts/build.js --strict-lines <slug>/<slug>.song.json <slug>/index
 }
 ```
 
+`meta.aliases` **同时参与歌名和作者匹配**：TK 的中文译名「凛冽时雨」写进 aliases 后，
+标题「TK from 凛冽时雨「unravel」」才算对上作者「TK from 凛として時雨」。
+
 脚本自带常见异体字归一（`宮/宫`、`歩/步`、`師/师`、`澤/泽`、`龍/龙` 等），
-所以 `宫崎步` 能匹配上 `宮崎歩`；但**中文昵称**（铃木木乃美）和**英文缩写**（NGNL0）归一不了，得靠 aliases。
+所以 `宫崎步` 能匹配上 `宮崎歩`；但**中文译名**（凛冽时雨、铃木木乃美）和**英文缩写**（NGNL0）归一不了，得靠 aliases。
 
 ## 选片的质量判据
 

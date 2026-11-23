@@ -22,6 +22,9 @@
 | `1fr` 的隐式最小宽 | 带 `nowrap` 的子元素把网格撑破，移动端横向溢出 | `minmax(0,1fr)` + 网格子项 `min-width:0` |
 | 伪元素定位 | `::after` 用了 `inset:0` 之后再设 `right/top`，会被 `left:0` 拉回左上角 | 需要独立定位的装饰做成真实元素（如 `.cover-ring`），伪元素只留铺满的高光 |
 | 封面搜不到原版 | 检索词带歌手仍返回翻唱／カラオケ／LIVE | `cover.js` 会打分并排除这些词；仍不对就 `--query "歌名 歌手"`，或 `--title` / `--artist` 覆盖字段。动画盘常要按歌手查专辑才命中（如 `brave heart`） |
+| 日区 iTunes 根本没有这张盘 | 搜「前前前世 RADWIMPS」只返回 Aruvn 翻唱单曲 | 换美区找官方专辑图，用 `--artwork "<URL>"` 直接喂给 `cover.js`；它照样做补边、缩略图和 `meta.cover` |
+| MV 搜到乐器翻奏 | `unravel` 搜出笛箫／吉他／TAB 版 | `mv.js` 的淘汰词表已含笛、箫、二胡、吉他、bass、弾いてみた、踊ってみた、歌い方、解説；新遇到的乐器名继续补进去 |
+| 歌手译名对不上 | 标题写「凛冽时雨」，song.json 写「凛として時雨」，被判作者对不上 | 在 `meta.aliases` 加译名；aliases 同时参与歌名和作者匹配 |
 | 封面不是方图 | build 警告宽高比、`object-fit:cover` 裁掉两侧 | `cover.js` 会自动用模糊底衬补成方形，主体不裁；手工换图时也照这个做法，不要硬裁 |
 | Cover Art Archive 连不上 | `coverartarchive.org` 307 到 `archive.org` 后超时 | 沙箱代理常拦 archive.org，换 iTunes API；CAA 只适合 iTunes 查不到的冷门盘 |
 | `background-clip:text` 与紧行高 | 大标题字形顶部／底部被齐齐削掉一条，看起来像被别的元素遮住 | 行高（`.84`）小于字形高度时，字形伸出元素的背景绘制盒；渐变只在盒内绘制，盒外就是透明。给标题加 `padding-block:.2em` 撑大绘制盒，再用 `margin-top:calc(.9rem - .2em)` 和副标题的 `margin-top:calc(1.05rem - .14em)` 抵消，视觉节奏不变。自查：`scrollHeight === clientHeight` 才算字形完整落在盒内 |

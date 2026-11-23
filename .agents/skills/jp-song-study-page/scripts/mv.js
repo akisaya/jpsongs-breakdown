@@ -83,10 +83,13 @@ function unify(s) {
 const HARD = [
   'tab', '谱', '指弹', '口琴', '钢琴', '鋼琴', '小提琴', '萨克斯', '打击乐', '鼓谱',
   '伴奏', '和声伴奏', 'offvocal', 'カラオケ', 'karaoke', 'ニコカラ', 'ktv', '卡拉ok',
-  '翻唱', 'cover', 'covered', '歌ってみた', '学唱', '空耳', '教学', '讲座', 'mmd', '手元', '演奏',
-  '吹奏楽', '8d', 'nightcore', 'remix', 'dj', '纯音乐', '純音樂', '铃声', '计算器',
+  '翻唱', 'cover', 'covered', 'カバー', '歌ってみた', '歌い方', '学唱', '空耳', '教学',
+  '讲座', '講座', '解説', 'mmd', '手元', '演奏', '吹奏楽', '踊ってみた', '振付', '弾いてみた',
+  '8d', 'nightcore', 'remix', 'dj', '纯音乐', '純音樂', '铃声', '计算器',
   '合集', 'reaction', '试听反应',
   'acoustic', 'アコースティック', 'アコギ', '弾き語り', 'アレンジ', 'arrange',
+  '笛', '箫', '二胡', '古筝', '琵琶', '弦乐', '弦楽', '四重奏', '八音盒', 'オルゴール',
+  '吉他', '贝斯', 'bass', 'ギター', 'ベース', '三味線', '箏',
 ];
 
 /* 命中扣分但不淘汰：形态与原曲不同（现场、TV size 等） */
@@ -198,6 +201,11 @@ function artistForms(meta) {
   if (!raw) return [];
   for (const part of [raw, ...raw.split(/[\/、,，&＆]|\s+feat\.?\s+/i)]) {
     const n = unify(norm(part));
+    if (usable(n)) forms.add(n);
+  }
+  /* aliases 同时供歌名和作者匹配用（如「凛として時雨」的中文译名「凛冽时雨」） */
+  for (const s of meta.aliases || []) {
+    const n = unify(norm(s));
     if (usable(n)) forms.add(n);
   }
   return [...forms];
