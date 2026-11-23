@@ -1,0 +1,19 @@
+index.html
+  s_ca0ce2fc4f214f::t_a9b1e322750748 24,26,93-94,362
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.52-trip",
+  "base_commit_sha": "c484c0eb9f0742a68f04589e89ec16e3ee1b95fb",
+  "prompts": {},
+  "sessions": {
+    "s_ca0ce2fc4f214f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a2071e-b48f-7f92-b292-b1e27607e54a",
+        "model": "gpt-6.1-terra[1M]"
+      },
+      "human_author": "akisaya <akikevinsama@gmail.com>"
+    }
+  }
+}
