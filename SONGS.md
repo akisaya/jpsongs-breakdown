@@ -29,3 +29,8 @@
 | 22 | One more time, One more chance | 秒速5センチメートル · 主題歌（原曲 1997） | 山崎まさよし | 1997 | N3 上下 | 24 句 / 70 词 / 16 语法 / 44 行歌词 | 5 块 | [打开](./one-more-time/index.html) |
 | 23 | ブルーバード | NARUTO 疾風伝 · OP3 | いきものがかり | 2008 | N3–N2 | 24 句 / 60 词 / 16 语法 / 33 行歌词 | 5 块 | [打开](./blue-bird/index.html) |
 | 24 | 東京 | COVER 70's · 翻唱（原曲 マイ・ペース 1975） | 柴田淳 | 2012 | N3 上下 | 19 句 / 51 词 / 14 语法 / 24 行歌词 | 5 块 | [打开](./tokyo-shibata/index.html) |
+| 25 | only my railgun | とある科学の超電磁砲 · OP1 | fripSide | 2009 | N2 上下 | 25 句 / 70 词 / 16 语法 / 53 行歌词 | 5 块 | [打开](./only-my-railgun/index.html) |
+| 26 | 紅蓮華 | 鬼滅の刃 · OP1 | LiSA | 2019 | N3–N2 | 24 句 / 69 词 / 16 语法 / 32 行歌词 | 5 块 | [打开](./gurenge/index.html) |
+| 27 | スパークル | 君の名は。 · 主題歌（original ver.） | RADWIMPS | 2016 | N3–N2 | 26 句 / 70 词 / 16 语法 / 39 行歌词 | 5 块 | [打开](./sparkle/index.html) |
+| 28 | tummy | ×と○と罪と · Album Track | RADWIMPS | 2013 | N3 上下 | 23 句 / 65 词 / 15 语法 / 59 行歌词 | 5 块 | [打开](./tummy/index.html) |
+| 29 | 正解 | NHK『RADWIMPS 18祭』書き下ろし（18FES ver.） | RADWIMPS | 2018 | N3–N2 | 26 句 / 68 词 / 16 语法 / 52 行歌词 | 5 块 | [打开](./seikai/index.html) |
