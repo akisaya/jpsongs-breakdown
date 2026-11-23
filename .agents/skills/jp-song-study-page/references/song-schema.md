@@ -57,7 +57,8 @@ node scripts/build.js --check --strict-lines song.json   # 新建/维护逐句�
 | `artist` | 演唱者 |
 | `subtitle` | 通常 `歌詞精読` |
 | `level` | 大致难度档位，会显示在封面右下角，如 `N3 上下`、`N3–N2` |
-| `lead` | **允许 HTML**。首屏导语，一到两句，说清"为什么拿这首入门" |
+| `lead` | **允许 HTML**。首屏导语，一到两句，说清"为什么拿这首入门"。末尾通常挂一条 B 站链接，由 `scripts/mv.js` 写入，见 `references/mv-links.md` |
+| `aliases` | 可选。给 `mv.js` 检索用的别名数组（中文译名、罗马字、常见误写），不影响渲染，也不参与校验 |
 | `badges` | 4 个徽章。**第一个**会渲染成等级色（橙色），其余是圆点样式 |
 | `discLabel` / `discSub` | CD 中心的字，通常年份 + `single`；同时作为排版封面的年份 |
 | `cover` | 首屏封面，三种写法见下。**不填 = 排版式封面**；推荐先跑 `scripts/cover.js` 自动生成 |
