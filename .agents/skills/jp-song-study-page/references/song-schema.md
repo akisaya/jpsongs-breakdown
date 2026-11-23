@@ -60,7 +60,7 @@ node scripts/build.js --check --strict-lines song.json   # 新建/维护逐句�
 | `lead` | **允许 HTML**。首屏导语，一到两句，说清"为什么拿这首入门" |
 | `badges` | 4 个徽章。**第一个**会渲染成等级色（橙色），其余是圆点样式 |
 | `discLabel` / `discSub` | CD 中心的字，通常年份 + `single`；同时作为排版封面的年份 |
-| `cover` | 首屏封面，三种写法见下。**不填 = 排版式封面** |
+| `cover` | 首屏封面，三种写法见下。**不填 = 排版式封面**；推荐先跑 `scripts/cover.js` 自动生成 |
 | `coverTag` | 排版封面左上角的小字，默认 `Single` |
 | `coverAlt` | 图片封面的 alt，不填则用「歌名 封面」 |
 | `backHref` | 顶栏「‹ 合集」的链接。不填默认 `../index.html`（对应 `<slug>/index.html` 的结构）；显式写 `""` 则不显示该入口 |
@@ -70,11 +70,13 @@ node scripts/build.js --check --strict-lines song.json   # 新建/维护逐句�
 
 首屏默认渲染一张**排版式封面**（纯 CSS + 文字，无图片文件）：深青底、数码网格、歌名用衬线斜体，顶部 `SINGLE / 年份`，底部 `歌詞精読 / N3`。信息全部来自 `meta`，换歌自动变。
 
+**默认改用官方封面**：跑一次 `node scripts/cover.js <song.json>`。脚本按「歌名 + 歌手」检索 iTunes，打分挑原版单曲（排除 LIVE／翻唱／カラオケ／オルゴール／inst），取 1000px 图，方图缩到 800×800，非方图用模糊底衬补成方形，写入 `covers/cover.jpg`、另出一张 320px 的 `covers/thumb.jpg`（合集页卡片用），并把 `meta.cover` 指过去。已有封面会跳过，`--force` 重抓，`--query "歌名 歌手"` 手动指定检索词，`--dry-run` 只看选哪张。
+
 | 写法 | 效果 |
 |---|---|
-| 不填 | 排版式封面（推荐，零文件、零版权风险） |
+| 不填 | 排版式封面（不跑 `cover.js` 时的兜底，零文件） |
 | `"disc"` | 回到旧版的 CD 唱片图形 |
-| `"covers/xxx.jpg"` | 图片封面。相对路径**相对于该 song.json**，build 时自动转 base64 内联，产物仍是单文件 |
+| `"covers/cover.jpg"` | `cover.js` 生成的封面。相对路径**相对于该 song.json**，build 时自动转 base64 内联，产物仍是单文件 |
 | `"https://..."` | 外链图片（不内联，页面需要联网） |
 
 图片建议：正方形，≥600×600，压到 300KB 以内（超过 600KB 会告警）。`build.js` 会自动识别 jpg / png / webp / gif / svg，并读取实际像素尺寸，两种情况会给出提醒：
@@ -82,7 +84,7 @@ node scripts/build.js --check --strict-lines song.json   # 新建/维护逐句�
 - **不是正方形**（宽高比偏离 1 超过 6%）——页面按方形 `object-fit: cover` 裁切，会切掉长边两侧，提醒你确认主体居中；
 - **短边 < 600px**——页面上会放大到约 378px 显示，清晰度不够。
 
-用官方原封面时注意两点：图片需**自己持有**（购买的数字专辑、CD 扫描、自己的截图），不要直接把网上转载图打进页面；页面底部 `footer.note` 的版权句要保留。
+封面版权归原权利方。个人学习项目直接用 `cover.js` 取来的官方图即可，页面底部 `footer.note` 的版权句照旧保留；若用户明确要求公开发布且不愿担图片风险，再把 `meta.cover` 清空、删掉 `covers/`，回到排版式封面。
 
 ## stats
 

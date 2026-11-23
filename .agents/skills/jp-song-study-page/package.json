@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node scripts/build.js",
     "check": "node scripts/check.js",
-    "verify": "node scripts/build.js --check --strict-lines"
+    "verify": "node scripts/build.js --check --strict-lines",
+    "cover": "node scripts/cover.js"
   },
   "dependencies": {
     "playwright-core": "^1.65.1"

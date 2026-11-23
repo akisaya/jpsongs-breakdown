@@ -27,7 +27,7 @@ metadata:
 | 难度 | 页面标「N3 上下」这类**大致档位**，不写成 JLPT 等级判定 | 「N4」「N2」→ 调 `vocab[].lv` 分布与语法条难度，同时改 `meta.level` |
 | 输出 | **当前工作目录**下的 `<slug>/{index.html,<slug>.song.json}` | 给了路径就用给的；同名文件存在时先问 |
 | 配色 | 奶油纸底 + 橙/青 | 「换个蓝色系」→ 改 `assets/base.css` 顶部的 `--orange` / `--teal` |
-| 封面 | **排版式封面**（纯 CSS，随歌名自动生成） | 「用我的封面图」→ 图片路径写进 `meta.cover`，build 自动内联 |
+| 封面 | **自动取官方封面**：`node scripts/cover.js <slug>/<slug>.song.json`（iTunes 检索 → 800px → 非方图自动补边 → build 内联） | 「不要图片」→ 不跑脚本，`meta.cover` 留空走排版式封面；「用我的图」→ 路径写进 `meta.cover` |
 | 卡片量 | 通常 16–24 张；每张必须对应一条**完整歌词行**，完全重复的行只做一张 | 「做细一点」→ 24+；「一页就够」→ 12 左右，但不得把来源行截成词组来凑数 |
 
 **必须先确认的三种情况**（其余都自己判断）：
@@ -47,13 +47,16 @@ SKILL=.agents/skills/jp-song-study-page
 cp $SKILL/examples/_skeleton.song.json <slug>/<slug>.song.json
 # 骨架中的歌词是格式范例；换歌时整体替换 meta、完整歌词和教学内容
 
-# 2. 只校验，不产出（改 JSON 时反复跑）
+# 2. 配封面（自动检索官方图，写入 covers/cover.jpg 并改 meta.cover）
+node $SKILL/scripts/cover.js <slug>/<slug>.song.json
+
+# 3. 只校验，不产出（改 JSON 时反复跑）
 node $SKILL/scripts/build.js --check --strict-lines <slug>/<slug>.song.json
 
-# 3. 出页面
+# 4. 出页面
 node $SKILL/scripts/build.js --strict-lines <slug>/<slug>.song.json <slug>/index.html
 
-# 4. 验收（无头 Chrome：交互 + 多断点溢出 + 截图）
+# 5. 验收（无头 Chrome：交互 + 多断点溢出 + 截图）
 node $SKILL/scripts/check.js <slug>/index.html --shots
 ```
 
@@ -69,16 +72,18 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 ├── index.html                 ← 合集索引页（可选）
 ├── brave-heart/
 │   ├── index.html             ← 构建产物
+│   ├── covers/cover.jpg       ← 官方封面（cover.js 生成，build 内联）
 │   └── brave-heart.song.json  ← 数据源
 └── again/
     ├── index.html
+    ├── covers/cover.jpg
     └── again.song.json
 ```
 
 **有合集页时，新歌出页后还要多做一步**：在根 `index.html` 的 `SONGS` 数组里追加一条
-（slug / href / kicker / work / title / artist / year / level / tone / desc / scale），否则新歌不会出现在合集页上。
+（slug / href / cover / kicker / work / title / artist / year / level / tone / desc / scale），否则新歌不会出现在合集页上。
 `slug` 必须与 `meta.slug` 一字不差（合集页靠它读 `jss.<slug>.mastery`）；`href` 要写全 `./<slug>/index.html`。
-`tone` 取 `teal` 或 `rust`，同色系别连排。没有合集页就跳过，并在 `meta.backHref` 写 `""` 关掉顶栏「‹ 合集」。
+`cover` 写 `./<slug>/covers/thumb.jpg`（`cover.js` 自动生成）；不写则退回排版式迷你封面。`tone` 取 `teal` 或 `rust`，同色系别连排。没有合集页就跳过，并在 `meta.backHref` 写 `""` 关掉顶栏「‹ 合集」。
 
 ## 页面范围
 
@@ -97,7 +102,8 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 | 4 | **词表** 50–70：按歌词出现顺序排，`lv` 给保守值 | editorial「词表」 |
 | 5 | **语法** 12–16：`form` 写完整接续，`warn` 写易错点，`examples` 写 2–3 个对应例句（注音 + 中文） | editorial「语法条」 |
 | 6 | **写文案**：`map.why` 四条理由、`steps` 三步，每首重写；页面上没有的板块不要提 | editorial「文案」 |
-| 7 | **构建 + 验收** | 命令见上、清单见下 |
+| 7 | **配封面**：跑 `cover.js`，看一眼脚本打印的专辑名是不是原版单曲（不是 LIVE／翻唱／カラオケ）；非方图脚本会自动补边 | 命令见上 |
+| 8 | **构建 + 验收** | 命令见上、清单见下 |
 
 口径不要在这里猜：内容标准全在 `references/editorial-guide.md`，字段全在 `references/song-schema.md`。
 
@@ -108,6 +114,7 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 - [ ] 控制台无错误
 - [ ] 语法图谱是最后一节；每条语法展开后有 2–3 个注音例句和中文译文
 - [ ] 顶部数据条项数正确、数值非 0
+- [ ] 封面与歌手／单曲对得上；非方图补边后主体没被裁（脚本会打印原图尺寸与专辑名）
 - [ ] 全部精读卡可见，假名与中文显示开关生效
 - [ ] **每张 `lines[].jp` 去掉注音并忽略空白后，必须与一条 `lyrics.blocks[].lines` 完全相同；不能是词组、半句或跨行拼接**
 - [ ] **显示名称为「逐句精读」，`--strict-lines` 校验无错误；“短语精读”不能用来包装片段卡**
@@ -123,7 +130,8 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 - 加了就在 `footer.note` 写全作词 / 作曲 / 演唱，并注明「仅供学习参考，请勿用于商业用途」，
   句式模板见 `editorial-guide.md` 的版权一节。
 - 页面要挂公开域名（GitHub Pages、个人站）时**先提醒用户**：公开传播和个人本地学习不是一回事，选择权交给用户。
-- 封面**不要主动去图站抓官方图**；用户自己提供才用，并内联进页面。
+- 封面默认用 `scripts/cover.js` 从 iTunes 取官方图，个人学习项目直接用即可；页脚版权句照旧保留。
+  只有用户明确说「要公开发布、不想担图片风险」时，才清空 `meta.cover` 回到排版式封面。
 
 ## 改模板时
 
@@ -142,4 +150,5 @@ assets/base.css        全部样式（改配色只动这里）
 assets/render.js       渲染逻辑（改交互只动这里）
 scripts/build.js       JSON → HTML，含字段校验
 scripts/check.js       无头浏览器验收
+scripts/cover.js       检索并处理官方封面（iTunes）
 ```

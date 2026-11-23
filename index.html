@@ -384,6 +384,10 @@ a{color:inherit;text-decoration:none}
   box-shadow:0 12px 24px -14px rgba(60,30,10,.55);
 }
 .song:hover .cov{transform:rotate(0deg) scale(1.02)}
+.cov--img{padding:0;background:var(--bg-deep);align-items:stretch}
+.cov--img::before{display:none}
+.cov--img img{inline-size:100%;block-size:100%;object-fit:cover;border-radius:inherit;display:block}
+
 .cov::before{
   content:"";position:absolute;inset:0;pointer-events:none;
   background-image:
@@ -627,6 +631,7 @@ a{color:inherit;text-decoration:none}
     {
       slug: 'brave-heart',
       href: './brave-heart/index.html',
+      cover: './brave-heart/covers/thumb.jpg',
       kicker: 'Digimon Adventure · Insert Song · 1999',
       work: 'Digimon',
       title: ['brave', 'heart'],
@@ -640,6 +645,7 @@ a{color:inherit;text-decoration:none}
     {
       slug: 'again-yui',
       href: './again/index.html',
+      cover: './again/covers/thumb.jpg',
       kicker: '鋼の錬金術師 FA · OP1 · 2009',
       work: 'FMA:B',
       title: ['again'],
@@ -653,6 +659,7 @@ a{color:inherit;text-decoration:none}
     {
       slug: 'loser',
       href: './loser/index.html',
+      cover: './loser/covers/thumb.jpg',
       kicker: 'LOSER / ナンバーナイン · 両A面シングル · 2016',
       work: 'LOSER',
       title: ['loser'],
@@ -666,6 +673,7 @@ a{color:inherit;text-decoration:none}
     {
       slug: 'flamingo',
       href: './flamingo/index.html',
+      cover: './flamingo/covers/thumb.jpg',
       kicker: 'Flamingo / TEENAGE RIOT · Single · 2018',
       work: 'FLAMINGO',
       title: ['Flamingo'],
@@ -679,6 +687,7 @@ a{color:inherit;text-decoration:none}
     {
       slug: 'gunjou',
       href: './gunjou/index.html',
+      cover: './gunjou/covers/thumb.jpg',
       kicker: 'ブルーピリオド · イメージソング · 2020',
       work: 'Blue Period',
       title: ['群青'],
@@ -692,6 +701,7 @@ a{color:inherit;text-decoration:none}
     {
       slug: 'yoru-ni-kakeru',
       href: './yoru-ni-kakeru/index.html',
+      cover: './yoru-ni-kakeru/covers/thumb.jpg',
       kicker: 'タナトスの誘惑 · デビューシングル · 2019',
       work: 'Debut',
       title: ['夜に', '駆ける'],
@@ -837,15 +847,17 @@ a{color:inherit;text-decoration:none}
       + prog + '/' + s.scale.vocab + '</span>';
 
     return '<a class="song" href="' + esc(s.href) + '">'
-      + '<figure class="cov t-' + esc(s.tone) + '">'
-      +   '<div class="cov-top"><span>SINGLE</span><span>' + esc(s.year) + '</span></div>'
-      +   '<div class="cov-mid">'
-      +     '<span class="cov-work">' + esc(s.work) + '</span>'
-      +     '<span class="cov-title">' + titleHtml + '</span>'
-      +     '<span class="cov-artist" lang="ja">' + esc(s.artist) + '</span>'
-      +   '</div>'
-      +   '<div class="cov-foot"><span lang="ja">歌詞精読</span><span>' + esc(s.level) + '</span></div>'
-      + '</figure>'
+      + (s.cover
+          ? '<figure class="cov cov--img"><img src="' + esc(s.cover) + '" alt="' + titleText + ' 封面" loading="lazy" decoding="async"></figure>'
+          : '<figure class="cov t-' + esc(s.tone) + '">'
+            + '<div class="cov-top"><span>SINGLE</span><span>' + esc(s.year) + '</span></div>'
+            + '<div class="cov-mid">'
+            +   '<span class="cov-work">' + esc(s.work) + '</span>'
+            +   '<span class="cov-title">' + titleHtml + '</span>'
+            +   '<span class="cov-artist" lang="ja">' + esc(s.artist) + '</span>'
+            + '</div>'
+            + '<div class="cov-foot"><span lang="ja">歌詞精読</span><span>' + esc(s.level) + '</span></div>'
+            + '</figure>')
       + '<div class="song-body">'
       +   '<p class="song-kicker" lang="ja">' + esc(s.kicker) + '</p>'
       +   '<h3 class="song-title" lang="ja">' + titleText + '</h3>'

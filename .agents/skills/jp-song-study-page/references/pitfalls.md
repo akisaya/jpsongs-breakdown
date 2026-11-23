@@ -20,4 +20,7 @@
 | 媒体查询位置 | `@media` 里的规则被后面同权重的基础规则覆盖 | 媒体查询放到基础规则**之后**，或提高选择器权重（例如 `.g-row`） |
 | `1fr` 的隐式最小宽 | 带 `nowrap` 的子元素把网格撑破，移动端横向溢出 | `minmax(0,1fr)` + 网格子项 `min-width:0` |
 | 伪元素定位 | `::after` 用了 `inset:0` 之后再设 `right/top`，会被 `left:0` 拉回左上角 | 需要独立定位的装饰做成真实元素（如 `.cover-ring`），伪元素只留铺满的高光 |
+| 封面搜不到原版 | 检索词带歌手仍返回翻唱／カラオケ／LIVE | `cover.js` 会打分并排除这些词；仍不对就 `--query "歌名 歌手"`，或 `--title` / `--artist` 覆盖字段。动画盘常要按歌手查专辑才命中（如 `brave heart`） |
+| 封面不是方图 | build 警告宽高比、`object-fit:cover` 裁掉两侧 | `cover.js` 会自动用模糊底衬补成方形，主体不裁；手工换图时也照这个做法，不要硬裁 |
+| Cover Art Archive 连不上 | `coverartarchive.org` 307 到 `archive.org` 后超时 | 沙箱代理常拦 archive.org，换 iTunes API；CAA 只适合 iTunes 查不到的冷门盘 |
 | `background-clip:text` 与紧行高 | 大标题字形顶部／底部被齐齐削掉一条，看起来像被别的元素遮住 | 行高（`.84`）小于字形高度时，字形伸出元素的背景绘制盒；渐变只在盒内绘制，盒外就是透明。给标题加 `padding-block:.2em` 撑大绘制盒，再用 `margin-top:calc(.9rem - .2em)` 和副标题的 `margin-top:calc(1.05rem - .14em)` 抵消，视觉节奏不变。自查：`scrollHeight === clientHeight` 才算字形完整落在盒内 |

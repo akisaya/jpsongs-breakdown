@@ -16,12 +16,14 @@
 ├── index.html                          合集索引页（手写，曲目清单在 SONGS 数组里）
 ├── <slug>/                             一首歌一个目录
 │   ├── index.html                      构建产物（不要手改，重跑 build 会覆盖）
+│   ├── covers/cover.jpg                官方封面（cover.js 生成，build 内联；thumb.jpg 给合集页）
 │   └── <slug>.song.json                数据源，页面全部内容都在这里
 └── .agents/skills/jp-song-study-page/  生成器技能
     ├── SKILL.md                        技能说明（给 Agent 看的工作流）
     ├── assets/                         模板 HTML / CSS / 渲染脚本
     ├── scripts/build.js                song.json → index.html，含字段校验
     ├── scripts/check.js                无头浏览器验收（交互 + 溢出 + 截图）
+    ├── scripts/cover.js                检索并处理官方封面（iTunes → 800px 方图）
     ├── examples/                       骨架与完整范例
     └── references/                     字段字典、内容口径、坑表
 ```
@@ -60,6 +62,7 @@ mkdir -p $SLUG
 cp $SKILL/examples/_skeleton.song.json $SLUG/$SLUG.song.json   # 6 卡 / 20 词的骨架
 
 # 先填 meta，再填 lines / vocab / grammar
+node $SKILL/scripts/cover.js $SLUG/$SLUG.song.json              # 官方封面 → covers/cover.jpg，并写回 meta.cover
 node $SKILL/scripts/build.js --check --strict-lines $SLUG/$SLUG.song.json
 node $SKILL/scripts/build.js --strict-lines $SLUG/$SLUG.song.json $SLUG/index.html
 node $SKILL/scripts/check.js $SLUG/index.html --shots          # 交互 + 四档断点溢出 + 截图
@@ -98,6 +101,7 @@ node $SKILL/scripts/check.js $SLUG/index.html --shots          # 交互 + 四档
 {
   slug: 'butterfly',                                  // 必须等于 song.json 的 meta.slug
   href: './butterfly/index.html',                     // 写全 index.html，file:// 下 ./butterfly/ 打不开
+  cover: './butterfly/covers/thumb.jpg',              // cover.js 生成的 320px 缩略图；不写则用迷你排版封面
   kicker: 'Digimon Adventure · OP · 1999',
   work: 'Digimon',
   title: ['butterfly'],
@@ -153,4 +157,5 @@ ln -s ../../.agents/skills/jp-song-study-page .workbuddy/skills/jp-song-study-pa
 页面是个人日语学习用途的歌词解析作品。收录完整歌词时，`footer.note` 要写全作词 / 作曲 / 演唱，
 并注明「仅供学习参考，请勿用于商业用途」。
 
-**挂到公开域名之前先想一下**：本地双击打开是个人使用，公开传播是另一回事。封面同理——不主动去图站抓官方图。
+封面由 `scripts/cover.js` 从 iTunes 自动取官方图。个人学习项目直接用即可；这个仓库挂着 Pages，公开托管属于再分发，
+介意的话把 `meta.cover` 清空、删掉 `covers/`，页面会自动回到排版式封面。

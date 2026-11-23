@@ -94,7 +94,7 @@
     if (cover === 'disc') return;
 
     if (cover && cover !== 'type') {
-      const alt = META.coverAlt || ((META.titleLine1 || '') + ' ' + (META.titleLine2 || '') + ' 封面').trim();
+      const alt = META.coverAlt || ([META.titleLine1, META.titleLine2].filter(Boolean).join(' ') + ' 封面');
       box.innerHTML = '<figure class="cover cover--img"><img src="' + escapeAttr(cover) + '" alt="' + escapeAttr(alt) + '"'
         + ' loading="eager" decoding="async"></figure>';
       return;
