@@ -143,7 +143,10 @@ img,svg{display:block}
   font-size:clamp(4rem,12.5vw,8.4rem);
   line-height:.84;
   letter-spacing:-.035em;
-  margin:.9rem 0 0 -.06em;
+  /* 行高小于字身时，字形顶部会超出背景绘制盒；background-clip:text 只画盒内，
+     超出部分变成透明，看起来像被削掉。用 padding 把绘制盒撑大，再抵消外边距。 */
+  padding-block:.2em .2em;
+  margin:calc(.9rem - .2em) 0 0 -.06em;
   color:var(--orange-2);
   text-wrap:balance;
 }
@@ -161,7 +164,7 @@ img,svg{display:block}
   font-size:clamp(1rem,2.1vw,1.22rem);
   color:var(--ink-2);
   letter-spacing:.22em;
-  margin-top:1.05rem;
+  margin-top:calc(1.05rem - .14em);
   display:flex;align-items:center;gap:.85rem;flex-wrap:wrap;
 }
 .song-jp span.dot{width:5px;height:5px;border-radius:50%;background:var(--orange-3);display:block}
@@ -175,6 +178,15 @@ img,svg{display:block}
   text-wrap:pretty;
 }
 .hero-lead b{color:var(--ink);font-weight:700}
+.hero-lead a{
+  color:var(--orange);
+  text-decoration:none;
+  border-bottom:1px solid rgba(217,84,31,.32);
+  padding-bottom:1px;
+  transition:border-color .18s ease,color .18s ease;
+  white-space:nowrap;
+}
+.hero-lead a:hover{color:var(--orange-2);border-bottom-color:var(--orange-2)}
 
 .badges{
   display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.6rem;

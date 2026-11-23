@@ -9,3 +9,5 @@
 | 2 | again | 钢炼 FA · OP1 | YUI | 2009 | N3–N2 | 23 句 / 68 词 / 16 语法 / 46 行歌词 | 5 块 | [打开](./again/index.html) |
 | 3 | LOSER | 双 A 面单曲（with ナンバーナイン） | 米津玄師 | 2016 | N3–N2 | 24 句 / 68 词 / 16 语法 / 62 行歌词 | 5 块 | [打开](./loser/index.html) |
 | 4 | Flamingo | Flamingo / TEENAGE RIOT · 双 A 面单曲 | 米津玄師 | 2018 | N3–N2＋文学词 | 23 句 / 70 词 / 12 语法 / 26 行歌词 | 5 块 | [打开](./flamingo/index.html) |
+| 5 | 群青 | ブルーピリオド · 形象曲 | YOASOBI | 2020 | N3–N2 | 28 句 / 70 词 / 16 语法 / 75 行歌词 | 5 块 | [打开](./gunjou/index.html) |
+| 6 | 夜に駆ける | タナトスの誘惑 · 出道单曲 | YOASOBI | 2019 | N3–N2 | 26 句 / 70 词 / 16 语法 / 56 行歌词 | 5 块 | [打开](./yoru-ni-kakeru/index.html) |

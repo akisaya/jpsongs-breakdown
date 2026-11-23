@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>群青 · YOASOBI｜日语歌词精读</title>
+<meta name="description" content="YOASOBI「群青」（2020）的日语歌词精读：完整歌词、28 句逐句拆解、70 个核心词汇、16 条语法图谱，重点讲清「〜ば〜ほど」「〜てきた」「ままに」这些把情绪推上去的句式。">
+<style>
+/* ============================================================
+   0. 设计变量
+   ============================================================ */
+:root{
+  --bg:#FBF6EF;
+  --bg-deep:#F4EADD;
+  --surface:#FFFFFF;
+  --surface-warm:#FFFCF7;
+  --ink:#1F232A;
+  --ink-2:#4C525C;
+  --ink-3:#828893;
+  --ink-4:#A9AEB7;
+  --line:#E8DCCB;
+  --line-soft:#F1E8DB;
+  --orange:#D9541F;
+  --orange-2:#E8622B;
+  --orange-3:#F59A4B;
+  --amber:#F2B33D;
+  --teal:#1E8A7E;
+  --teal-soft:#E4F2EE;
+  --blue:#33598F;
+  --blue-soft:#E8EEF8;
+  --rose:#B94E66;
+  --rose-soft:#FAE9ED;
+
+  --font-sans:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Noto Sans SC",sans-serif;
+  --font-sans-ja:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans CJK JP","Noto Sans JP",sans-serif;
+  --font-serif:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",Georgia,"Songti SC",serif;
+  --font-display:"Didot","Bodoni 72",Georgia,"Times New Roman",serif;
+
+  --shadow-xs:0 1px 2px rgba(84,56,24,.05);
+  --shadow-sm:0 1px 2px rgba(84,56,24,.05),0 4px 12px -6px rgba(84,56,24,.14);
+  --shadow-md:0 2px 4px rgba(84,56,24,.05),0 14px 34px -14px rgba(84,56,24,.22);
+  --shadow-lg:0 30px 60px -30px rgba(84,56,24,.30);
+
+  --r-sm:10px;
+  --r-md:16px;
+  --r-lg:22px;
+  --r-xl:30px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+
+html{
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+  scroll-padding-top:86px;
+}
+
+body{
+  margin:0;
+  font-family:var(--font-sans);
+  font-size:1rem;
+  line-height:1.75;
+  color:var(--ink);
+  background:
+    radial-gradient(1100px 560px at 88% -12%, rgba(255,224,190,.85) 0%, rgba(255,224,190,0) 62%),
+    radial-gradient(820px 480px at -8% 4%, rgba(214,238,231,.75) 0%, rgba(214,238,231,0) 58%),
+    var(--bg);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+
+/* 细网格底纹 */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background-image:
+    linear-gradient(to right, rgba(120,86,48,.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(120,86,48,.055) 1px, transparent 1px);
+  background-size:72px 72px;
+  -webkit-mask-image:radial-gradient(circle at 50% 12%, #000 0%, transparent 72%);
+  mask-image:radial-gradient(circle at 50% 12%, #000 0%, transparent 72%);
+}
+
+h1,h2,h3,h4{margin:0;line-height:1.28;font-weight:700;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit}
+img,svg{display:block}
+:where([lang="ja"]){font-family:var(--font-serif)}
+
+.wrap{
+  width:min(1160px, calc(100% - 2.6rem));
+  margin-inline:auto;
+  position:relative;
+  z-index:1;
+}
+@media (max-width:620px){
+  .wrap{width:calc(100% - 1.9rem)}
+}
+
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+.hide-tr .lyric-tr{display:none}
+
+.skip{
+  position:absolute;left:-9999px;top:0;
+  background:var(--ink);color:#fff;padding:.7rem 1.1rem;border-radius:0 0 10px 0;z-index:99;
+}
+.skip:focus{left:0}
+:focus-visible{outline:2.5px solid var(--orange-2);outline-offset:3px;border-radius:4px}
+
+/* ============================================================
+   1. Hero
+   ============================================================ */
+.hero{
+  position:relative;
+  padding:clamp(2.4rem,5vw,4.2rem) 0 0;
+  overflow:hidden;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr);
+  gap:clamp(1.6rem,4vw,3.4rem);
+  align-items:center;
+}
+@media (max-width:880px){
+  .hero-grid{grid-template-columns:1fr;gap:2.4rem}
+}
+
+.kicker{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-size:.72rem;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--orange);
+}
+.kicker::before{
+  content:"";width:34px;height:1.5px;background:currentColor;display:block;
+}
+
+.song-title{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-weight:400;
+  font-size:clamp(4rem,12.5vw,8.4rem);
+  line-height:.84;
+  letter-spacing:-.035em;
+  /* 行高小于字身时，字形顶部会超出背景绘制盒；background-clip:text 只画盒内，
+     超出部分变成透明，看起来像被削掉。用 padding 把绘制盒撑大，再抵消外边距。 */
+  padding-block:.2em .2em;
+  margin:calc(.9rem - .2em) 0 0 -.06em;
+  color:var(--orange-2);
+  text-wrap:balance;
+}
+@supports (background-clip:text) or (-webkit-background-clip:text){
+  .song-title{
+    background:linear-gradient(118deg,#C64A1A 0%,#E8622B 28%,#F7A94F 62%,#DD5B23 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+}
+
+.song-jp{
+  font-family:var(--font-sans);
+  font-size:clamp(1rem,2.1vw,1.22rem);
+  color:var(--ink-2);
+  letter-spacing:.22em;
+  margin-top:calc(1.05rem - .14em);
+  display:flex;align-items:center;gap:.85rem;flex-wrap:wrap;
+}
+.song-jp span.dot{width:5px;height:5px;border-radius:50%;background:var(--orange-3);display:block}
+
+.hero-lead{
+  max-width:46ch;
+  color:var(--ink-2);
+  font-size:1.02rem;
+  line-height:1.85;
+  margin-top:1.35rem;
+  text-wrap:pretty;
+}
+.hero-lead b{color:var(--ink);font-weight:700}
+.hero-lead a{
+  color:var(--orange);
+  text-decoration:none;
+  border-bottom:1px solid rgba(217,84,31,.32);
+  padding-bottom:1px;
+  transition:border-color .18s ease,color .18s ease;
+  white-space:nowrap;
+}
+.hero-lead a:hover{color:var(--orange-2);border-bottom-color:var(--orange-2)}
+
+.badges{
+  display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.6rem;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:.42rem;
+  padding:.34rem .78rem;
+  border-radius:999px;
+  font-size:.78rem;font-weight:600;
+  letter-spacing:.02em;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.72);
+  color:var(--ink-2);
+  backdrop-filter:blur(6px);
+}
+.badge--level{border-color:#F3C9A2;background:#FFF1E2;color:#A8430F}
+.badge--dot::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--teal);display:block}
+
+.hero-cta{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.1rem}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:.82rem 1.5rem;
+  border-radius:999px;
+  font-size:.92rem;font-weight:700;
+  border:1.5px solid transparent;
+  cursor:pointer;
+  text-decoration:none;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  min-block-size:44px;
+}
+.btn-primary{
+  background:linear-gradient(135deg,#E8622B,#D0451A);
+  color:#fff;
+  box-shadow:0 10px 22px -12px rgba(208,69,26,.85);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 28px -14px rgba(208,69,26,.9)}
+.btn-ghost{
+  background:rgba(255,255,255,.8);
+  border-color:var(--line);
+  color:var(--ink);
+}
+.btn-ghost:hover{background:#fff;border-color:#D9C7AE;transform:translateY(-2px)}
+
+/* CD 装饰 */
+.hero-art{
+  position:relative;
+  display:grid;place-items:center;
+  min-block-size:clamp(240px,30vw,360px);
+}
+.hero-art::before{
+  content:"";
+  position:absolute;
+  width:78%;aspect-ratio:1;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(249,193,133,.45),rgba(249,193,133,0) 68%);
+  filter:blur(18px);
+}
+.disc{
+  position:relative;
+  width:min(100%,320px);
+  aspect-ratio:1;
+  border-radius:50%;
+  background:conic-gradient(from 200deg,#F9CFA9,#FCE7CD,#CFE9E1,#DBDDF3,#F7D3DC,#F6C79E,#F9CFA9);
+  box-shadow:
+    0 24px 50px -22px rgba(120,74,30,.45),
+    inset 0 0 0 1px rgba(255,255,255,.6);
+  animation:spin 34s linear infinite;
+}
+.disc::before{
+  content:"";
+  position:absolute;inset:0;border-radius:50%;
+  background:repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.55) 0 1px, rgba(255,255,255,0) 1px 4px);
+  opacity:.55;
+}
+.disc::after{
+  content:"";
+  position:absolute;inset:12%;border-radius:50%;
+  background:linear-gradient(140deg,rgba(255,255,255,.85),rgba(255,255,255,0) 42%),
+             conic-gradient(from 20deg,rgba(255,255,255,.5),rgba(255,255,255,0) 40%,rgba(255,255,255,.35));
+  mix-blend-mode:screen;
+}
+.disc-label{
+  position:absolute;inset:35%;
+  border-radius:50%;
+  background:linear-gradient(150deg,#FFF7EC,#FFE7C9);
+  box-shadow:inset 0 0 0 1px rgba(180,130,80,.25), 0 4px 12px rgba(140,90,40,.18);
+  display:grid;place-content:center;text-align:center;gap:.05rem;
+  z-index:2;
+}
+.disc-label b{
+  font-family:var(--font-display);font-style:italic;font-weight:400;
+  font-size:clamp(.9rem,1.9vw,1.15rem);color:var(--orange);letter-spacing:-.02em;line-height:1;
+}
+.disc-label i{
+  display:block;font-style:normal;font-size:.55rem;letter-spacing:.24em;
+  color:var(--ink-3);margin-top:.28rem;text-transform:uppercase;
+}
+.disc-hole{
+  position:absolute;inset:49%;border-radius:50%;
+  background:var(--bg);box-shadow:inset 0 1px 3px rgba(80,50,20,.3);
+  z-index:3;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* 封面（优先于 CD：song.json 里给了 meta.cover 就显示封面） */
+.cover{
+  position:relative;
+  width:min(100%,368px);
+  aspect-ratio:1;
+  margin:0;
+  border-radius:16px;
+  overflow:hidden;
+  background:linear-gradient(150deg,#F7C9A3,#EFAE7C);
+  box-shadow:
+    0 34px 64px -32px rgba(96,48,12,.55),
+    0 6px 18px -8px rgba(96,48,12,.28);
+  transform:rotate(-1.5deg);
+  transition:transform .45s cubic-bezier(.2,.7,.3,1), box-shadow .45s ease;
+}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.cover::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(155deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,0) 40%);
+  mix-blend-mode:screen;
+}
+/* 真实封面不叠高光：那层光泽是给排版封面的塑料质感，盖在图片上会洗白左上角 */
+.cover--img::after{display:none}
+.cover--img{background:#1B2A30}
+.cover:hover{transform:rotate(0deg) translateY(-5px);box-shadow:0 42px 74px -32px rgba(96,48,12,.6),0 8px 22px -8px rgba(96,48,12,.3)}
+@media (prefers-reduced-motion:reduce){
+  .cover{transform:none}
+  .cover:hover{transform:none}
+}
+@media (max-width:620px){
+  .cover{width:min(74vw,300px)}
+}
+
+/* 排版式封面：没有任何图片，纯 CSS + 文字，随歌名自动生成 */
+.cover--type{
+  background:
+    radial-gradient(125% 95% at 24% 8%, #2E8379 0%, #1C5D5B 30%, #123C45 64%, #08222C 100%);
+  color:#FBF1E0;
+  overflow:hidden;
+}
+.cover--type::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(to right, rgba(255,240,215,.11) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,240,215,.11) 1px, transparent 1px);
+  background-size:34px 34px;
+  -webkit-mask-image:radial-gradient(circle at 34% 22%, #000 0%, transparent 74%);
+  mask-image:radial-gradient(circle at 34% 22%, #000 0%, transparent 74%);
+}
+.cover--type::after{
+  content:"";position:absolute;pointer-events:none;
+  inset:0;border:0;
+  background:linear-gradient(158deg,rgba(255,255,255,.20) 0%,rgba(255,255,255,0) 46%);
+  mix-blend-mode:screen;
+}
+.cover-ring{
+  position:absolute;z-index:1;pointer-events:none;
+  width:52%;aspect-ratio:1;border-radius:50%;
+  right:-22%;top:30%;
+  border:1px solid rgba(255,232,196,.17);
+  box-shadow:0 0 0 18px rgba(255,232,196,.042), 0 0 0 42px rgba(255,232,196,.022);
+}
+.cover-inner{
+  position:relative;z-index:2;
+  height:100%;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(1rem,5.2%,1.6rem);
+}
+.cover-row{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+.cover-tag,.cover-year,.cover-foot span{
+  font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  opacity:.82;white-space:nowrap;
+}
+.cover-mid{display:flex;flex-direction:column;gap:.55rem;margin-top:auto;margin-bottom:auto}
+.cover-work{
+  font-size:.55rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  opacity:.72;
+}
+.cover-title{
+  font-family:var(--font-display);
+  font-style:italic;font-weight:400;
+  font-size:clamp(2.3rem,7.6vw,3.15rem);
+  line-height:.86;letter-spacing:-.02em;
+  color:#FFFBF0;
+  text-shadow:0 2px 20px rgba(0,18,24,.38);
+}
+.cover-artist{
+  font-size:.78rem;letter-spacing:.28em;opacity:.9;margin-top:.15rem;
+}
+.cover-foot{
+  display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+  padding-top:.7rem;
+  border-top:1px solid rgba(255,232,196,.24);
+}
+@media (prefers-reduced-motion:reduce){
+  .disc{animation:none}
+  html{scroll-behavior:auto}
+  *{transition-duration:.01ms !important;animation-duration:.01ms !important}
+}
+
+/* 数据条 */
+.hero-stats{
+  margin-top:clamp(2.4rem,5vw,3.6rem);
+  display:grid;
+  grid-template-columns:repeat(var(--stat-cols,4),minmax(0,1fr));
+  background:rgba(255,255,255,.66);
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  backdrop-filter:blur(10px);
+  box-shadow:var(--shadow-sm);
+  overflow:hidden;
+}
+@media (max-width:640px){
+  .hero-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat:last-child:nth-child(odd){grid-column:1 / -1;border-right:0}
+}
+.stat{
+  padding:1.15rem 1.25rem 1.2rem;
+  border-right:1px solid var(--line-soft);
+  position:relative;
+}
+.stat:last-child{border-right:0}
+@media (max-width:640px){
+  .stat:nth-child(2n){border-right:0}
+  .stat:nth-child(-n+2){border-bottom:1px solid var(--line-soft)}
+}
+.stat b{
+  display:block;
+  font-family:var(--font-display);
+  font-style:italic;
+  font-weight:400;
+  font-size:clamp(1.8rem,3.6vw,2.5rem);
+  line-height:1;
+  color:var(--orange-2);
+  letter-spacing:-.02em;
+}
+.stat b small{font-size:.45em;font-family:var(--font-sans);font-style:normal;font-weight:600;color:var(--ink-3);margin-left:.18em;letter-spacing:0}
+.stat span{
+  display:block;margin-top:.45rem;
+  font-size:.76rem;color:var(--ink-3);
+  letter-spacing:.1em;
+}
+
+/* ============================================================
+   2. 顶部导航
+   ============================================================ */
+@media (max-width:620px){
+  .kicker{font-size:.63rem;letter-spacing:.15em;gap:.55rem}
+  .kicker::before{width:22px}
+  .hero-art{min-block-size:auto;padding-block:.4rem}
+  .disc{width:min(58vw,210px)}
+  .hero-lead{font-size:.96rem}
+  .badge{font-size:.74rem;padding:.3rem .68rem}
+  .hero-cta{gap:.55rem}
+  .btn{padding:.78rem 1.25rem;font-size:.88rem}
+}
+.topnav{
+  position:sticky;top:0;z-index:50;
+  margin-top:clamp(2rem,4vw,2.8rem);
+  background:rgba(251,246,239,.82);
+  backdrop-filter:blur(14px) saturate(1.4);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  display:flex;align-items:center;gap:.4rem;
+  overflow-x:auto;
+  scrollbar-width:none;
+  padding-block:.55rem;
+}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-link{
+  flex:0 0 auto;
+  padding:.42rem .78rem;
+  border-radius:999px;
+  font-size:.82rem;
+  font-weight:600;
+  color:var(--ink-3);
+  text-decoration:none;
+  white-space:nowrap;
+  transition:background .16s ease,color .16s ease;
+}
+.nav-link:hover{background:rgba(232,98,43,.08);color:var(--orange)}
+.nav-link.is-active{background:var(--ink);color:#FFF8EF}
+/* 返回合集：指向合集索引页，href 由 meta.backHref 控制 */
+.nav-back{
+  flex:0 0 auto;
+  display:inline-flex;align-items:center;gap:.3rem;
+  padding:.42rem .2rem;
+  font-size:.78rem;font-weight:600;
+  color:var(--ink-3);text-decoration:none;white-space:nowrap;
+  transition:color .16s ease;
+}
+.nav-back:hover{color:var(--orange)}
+.nav-back svg{width:13px;height:13px;flex:0 0 auto}
+.nav-back::after{
+  content:"";inline-size:1px;block-size:14px;margin-left:.55rem;
+  background:var(--line);
+}
+.nav-spacer{flex:1 1 auto}
+.nav-progress{
+  flex:0 0 auto;display:flex;align-items:center;gap:.55rem;
+  font-size:.74rem;color:var(--ink-3);white-space:nowrap;
+  padding-left:.4rem;
+}
+@media (max-width:900px){.nav-progress{display:none}}
+.bar{
+  width:82px;height:5px;border-radius:99px;background:var(--line);
+  overflow:hidden;
+}
+.bar i{display:block;height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--amber),var(--orange));transition:width .35s ease}
+
+/* ============================================================
+   3. 章节骨架
+   ============================================================ */
+.section{padding:clamp(2.8rem,6vw,4.6rem) 0}
+.section + .section{border-top:1px solid var(--line-soft)}
+.sec-head{
+  display:grid;
+  grid-template-columns:3.2rem minmax(0,1fr);
+  gap:1.1rem;
+  margin-bottom:clamp(1.6rem,3vw,2.4rem);
+}
+@media (max-width:600px){
+  .sec-head{grid-template-columns:1fr;gap:.5rem}
+}
+.sec-num{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:1.05rem;
+  color:var(--orange);
+  border-top:1.5px solid var(--orange);
+  padding-top:.55rem;
+  letter-spacing:.02em;
+}
+.sec-title{
+  font-size:clamp(1.45rem,3.2vw,2.05rem);
+  text-wrap:balance;
+}
+.sec-jp{
+  font-family:var(--font-serif);
+  font-size:.86rem;
+  letter-spacing:.24em;
+  color:var(--ink-3);
+  margin-top:.5rem;
+}
+.sec-lead{
+  max-width:66ch;
+  color:var(--ink-2);
+  margin-top:.9rem;
+  text-wrap:pretty;
+}
+
+/* 通用卡片 */
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  box-shadow:var(--shadow-sm);
+}
+.card-pad{padding:1.4rem 1.5rem}
+
+/* ============================================================
+   4. 学习地图
+   ============================================================ */
+.card{min-width:0}
+
+.why-list{display:grid;gap:0;margin:0;padding:0;list-style:none}
+.why-item{
+  display:grid;
+  grid-template-columns:2.1rem minmax(0,1fr);
+  gap:.9rem;
+  padding:1.05rem 0;
+  border-bottom:1px dashed var(--line);
+}
+.why-item:last-child{border-bottom:0;padding-bottom:0}
+.why-item:first-child{padding-top:0}
+.why-item b{color:var(--ink);font-size:.95rem}
+.why-item p{color:var(--ink-2);font-size:.9rem;margin-top:.2rem;line-height:1.7}
+.why-idx{
+  width:2.1rem;height:2.1rem;border-radius:50%;
+  display:grid;place-items:center;
+  font-family:var(--font-display);font-style:italic;font-size:.95rem;
+  background:#FFF0E1;color:var(--orange);border:1px solid #F6D3B4;
+}
+
+/* 三步学习法 */
+.steps{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:.7rem;
+  margin-top:1.35rem;
+}
+@media (max-width:700px){.steps{grid-template-columns:1fr}}
+.step{
+  background:var(--surface-warm);
+  border:1px solid var(--line-soft);
+  border-radius:var(--r-sm);
+  padding:.95rem 1rem;
+}
+.step em{
+  display:block;font-style:normal;font-size:.66rem;letter-spacing:.18em;
+  color:var(--orange);font-weight:700;margin-bottom:.3rem;
+}
+.step b{display:block;font-size:.9rem}
+.step p{font-size:.8rem;color:var(--ink-3);line-height:1.6;margin-top:.25rem}
+
+/* ============================================================
+   完整歌词
+   ============================================================ */
+.lyr-wrap{
+  max-width:46rem;
+  margin-inline:auto;
+  padding:clamp(1.25rem,3vw,2rem);
+  background:var(--surface-warm);
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+}
+.lyr-block{padding-block:1.1rem}
+.lyr-block+.lyr-block{border-top:1px solid var(--line-soft)}
+.lyr-block:first-child{padding-top:0}
+.lyr-block:last-child{padding-bottom:0}
+.lyr-head{
+  margin-bottom:.5rem;
+  font-size:.7rem;font-weight:500;letter-spacing:.1em;
+  color:var(--ink-3);
+  font-variant-numeric:tabular-nums;
+}
+.lyr-line{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 30px;
+  align-items:start;
+  gap:.65rem;
+  margin:0;
+  font-family:var(--font-serif);
+  font-size:1.06rem;
+  line-height:2.05;
+  letter-spacing:.02em;
+  color:#2A2D33;
+  overflow-wrap:anywhere;
+}
+.lyr-foot{
+  max-width:46rem;
+  margin:.85rem auto 0;
+  font-size:.74rem;line-height:1.8;
+  color:var(--ink-3);
+}
+@media (max-width:600px){
+  .lyr-wrap{padding:1rem}
+  .lyr-line{font-size:.96rem;line-height:2}
+}
+
+/* ============================================================
+   5. 逐句精读
+   ============================================================ */
+.toolbar{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;
+  margin-bottom:1.4rem;
+}
+.toolbar-right{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.toggle{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.78rem;color:var(--ink-2);cursor:pointer;
+  padding:.34rem .7rem;border-radius:999px;
+  border:1px dashed var(--line);background:transparent;
+  min-block-size:34px;
+}
+.toggle input{accent-color:var(--orange);margin:0}
+
+.lyric-list{display:grid;gap:.9rem}
+
+.lyric{
+  position:relative;
+  background:linear-gradient(180deg,#FFFFFF,#FFFCF8);
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  padding:1.55rem 1.5rem 1.4rem;
+  box-shadow:var(--shadow-xs);
+  transition:box-shadow .2s ease, transform .2s ease, border-color .2s ease;
+}
+.lyric:hover{box-shadow:var(--shadow-sm);border-color:#DFCEB4;transform:translateY(-1px)}
+.lyric::before{
+  content:"";position:absolute;left:0;top:1.1rem;bottom:1.1rem;width:3px;
+  border-radius:0 3px 3px 0;background:var(--teal);
+}
+
+.lyric-main{min-width:0;display:flex;flex-direction:column;justify-content:center}
+.lyric-side{min-width:0;margin-top:1.05rem;display:grid;gap:.85rem;align-content:start}
+@media (min-width:1000px){
+  .lyric{
+    display:grid;
+    grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+    column-gap:2.1rem;
+    align-items:start;
+  }
+  .lyric-main{grid-column:1}
+  .lyric-side{grid-column:2;margin-top:.15rem}
+}
+
+.lyric-top{display:flex;align-items:center;gap:.9rem}
+.lyric-jp{
+  font-family:var(--font-serif);
+  font-size:clamp(1.22rem,2.7vw,1.62rem);
+  line-height:2.15;
+  letter-spacing:.03em;
+  color:#23262C;
+  flex:0 1 auto;
+  min-width:0;
+}
+ruby{ruby-position:over}
+rt{
+  font-family:var(--font-sans-ja);
+  font-size:.44em;
+  font-weight:500;
+  color:#B08C68;
+  letter-spacing:.02em;
+  line-height:1.2;
+}
+body.hide-furi rt{display:none}
+
+.icon-btn{
+  flex:0 0 auto;
+  width:34px;height:34px;border-radius:50%;
+  display:grid;place-items:center;
+  border:1px solid var(--line);background:#fff;
+  cursor:pointer;color:var(--ink-3);
+  transition:all .16s ease;
+}
+.icon-btn:hover{color:var(--orange);border-color:#EFC7A9;background:#FFF6EC}
+.lyric .icon-btn,.lyr-line .icon-btn{width:30px;height:30px;border-color:transparent;background:transparent;color:var(--ink-3);opacity:.85}
+.lyric .icon-btn:hover,.lyr-line .icon-btn:hover{background:#FFF3E7;border-color:#F2D8BE;color:var(--orange);opacity:1}
+.icon-btn svg{width:15px;height:15px}
+
+.lyric-tr{
+  color:var(--ink-2);font-size:.92rem;line-height:1.8;
+  margin-top:.55rem;
+  padding-left:.15rem;
+  text-wrap:pretty;
+}
+.words{
+  display:flex;flex-wrap:wrap;gap:.4rem;margin-top:0;
+}
+.wchip{
+  display:inline-flex;align-items:baseline;gap:.34rem;
+  padding:.26rem .62rem;
+  background:#FCF7F0;
+  border:1px solid var(--line-soft);
+  border-radius:8px;
+  font-size:.78rem;
+  line-height:1.5;
+}
+.wchip b{font-weight:700;color:var(--ink)}
+.wchip i{font-style:normal;color:var(--teal);font-size:.72rem;font-family:var(--font-serif)}
+.wchip em{font-style:normal;color:var(--ink-3);font-size:.74rem}
+
+.note{
+  margin-top:0;
+  padding:.7rem .85rem;
+  background:#FFF8EC;
+  border-left:2px solid var(--amber);
+  border-radius:0 8px 8px 0;
+  font-size:.83rem;
+  line-height:1.75;
+  color:#6B573E;
+}
+.nuance{
+  font-size:.82rem;
+  line-height:1.8;
+  color:var(--ink-3);
+  margin:0;
+  padding-left:.15rem;
+}
+.note b{color:#8A4A16;font-weight:700}
+.note code{
+  font-family:var(--font-sans);
+  background:rgba(255,255,255,.7);
+  padding:.05em .3em;border-radius:4px;
+  color:#5C4327;font-size:.95em;
+}
+
+.empty{
+  text-align:center;padding:3rem 1rem;color:var(--ink-3);font-size:.9rem;
+}
+
+/* ============================================================
+   6. 词汇表
+   ============================================================ */
+.vocab-tools{
+  display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;
+  margin-bottom:1rem;
+}
+.search{
+  position:relative;flex:1 1 240px;max-width:340px;
+}
+.search input{
+  width:100%;
+  padding:.62rem .9rem .62rem 2.3rem;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:#fff;
+  font-size:.86rem;
+  color:var(--ink);
+  transition:border-color .16s ease, box-shadow .16s ease;
+}
+.search input:focus{outline:none;border-color:var(--orange-3);box-shadow:0 0 0 3px rgba(245,154,75,.18)}
+.search svg{
+  position:absolute;left:.82rem;top:50%;transform:translateY(-50%);
+  width:14px;height:14px;color:var(--ink-3);
+}
+.chips{display:flex;gap:.4rem;flex-wrap:wrap}
+.chip{
+  padding:.34rem .72rem;border-radius:999px;border:1px solid var(--line);
+  background:#fff;font-size:.75rem;font-weight:600;color:var(--ink-2);
+  cursor:pointer;transition:all .16s ease;min-block-size:32px;
+}
+.chip:hover{border-color:#DCC9AF}
+.chip.is-on{background:#FFF0E1;border-color:#F0C49C;color:#A8430F}
+
+.table-wrap{
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  background:#fff;
+  overflow:hidden;
+  box-shadow:var(--shadow-xs);
+}
+.table-scroll{overflow-x:auto;max-block-size:min(72vh,760px);overflow-y:auto}
+table.vocab{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  font-size:.87rem;
+}
+table.vocab thead th{
+  position:sticky;top:0;z-index:2;
+  background:#FBF5EC;
+  text-align:left;
+  font-size:.72rem;
+  letter-spacing:.12em;
+  color:var(--ink-3);
+  font-weight:700;
+  padding:.72rem .9rem;
+  border-bottom:1px solid var(--line);
+  white-space:nowrap;
+}
+table.vocab tbody td{
+  padding:.7rem .9rem;
+  border-bottom:1px solid var(--line-soft);
+  vertical-align:middle;
+}
+table.vocab tbody tr:last-child td{border-bottom:0}
+table.vocab tbody tr:hover{background:#FEFAF4}
+table.vocab tbody tr.done{background:#F6FBF8}
+table.vocab tbody tr.done .v-word{color:var(--ink-3);text-decoration:line-through;text-decoration-color:#A9C9BF}
+
+table.vocab th:nth-child(2){width:24%}
+table.vocab th:nth-child(3){width:16%}
+table.vocab th:nth-child(4){width:9%}
+table.vocab th:nth-child(6){width:8%}
+table.vocab th:nth-child(7){width:56px}
+
+.v-word{
+  font-family:var(--font-serif);
+  font-size:1rem;font-weight:700;color:var(--ink);
+  white-space:nowrap;
+}
+.v-read{color:var(--teal);font-size:.78rem;white-space:nowrap}
+.v-pos{color:var(--ink-3);font-size:.76rem;white-space:nowrap}
+.v-cn{color:var(--ink-2)}
+.lv{
+  display:inline-block;padding:.1rem .45rem;border-radius:5px;
+  font-size:.68rem;font-weight:800;letter-spacing:.04em;
+  border:1px solid transparent;
+}
+.lv-N5{background:#F2F1EE;color:#78736B;border-color:#E3E1DB}
+.lv-N4{background:#E9F3F0;color:#1D7568;border-color:#CFE6E0}
+.lv-N3{background:#FFF0E1;color:#A8430F;border-color:#F5D2B2}
+.lv-N2{background:#ECEBF8;color:#4B4694;border-color:#DAD7F0}
+.lv-N1{background:#FBEAEE;color:#94364B;border-color:#F0D2D9}
+
+.v-check{
+  width:19px;height:19px;border-radius:5px;
+  border:1.5px solid #D6C4AC;background:#fff;
+  display:grid;place-items:center;cursor:pointer;
+  transition:all .15s ease;padding:0;
+}
+.v-check svg{width:11px;height:11px;opacity:0;color:#fff}
+.v-check[aria-checked="true"]{background:var(--teal);border-color:var(--teal)}
+.v-check[aria-checked="true"] svg{opacity:1}
+
+.table-foot{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:.6rem;padding:.75rem 1rem;
+  border-top:1px solid var(--line-soft);
+  background:#FDFAF5;
+  font-size:.78rem;color:var(--ink-3);
+}
+.mini-btn{
+  border:1px solid var(--line);background:#fff;border-radius:8px;
+  padding:.3rem .7rem;font-size:.75rem;color:var(--ink-2);cursor:pointer;
+}
+.mini-btn:hover{border-color:#DCC9AF;color:var(--ink)}
+
+/* ============================================================
+   7. 语法图谱
+   ============================================================ */
+.grammar-list{display:grid;gap:.65rem}
+details.g{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  box-shadow:var(--shadow-xs);
+  overflow:hidden;
+  transition:border-color .18s ease, box-shadow .18s ease;
+}
+details.g[open]{border-color:#E4C9A9;box-shadow:var(--shadow-sm)}
+details.g summary{
+  list-style:none;
+  cursor:pointer;
+  padding:1.05rem 1.25rem;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:1rem;
+  align-items:center;
+  user-select:none;
+}
+details.g summary::-webkit-details-marker{display:none}
+.g-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem}
+.g-pattern{
+  font-family:var(--font-serif);
+  font-size:1.06rem;font-weight:700;color:var(--ink);
+  letter-spacing:.02em;
+}
+.g-sub{font-size:.8rem;color:var(--ink-3)}
+.g-plus{
+  width:26px;height:26px;border-radius:50%;
+  border:1px solid var(--line);
+  display:grid;place-items:center;flex:0 0 auto;
+  color:var(--ink-3);font-size:.9rem;
+  transition:transform .2s ease, background .2s ease;
+}
+details.g[open] .g-plus{transform:rotate(45deg);background:#FFF0E1;border-color:#F0C49C;color:var(--orange)}
+.g-body{padding:0 1.25rem 1.25rem;display:grid;gap:.75rem}
+.g-row{display:grid;grid-template-columns:4.2rem minmax(0,1fr);gap:.8rem;font-size:.86rem;line-height:1.75}
+@media (max-width:520px){.g-row{grid-template-columns:1fr;gap:.15rem}}
+.g-row dt{color:var(--ink-3);font-size:.75rem;letter-spacing:.08em;padding-top:.15rem}
+.g-row dd{margin:0;color:var(--ink-2)}
+.g-eg{
+  font-family:var(--font-sans);
+  font-size:.98rem;color:var(--ink);
+  background:#FCF7F0;border-radius:8px;padding:.5rem .7rem;
+  display:inline-block;max-width:100%;overflow-wrap:anywhere;
+}
+.g-eg[lang="ja"]{font-family:var(--font-serif)}
+.g-examples{border-top:1px solid var(--line-soft);padding-top:.85rem}
+.g-examples h4{font-size:.78rem;font-weight:600;color:var(--ink-3);margin-bottom:.7rem}
+.g-examples ol{margin:0;padding-left:1.5rem;display:grid;gap:.9rem}
+.g-examples li{padding-left:.3rem;min-width:0}
+.g-examples li::marker{font-size:.75rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.g-example-jp{font-family:var(--font-serif);font-size:1rem;line-height:2.2;overflow-wrap:anywhere}
+.g-example-tr{font-size:.84rem;color:var(--ink-2);line-height:1.75;margin-top:.15rem}
+.g-warn{
+  font-size:.8rem;color:#8A4A16;background:#FFF8EC;
+  border-left:2px solid var(--amber);border-radius:0 8px 8px 0;
+  padding:.55rem .75rem;line-height:1.7;max-width:84ch;
+}
+
+/* ============================================================
+   8. Footer
+   ============================================================ */
+.footer{
+  border-top:1px solid var(--line);
+  padding:2.2rem 0 3rem;
+  margin-top:1rem;
+  background:rgba(255,255,255,.4);
+}
+.foot-grid{
+  display:flex;flex-wrap:wrap;gap:1.4rem;justify-content:space-between;align-items:flex-start;
+}
+.foot-title{
+  font-family:var(--font-display);font-style:italic;
+  font-size:1.35rem;color:var(--orange-2);line-height:1;
+}
+.foot-note{
+  max-width:58ch;font-size:.78rem;line-height:1.85;color:var(--ink-2);margin-top:.6rem;
+}
+.foot-meta{font-size:.72rem;color:var(--ink-4);letter-spacing:.1em;text-align:right}
+@media (max-width:640px){.foot-meta{text-align:left}}
+
+/* 动效 */
+@media (prefers-reduced-motion:no-preference){
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease, transform .55s ease}
+  .reveal.in{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="kicker">ブルーピリオド · イメージソング · 2020</span>
+      <h1 class="song-title" lang="ja">群青<br></h1>
+      <div class="song-jp">
+        <span lang="ja">YOASOBI</span><span class="dot"></span><span lang="ja">歌詞精読</span><span class="dot"></span><span>N3–N2</span>
+      </div>
+      <p class="hero-lead">一首把「喜欢」说到疼的歌。歌词几乎不用难词，靠<b>「〜ば〜ほど」「〜てきた」「〜ほど」</b>把情绪一层层推上去；拆完这 28 句，再听副歌会完全不同。 <a href="https://www.youtube.com/watch?v=Y4nEEZwckuU" target="_blank" rel="noopener noreferrer">官方 MV ↗</a> · <a href="https://orcd.co/gunjo" target="_blank" rel="noopener noreferrer">在线收听 ↗</a></p>
+      <div class="badges" id="badges"></div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#lines">开始逐句精读</a>
+        <a class="btn btn-ghost" href="#grammar">先看语法图谱</a>
+      </div>
+    </div>
+    <div class="hero-art" id="hero-art" aria-hidden="true">
+      <div class="disc">
+        <div class="disc-label"><b>2020</b><i>single</i></div>
+        <div class="disc-hole"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero-stats" id="hero-stats"></div>
+  </div>
+</header>
+
+<nav class="topnav" aria-label="章节导航">
+  <div class="wrap nav-inner" id="nav-inner"></div>
+</nav>
+
+<main id="main">
+  <!-- 01 学习地图 -->
+  <section class="section" id="map">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">01</div>
+        <div>
+          <h2 class="sec-title">学习重点：把「程度」一层层推上去</h2>
+          <div class="sec-jp" lang="ja">がくしゅうの ポイント</div>
+          <p class="sec-lead">这首歌的难点不在词汇，而在「ほど」「ば〜ほど」「て仕方ない」这些把情绪推到顶的表达。先把它们认出来，再谈跟唱。</p>
+        </div>
+      </div>
+
+      <div class="card card-pad reveal">
+        <h3 style="font-size:.98rem;margin-bottom:.2rem">为什么值得逐句拆开听</h3>
+        <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:.9rem">四个理由，按重要性排</p>
+        <ul class="why-list" id="why-list"></ul>
+      </div>
+
+      <div class="steps reveal" id="steps"></div>
+    </div>
+  </section>
+
+  <!-- 02 完整歌词 -->
+  <section class="section" id="lyrics">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">02</div>
+        <div>
+          <h2 class="sec-title">完整歌词：对着听，连着读</h2>
+          <div class="sec-jp" lang="ja">かんぜん かし</div>
+          <p class="sec-lead">保留原有换行与段落顺序。点击行末的喇叭可以朗读；注音与逐句讲解见下一节。</p>
+        </div>
+      </div>
+
+      <div class="lyr-wrap" id="lyrics-body"></div>
+      <p class="lyr-foot" id="lyrics-foot"></p>
+    </div>
+  </section>
+
+  <!-- 03 逐句精读 -->
+  <section class="section" id="lines">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">03</div>
+        <div>
+          <h2 class="sec-title">逐句精读：一句一个语法点</h2>
+          <div class="sec-jp" lang="ja">いちぎょうずつ よむ</div>
+          <p class="sec-lead">28 张卡片，按歌词顺序排。每张只讲一个点，另一层意思放进「语感」里。副歌部分建议连着读，不要跳。</p>
+        </div>
+      </div>
+
+      <div class="toolbar reveal">
+        <div class="toolbar-right">
+          <label class="toggle"><input type="checkbox" id="t-furi" checked> 显示假名</label>
+          <label class="toggle"><input type="checkbox" id="t-tr" checked> 显示中文</label>
+        </div>
+      </div>
+
+      <div class="lyric-list" id="lyric-list"></div>
+    </div>
+  </section>
+
+  <!-- 04 核心词汇 -->
+  <section class="section" id="vocab">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">04</div>
+        <div>
+          <h2 class="sec-title">核心词汇：70 个，按出场顺序</h2>
+          <div class="sec-jp" lang="ja">たんごリスト</div>
+          <p class="sec-lead">按歌词出现顺序排列，点左侧方框标记「已掌握」，进度会同步到页首。动词优先收，因为动词带活用；「する」「ある」这类基础词没有收。</p>
+        </div>
+      </div>
+
+      <div class="vocab-tools reveal">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="v-search" placeholder="搜索：群青 / ぐんじょう / 蓝色" aria-label="搜索词汇">
+        </div>
+        <div class="chips" id="v-levels">
+          <button class="chip is-on" data-lv="all">全部等级</button>
+          <button class="chip" data-lv="N5">N5</button>
+          <button class="chip" data-lv="N4">N4</button>
+          <button class="chip" data-lv="N3">N3</button>
+          <button class="chip" data-lv="N2">N2</button>
+          <button class="chip" data-lv="N1">N1</button>
+        </div>
+        <button class="chip" id="v-undone">只看未掌握</button>
+      </div>
+
+      <div class="table-wrap reveal">
+        <div class="table-scroll">
+          <table class="vocab">
+            <thead>
+              <tr>
+                <th style="width:44px">掌握</th>
+                <th>单词</th>
+                <th>读音</th>
+                <th>词性</th>
+                <th>意思</th>
+                <th>等级</th>
+                <th style="width:44px"><span class="sr-only">发音</span></th>
+              </tr>
+            </thead>
+            <tbody id="v-body"></tbody>
+          </table>
+        </div>
+        <div class="table-foot">
+          <span id="v-count">共 0 个词</span>
+          <div style="display:flex;gap:.5rem;align-items:center">
+            <span id="v-progress">已掌握 0</span>
+            <button class="mini-btn" id="v-reset">重置进度</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 语法图谱 -->
+  <section class="section" id="grammar">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">05</div>
+        <div>
+          <h2 class="sec-title">语法图谱：16 个句型，撑起整首歌</h2>
+          <div class="sec-jp" lang="ja">ぶんぽうマップ</div>
+          <p class="sec-lead">展开每条语法，先看接续与歌词原句，再读 2–3 个带注音和中文解释的例句，最后留意易错点。</p>
+        </div>
+      </div>
+      <div class="grammar-list" id="grammar-list"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap foot-grid">
+    <div>
+      <div class="foot-title">群青</div>
+      <p class="foot-note">本页为个人日语学习用途的歌词解析作品，非官方发布。歌词著作权归作词・作曲・编曲 Ayase、演唱 YOASOBI 及相关权利方所有；页面内容仅供学习参考，请勿用于商业用途，并请通过正版音源与官方歌词页对照收听。</p>
+    </div>
+    <div class="foot-meta">ブルーピリオド<br>歌詞精読ノート<br>JLPT N3–N2</div>
+  </div>
+</footer>
+
+<script>window.SONG = {"meta":{"slug":"gunjou","pageTitle":"群青 · YOASOBI｜日语歌词精读","description":"YOASOBI「群青」（2020）的日语歌词精读：完整歌词、28 句逐句拆解、70 个核心词汇、16 条语法图谱，重点讲清「〜ば〜ほど」「〜てきた」「ままに」这些把情绪推上去的句式。","kicker":"ブルーピリオド · イメージソング · 2020","titleLine1":"群青","titleLine2":"","artist":"YOASOBI","subtitle":"歌詞精読","level":"N3–N2","lead":"一首把「喜欢」说到疼的歌。歌词几乎不用难词，靠\u003cb>「〜ば〜ほど」「〜てきた」「〜ほど」\u003c/b>把情绪一层层推上去；拆完这 28 句，再听副歌会完全不同。 \u003ca href=\"https://www.youtube.com/watch?v=Y4nEEZwckuU\" target=\"_blank\" rel=\"noopener noreferrer\">官方 MV ↗\u003c/a> · \u003ca href=\"https://orcd.co/gunjo\" target=\"_blank\" rel=\"noopener noreferrer\">在线收听 ↗\u003c/a>","badges":["N3–N2 上下","绘画与自白","程度与累积","情绪跟读"],"discLabel":"2020","discSub":"single","coverTag":"DIGITAL SINGLE"},"stats":[{"key":"lines","label":"逐 句 精 读"},{"key":"vocab","label":"核 心 词 汇"},{"key":"grammar","label":"语 法 点"}],"cta":{"primary":"开始逐句精读","secondary":"先看语法图谱","secondaryHref":"#grammar"},"nav":[{"id":"map","label":"学习重点"},{"id":"lyrics","label":"完整歌词"},{"id":"lines","label":"逐句精读"},{"id":"vocab","label":"核心词汇"},{"id":"grammar","label":"语法图谱"}],"map":{"whyTitle":"为什么值得逐句拆开听","whySub":"四个理由，按重要性排","why":[{"t":"整首歌就是「程度」的练习","d":"「伸ばせば伸ばすほど」「踏み込むほど」「怖くて仕方ない」——同一个意思，用三种不同的程度表达往上推。把这三句放在一起听，比背十条语法条目清楚。"},{"t":"「〜てきた」出现四次，是全曲的骨架","d":"「描いてきた」「積み上げてきた」——不是「画了」，是「一直画到现在」。这一层时态是中文翻译最容易丢掉的东西，也是这首歌真正想说的话。"},{"t":"句子短，换气点清楚","d":"A メロ 多为六到十个音一行的短句，副歌最长的一句也不过十几个音。适合影子跟读：先跟着念，再跟着唱，最后才回去查词。"},{"t":"词不难，难在「语气」","d":"「つまらないな」「そんなもんさ」「これでいい」——每个词都是 N4，连起来却是一种自我说服的口气。这种语气只能逐句读，查词典查不出来。"}]},"steps":[{"k":"STEP 01","t":"先听一遍，别查词","d":"完整听一次，只注意副歌「自分にしか出せない色で」唱了几次、每次都落在什么位置。旋律记住了，词才有地方挂。"},{"k":"STEP 02","t":"逐句读，抓程度表达","d":"从 28 张卡里挑出带「ほど」「ば」「て」的句子，先把结构画出来，再念三遍。这一节不要求背，要求读到不用想。"},{"k":"STEP 03","t":"回看词表与语法例句","d":"把标了 N2 的词过一遍，再挑三条语法读例句。最后回到完整歌词，从头到尾念一次，看能不能不停顿地念完。"}],"sec":{"map":{"num":"01","title":"学习重点：把「程度」一层层推上去","jp":"がくしゅうの ポイント","lead":"这首歌的难点不在词汇，而在「ほど」「ば〜ほど」「て仕方ない」这些把情绪推到顶的表达。先把它们认出来，再谈跟唱。"},"lyrics":{"num":"02","title":"完整歌词：对着听，连着读","jp":"かんぜん かし","lead":"保留原有换行与段落顺序。点击行末的喇叭可以朗读；注音与逐句讲解见下一节。"},"lines":{"num":"03","title":"逐句精读：一句一个语法点","jp":"いちぎょうずつ よむ","lead":"28 张卡片，按歌词顺序排。每张只讲一个点，另一层意思放进「语感」里。副歌部分建议连着读，不要跳。"},"vocab":{"num":"04","title":"核心词汇：70 个，按出场顺序","jp":"たんごリスト","lead":"按歌词出现顺序排列，点左侧方框标记「已掌握」，进度会同步到页首。动词优先收，因为动词带活用；「する」「ある」这类基础词没有收。"},"grammar":{"num":"05","title":"语法图谱：16 个句型，撑起整首歌","jp":"ぶんぽうマップ","lead":"展开每条语法，先看接续与歌词原句，再读 2–3 个带注音和中文解释的例句，最后留意易错点。"}},"lyrics":{"foot":"点击行末的喇叭可以朗读。注音与逐句讲解在下一节「逐句精读」。","blocks":[{"lines":["嗚呼、いつもの様に","過ぎる日々にあくびが出る","さんざめく夜、越え、今日も","渋谷の街に朝が降る","どこか虚しいような","そんな気持ち","つまらないな","でもそれでいい","そんなもんさ","これでいい"]},{"lines":["知らず知らず隠してた","本当の声を響かせてよ、ほら","見ないフリしていても","確かにそこにある"]},{"lines":["感じたままに描く","自分で選んだその色で","眠い空気纏う朝に","訪れた青い世界","好きなものを好きだと言う","怖くて仕方ないけど","本当の自分","出会えた気がしたんだ"]},{"lines":["嗚呼、手を伸ばせば伸ばすほどに","遠くへゆく","思うようにいかない、今日も","また慌ただしくもがいてる","悔しい気持ちも","ただ情けなくて","涙が出る","踏み込むほど","苦しくなる","痛くもなる"]},{"lines":["感じたままに進む","自分で選んだこの道を","重いまぶた擦る夜に","しがみついた青い誓い","好きなことを続けること","それは「楽しい」だけじゃない","本当にできる?","不安になるけど"]},{"lines":["何枚でも","ほら何枚でも","自信がないから描いてきたんだよ","何回でも","ほら何回でも","積み上げてきたことが武器になる","周りを見たって","誰と比べたって","僕にしかできないことはなんだ","今でも自信なんかない","それでも"]},{"lines":["感じたことない気持ち","知らずにいた想い","あの日踏み出して","初めて感じたこの痛みも全部","好きなものと向き合うことで","触れたまだ小さな光","大丈夫、行こう、あとは楽しむだけだ"]},{"lines":["全てを賭けて描く","自分にしか出せない色で","朝も夜も走り続け","見つけ出した青い光","好きなものと向き合うこと","今だって怖いことだけど","もう今はあの日の透明な僕じゃない","ありのままの","かけがえの無い僕だ"]},{"lines":["知らず知らず隠してた","本当の声を響かせてよ、ほら","見ないフリしていても","確かにそこに今もそこにあるよ","知らず知らず隠してた","本当の声を響かせてよ、さあ","見ないフリしていても","確かにそこに君の中に"]}]},"lines":[{"jp":"過[す]ぎる日々[ひび]にあくびが出[で]る","tr":"在一天天过去的日子里，忍不住打哈欠","words":[["過ぎる","すぎる","（时间）流逝"],["日々","ひび","每天，日日"],["あくび","あくび","哈欠"]],"g":"\u003cb>〜が出る\u003c/b>：生理反应、自然冒出来的东西用「が」。あくびが出る／涙が出る／声が出る，都是「不受控制地出现」。","n":"这一句几乎是念出来的，音符贴着说话的节奏；「あくび」三个音要唱得懒，才像真的困。"},{"jp":"さんざめく夜[よる]、越[こ]え、今日[きょう]も","tr":"穿过喧闹的夜晚，今天也一样","words":[["さんざめく","さんざめく","喧闹，灯火嘈杂"],["越える","こえる","越过，度过"],["今日","きょう","今天"]],"g":"\u003cb>連用中止\u003c/b>：动词ます形去掉「ます」（越え）放在句中顿住，作用等于「越えて」。书面语和歌词常用，读起来比「て形」更硬。","n":"「さんざめく」不是单纯的「吵」，是灯光、人声一起晃动的感觉；两个逗号把夜色切成三段。"},{"jp":"渋谷[しぶや]の街[まち]に朝[あさ]が降[ふ]る","tr":"清晨降落在涩谷的街上","words":[["渋谷","しぶや","涩谷"],["街","まち","街道，城镇"],["降る","ふる","落下，降下"]],"g":"\u003cb>に\u003c/b>：表示出现、成立的场所。这里不是「在街上」，而是「朝が（街に）降る」——把清晨当成从天上落下来的东西。","n":"通常说「夜が明ける」「朝が来る」，这里偏用「降る」，把清晨写成一场降落；这是全曲最漂亮的一笔。"},{"jp":"どこか虚[むな]しいような","tr":"总觉得有点空虚","words":[["どこか","どこか","总觉得，不知哪里"],["虚しい","むなしい","空虚的"],["ような","ような","像…一样的"]],"g":"\u003cb>〜ような\u003c/b>：把不确定的感觉说软，暗示「说不上来，但有点像」。句尾不接名词时，是省略了「気がする」。","n":"这句停在半空没有谓语，下一句「そんな気持ち」才补上；唱的时候气不要收干净。"},{"jp":"知[し]らず知[し]らず隠[かく]してた","tr":"不知不觉间藏了起来","words":[["知らず知らず","しらずしらず","不知不觉"],["隠す","かくす","隐藏"],["してた","してた","（していた的口语缩约）"]],"g":"\u003cb>知らず知らず\u003c/b>：惯用副词，「不知不觉地」。由「知る」的否定形叠用而来，意思接近「知らないうちに」。","n":"「隠してた」是「隠していた」省掉「い」的口语形；这一句的低音几乎贴着嘴唱。"},{"jp":"本当[ほんとう]の声[こえ]を響[ひび]かせてよ、ほら","tr":"让真正的声音响起来吧，你看","words":[["本当","ほんとう","真正的"],["声","こえ","声音"],["響かせる","ひびかせる","使回响"]],"g":"\u003cb>響かせる\u003c/b>：自動詞「響く」的使役他动词，「让…响起来」。＋「てよ」是带点央求的请求，比「てください」软。","n":"「ほら」在这里不是「你看」，是推对方一把的语气词，像把话筒递过去。"},{"jp":"見[み]ないフリしていても","tr":"就算一直装作没看见","words":[["見ないフリ","みないふり","装作没看见"],["して","して","做，保持"],["ても","ても","即使…也"]],"g":"\u003cb>〜ていても\u003c/b>：保持某种状态，即使这样也…。「フリ（振り）」＝假装，「見ないフリ」就是「装作没看见」。","n":"「フリ」特意写成片假名，是为了让「假装」这层意思跳出来；这一句旋律比前一句高，情绪开始顶。"},{"jp":"感[かん]じたままに描[えが]く","tr":"照着感觉到的样子去画","words":[["感じる","かんじる","感觉"],["まま","まま","原样，按照"],["描く","えがく","描绘，画"]],"g":"\u003cb>〜ままに\u003c/b>：照着…的样子、随心…。「感じたまま」＝按照感觉到的原样，后面接「に」变成状语。","n":"「描く」在这里读 えがく，是画画；如果写「書く」就是写字。这首歌全篇用「描」，不是错字。"},{"jp":"自分[じぶん]で選[えら]んだその色[いろ]で","tr":"用自己选的那个颜色","words":[["自分","じぶん","自己"],["選ぶ","えらぶ","选择"],["色","いろ","颜色"]],"g":"\u003cb>で\u003c/b>：表示手段、材料。「その色で描く」＝用那个颜色画。前面的「自分で選んだ」是连体修饰，中间不能加「の」。","n":"这一句是全曲的题眼：颜色不是别人给的，是自己选的；唱到这里鼓点刚好进来。"},{"jp":"眠[ねむ]い空気[くうき]纏[まと]う朝[あさ]に","tr":"在裹着困倦空气的清晨","words":[["眠い","ねむい","困的"],["空気","くうき","空气，气氛"],["纏う","まとう","裹着，带有"]],"g":"\u003cb>体言修饰\u003c/b>：动词连体形直接接名词。「空気を纏う朝」在歌词里省掉了「を」，为了塞进旋律，意思不变。","n":"「纏う」是文学词，日常会说「着ている」「まとっている」；这里省掉助词，节奏才挤得进去。"},{"jp":"訪[おとず]れた青[あお]い世界[せかい]","tr":"蓝色世界到来了","words":[["訪れる","おとずれる","到来，造访"],["青い","あおい","蓝色的"],["世界","せかい","世界"]],"g":"\u003cb>訪れる\u003c/b>：自动词，「（某物）到来、降临」。主语是「青い世界」，不是人——人不能「訪れる世界」。","n":"这一句是新段落的第一句，混响最重；「青い世界」四个音要唱满，别赶。"},{"jp":"好[す]きなものを好[す]きだと言[い]う","tr":"说出「喜欢」自己喜欢的东西","words":[["好き","すき","喜欢"],["言う","いう","说"],["〜だ","だ","（形容动词的词尾）"]],"g":"\u003cb>〜と言う\u003c/b>：「と」引出说的内容。「好きだ」是形容动词，引用时要保留词尾「だ」，不能省成「好きと言う」。","n":"两个「好き」重复，第二个在更高的音上；这是全曲最像宣言的一句，也是整首歌的转折。"},{"jp":"怖[こわ]くて仕方[しかた]ないけど","tr":"害怕得不得了，可是","words":[["怖い","こわい","害怕的"],["仕方ない","しかたない","没办法，无法控制"],["けど","けど","但是"]],"g":"\u003cb>〜て仕方ない\u003c/b>：程度到没办法，「…得不得了」。接形容词的「くて」形或动词「て」形，只用于感情、感觉。","n":"「仕方ない」在这里不是「没办法」，是「控制不住」；句尾「けど」把话又收回去一点。"},{"jp":"出会[であ]えた気[き]がしたんだ","tr":"感觉自己终于遇见了","words":[["出会う","であう","遇见"],["気がする","きがする","感觉，好像"],["んだ","んだ","（のだ的口语形）"]],"g":"\u003cb>〜気がする\u003c/b>：主观感觉「好像…」。「出会う」的可能形是「出会える」，这里用过去式「出会えた」。","n":"「んだ」是「のだ」的口语形，把句子变成自言自语式的解释；这一句尾音往下掉，不是上扬。"},{"jp":"嗚呼[ああ]、手[て]を伸[の]ばせば伸[の]ばすほどに","tr":"啊啊，手越是伸出去","words":[["手","て","手"],["伸ばす","のばす","伸展"],["ほど","ほど","到…的程度"]],"g":"\u003cb>〜ば〜ほど\u003c/b>：越…越…。动词假定形（伸ばせば）＋同一动词辞书形＋ほど。两边必须是同一个词。","n":"这句旋律一路往上爬，唱到「ほどに」已经到最高点，然后整段掉下来——注意换气放在「遠くへ」之前。"},{"jp":"思[おも]うようにいかない、今日[きょう]も","tr":"不能如愿，今天也是","words":[["思う","おもう","想，认为"],["ように","ように","像…那样"],["いかない","いかない","不顺利，行不通"]],"g":"\u003cb>〜ようにいかない\u003c/b>：不能如愿。「思うように」＝按所想的那样，「いく」在这里是「进展」的意思。","n":"「今日も」被甩到句末，是日语特有的倒装；唱的时候像补一句叹息，不要重读。"},{"jp":"踏[ふ]み込[こ]むほど","tr":"越是深入","words":[["踏み込む","ふみこむ","踏入，深入"],["ほど","ほど","到…的程度"]],"g":"\u003cb>〜ほど\u003c/b>：程度比例，「越…就越…」。这里后面直接接下一句「苦しくなる」，一句拆成两行唱。","n":"这一句只有六个音，是整段的支点；「踏み込む」的低音别抬高，把力气留给下一句。"},{"jp":"しがみついた青[あお]い誓[ちか]い","tr":"紧紧抱住的蓝色誓言","words":[["しがみつく","しがみつく","紧紧抓住不放"],["青い","あおい","蓝色的"],["誓い","ちかい","誓言"]],"g":"\u003cb>連体修飾\u003c/b>：「しがみついた」直接修饰「誓い」，中间不需要「の」。动词た形作定语，表示已完成的动作。","n":"「しがみつく」是抱住不放、死缠；用在「誓い」上，把决心写成了一个动作。"},{"jp":"それは「楽しい」だけじゃない","tr":"那不只是「快乐」而已","words":[["それ","それ","那个"],["だけ","だけ","只，仅"],["じゃない","じゃない","不是（ではない的口语）"]],"g":"\u003cb>〜だけじゃない\u003c/b>：「不只是…」。じゃない＝ではない的口语形。整句否定的不是「楽しい」，而是「只有快乐」这件事。","n":"「楽しい」加引号，是在给这个词打问号；这一句是整首歌的转折，唱得比前后都轻。"},{"jp":"自信[じしん]がないから描[えが]いてきたんだよ","tr":"正因为没自信，才一直画到现在啊","words":[["自信","じしん","自信"],["描く","えがく","画"],["〜てきた","てきた","一直…到现在"]],"g":"\u003cb>〜てきた\u003c/b>：从过去持续到现在，或某种状态逐渐形成。「描いてきた」不是「画了」，是「一直画到现在」。","n":"这句是全曲的核心时态；「んだよ」是解释语气，像在回答一个没人问出口的问题。"},{"jp":"積[つ]み上[あ]げてきたことが武器[ぶき]になる","tr":"一路累积起来的东西会成为武器","words":[["積み上げる","つみあげる","累积，堆起来"],["武器","ぶき","武器"],["〜になる","になる","成为"]],"g":"\u003cb>〜ことが〜になる\u003c/b>：把动作名词化再作主语。「積み上げてきたこと」＝积累起来的东西，是名词短语。","n":"「武器になる」是很直白的比喻，和上一句的「描いてきた」接成一条因果链。"},{"jp":"僕[ぼく]にしかできないことはなんだ","tr":"只有我才能做到的事，是什么","words":[["僕","ぼく","我（男性自称）"],["しか","しか","只有（接否定）"],["できない","できない","做不到"]],"g":"\u003cb>〜にしか〜ない\u003c/b>：只有…才能…。「しか」必须与否定呼应；「に」保留原句的格关系，不能换成「が」。","n":"这句是疑问句却唱得很平，像在问自己；「なんだ」不是礼貌形，是自言自语。"},{"jp":"触[ふ]れたまだ小[ちい]さな光[ひかり]","tr":"触碰到的那束还很小的光","words":[["触れる","ふれる","触碰"],["小さな","ちいさな","小的"],["光","ひかり","光"]],"g":"\u003cb>連体修飾の順\u003c/b>：「触れた」＋「まだ小さな」＋「光」，两个修饰语叠在名词前，顺序不能随便换。","n":"「まだ」插在「小さな」前面，多了一层「以后还会长大」的余味；这一句尾音是整段最轻的。"},{"jp":"大丈夫[だいじょうぶ]、行[い]こう、あとは楽[たの]しむだけだ","tr":"没关系，走吧，接下来只要享受就好","words":[["大丈夫","だいじょうぶ","没关系"],["行こう","いこう","走吧（意志形）"],["だけ","だけ","只，仅"]],"g":"\u003cb>意志形＋だけだ\u003c/b>：「行こう」是「行く」的意志形；「だけだ」把范围收到只剩一件事，语气干脆。","n":"三个短句一路往下走，最后「だけだ」收得干净；这是全曲第一次真正松开。"},{"jp":"全[すべ]てを賭[か]けて描[えが]く","tr":"押上一切去画","words":[["全て","すべて","全部"],["賭ける","かける","押上，赌上"],["描く","えがく","画"]],"g":"\u003cb>〜を賭ける\u003c/b>：「把…押上去」。賭ける前面用「を」，不用「に」；「全てを賭けて」是「押上全部」的固定说法。","n":"「賭けて」的促音要卡在鼓点上；这一句是副歌的发动机，前面两个字要咬住。"},{"jp":"自分[じぶん]にしか出[だ]せない色[いろ]で","tr":"用只有自己才调得出的颜色","words":[["自分","じぶん","自己"],["出す","だす","拿出，产出"],["色","いろ","颜色"]],"g":"\u003cb>にしか＋可能形否定\u003c/b>：「只有自己才拿得出」。「出す」的可能形是「出せる」，否定「出せない」。","n":"和前面的「自分で選んだその色」呼应：先选，再练到只有自己出得来。这两句是全曲的骨架。"},{"jp":"もう今はあの日の透明[とうめい]な僕[ぼく]じゃない","tr":"现在的我已经不是那天那个透明的我","words":[["もう","もう","已经"],["透明","とうめい","透明"],["じゃない","じゃない","不是"]],"g":"\u003cb>じゃない\u003c/b>：ではない的口语形，用于否定身份、状态。「透明な僕」是名词短语，接「じゃない」表示「不再是」。","n":"「透明な僕」＝没有颜色、可以被任何人穿过的自己；这一句是对开头的回答，也是全曲的落点。"},{"jp":"確[たし]かにそこに今[いま]もそこにあるよ","tr":"它确实就在那里，现在也还在那里","words":[["確かに","たしかに","确实"],["今も","いまも","现在也"],["ある","ある","存在"]],"g":"\u003cb>今も\u003c/b>：「即使现在也」。「も」强调持续，和开头的「確かにそこにある」只差这一个词。","n":"结尾重复开头的句子，只把「ある」换成「あるよ」；一个「よ」把话交到了听者手上。"}],"vocab":[{"k":"様","r":"さま","p":"名","cn":"样子，方式","lv":"N3"},{"k":"過ぎる","r":"すぎる","p":"動II","cn":"（时间）流逝；经过","lv":"N4"},{"k":"日々","r":"ひび","p":"名","cn":"日日，每天","lv":"N3"},{"k":"あくび","r":"あくび","p":"名","cn":"哈欠","lv":"N2"},{"k":"さんざめく","r":"さんざめく","p":"動I","cn":"喧闹；灯火嘈杂","lv":"N1"},{"k":"越える","r":"こえる","p":"動II","cn":"越过；度过","lv":"N3"},{"k":"街","r":"まち","p":"名","cn":"街道；城镇","lv":"N4"},{"k":"降る","r":"ふる","p":"動I","cn":"落下；降下","lv":"N4"},{"k":"虚しい","r":"むなしい","p":"形I","cn":"空虚的","lv":"N3"},{"k":"気持ち","r":"きもち","p":"名","cn":"心情，感受","lv":"N4"},{"k":"つまらない","r":"つまらない","p":"形I","cn":"无聊的，没意思的","lv":"N3"},{"k":"隠す","r":"かくす","p":"動I","cn":"隐藏","lv":"N3"},{"k":"本当","r":"ほんとう","p":"名","cn":"真实；真正的","lv":"N4"},{"k":"声","r":"こえ","p":"名","cn":"声音","lv":"N4"},{"k":"響かせる","r":"ひびかせる","p":"動II","cn":"使回响","lv":"N2"},{"k":"フリ","r":"ふり","p":"名","cn":"假装","lv":"N3"},{"k":"確か","r":"たしか","p":"形II","cn":"确实的，可靠的","lv":"N3"},{"k":"感じる","r":"かんじる","p":"動II","cn":"感觉，感受到","lv":"N4"},{"k":"まま","r":"まま","p":"名","cn":"原样；按照…的样子","lv":"N3"},{"k":"描く","r":"えがく","p":"動I","cn":"描绘，画","lv":"N3"},{"k":"選ぶ","r":"えらぶ","p":"動I","cn":"选择","lv":"N3"},{"k":"色","r":"いろ","p":"名","cn":"颜色","lv":"N5"},{"k":"眠い","r":"ねむい","p":"形I","cn":"困的","lv":"N3"},{"k":"空気","r":"くうき","p":"名","cn":"空气；气氛","lv":"N4"},{"k":"纏う","r":"まとう","p":"動I","cn":"裹着；带有（气质）","lv":"N1"},{"k":"訪れる","r":"おとずれる","p":"動II","cn":"到来；造访","lv":"N3"},{"k":"青い","r":"あおい","p":"形I","cn":"蓝色的","lv":"N5"},{"k":"世界","r":"せかい","p":"名","cn":"世界","lv":"N4"},{"k":"好き","r":"すき","p":"形II","cn":"喜欢","lv":"N5"},{"k":"怖い","r":"こわい","p":"形I","cn":"害怕的","lv":"N4"},{"k":"仕方ない","r":"しかたない","p":"形I","cn":"没办法；控制不住","lv":"N3"},{"k":"出会う","r":"であう","p":"動I","cn":"遇见","lv":"N3"},{"k":"伸ばす","r":"のばす","p":"動I","cn":"伸展，伸出","lv":"N3"},{"k":"遠い","r":"とおい","p":"形I","cn":"远的","lv":"N4"},{"k":"慌ただしい","r":"あわただしい","p":"形I","cn":"匆忙的，慌乱的","lv":"N2"},{"k":"もがく","r":"もがく","p":"動I","cn":"挣扎","lv":"N1"},{"k":"悔しい","r":"くやしい","p":"形I","cn":"不甘心的","lv":"N3"},{"k":"情けない","r":"なさけない","p":"形I","cn":"可悲的；丢脸的","lv":"N2"},{"k":"涙","r":"なみだ","p":"名","cn":"眼泪","lv":"N3"},{"k":"踏み込む","r":"ふみこむ","p":"動I","cn":"踏入；深入","lv":"N2"},{"k":"苦しい","r":"くるしい","p":"形I","cn":"痛苦的","lv":"N4"},{"k":"進む","r":"すすむ","p":"動I","cn":"前进","lv":"N3"},{"k":"道","r":"みち","p":"名","cn":"道路","lv":"N4"},{"k":"まぶた","r":"まぶた","p":"名","cn":"眼皮","lv":"N2"},{"k":"擦る","r":"こする","p":"動I","cn":"摩擦；揉","lv":"N2"},{"k":"しがみつく","r":"しがみつく","p":"動I","cn":"紧紧抓住不放","lv":"N1"},{"k":"誓い","r":"ちかい","p":"名","cn":"誓言","lv":"N3"},{"k":"続ける","r":"つづける","p":"動II","cn":"继续","lv":"N4"},{"k":"楽しい","r":"たのしい","p":"形I","cn":"快乐的","lv":"N5"},{"k":"不安","r":"ふあん","p":"名/形II","cn":"不安","lv":"N3"},{"k":"枚","r":"まい","p":"名","cn":"张（计数单位）","lv":"N4"},{"k":"自信","r":"じしん","p":"名","cn":"自信","lv":"N3"},{"k":"積み上げる","r":"つみあげる","p":"動II","cn":"累积，堆起来","lv":"N2"},{"k":"武器","r":"ぶき","p":"名","cn":"武器","lv":"N2"},{"k":"周り","r":"まわり","p":"名","cn":"周围","lv":"N3"},{"k":"比べる","r":"くらべる","p":"動II","cn":"比较","lv":"N3"},{"k":"想い","r":"おもい","p":"名","cn":"思绪；情感","lv":"N2"},{"k":"踏み出す","r":"ふみだす","p":"動I","cn":"迈出（一步）","lv":"N2"},{"k":"痛み","r":"いたみ","p":"名","cn":"疼痛","lv":"N3"},{"k":"向き合う","r":"むきあう","p":"動I","cn":"面对，正视","lv":"N2"},{"k":"触れる","r":"ふれる","p":"動II","cn":"触碰","lv":"N3"},{"k":"小さな","r":"ちいさな","p":"形I","cn":"小的","lv":"N5"},{"k":"光","r":"ひかり","p":"名","cn":"光","lv":"N3"},{"k":"大丈夫","r":"だいじょうぶ","p":"形II","cn":"没关系，不要紧","lv":"N4"},{"k":"楽しむ","r":"たのしむ","p":"動I","cn":"享受","lv":"N3"},{"k":"賭ける","r":"かける","p":"動II","cn":"押上，赌上","lv":"N2"},{"k":"見つけ出す","r":"みつけだす","p":"動I","cn":"找出，发现","lv":"N2"},{"k":"透明","r":"とうめい","p":"名/形II","cn":"透明","lv":"N2"},{"k":"ありのまま","r":"ありのまま","p":"副","cn":"原原本本，如实","lv":"N2"},{"k":"かけがえのない","r":"かけがえのない","p":"形I","cn":"无可替代的","lv":"N1"}],"vocabTip":{"searchHint":"搜索：群青 / ぐんじょう / 蓝色"},"grammar":[{"p":"〜ば〜ほど","sub":"程度递进","form":"動詞・形容詞の仮定形 ＋ 同一語の辞書形 ＋ ほど（ナ形：〜なら〜なほど）","mean":"越…越…","eg":"手を伸ばせば伸ばすほどに","examples":[{"jp":"考[かんが]えれば考[かんが]えるほど、分[わ]からなくなる。","tr":"越想越不明白。"},{"jp":"練習[れんしゅう]すればするほど、上手[じょうず]になる。","tr":"越练习越熟练。"},{"jp":"静[しず]かな場所[ばしょ]なら静[しず]かなほど集中[しゅうちゅう]できる。","tr":"越是安静的地方越能集中。"}],"warn":"「ば」和「ほど」两边必须用同一个词；不能写成「伸ばすほど伸ばせば」。形容动词用「〜なら〜なほど」。"},{"p":"〜て仕方ない","sub":"程度到无法控制","form":"動詞て形／形容詞くて／形動で ＋ 仕方ない（仕方がない）","mean":"…得不得了，控制不住","eg":"怖くて仕方ないけど","examples":[{"jp":"この映画[えいが]は悲[かな]しくて仕方ない。","tr":"这部电影让人难过得不得了。"},{"jp":"彼[かれ]の話[はなし]が面白[おもしろ]くて仕方ない。","tr":"他讲的事有趣得不行。"},{"jp":"一人[ひとり]で待[ま]つのが心細[こころぼそ]くて仕方ない。","tr":"一个人等得心里发慌。"}],"warn":"只能接感情、感觉，不能用来表示能力或命令。比「とても〜」多一层「自己也没办法」的语感。"},{"p":"〜ままに","sub":"随心、照原样","form":"動詞た形／辞書形 ＋ ままに（名詞＋の＋ままに）","mean":"照着…的样子，随心…","eg":"感じたままに描く","examples":[{"jp":"思[おも]うままに歌[うた]ってください。","tr":"请随心所欲地唱。"},{"jp":"足[あし]の向[む]くままに歩[ある]いた。","tr":"我信步而行。"},{"jp":"言[い]われるままに従[したが]うのはよくない。","tr":"别人说什么就照做并不好。"}],"warn":"「た形＋まま」是已经形成的状态，「辞書形＋まま」是任由动作发生；两者语气不同，别混用。"},{"p":"〜にしか〜ない","sub":"唯一限定","form":"名詞 ＋ にしか ＋ 動詞否定形（可能形なら「〜できない」）","mean":"只有…才…","eg":"僕にしかできないことはなんだ","examples":[{"jp":"この仕事[しごと]は彼[かれ]にしかできない。","tr":"这项工作只有他能做。"},{"jp":"この秘密[ひみつ]は君[きみ]にしか話[はな]せない。","tr":"这个秘密我只能告诉你。"},{"jp":"この景色[けしき]はここにしかない。","tr":"这景色只有这里才有。"}],"warn":"「しか」必须与否定呼应，缺了否定就错句；「に」保留原句的格关系，不能换成「が」。"},{"p":"〜てきた","sub":"持续到现在","form":"動詞て形 ＋ きた","mean":"一直…到现在；（状态）逐渐出现","eg":"自信がないから描いてきたんだよ","examples":[{"jp":"十年[じゅうねん]この町[まち]に住[す]んできた。","tr":"我在这个城市住了十年。"},{"jp":"少[すこ]しずつ分[わ]かってきた。","tr":"渐渐明白起来了。"},{"jp":"ずっと夢[ゆめ]を追[お]いかけてきた。","tr":"一直追着梦想走到现在。"}],"warn":"和「〜ていく」方向相反：きた指向过去到现在，ていく从现在向未来。中文翻译常把「てきた」译丢，要特别留意。"},{"p":"〜ほど","sub":"程度、比例","form":"動詞辞書形／名詞 ＋ ほど","mean":"到了…的程度；越…越…","eg":"踏み込むほど苦しくなる","examples":[{"jp":"泣[な]きたいほど悔[くや]しい。","tr":"后悔得想哭。"},{"jp":"考[かんが]えるほど眠[ねむ]れなくなる。","tr":"越想越睡不着。"},{"jp":"彼[かれ]ほど努力[どりょく]する人[ひと]はいない。","tr":"没人比他更努力。"}],"warn":"「ほど」表示程度时后面常接变化；和「くらい」相近，但「ほど」更书面、程度更强。"},{"p":"〜ような","sub":"婉曲、比况","form":"名詞＋の／用言連体形 ＋ ような ＋ 名詞","mean":"像…一样的；似乎…","eg":"どこか虚しいような","examples":[{"jp":"どこか寂[さび]しいような気持[きも]ちがした。","tr":"心里总觉得有点寂寞。"},{"jp":"夢[ゆめ]のような話[はなし]だ。","tr":"像是梦一样的故事。"},{"jp":"彼[かれ]は何[なに]か隠[かく]しているような顔[かお]をしている。","tr":"他一脸像是藏着什么的表情。"}],"warn":"句尾只用「ような」而不接名词，是省略了「気がする」，语气变软；这不是语法错误，但正式书面语里很少这样收尾。"},{"p":"〜ていても","sub":"状态持续下的逆接","form":"動詞て形 ＋ いても","mean":"即使一直…也…","eg":"見ないフリしていても","examples":[{"jp":"知[し]らないふりをしていても、いつかは分[わ]かる。","tr":"就算一直装作不知道，总有一天会明白。"},{"jp":"雨[あめ]が降[ふ]っていても試合[しあい]は行[おこな]われる。","tr":"即使下雨，比赛也照常进行。"},{"jp":"忙[いそが]しくていても、連絡[れんらく]だけはしてほしい。","tr":"就算再忙，也希望你至少联系一下。"}],"warn":"「ていても」是「ていて＋も」；不要和单纯的「ても」混用——加「いて」强调状态的持续。"},{"p":"〜ことで","sub":"手段、原因","form":"動詞辞書形／名詞＋の ＋ ことで","mean":"通过…；因为…","eg":"好きなものと向き合うことで","examples":[{"jp":"毎日[まいにち]練習[れんしゅう]することで上手[じょうず]になった。","tr":"通过每天练习变得熟练了。"},{"jp":"話[はな]し合[あ]うことで問題[もんだい]が解決[かいけつ]した。","tr":"通过沟通解决了问题。"},{"jp":"失敗[しっぱい]することで学[まな]ぶことも多[おお]い。","tr":"通过失败学到的东西也很多。"}],"warn":"「こと」把前面的动作名词化；书面语里也常写「ことによって」，语气更正式。"},{"p":"〜だけじゃない","sub":"部分否定","form":"名詞・用言 ＋ だけじゃない（＝だけではない）","mean":"不只是…","eg":"それは「楽しい」だけじゃない","examples":[{"jp":"彼[かれ]は歌手[かしゅ]なだけじゃない。","tr":"他不只是歌手。"},{"jp":"つらいだけじゃなくて、学[まな]ぶことも多[おお]い。","tr":"不只是辛苦，也学到很多。"},{"jp":"問題[もんだい]は値段[ねだん]だけじゃない。","tr":"问题不只是价格。"}],"warn":"「じゃない」是否定，但整句否定的不是前面的词，而是「只有它」这件事；中文要译成「不只…」。"},{"p":"〜んだ／のだ","sub":"解释、说明","form":"用言連体形 ＋ んだ（のだ）；名詞・ナ形 ＋ なんだ","mean":"（解释原因、补充背景）…的","eg":"出会えた気がしたんだ","examples":[{"jp":"どうして遅[おく]れたの？—バスが来[こ]なかったんだ。","tr":"为什么迟到？——因为公交没来。"},{"jp":"明日[あした]は休[やす]みなんだ。","tr":"明天休息。"},{"jp":"実[じつ]は前[まえ]から知[し]ってたんだ。","tr":"其实我早就知道了。"}],"warn":"口语里「の」常变成「ん」；疑问句用「んですか」比「ですか」更柔，是在求解释而不是质问。"},{"p":"連用中止","sub":"书面语的并列","form":"動詞ます形（去ます）／形容詞く形 ＋ 、","mean":"…，然后…；…，并且…（等于て形）","eg":"さんざめく夜、越え、今日も","examples":[{"jp":"彼[かれ]は窓[まど]を開[あ]け、風[かぜ]を入[い]れた。","tr":"他打开窗，放进风。"},{"jp":"空[そら]は青[あお]く、海[うみ]は静[しず]かだった。","tr":"天空湛蓝，大海平静。"},{"jp":"資料[しりょう]を読[よ]み、要点[ようてん]をまとめた。","tr":"读了资料，整理了要点。"}],"warn":"歌词里停顿很短，不要把「越え」读成完整句子；日常口语几乎不用连用中止，它属于书面语。"},{"p":"〜だって","sub":"极端举例","form":"名詞／疑問詞 ＋ だって","mean":"连…也；不管…都","eg":"周りを見たって","examples":[{"jp":"子[こ]どもだって分[わ]かる。","tr":"连小孩都懂。"},{"jp":"どこだって行[い]くよ。","tr":"哪里我都去。"},{"jp":"今[いま]からだって遅[おそ]くない。","tr":"就算从现在开始也不晚。"}],"warn":"「だって」还有「因为」的用法（放句首）。接在名词或疑问词后是「也」，放句首是「因为」，看位置。"},{"p":"意志形（〜う／〜よう）","sub":"意志、劝诱","form":"五段：词尾变お段＋う／一段：＋よう／する：しよう／くる：こよう","mean":"…吧；我要…","eg":"大丈夫、行こう、あとは楽しむだけだ","examples":[{"jp":"そろそろ帰[かえ]ろう。","tr":"差不多回去吧。"},{"jp":"一緒[いっしょ]に昼[ひる]ご飯[はん]を食[た]べよう。","tr":"一起吃午饭吧。"},{"jp":"明日[あした]から早起[はやお]きしよう。","tr":"从明天开始早起吧。"}],"warn":"「〜ましょう」是礼貌体，意志形更口语；歌词里常用来对自己说，不一定是邀请别人。"},{"p":"〜気がする","sub":"主观感觉","form":"名詞＋の／用言連体形 ＋ 気がする","mean":"感觉好像…","eg":"出会えた気がしたんだ","examples":[{"jp":"誰[だれ]かに見[み]られている気[き]がする。","tr":"感觉有人在看我。"},{"jp":"この曲[きょく]、どこかで聞[き]いた気[き]がする。","tr":"这首歌好像在哪里听过。"},{"jp":"全部[ぜんぶ]うまくいった気[き]がする。","tr":"感觉一切都顺利。"}],"warn":"「気がする」是主观推测，比「と思う」更不确定；否定形「気がしない」是「不觉得」，不是「感觉不到」。"},{"p":"〜ように","sub":"比况、期待","form":"動詞辞書形／名詞＋の ＋ ように","mean":"像…一样；按照…；希望…","eg":"思うようにいかない、今日も","examples":[{"jp":"彼[かれ]は魚[さかな]のように泳[およ]ぐ。","tr":"他像鱼一样游泳。"},{"jp":"先生[せんせい]の言[い]うように書[か]いてください。","tr":"请按老师说的那样写。"},{"jp":"夢[ゆめ]が叶[かな]いますように。","tr":"希望梦想成真。"}],"warn":"后面接名词时要变成「ような」；表目的时「ように」前面多接可能形或非意志动词，和「ために」的接续不同。"}],"footer":{"title":"群青","note":"本页为个人日语学习用途的歌词解析作品，非官方发布。歌词著作权归作词・作曲・编曲 Ayase、演唱 YOASOBI 及相关权利方所有；页面内容仅供学习参考，请勿用于商业用途，并请通过正版音源与官方歌词页对照收听。","meta":["ブルーピリオド","歌詞精読ノート","JLPT N3–N2"]}};</script>
+<script>/* ============================================================
+   render.js — 由 song.json 驱动整页渲染
+   约定：window.SONG 由 build 注入；所有文案在 JSON 里，脚本不含任何歌曲内容
+   页面在语法图谱结束；完整歌词可省略，导航和章节编号自动跟随
+   ============================================================ */
+(function () {
+  'use strict';
+
+  const SONG   = window.SONG || {};
+  const META   = SONG.meta || {};
+  const LYRIC  = SONG.lines || [];
+  const VOCAB  = SONG.vocab || [];
+  const GRAM   = SONG.grammar || [];
+  const NS     = 'jss.' + (META.slug || 'default') + '.';
+
+  const ALL_SECTIONS = ['map', 'lyrics', 'lines', 'vocab', 'grammar'];
+  const MODULES = Object.assign({}, ...ALL_SECTIONS.map(k => ({ [k]: true })), SONG.modules || {});
+  const on = k => MODULES[k] !== false;
+
+  /* ---------------- 基础工具 ---------------- */
+  const $  = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem(NS + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(NS + k, JSON.stringify(v)); } catch (e) {} }
+  };
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, c =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+  const escapeAttr = escapeHtml;
+
+  /* 把 漢字[かな] 转成 ruby */
+  function ruby(s) {
+    return escapeHtml(s).replace(/([\u4e00-\u9fff々〆]+)\[([^\]]+)\]/g,
+      (m, kanji, kana) => '<ruby>' + kanji + '<rt>' + kana + '</rt></ruby>');
+  }
+  function plain(s) { return String(s || '').replace(/\[([^\]]+)\]/g, ''); }
+
+  const SPEAKER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+  const CHECK   = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>';
+
+  /* ---------------- 语音 ---------------- */
+  let jaVoice = null;
+  function pickVoice() {
+    if (!('speechSynthesis' in window)) return;
+    const vs = speechSynthesis.getVoices() || [];
+    jaVoice = vs.find(v => v.lang === 'ja-JP') || vs.find(v => (v.lang || '').indexOf('ja') === 0) || null;
+  }
+  function speak(text) {
+    if (!('speechSynthesis' in window) || !text) return;
+    try {
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'ja-JP';
+      u.rate = 0.82;
+      if (jaVoice) u.voice = jaVoice;
+      speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+  if ('speechSynthesis' in window) {
+    pickVoice();
+    speechSynthesis.addEventListener('voiceschanged', pickVoice);
+  }
+
+  /* ---------------- 板块卸载 + 章节编号重排 ---------------- */
+  function renumberSections() {
+    $$('main > section').forEach((s, i) => {
+      const n = s.querySelector('.sec-num');
+      if (n) n.textContent = String(i + 1).padStart(2, '0');
+    });
+  }
+
+  ALL_SECTIONS.forEach(k => {
+    if (!on(k)) {
+      const el = document.getElementById(k);
+      if (el) el.remove();
+    }
+  });
+  renumberSections();
+
+  /* ---------------- 首屏右侧：封面 ----------------
+     meta.cover = "disc"  → 用模板里的 CD 图形
+     meta.cover = 图片路径 → 图片封面
+     不填（默认）        → 排版式封面（纯 CSS + 文字，随歌名生成）
+  */
+  function renderHeroArt() {
+    const box = $('#hero-art');
+    if (!box) return;
+    const cover = META.cover;
+
+    if (cover === 'disc') return;
+
+    if (cover && cover !== 'type') {
+      const alt = META.coverAlt || ((META.titleLine1 || '') + ' ' + (META.titleLine2 || '') + ' 封面').trim();
+      box.innerHTML = '<figure class="cover cover--img"><img src="' + escapeAttr(cover) + '" alt="' + escapeAttr(alt) + '"'
+        + ' loading="eager" decoding="async"></figure>';
+      return;
+    }
+
+    const work = String(META.kicker || '').split('·')[0].trim().toUpperCase();
+    const title = escapeHtml(META.titleLine1 || '')
+      + (META.titleLine2 ? '<br>' + escapeHtml(META.titleLine2) : '');
+
+    box.innerHTML = '<figure class="cover cover--type">'
+      + '<span class="cover-ring" aria-hidden="true"></span>'
+      + '<div class="cover-inner">'
+      +   '<div class="cover-row">'
+      +     '<span class="cover-tag">' + escapeHtml(META.coverTag || 'Single') + '</span>'
+      +     '<span class="cover-year">' + escapeHtml(META.discLabel || '') + '</span>'
+      +   '</div>'
+      +   '<div class="cover-mid">'
+      +     (work ? '<span class="cover-work">' + escapeHtml(work) + '</span>' : '')
+      +     '<span class="cover-title" lang="ja">' + title + '</span>'
+      +     '<span class="cover-artist" lang="ja">' + escapeHtml(META.artist || '') + '</span>'
+      +   '</div>'
+      +   '<div class="cover-foot">'
+      +     '<span lang="ja">' + escapeHtml(META.subtitle || '歌詞精読') + '</span>'
+      +     '<span>' + escapeHtml(META.level || '') + '</span>'
+      +   '</div>'
+      + '</div></figure>';
+  }
+
+  /* ---------------- 完整歌词 ---------------- */
+  function renderLyrics() {
+    const box = $('#lyrics-body');
+    if (!box) return;
+    const L = SONG.lyrics;
+    const blocks = (L && Array.isArray(L.blocks))
+      ? L.blocks.filter(b => b && Array.isArray(b.lines) && b.lines.length) : [];
+
+    /* 没有歌词数据就把这一节整块撤掉，章节编号重新排 */
+    if (!blocks.length) {
+      const sec = document.getElementById('lyrics');
+      if (sec) { sec.remove(); renumberSections(); }
+      return;
+    }
+
+    box.innerHTML = blocks.map((b, i) => {
+      const head = '<h3 class="lyr-head">段落 ' + String(i + 1).padStart(2, '0') + '</h3>';
+      const lines = b.lines.map(l =>
+        '<p class="lyr-line" lang="ja"><span>' + ruby(l) + '</span>'
+        + '<button class="icon-btn lyr-speak" data-say="' + escapeAttr(plain(l))
+        + '" aria-label="朗读这一行">' + SPEAKER + '</button></p>').join('');
+      return '<div class="lyr-block">'
+        + head + lines + '</div>';
+    }).join('');
+
+    const foot = $('#lyrics-foot');
+    if (foot) {
+      foot.innerHTML = L.foot
+        || '点击行末的喇叭可以朗读；注音与逐句讲解见下一节。';
+    }
+  }
+
+  /* ---------------- 导航 ---------------- */
+  const BACK_ARROW = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">'
+    + '<path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.7" '
+    + 'stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  /* 返回合集入口：meta.backHref 不填默认 ../index.html，显式写空则不显示 */
+  function backLink() {
+    const href = META.backHref === undefined ? '../index.html' : META.backHref;
+    if (!href) return '';
+    return '<a class="nav-back" href="' + escapeAttr(href) + '">' + BACK_ARROW
+      + escapeHtml(META.backLabel || '合集') + '</a>';
+  }
+
+  function renderNav() {
+    const items = (SONG.nav || []).filter(n => document.getElementById(n.id));
+    const links = items.map((n, i) =>
+      '<a class="nav-link' + (i === 0 ? ' is-active' : '') + '" href="#' + escapeAttr(n.id) + '">' + escapeHtml(n.label) + '</a>').join('');
+    $('#nav-inner').innerHTML = backLink() + links
+      + '<div class="nav-spacer"></div>'
+      + '<div class="nav-progress"><span id="nav-progress-text">已掌握 0 / 0</span><span class="bar"><i id="nav-progress-bar"></i></span></div>';
+  }
+
+  /* ---------------- 顶部数据条 ---------------- */
+  const STAT_VALUE = {
+    lines: () => LYRIC.length,
+    vocab: () => VOCAB.length,
+    grammar: () => GRAM.length
+  };
+
+  function renderStats() {
+    const box = $('#hero-stats');
+    if (!box) return;
+    const items = SONG.stats || [];
+    box.style.setProperty('--stat-cols', items.length || 1);
+    box.innerHTML = items.map(s => {
+      const v = STAT_VALUE[s.key] ? STAT_VALUE[s.key]() : (s.value != null ? s.value : 0);
+      return '<div class="stat"><b>' + v + '</b><span>' + escapeHtml(s.label) + '</span></div>';
+    }).join('');
+  }
+
+  /* ---------------- 徽章 / 为什么 / 步骤 ---------------- */
+  function renderBadges() {
+    const el = $('#badges');
+    if (!el) return;
+    el.innerHTML = (META.badges || []).map((b, i) =>
+      '<span class="badge ' + (i === 0 ? 'badge--level' : 'badge--dot') + '">' + escapeHtml(b) + '</span>').join('');
+  }
+
+  function renderWhy() {
+    const el = $('#why-list');
+    if (!el) return;
+    el.innerHTML = ((SONG.map && SONG.map.why) || []).map((w, i) =>
+      '<li class="why-item"><span class="why-idx">' + (i + 1) + '</span>'
+      + '<div><b>' + escapeHtml(w.t) + '</b><p>' + escapeHtml(w.d) + '</p></div></li>').join('');
+  }
+
+  function renderSteps() {
+    const el = $('#steps');
+    if (!el) return;
+    el.innerHTML = (SONG.steps || []).map(s =>
+      '<div class="step"><em>' + escapeHtml(s.k) + '</em><b>' + escapeHtml(s.t) + '</b><p>' + escapeHtml(s.d) + '</p></div>').join('');
+  }
+
+  /* ---------------- 逐句精读 ---------------- */
+  function initLines() {
+    const list = $('#lyric-list');
+    if (!list) return;
+
+    function render() {
+      list.innerHTML = LYRIC.map(it => {
+        const words = (it.words || []).map(w =>
+          '<span class="wchip"><b lang="ja">' + escapeHtml(w[0]) + '</b><i lang="ja">' + escapeHtml(w[1]) + '</i><em>' + escapeHtml(w[2]) + '</em></span>'
+        ).join('');
+        const say = escapeAttr(plain(it.jp));
+        return '<article class="lyric reveal in">'
+          + '<div class="lyric-main">'
+          +   '<div class="lyric-top">'
+          +     '<p class="lyric-jp" lang="ja">' + ruby(it.jp) + '</p>'
+          +     '<button class="icon-btn" data-say="' + say + '" aria-label="朗读这一句">' + SPEAKER + '</button>'
+          +   '</div>'
+          +   '<p class="lyric-tr">' + escapeHtml(it.tr) + '</p>'
+          + '</div>'
+          + '<div class="lyric-side">'
+          +   '<div class="words">' + words + '</div>'
+          +   '<div class="note"><b>语法</b> ' + (it.g || '') + '</div>'
+          +   '<p class="nuance">▸ ' + (it.n || '') + '</p>'
+          + '</div>'
+          + '</article>';
+      }).join('');
+    }
+
+    const furi = $('#t-furi');
+    if (furi) {
+      const saved = store.get('furi', true);
+      furi.checked = saved;
+      document.body.classList.toggle('hide-furi', !saved);
+      furi.addEventListener('change', e => {
+        document.body.classList.toggle('hide-furi', !e.target.checked);
+        store.set('furi', e.target.checked);
+      });
+    }
+
+    const tr = $('#t-tr');
+    if (tr) {
+      const saved = store.get('tr', true);
+      tr.checked = saved;
+      document.body.classList.toggle('hide-tr', !saved);
+      tr.addEventListener('change', e => {
+        document.body.classList.toggle('hide-tr', !e.target.checked);
+        store.set('tr', e.target.checked);
+      });
+    }
+
+    render();
+  }
+
+  /* ---------------- 词汇表 ---------------- */
+  function initVocab() {
+    const body = $('#v-body');
+    const search = $('#v-search');
+    if (!body || !search) return;
+
+    const keyOf = v => v.k + '|' + v.r;
+    const mastery = new Set(store.get('mastery', []));
+    let level = 'all';
+    let undone = false;
+
+    function updateProgress() {
+      const total = VOCAB.length;
+      const done = mastery.size;
+      const pct = total ? Math.round(done / total * 100) : 0;
+      const t = $('#nav-progress-text');
+      if (t) t.textContent = '已掌握 ' + done + ' / ' + total;
+      const bar = $('#nav-progress-bar');
+      if (bar) bar.style.width = pct + '%';
+      const vp = $('#v-progress');
+      if (vp) vp.textContent = '已掌握 ' + done + '（' + pct + '%）';
+    }
+
+    function render() {
+      const q = search.value.trim().toLowerCase();
+      const rows = VOCAB.filter(v => {
+        if (level !== 'all' && v.lv !== level) return false;
+        if (undone && mastery.has(keyOf(v))) return false;
+        if (!q) return true;
+        return (v.k + v.r + v.cn + v.p).toLowerCase().indexOf(q) > -1;
+      });
+
+      body.innerHTML = rows.length ? rows.map(v => {
+        const k = keyOf(v);
+        const done = mastery.has(k);
+        return '<tr' + (done ? ' class="done"' : '') + '>'
+          + '<td><button class="v-check" role="switch" aria-checked="' + done + '" aria-label="标记 ' + escapeAttr(v.k) + ' 已掌握" data-key="' + escapeAttr(k) + '">' + CHECK + '</button></td>'
+          + '<td class="v-word" lang="ja">' + escapeHtml(v.k) + '</td>'
+          + '<td class="v-read" lang="ja">' + escapeHtml(v.r) + '</td>'
+          + '<td class="v-pos">' + escapeHtml(v.p || '') + '</td>'
+          + '<td class="v-cn">' + escapeHtml(v.cn) + '</td>'
+          + '<td><span class="lv lv-' + v.lv + '">' + v.lv + '</span></td>'
+          + '<td><button class="icon-btn" data-say="' + escapeAttr(v.k) + '" aria-label="朗读 ' + escapeAttr(v.k) + '">' + SPEAKER + '</button></td>'
+          + '</tr>';
+      }).join('') : '<tr><td colspan="7" style="text-align:center;padding:2.4rem 1rem;color:var(--ink-3);font-size:.86rem">没有匹配的词，换个关键词试试。</td></tr>';
+
+      $('#v-count').textContent = '共 ' + VOCAB.length + ' 个词，当前显示 ' + rows.length + ' 个';
+      updateProgress();
+    }
+
+    body.addEventListener('click', e => {
+      const btn = e.target.closest('.v-check');
+      if (!btn) return;
+      const k = btn.dataset.key;
+      if (mastery.has(k)) mastery.delete(k); else mastery.add(k);
+      store.set('mastery', Array.from(mastery));
+      render();
+    });
+
+    search.addEventListener('input', render);
+
+    $$('#v-levels .chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        $$('#v-levels .chip').forEach(c => c.classList.remove('is-on'));
+        chip.classList.add('is-on');
+        level = chip.dataset.lv;
+        render();
+      });
+    });
+
+    const undoneBtn = $('#v-undone');
+    if (undoneBtn) {
+      undoneBtn.addEventListener('click', e => {
+        undone = !undone;
+        e.currentTarget.classList.toggle('is-on', undone);
+        render();
+      });
+    }
+
+    const reset = $('#v-reset');
+    if (reset) {
+      reset.addEventListener('click', () => {
+        mastery.clear();
+        store.set('mastery', []);
+        render();
+      });
+    }
+
+    render();
+  }
+
+  /* ---------------- 语法 ---------------- */
+  function initGrammar() {
+    const el = $('#grammar-list');
+    if (!el) return;
+    el.innerHTML = GRAM.map(g =>
+      '<details class="g reveal">'
+      + '<summary>'
+      +   '<div class="g-head"><span class="g-pattern" lang="ja">' + escapeHtml(g.p) + '</span><span class="g-sub">' + escapeHtml(g.sub) + '</span></div>'
+      +   '<span class="g-plus" aria-hidden="true">+</span>'
+      + '</summary>'
+      + '<div class="g-body">'
+      +   '<dl style="display:grid;gap:.55rem;margin:0">'
+      +     '<div class="g-row"><dt>接续</dt><dd><span class="g-eg">' + escapeHtml(g.form) + '</span></dd></div>'
+      +     '<div class="g-row"><dt>意思</dt><dd>' + escapeHtml(g.mean) + '</dd></div>'
+      +     '<div class="g-row"><dt>原句</dt><dd><span class="g-eg" lang="ja">' + escapeHtml(g.eg) + '</span></dd></div>'
+      +   '</dl>'
+      +   '<div class="g-examples"><h4>例句</h4><ol>'
+      +     g.examples.map(e => '<li><p class="g-example-jp" lang="ja">' + ruby(e.jp) + '</p>'
+      +       '<p class="g-example-tr">' + escapeHtml(e.tr) + '</p></li>').join('')
+      +   '</ol></div>'
+      +   '<p class="g-warn"><b>注意</b> ' + escapeHtml(g.warn) + '</p>'
+      + '</div>'
+      + '</details>').join('');
+  }
+
+  /* ---------------- 启动 ---------------- */
+  renderLyrics();
+  renderNav();
+  renderStats();
+  renderHeroArt();
+  renderBadges();
+  renderWhy();
+  renderSteps();
+  initLines();
+  initVocab();
+  initGrammar();
+
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('[data-say]');
+    if (btn) speak(btn.dataset.say);
+  });
+
+  /* 滚动高亮 */
+  const navLinks = $$('.nav-link');
+  const sections = navLinks.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+
+  if ('IntersectionObserver' in window) {
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          navLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + en.target.id));
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+    sections.forEach(s => spy.observe(s));
+
+    const revealer = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          revealer.unobserve(en.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    $$('.reveal').forEach(el => revealer.observe(el));
+  } else {
+    $$('.reveal').forEach(el => el.classList.add('in'));
+  }
+})();
+</script>
+</body>
+</html>
