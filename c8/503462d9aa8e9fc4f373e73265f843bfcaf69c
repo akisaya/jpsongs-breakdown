@@ -1,0 +1,38 @@
+flamingo/flamingo.song.json
+  s_c2361d7293cad9::t_ced0b9986a3dd3 1-4,6-11,13-47,52-93,96-110,112-113,115-116,118-122,124-126,133-1030,1032-1037,1104-1105
+  s_7b64df0965551d::t_7c0091a0286937 5,12,48-51,94-95,111,114,117,123,127-132,1031,1038-1103
+index.html
+  s_7b64df0965551d::t_b58d311d2e5074 460-461
+  s_7b64df0965551d::t_65748c09e40a97 7
+  s_c2361d7293cad9::t_8bbbd883446971 449-459
+flamingo/index.html
+  s_c2361d7293cad9::t_ced0b9986a3dd3 1-6,8-994,996-1041,1059-1062,1064-1066,1068-1085,1087-1141,1143-1158,1160-1164,1166-1601
+  s_7b64df0965551d::t_152d9929f6d325 7,995,1042-1058,1063,1067,1086,1142,1159,1165
+SONGS.md
+  s_7b64df0965551d::t_b58d311d2e5074 11
+  s_c2361d7293cad9::t_8bbbd883446971 10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.52-trip",
+  "base_commit_sha": "c8503462d9aa8e9fc4f373e73265f843bfcaf69c",
+  "prompts": {},
+  "sessions": {
+    "s_7b64df0965551d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a2077e-cdb2-7e91-9d9f-19c74ff4744d",
+        "model": "deepseek-v4.1-flash[1M]"
+      },
+      "human_author": "akisaya <akikevinsama@gmail.com>"
+    },
+    "s_c2361d7293cad9": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a20740-4e04-7af3-9235-71171f9bd768",
+        "model": "gpt-6.1-terra[1M]"
+      },
+      "human_author": "akisaya <akikevinsama@gmail.com>"
+    }
+  }
+}
