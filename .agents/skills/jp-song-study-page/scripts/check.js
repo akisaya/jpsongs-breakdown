@@ -46,6 +46,7 @@ sp(html.includes('window.SONG'), '含 window.SONG');
 sp(!/__SONG_JSON__|__CSS__|__RENDER_JS__/.test(html), '无未替换的构建占位符');
 sp(!/\{\{[\w.]+\}\}/.test(html), '无未替换的 {{}} 占位符');
 sp(!/id="(?:struct|struct-legend|sec-filters)"/.test(html), '无曲式时间轴、图例或筛选器');
+sp(!/id="steps"/.test(html), '无三步学习法卡片');
 
 sp([...present].every(k => ['map', 'lyrics', 'lines', 'vocab', 'grammar'].includes(k)), '章节范围正确');
 const fails = statics.filter(s => s.startsWith('✗'));

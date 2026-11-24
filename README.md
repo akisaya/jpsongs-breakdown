@@ -77,6 +77,7 @@ node $SKILL/scripts/check.js $SLUG/index.html --shots          # 交互 + 四档
 
 `lines` 是逐句精读：每张卡的 `jp` 必须是 `lyrics.blocks[].lines` 中的一条完整原文，
 去掉注音、忽略空白后要完全一致。不能把词、半句或跨行拼接当作逐句卡；`--strict-lines` 会拦截这类错误。
+精读卡数量按歌曲难度和有教学价值的不同歌词行调整，复杂歌曲应多选值得讲解的句子；每卡结合句子解释结构与语感，避免凑数和重复。
 
 默认缺少完整歌词会构建失败。只有用户明确要求不要全文时，才写 `"modules": {"lyrics": false}`。
 

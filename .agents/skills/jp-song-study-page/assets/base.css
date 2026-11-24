@@ -577,27 +577,6 @@ img,svg{display:block}
   background:#FFF0E1;color:var(--orange);border:1px solid #F6D3B4;
 }
 
-/* 三步学习法 */
-.steps{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:.7rem;
-  margin-top:1.35rem;
-}
-@media (max-width:700px){.steps{grid-template-columns:1fr}}
-.step{
-  background:var(--surface-warm);
-  border:1px solid var(--line-soft);
-  border-radius:var(--r-sm);
-  padding:.95rem 1rem;
-}
-.step em{
-  display:block;font-style:normal;font-size:.66rem;letter-spacing:.18em;
-  color:var(--orange);font-weight:700;margin-bottom:.3rem;
-}
-.step b{display:block;font-size:.9rem}
-.step p{font-size:.8rem;color:var(--ink-3);line-height:1.6;margin-top:.25rem}
-
 /* ============================================================
    完整歌词
    ============================================================ */

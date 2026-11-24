@@ -376,6 +376,7 @@ dropSections.forEach(k => {
 });
 
 /* 关闭的板块连数据一起剔除，避免无用的 JSON 占体积、源码里露出来 */
+delete song.steps;
 OPTIONAL.forEach(k => {
   if (dropSections.has(k)) {
     delete song[k];

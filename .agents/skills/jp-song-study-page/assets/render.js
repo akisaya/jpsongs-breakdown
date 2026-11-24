@@ -195,7 +195,7 @@
     }).join('');
   }
 
-  /* ---------------- 徽章 / 为什么 / 步骤 ---------------- */
+  /* ---------------- 徽章 / 为什么 ---------------- */
   function renderBadges() {
     const el = $('#badges');
     if (!el) return;
@@ -209,13 +209,6 @@
     el.innerHTML = ((SONG.map && SONG.map.why) || []).map((w, i) =>
       '<li class="why-item"><span class="why-idx">' + (i + 1) + '</span>'
       + '<div><b>' + escapeHtml(w.t) + '</b><p>' + escapeHtml(w.d) + '</p></div></li>').join('');
-  }
-
-  function renderSteps() {
-    const el = $('#steps');
-    if (!el) return;
-    el.innerHTML = (SONG.steps || []).map(s =>
-      '<div class="step"><em>' + escapeHtml(s.k) + '</em><b>' + escapeHtml(s.t) + '</b><p>' + escapeHtml(s.d) + '</p></div>').join('');
   }
 
   /* ---------------- 逐句精读 ---------------- */
@@ -394,7 +387,6 @@
   renderHeroArt();
   renderBadges();
   renderWhy();
-  renderSteps();
   initLines();
   initVocab();
   initGrammar();
