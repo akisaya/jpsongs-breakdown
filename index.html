@@ -170,9 +170,9 @@ a{color:inherit;text-decoration:none}
 .list-count{font-size:.72rem;color:var(--ink-3);letter-spacing:.06em}
 
 .directory-tools{
-  display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;
+  display:flex;align-items:center;justify-content:flex-end;
   gap:.55rem;
-  width:min(100%,710px);
+  flex:0 0 auto;max-width:100%;
 }
 .search-box,.artist-trigger{
   min-width:0;height:40px;
@@ -182,7 +182,7 @@ a{color:inherit;text-decoration:none}
   color:var(--ink-2);
   transition:border-color .18s ease,background .18s ease,box-shadow .18s ease;
 }
-.search-box{position:relative;display:flex;align-items:center;flex:1 1 220px;max-width:280px}
+.search-box{position:relative;display:flex;align-items:center;flex:0 0 280px;max-width:100%}
 .search-box:focus-within,.artist-trigger:focus-visible,.artist-trigger[aria-expanded="true"]{
   border-color:var(--orange);
   background:var(--surface);
@@ -205,7 +205,7 @@ a{color:inherit;text-decoration:none}
 }
 .search-box input::placeholder{color:var(--ink-3);opacity:1}
 
-.artist-picker{position:relative;flex:0 1 220px;min-width:180px;height:40px}
+.artist-picker{position:relative;flex:0 0 220px;min-width:0;height:40px}
 .artist-trigger{
   display:flex;align-items:center;justify-content:space-between;gap:.6rem;
   width:100%;padding:0 .7rem 0 .75rem;
@@ -266,36 +266,12 @@ a{color:inherit;text-decoration:none}
 .artist-option small{font-size:.62rem;font-weight:400;color:var(--ink-3);font-variant-numeric:tabular-nums}
 .artist-option-empty{padding:.75rem .6rem;font-size:.68rem;color:var(--ink-3);text-align:center}
 
-.sort-toggle{
-  display:flex;align-items:center;flex:0 0 auto;height:40px;
-  padding:.22rem;gap:.1rem;
-  border:1px solid var(--line);border-radius:12px;
-  background:rgba(255,255,255,.62);
-}
-.sort-toggle>span{
-  padding:0 .35rem 0 .3rem;
-  font-size:.56rem;letter-spacing:.08em;color:var(--ink-3);
-}
-.sort-toggle button{
-  height:100%;padding:0 .48rem;
-  border:0;border-radius:8px;background:transparent;
-  color:var(--ink-3);font:inherit;font-size:.66rem;white-space:nowrap;cursor:pointer;
-}
-.sort-toggle button:hover{color:var(--ink)}
-.sort-toggle button[aria-pressed="true"]{background:var(--ink);color:#FFFDF8;box-shadow:var(--shadow-xs)}
-.sort-toggle button:focus-visible{outline:2px solid var(--orange);outline-offset:1px}
-
-@media (max-width:860px){
-  .directory-tools{display:grid;grid-template-columns:minmax(0,1fr) auto;width:100%}
-  .search-box{grid-column:1/-1;max-width:none;width:100%}
+@media (max-width:760px){
+  .directory-tools{display:grid;grid-template-columns:1fr;width:100%}
+  .search-box{max-width:none;width:100%}
   .artist-picker{width:100%}
 }
 @media (max-width:700px){.list-head{align-items:stretch}}
-@media (max-width:480px){
-  .directory-tools{grid-template-columns:1fr}
-  .sort-toggle{width:100%}
-  .sort-toggle button{flex:1 1 auto}
-}
 
 .songs{
   display:grid;
@@ -565,13 +541,13 @@ a{color:inherit;text-decoration:none}
             <circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/>
             <path d="m10.5 10.5 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
-          <input id="song-search" type="search" autocomplete="off" placeholder="搜索歌曲、演唱者或作品" aria-label="搜索歌曲、演唱者或作品">
+          <input id="song-search" type="search" autocomplete="off" placeholder="搜索歌曲、歌手或作品" aria-label="搜索歌曲、歌手或作品">
         </label>
         <div class="artist-picker" id="artist-picker">
           <button class="artist-trigger" id="artist-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="artist-menu">
             <span class="artist-trigger-copy">
-              <small>演唱者</small>
-              <b id="artist-trigger-label">全部演唱者</b>
+              <small>歌手</small>
+              <b id="artist-trigger-label">全部</b>
             </span>
             <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
@@ -581,22 +557,17 @@ a{color:inherit;text-decoration:none}
                 <circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/>
                 <path d="m10.5 10.5 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
               </svg>
-              <input id="artist-menu-search" type="search" autocomplete="off" placeholder="查找演唱者" aria-label="查找演唱者">
+              <input id="artist-menu-search" type="search" autocomplete="off" placeholder="查找歌手" aria-label="查找歌手">
             </label>
-            <div class="artist-options" id="artist-options" role="listbox" aria-label="选择演唱者"></div>
+            <div class="artist-options" id="artist-options" role="listbox" aria-label="选择歌手"></div>
           </div>
-        </div>
-        <div class="sort-toggle" role="group" aria-label="排序方式">
-          <span>排序</span>
-          <button type="button" data-sort="added" aria-pressed="true">添加顺序</button>
-          <button type="button" data-sort="artist" aria-pressed="false">演唱者</button>
         </div>
       </div>
     </div>
     <div class="songs" id="songs"></div>
     <div class="empty" id="empty" hidden>
       <b>没有找到匹配的曲目</b>
-      <span>试试其他歌曲名、演唱者或作品名。</span>
+      <span>试试其他歌曲名、歌手或作品名。</span>
       <button type="button" id="reset-directory">显示全部曲目</button>
     </div>
     <nav class="pager" id="pager" aria-label="曲目分页" hidden>
@@ -1221,7 +1192,6 @@ a{color:inherit;text-decoration:none}
   var $ = function(s){ return document.querySelector(s); };
   var activeArtist = '';
   var searchQuery = '';
-  var sortMode = 'added';
   var currentPage = 1;
   var PAGE_SIZE = 10;
   var collator = new Intl.Collator('ja', { numeric: true, sensitivity: 'base' });
@@ -1296,7 +1266,7 @@ a{color:inherit;text-decoration:none}
     var count = activeArtist
       ? SONGS.filter(function(song){ return song.artist === activeArtist; }).length
       : SONGS.length;
-    $('#artist-trigger-label').textContent = (activeArtist || '全部演唱者') + ' · ' + count + ' 首';
+    $('#artist-trigger-label').textContent = (activeArtist || '全部') + ' · ' + count + ' 首';
   }
 
   function renderArtistOptions(){
@@ -1306,7 +1276,7 @@ a{color:inherit;text-decoration:none}
     });
     var options = query ? '' :
       '<button type="button" class="artist-option" role="option" data-artist="" aria-selected="'
-        + String(activeArtist === '') + '"><span>全部演唱者</span><small>' + SONGS.length + ' 首</small></button>';
+        + String(activeArtist === '') + '"><span>全部歌手</span><small>' + SONGS.length + ' 首</small></button>';
 
     options += artists.map(function(item){
       return '<button type="button" class="artist-option" role="option" data-artist="' + esc(item.artist) + '"'
@@ -1315,7 +1285,7 @@ a{color:inherit;text-decoration:none}
     }).join('');
 
     if (!artists.length) {
-      options += '<p class="artist-option-empty">没有匹配的演唱者</p>';
+      options += '<p class="artist-option-empty">没有匹配的歌手</p>';
     }
     $('#artist-options').innerHTML = options;
   }
@@ -1434,14 +1404,6 @@ a{color:inherit;text-decoration:none}
       return (!activeArtist || song.artist === activeArtist) && matchesSearch(song, query);
     });
 
-    if (sortMode === 'artist') {
-      var order = Object.create(null);
-      SONGS.forEach(function(song, index){ order[song.slug] = index; });
-      visibleSongs.sort(function(a, b){
-        return collator.compare(a.artist, b.artist) || order[a.slug] - order[b.slug];
-      });
-    }
-
     var totalPages = Math.ceil(visibleSongs.length / PAGE_SIZE);
     currentPage = Math.min(Math.max(1, currentPage), Math.max(1, totalPages));
     var pageStart = (currentPage - 1) * PAGE_SIZE;
@@ -1459,7 +1421,7 @@ a{color:inherit;text-decoration:none}
     var count = filtering
       ? visibleSongs.length + ' / ' + SONGS.length + ' 首'
       : visibleSongs.length + ' 首';
-    $('#list-count').textContent = count + ' · ' + artistsOnPage + ' 位演唱者';
+    $('#list-count').textContent = count + ' · ' + artistsOnPage + ' 位歌手';
     $('#foot-year').textContent = new Date().getFullYear();
   }
 
@@ -1538,17 +1500,6 @@ a{color:inherit;text-decoration:none}
     renderSongs();
   });
 
-  Array.prototype.forEach.call(document.querySelectorAll('.sort-toggle button'), function(button){
-    button.addEventListener('click', function(){
-      sortMode = button.getAttribute('data-sort');
-      currentPage = 1;
-      Array.prototype.forEach.call(document.querySelectorAll('.sort-toggle button'), function(item){
-        item.setAttribute('aria-pressed', String(item === button));
-      });
-      renderSongs();
-    });
-  });
-
   $('#pager').addEventListener('click', function(event){
     var button = event.target.closest('button[data-page]');
     if (!button || button.disabled) return;
@@ -1563,13 +1514,9 @@ a{color:inherit;text-decoration:none}
   $('#reset-directory').addEventListener('click', function(){
     activeArtist = '';
     searchQuery = '';
-    sortMode = 'added';
     currentPage = 1;
     $('#song-search').value = '';
     renderArtistTrigger();
-    Array.prototype.forEach.call(document.querySelectorAll('.sort-toggle button'), function(button){
-      button.setAttribute('aria-pressed', String(button.getAttribute('data-sort') === 'added'));
-    });
     renderSongs();
     $('#song-search').focus();
   });
