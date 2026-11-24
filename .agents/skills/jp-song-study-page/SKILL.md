@@ -86,9 +86,21 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 ```
 
 **有合集页时，新歌出页后还要多做一步**：在根 `index.html` 的 `SONGS` 数组里追加一条
-（slug / href / cover / kicker / work / title / artist / year / level / tone / desc / scale），否则新歌不会出现在合集页上。
+（slug / href / cover / kicker / work / title / artist / year / level / tone / desc / scale，合作曲另加 `artists`），否则新歌不会出现在合集页上。
 `slug` 必须与 `meta.slug` 一字不差（合集页靠它读 `jss.<slug>.mastery`）；`href` 要写全 `./<slug>/index.html`。
 `cover` 写 `./<slug>/covers/thumb.jpg`（`cover.js` 自动生成）；不写则退回排版式迷你封面。`tone` 取 `teal` 或 `rust`，同色系别连排。没有合集页就跳过，并在 `meta.backHref` 写 `""` 关掉顶栏「‹ 合集」。
+
+**合作曲、feat. 曲、角色名义曲要另外写 `artists: ['A', 'B']`**：合集页的歌手统计与筛选按它拆分计到每位歌手头上，`artist` 只负责卡面上的完整署名。
+`artists` 里**只放真正演唱的人**——作词作曲、制作人、角色名都不写：
+
+| 署名（`artist`） | `artists` |
+|---|---|
+| `DAOKO × 米津玄師` | `['DAOKO', '米津玄師']` |
+| `samfree feat. 巡音ルカ` | `['巡音ルカ']`（samfree 是作词作曲） |
+| `千石撫子（CV: 花澤香菜）` | `['花澤香菜']`（千石撫子 是角色名） |
+| `TK from 凛として時雨` | 不写（这是 TK 个人项目的艺名，拆开会凭空多出一个歌手） |
+
+漏写 `artists` 的后果：整首只算给 `artist` 串里的第一个人，那位歌手的总数会少一首，而且统计看不出哪里错了。
 
 ## 页面范围
 
@@ -144,6 +156,7 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 - [ ] 完整歌词按原顺序显示，段落自动编号，行末朗读按钮可通过键盘操作
 - [ ] 掌握度点击后进度变化
 - [ ] 390 / 768 / 1024 / 1440 四个宽度无横向溢出
+- [ ] 有合集页时 `SONGS` 已同步；合作曲 / feat. 曲写了 `artists`（只列演唱者），下拉里的歌手计数与筛选结果对得上
 
 再人工扫一遍 `preview/` 里的截图：重点看**注音有没有串行**、**长句有没有在小屏把词拆断**。
 
