@@ -38,3 +38,12 @@
 | 31 | カサネテク | 重ねドルチェ · CM（千层套路） | 中村千尋 | 2017 | N3–N2 | 45 句 / 69 词 / 14 语法 / 60 行歌词 | 5 块 | [打开](./kasaneteku/index.html) |
 | 32 | 僕が死のうと思ったのは | 秋田ひろむ 提供 · 单曲 | 中島美嘉 | 2013 | N2 上下 | 25 句 / 67 词 / 14 语法 / 25 行歌词 | 5 块 | [打开](./boku-ga-shinou/index.html) |
 | 33 | 打上花火 | 打ち上げ花火 · 主題歌 | DAOKO × 米津玄師 | 2017 | N3–N2 | 26 句 / 62 词 / 14 语法 / 33 行歌词 | 5 块 | [打开](./uchiage-hanabi/index.html) |
+| 34 | NIGHT DANCER | imase · Digital Single | imase | 2022 | N3 上下 | 26 句 / 57 词 / 13 语法 / 43 行歌词 | 5 块 | [打开](./night-dancer/index.html) |
+| 35 | たぶん | たぶん · 小説音楽化 | YOASOBI | 2020 | N3–N2 | 29 句 / 62 词 / 14 语法 / 61 行歌词 | 5 块 | [打开](./tabun/index.html) |
+| 36 | ルージュ | おかえりなさい · Album（原曲 ちあきなおみ 1977） | 中島みゆき | 1979 | N2 上下 | 13 句 / 48 词 / 13 语法 / 26 行歌词 | 5 块 | [打开](./rouge/index.html) |
+| 37 | ルカルカ★ナイトフィーバー | VOCALOID · 巡音ルカ | samfree feat. 巡音ルカ | 2009 | N3 上下 | 28 句 / 71 词 / 13 语法 / 45 行歌词 | 5 块 | [打开](./lukaluka/index.html) |
+| 38 | 懺悔録 | デモンズゲート 帝都審神大戦 · ED | 黒木渚 | 2016 | N2 上下 | 31 句 / 56 词 / 13 语法 / 44 行歌词 | 5 块 | [打开](./zange-roku/index.html) |
+| 39 | サムライハート(Some Like It Hot!!) | 銀魂 · ED17 | SPYAIR | 2011 | N3–N2 | 28 句 / 60 词 / 14 语法 / 34 行歌词 | 5 块 | [打开](./samurai-heart/index.html) |
+| 40 | 恋愛サーキュレーション | 化物語 · OP4 | 千石撫子（CV: 花澤香菜） | 2009 | N3–N2 | 28 句 / 63 词 / 14 语法 / 58 行歌词 | 5 块 | [打开](./renai-circulation/index.html) |
+| 41 | Hello,world! | 血界戦線 · OP1 | BUMP OF CHICKEN | 2015 | N2 上下 | 35 句 / 70 词 / 15 语法 / 42 行歌词 | 5 块 | [打开](./hello-world/index.html) |
+| 42 | 光るなら | 四月は君の嘘 · OP1 | Goose house | 2014 | N3 上下 | 25 句 / 70 词 / 14 语法 / 30 行歌词 | 5 块 | [打开](./hikaru-nara/index.html) |
