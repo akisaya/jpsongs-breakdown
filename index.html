@@ -169,10 +169,12 @@ a{color:inherit;text-decoration:none}
 }
 .list-count{font-size:.72rem;color:var(--ink-3);letter-spacing:.06em}
 
+/* 工具栏右缘与卡片右缘对齐，左缘落在右侧卡片列的起点（= 卡片列宽） */
 .directory-tools{
-  display:flex;align-items:center;justify-content:flex-end;
+  display:flex;align-items:center;justify-content:space-between;
   gap:.55rem;
-  flex:0 0 auto;max-width:100%;
+  flex:0 0 auto;
+  width:calc(50% - .45rem);   /* 与 .songs 的列宽一致：gap .9rem 的一半 */
 }
 .search-box,.artist-trigger{
   min-width:0;height:40px;
@@ -182,7 +184,7 @@ a{color:inherit;text-decoration:none}
   color:var(--ink-2);
   transition:border-color .18s ease,background .18s ease,box-shadow .18s ease;
 }
-.search-box{position:relative;display:flex;align-items:center;flex:0 0 280px;max-width:100%}
+.search-box{position:relative;display:flex;align-items:center;flex:1 1 0;min-width:0}
 .search-box:focus-within,.artist-trigger:focus-visible,.artist-trigger[aria-expanded="true"]{
   border-color:var(--orange);
   background:var(--surface);
@@ -266,9 +268,14 @@ a{color:inherit;text-decoration:none}
 .artist-option small{font-size:.62rem;font-weight:400;color:var(--ink-3);font-variant-numeric:tabular-nums}
 .artist-option-empty{padding:.75rem .6rem;font-size:.68rem;color:var(--ink-3);text-align:center}
 
+/* 卡片改成单列后，工具栏不再需要按列宽对齐 */
+@media (max-width:860px){
+  .directory-tools{width:auto}
+  .search-box{flex:0 0 280px}
+}
 @media (max-width:760px){
   .directory-tools{display:grid;grid-template-columns:1fr;width:100%}
-  .search-box{max-width:none;width:100%}
+  .search-box{flex:1 1 auto;width:100%}
   .artist-picker{width:100%}
 }
 @media (max-width:700px){.list-head{align-items:stretch}}
