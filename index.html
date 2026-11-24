@@ -1062,6 +1062,7 @@ a{color:inherit;text-decoration:none}
       work: '打ち上げ花火',
       title: ['打上花火'],
       artist: 'DAOKO × 米津玄師',
+      artists: ['DAOKO', '米津玄師'],
       year: '2017',
       level: 'N3–N2',
       tone: 'teal',
@@ -1118,6 +1119,8 @@ a{color:inherit;text-decoration:none}
       work: 'VOCALOID',
       title: ['ルカルカ', 'NIGHT FEVER'],
       artist: 'samfree feat. 巡音ルカ',
+      /* 只列演唱的一方：samfree 是作词作曲，不进歌手列表 */
+      artists: ['巡音ルカ'],
       year: '2009',
       level: 'N3 上下',
       tone: 'rust',
@@ -1160,6 +1163,8 @@ a{color:inherit;text-decoration:none}
       work: '化物語',
       title: ['恋愛', 'サーキュレーション'],
       artist: '千石撫子（CV: 花澤香菜）',
+      /* 只列演唱的一方：千石撫子 是角色名，不进歌手列表 */
+      artists: ['花澤香菜'],
       year: '2009',
       level: 'N3–N2',
       tone: 'teal',
@@ -1251,9 +1256,20 @@ a{color:inherit;text-decoration:none}
       .toLocaleLowerCase().replace(/\s+/g, ' ').trim();
   }
 
+  /* 一首歌可以署多位歌手（合作曲）：artists 参与统计与筛选，artist 只负责展示 */
+  function credits(song){
+    return song.artists && song.artists.length ? song.artists : [song.artist];
+  }
+
+  function onCredit(song, artist){
+    return credits(song).indexOf(artist) !== -1;
+  }
+
   function songArtists(){
     return SONGS.reduce(function(list, song){
-      if (list.indexOf(song.artist) === -1) list.push(song.artist);
+      credits(song).forEach(function(name){
+        if (list.indexOf(name) === -1) list.push(name);
+      });
       return list;
     }, []).sort(collator.compare);
   }
@@ -1262,7 +1278,7 @@ a{color:inherit;text-decoration:none}
     return songArtists().map(function(artist){
       return {
         artist: artist,
-        count: SONGS.filter(function(song){ return song.artist === artist; }).length
+        count: SONGS.filter(function(song){ return onCredit(song, artist); }).length
       };
     }).sort(function(a, b){
       return b.count - a.count || collator.compare(a.artist, b.artist);
@@ -1271,7 +1287,7 @@ a{color:inherit;text-decoration:none}
 
   function renderArtistTrigger(){
     var count = activeArtist
-      ? SONGS.filter(function(song){ return song.artist === activeArtist; }).length
+      ? SONGS.filter(function(song){ return onCredit(song, activeArtist); }).length
       : SONGS.length;
     $('#artist-trigger-label').textContent = (activeArtist || '全部') + ' · ' + count + ' 首';
   }
@@ -1312,7 +1328,7 @@ a{color:inherit;text-decoration:none}
   function matchesSearch(song, query){
     if (!query) return true;
     return [
-      song.title.join(' '), song.artist, song.work, song.year,
+      song.title.join(' '), song.artist, credits(song).join(' '), song.work, song.year,
       song.level, song.kicker, song.desc
     ].some(function(value){
       return normalize(value).indexOf(query) !== -1;
@@ -1408,7 +1424,7 @@ a{color:inherit;text-decoration:none}
   function renderSongs(){
     var query = normalize(searchQuery);
     var visibleSongs = SONGS.filter(function(song){
-      return (!activeArtist || song.artist === activeArtist) && matchesSearch(song, query);
+      return (!activeArtist || onCredit(song, activeArtist)) && matchesSearch(song, query);
     });
 
     var totalPages = Math.ceil(visibleSongs.length / PAGE_SIZE);
@@ -1421,14 +1437,17 @@ a{color:inherit;text-decoration:none}
     renderPager(visibleSongs.length, totalPages);
 
     var artistsOnPage = visibleSongs.reduce(function(list, song){
-      if (list.indexOf(song.artist) === -1) list.push(song.artist);
+      credits(song).forEach(function(name){
+        if (list.indexOf(name) === -1) list.push(name);
+      });
       return list;
     }, []).length;
     var filtering = Boolean(activeArtist || query);
     var count = filtering
       ? visibleSongs.length + ' / ' + SONGS.length + ' 首'
       : visibleSongs.length + ' 首';
-    $('#list-count').textContent = count + ' · ' + artistsOnPage + ' 位歌手';
+    /* 按歌手筛选时不再报「N 位歌手」：合作曲会让这个数字大于 1，看着像出错 */
+    $('#list-count').textContent = count + (activeArtist ? '' : ' · ' + artistsOnPage + ' 位歌手');
     $('#foot-year').textContent = new Date().getFullYear();
   }
 
