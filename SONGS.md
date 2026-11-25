@@ -47,6 +47,13 @@
 | 40 | 恋愛サーキュレーション | 化物語 · OP4 | 千石撫子（CV: 花澤香菜） | 2009 | N3–N2 | 28 句 / 63 词 / 14 语法 / 58 行歌词 | 5 块 | [打开](./renai-circulation/index.html) |
 | 41 | Hello,world! | 血界戦線 · OP1 | BUMP OF CHICKEN | 2015 | N2 上下 | 35 句 / 70 词 / 15 语法 / 42 行歌词 | 5 块 | [打开](./hello-world/index.html) |
 | 42 | 光るなら | 四月は君の嘘 · OP1 | Goose house | 2014 | N3 上下 | 25 句 / 70 词 / 14 语法 / 30 行歌词 | 5 块 | [打开](./hikaru-nara/index.html) |
+| 43 | 世界は 恋に落ちている | アオハライド · OP · 2014 | CHiCO with HoneyWorks | 2014 | N3–N2 | 31 句 / 66 词 / 16 语法 / 43 行歌词 | 5 块 | [打开](./sekai-wa-koi-ni-ochiteiru/index.html) |
+| 44 | 雪の華 | Single · 2003 | 中島美嘉 | 2003 | N3–N2 | 31 句 / 62 词 / 16 语法 / 46 行歌词 | 5 块 | [打开](./yuki-no-hana/index.html) |
+| 45 | Prisoner Of Love | ラスト・フレンズ · 主題歌 · 2008 | 宇多田ヒカル | 2008 | N3–N2 | 23 句 / 56 词 / 16 语法 / 39 行歌词 | 5 块 | [打开](./prisoner-of-love/index.html) |
+| 46 | 鳥の詩 | AIR · OP · 2000 | Lia | 2000 | N3–N2 | 27 句 / 61 词 / 15 语法 / 33 行歌词 | 5 块 | [打开](./tori-no-uta/index.html) |
+| 47 | おとなの掟 | カルテット · 主題歌 · 2017 | Doughnuts Hole | 2017 | N2 上下 | 27 句 / 70 词 / 16 语法 / 28 行歌词 | 5 块 | [打开](./otona-no-okite/index.html) |
+| 48 | 絆 | Album「Rhythm of My Heart」· 2009 | miu-clips | 2009 | N3–N2 | 29 句 / 58 词 / 15 语法 / 63 行歌词 | 5 块 | [打开](./kizuna/index.html) |
+| 49 | 極楽浄土 | Single · 2016 | GARNiDELiA | 2016 | N2 上下 | 17 句 / 54 词 / 15 语法 / 28 行歌词 | 5 块 | [打开](./gokuraku-jodo/index.html) |
 
 ## 多署名曲
 
