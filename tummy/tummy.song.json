@@ -19,7 +19,14 @@
     "discLabel": "2013",
     "discSub": "album",
     "coverTag": "ALBUM TRACK",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 28,
+      "work": "×と○と罪と",
+      "source": "×と○と罪と · Album Track",
+      "tone": "rust",
+      "description": "日文段与英文副歌交替，日文那边「〜てる」「〜ちゃう」的口语缩约密集，「産まれる」「キラッキラ」这类非常规写法也藏在里面。慢歌，但句子口语到近乎说话。"
+    }
   },
   "stats": [
     {

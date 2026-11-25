@@ -19,7 +19,14 @@
     "discLabel": "2018",
     "discSub": "single",
     "coverTag": "DRAMA THEME",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 14,
+      "work": "アンナチュラル",
+      "source": "アンナチュラル · 主題歌",
+      "tone": "rust",
+      "description": "用「否定」写成的悼歌：戻らない、言えずに、帰れない、忘れられない。可能形否定、文言否定、双重否定全在同一首歌里。"
+    }
   },
   "stats": [
     {

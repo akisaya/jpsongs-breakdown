@@ -4,8 +4,8 @@
 每首歌是一个自包含目录，产物是**单文件 HTML**——零依赖、双击即开、离线可用、手机上也能看。
 
 根目录的 [`index.html`](./index.html) 是合集页：可搜索、按歌手筛选、自动分页的曲目卡片 + 汇总统计 + 各曲掌握进度。
-新增歌曲只需追加到 `SONGS`，默认按添加顺序展示；歌手数量、筛选选项和分页会自动更新。歌手筛选按歌曲数量从多到少排列，数量相同则按名字排序。
-**合作曲 / feat. 曲要写 `artists: ['A', 'B']`**：统计与筛选按 `artists` 拆分计到每位歌手头上，卡面上仍显示 `artist` 的完整署名（如 `DAOKO × 米津玄師`）。只写 `artist` 的话，这首只会算给署名串里的第一个人。
+合集页和 [`SONGS.md`](./SONGS.md) 都由各曲 `song.json` 自动生成。新增歌曲只需填写 `meta.catalog` 并运行 `npm run build`；默认按 `meta.catalog.order` 展示，未设置 order 的新歌会排到末尾。歌手数量、筛选选项、分页、规模统计和 SEO 描述会一起更新。
+**合作曲 / feat. 曲要在 `meta.catalog.artists` 写 `['A', 'B']`**：统计与筛选按它拆分计到每位歌手头上，卡面上仍显示 `meta.artist` 的完整署名（如 `DAOKO × 米津玄師`）。只写 `meta.artist` 的话，这首只会算给署名串里的第一个人。
 `artists` 里**只放真正演唱的人**：作词作曲、制作人、角色名都不写（`samfree feat. 巡音ルカ` → 只列 `巡音ルカ`；`千石撫子（CV: 花澤香菜）` → 只列 `花澤香菜`）。
 **当前收录了哪几首、各自什么规模，见 [`SONGS.md`](./SONGS.md)。**
 
@@ -14,8 +14,12 @@
 ```
 .
 ├── README.md                           本文件：怎么加一首新歌
-├── SONGS.md                            曲目清单（给人看的那份）
-├── index.html                          合集索引页（手写，曲目清单在 SONGS 数组里）
+├── package.json                        全站构建入口
+├── SONGS.md                            曲目清单（自动生成）
+├── index.html                          合集索引页（自动生成）
+├── scripts/build-site.js               song.json → 首页 + SONGS.md
+├── scripts/check-site.js               汇总过期、搜索筛选与响应式检查
+├── site/index.template.html            首页模板与交互源码
 ├── <slug>/                             一首歌一个目录
 │   ├── index.html                      构建产物（不要手改，重跑 build 会覆盖）
 │   ├── covers/cover.jpg                官方封面（cover.js 生成，build 内联；thumb.jpg 给合集页）
@@ -51,7 +55,7 @@ cd .agents/skills/jp-song-study-page && npm i
 
 > 做一首《Butterfly》的学习页
 
-技能会自己走完：判断值不值得做 → 交叉核对歌词 → 切段落 → 抽卡 → 词表 → 语法 → 构建 → 验收 → 追加到合集页。
+技能会自己走完：判断值不值得做 → 交叉核对歌词 → 切段落 → 抽卡 → 词表 → 语法 → 填写首页 `meta.catalog` → 构建 → 验收 → 运行站点汇总。
 默认收录完整歌词，无需额外确认。歌名、歌手和出处对得上后，按默认位置或你指定的目录输出；只有明确说「不要完整歌词」时才省略。
 
 ### 方式二：手动
@@ -68,6 +72,7 @@ node $SKILL/scripts/cover.js $SLUG/$SLUG.song.json              # 官方封面 �
 node $SKILL/scripts/build.js --check --strict-lines $SLUG/$SLUG.song.json
 node $SKILL/scripts/build.js --strict-lines $SLUG/$SLUG.song.json $SLUG/index.html
 node $SKILL/scripts/check.js $SLUG/index.html --shots          # 交互 + 四档断点溢出 + 截图
+npm run build                                                   # 首页 + SONGS.md
 ```
 
 产物是 `$SLUG/index.html`，截图在 `preview/`（已 gitignore，看完可删）。
@@ -93,34 +98,37 @@ node $SKILL/scripts/check.js $SLUG/index.html --shots          # 交互 + 四档
 两条最容易踩的规则：
 
 - **`meta.slug` 全站唯一**。页面用它给 localStorage 加前缀（`jss.<slug>.mastery`），重复了掌握度会串歌。
-- **目录名和 slug 可以是两个东西**（比如目录 `again/`、slug `again-yui`），但合集页 `SONGS[].slug`
-  必须和 `meta.slug` 一字不差，否则合集页上的进度条不显示。
+- **目录名和 slug 可以是两个东西**（比如目录 `again/`、slug `again-yui`）。站点构建器始终使用 `meta.slug`，合集页进度条因此会和单曲页共用同一个 localStorage 命名空间。
 
-## 收尾：加进合集页
+## 收尾：生成站点汇总
 
-编辑根目录 `index.html` 里的 `SONGS` 数组，追加一条：
+在 `song.json` 的 `meta` 中加入合集卡片信息：
 
-```js
-{
-  slug: 'butterfly',                                  // 必须等于 song.json 的 meta.slug
-  href: './butterfly/index.html',                     // 写全 index.html，file:// 下 ./butterfly/ 打不开
-  cover: './butterfly/covers/thumb.jpg',              // cover.js 生成的 320px 缩略图；不写则用迷你排版封面
-  kicker: 'Digimon Adventure · OP · 1999',
-  work: 'Digimon',
-  title: ['butterfly'],
-  artist: '和田光司',
-  year: '1999',
-  level: 'N4 上下',
-  tone: 'teal',                                       // teal / rust 两色，同色系别连排
-  desc: '两句话说明这首为什么值得逐句拆开听。',
-  scale: { lyr: 0, lines: 0, vocab: 0, grammar: 0 }   // 填实际数量
+```json
+"catalog": {
+  "order": 43,
+  "work": "Digimon",
+  "source": "数码宝贝 · OP · 1999",
+  "tone": "teal",
+  "description": "两句话说明这首为什么值得逐句拆开听。",
+  "title": ["butterfly"],
+  "documentTitle": "butterfly",
+  "artists": ["和田光司"]
 }
 ```
 
-`scale` 的数字从 build 输出里抄（`✓ 校验通过 22 句 / 61 词 / 16 语法`）；
-`lyr` 是完整歌词的行数，没收录就写 0。
+其中 `work`、`source`、`tone`、`description` 必填；`title`、`documentTitle`、`kicker`、`artists` 只在需要覆盖默认展示时填写。`order` 控制合集顺序，不写时会排在现有曲目之后。卡片链接、封面、歌手、年份、难度和各项数量都由构建器自动推导。
 
-改完 `SONGS`，顺手在 [`SONGS.md`](./SONGS.md) 里补一行、加一小节——那份是给人看的清单，和代码里的数组各管一头。
+修改后运行：
+
+```bash
+npm run build
+npm run check
+```
+
+`npm run build` 会重新生成根 `index.html` 和 `SONGS.md`；`npm run check` 会在生成物过期时失败。`npm run check:browser` 还会用无头 Chrome 检查搜索、歌手筛选、分页和 390/768/1024/1440 四档横向溢出。不要手改这两个生成文件。
+
+仓库使用 GitHub Pages 的「Deploy from a branch」模式（`main` / 根目录），推送后会直接发布已提交的静态文件。仓库不配置站点检查 CI，也不会自动运行 `npm run build`；新增或修改歌曲时必须由 Agent 在本地生成、校验并提交 `index.html` 与 `SONGS.md`。
 
 ## 验收
 
@@ -133,6 +141,9 @@ node $SKILL/scripts/check.js $SLUG/index.html --shots          # 交互 + 四档
 
 ## 常见问题
 
+**`✗ 站点汇总校验未通过`**
+按提示补齐对应 `meta.catalog` 字段，再运行 `npm run build`。
+
 **`✗ 模板里有数据没提供的占位符：{{sec.xxx.*}}`**
 按提示的 key 补齐字段。完整歌词默认必填；只有明确要求省略全文时，才设置 `"modules": {"lyrics": false}`。
 
@@ -143,7 +154,7 @@ node $SKILL/scripts/check.js $SLUG/index.html --shots          # 交互 + 四档
 `meta.backHref` 默认指向 `../index.html`；歌不在 `<slug>/index.html` 这层时，显式写相对路径，或写 `""` 关掉。
 
 **合集页上看不到新歌 / 没有进度条**
-新歌必须先加进 `SONGS` 数组才会出现；进度条还要求 `SONGS[].slug` 与 `meta.slug` 完全一致。
+新歌必须先填写 `meta.catalog` 并运行 `npm run build`；进度条要求 `meta.slug` 与单曲页一致。
 
 **WorkBuddy 里看不到这个技能**
 软链断了。`ls -l .workbuddy/skills/` 若显示红字，重建：

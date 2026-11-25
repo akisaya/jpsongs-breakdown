@@ -24,7 +24,14 @@
     "discLabel": "2012",
     "discSub": "album",
     "coverTag": "Cover",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 24,
+      "work": "COVER 70's",
+      "source": "COVER 70's · 翻唱（原曲 マイ・ペース 1975）",
+      "tone": "rust",
+      "description": "24 行里「で／へ／を／と」轮着来，一句「最終電車で 君にさよなら」就把手段、对象、告别三件事说完。慢板钢琴，咬字清楚，适合练助词听力。"
+    }
   },
   "stats": [
     {

@@ -19,7 +19,15 @@
     "discLabel": "2018",
     "discSub": "single",
     "coverTag": "DOUBLE A-SIDE",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 4,
+      "work": "FLAMINGO",
+      "source": "Flamingo / TEENAGE RIOT · 双 A 面单曲",
+      "tone": "rust",
+      "description": "完整收录歌词，再逐句拆解摇摆的拟态语、鲜艳的古风词汇与口语缩约：从原段落开始听懂《Flamingo》，再用原创例句练习语法。",
+      "kicker": "Flamingo / TEENAGE RIOT · Single · 2018"
+    }
   },
   "stats": [
     {

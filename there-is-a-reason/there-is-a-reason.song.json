@@ -19,7 +19,14 @@
     "discLabel": "2017",
     "discSub": "single",
     "coverTag": "MOVIE THEME",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 15,
+      "work": "NGNL Zero",
+      "source": "ノーゲーム・ノーライフ ゼロ · 主題歌",
+      "tone": "teal",
+      "description": "使役形只出现一次，却最关键：言わせない＝不让你说结束。四种条件形「ば／たら／れば／たって」在同一首歌里成组出现。"
+    }
   },
   "stats": [
     {

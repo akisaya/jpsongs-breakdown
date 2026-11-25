@@ -26,7 +26,17 @@
     "discLabel": "2005",
     "discSub": "single",
     "coverTag": "Single",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 30,
+      "work": "1リットルの涙",
+      "source": "1リットルの涙 · 插入歌",
+      "tone": "rust",
+      "description": "「同じ空見てるのに」把逆接停在句尾。副歌问「二人の孤独を分け合う事が出来たのかい」，最后一遍改成「空にかえすから」。慢，适合把「のに」和「なら」听全。",
+      "title": [
+        "粉雪"
+      ]
+    }
   },
   "stats": [
     {

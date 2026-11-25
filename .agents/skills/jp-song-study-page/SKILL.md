@@ -38,7 +38,9 @@ metadata:
 2. 找不到权威歌词来源，或两个来源差异大到影响讲解。
 3. 这首歌明显不适合（饶舌、方言、通篇拟声词）——直接说"这首做不出教学价值"，并给替代建议。
 
-**做完要主动报**：用了哪些板块、共几张卡/几个词/几条语法、文件路径、有没有收录完整歌词，以及**当前目录若有合集页（`index.html` 里的 `SONGS` 数组），有没有同步追加这条新歌**。
+**做完要主动报**：用了哪些板块、共几张卡/几个词/几条语法、文件路径、有没有收录完整歌词，以及**当前目录若有合集页，`meta.catalog` 是否已填写、站点汇总是否已重建**。
+
+**仓库没有站点检查 CI 兜底。** 只要修改了 `meta.catalog`、歌曲数据或新增歌曲，收尾都必须在仓库根运行 `npm run build && npm run check`；生成物未同步或检查失败时不能报告完成。
 
 ## 30 秒上手
 
@@ -85,22 +87,21 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
     └── again.song.json
 ```
 
-**有合集页时，新歌出页后还要多做一步**：在根 `index.html` 的 `SONGS` 数组里追加一条
-（slug / href / cover / kicker / work / title / artist / year / level / tone / desc / scale，合作曲另加 `artists`），否则新歌不会出现在合集页上。
-`slug` 必须与 `meta.slug` 一字不差（合集页靠它读 `jss.<slug>.mastery`）；`href` 要写全 `./<slug>/index.html`。
-`cover` 写 `./<slug>/covers/thumb.jpg`（`cover.js` 自动生成）；不写则退回排版式迷你封面。`tone` 取 `teal` 或 `rust`，同色系别连排。没有合集页就跳过，并在 `meta.backHref` 写 `""` 关掉顶栏「‹ 合集」。
+**有合集页时，新歌出页后不要手改根 `index.html` 或 `SONGS.md`**。在 `meta.catalog` 填写站点卡片元数据，然后运行根目录的 `npm run build`。构建器会扫描全部 `<slug>/<slug>.song.json`，自动生成首页数组、统计、SEO 总数和 `SONGS.md`。
 
-**合作曲、feat. 曲、角色名义曲要另外写 `artists: ['A', 'B']`**：合集页的歌手统计与筛选按它拆分计到每位歌手头上，`artist` 只负责卡面上的完整署名。
+必填字段：`work / source / tone / description`；可选字段：`order / title / documentTitle / kicker / artists`。`order` 控制顺序，不写时排到现有曲目之后；`title` 控制卡片标题断行；`kicker` 只在需要覆盖 `meta.kicker` 时填写。没有合集页时跳过站点构建，并在 `meta.backHref` 写 `""` 关掉顶栏「‹ 合集」。
+
+**合作曲、feat. 曲、角色名义曲要在 `meta.catalog.artists` 写 `['A', 'B']`**：合集页的歌手统计与筛选按它拆分计到每位歌手头上，`meta.artist` 只负责卡面上的完整署名。
 `artists` 里**只放真正演唱的人**——作词作曲、制作人、角色名都不写：
 
-| 署名（`artist`） | `artists` |
+| 署名（`meta.artist`） | `meta.catalog.artists` |
 |---|---|
 | `DAOKO × 米津玄師` | `['DAOKO', '米津玄師']` |
 | `samfree feat. 巡音ルカ` | `['巡音ルカ']`（samfree 是作词作曲） |
 | `千石撫子（CV: 花澤香菜）` | `['花澤香菜']`（千石撫子 是角色名） |
 | `TK from 凛として時雨` | 不写（这是 TK 个人项目的艺名，拆开会凭空多出一个歌手） |
 
-漏写 `artists` 的后果：整首只算给 `artist` 串里的第一个人，那位歌手的总数会少一首，而且统计看不出哪里错了。
+漏写 `meta.catalog.artists` 的后果：整首只算给 `meta.artist` 串里的第一个人，那位歌手的总数会少一首，而且统计看不出哪里错了。
 
 ## 页面范围
 
@@ -121,7 +122,8 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 | 6 | **写文案**：`map.why` 四条理由，每首重写；页面上没有的板块不要提 | editorial「文案」 |
 | 7 | **配封面**：跑 `cover.js`，看一眼脚本打印的专辑名是不是原版单曲（不是 LIVE／翻唱／カラオケ）；非方图脚本会自动补边 | 命令见上 |
 | 8 | **挂 MV 链接**：跑 `mv.js` 搜 B 站，确认它选的那条是原曲原唱（不是翻唱／谱例／AMV），写入 `meta.lead` | `references/mv-links.md` |
-| 9 | **构建 + 验收** | 命令见上、清单见下 |
+| 9 | **构建单曲 + 验收** | 命令见上、清单见下 |
+| 10 | **有合集页时重建站点汇总**：填写 `meta.catalog` 后在仓库根运行 `npm run build && npm run check` | `references/song-schema.md` 的 `meta.catalog` |
 
 口径不要在这里猜：内容标准全在 `references/editorial-guide.md`，字段全在 `references/song-schema.md`。
 
@@ -156,7 +158,7 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 - [ ] 完整歌词按原顺序显示，段落自动编号，行末朗读按钮可通过键盘操作
 - [ ] 掌握度点击后进度变化
 - [ ] 390 / 768 / 1024 / 1440 四个宽度无横向溢出
-- [ ] 有合集页时 `SONGS` 已同步；合作曲 / feat. 曲写了 `artists`（只列演唱者），下拉里的歌手计数与筛选结果对得上
+- [ ] 有合集页时 `meta.catalog` 已填写并运行 `npm run build`；合作曲 / feat. 曲写了 `meta.catalog.artists`（只列演唱者），下拉里的歌手计数与筛选结果对得上
 
 再人工扫一遍 `preview/` 里的截图：重点看**注音有没有串行**、**长句有没有在小屏把词拆断**。
 
@@ -188,4 +190,6 @@ scripts/build.js       JSON → HTML，含字段校验
 scripts/check.js       无头浏览器验收
 scripts/cover.js       检索并处理官方封面（iTunes）
 scripts/mv.js          检索 B 站视频并写进 meta.lead
+
+仓库根另有 `scripts/build-site.js`：扫描全部 song.json，生成根首页与 SONGS.md。它不是单曲模板的一部分。
 ```

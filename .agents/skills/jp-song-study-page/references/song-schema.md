@@ -66,6 +66,37 @@ node scripts/build.js --check --strict-lines song.json   # 新建/维护逐句�
 | `backHref` | 顶栏「‹ 合集」的链接。不填默认 `../index.html`（对应 `<slug>/index.html` 的结构）；显式写 `""` 则不显示该入口 |
 | `backLabel` | 返回链接的文案，默认 `合集` |
 
+### 站点合集（meta.catalog，可选）
+
+仓库根存在合集页 `index.html` 时，每首歌都应填写 `meta.catalog`。根级 `npm run build` 会扫描全部 `*.song.json`，用它生成 `index.html` 里的 `SONGS`、SEO 总数和 `SONGS.md`。
+
+```json
+"catalog": {
+  "order": 43,
+  "work": "Digimon",
+  "source": "数码宝贝 · OP · 1999",
+  "tone": "teal",
+  "description": "两句话说明这首为什么值得逐句拆开听。",
+  "title": ["butterfly"],
+  "documentTitle": "butterfly",
+  "artists": ["和田光司"]
+}
+```
+
+| 字段 | 说明 |
+|---|---|
+| `work` | 必填。卡片封面与搜索结果使用的短作品名 |
+| `source` | 必填。`SONGS.md` 的「出处」列，可写中文说明 |
+| `tone` | 必填。卡片排版封面色，只能是 `teal` / `rust` |
+| `description` | 必填。合集卡片简介，和单曲 `meta.lead` 分开维护 |
+| `order` | 可选。正整数，控制合集顺序；不写时排在所有显式 order 之后，多个新歌按 slug 排序 |
+| `title` | 可选。卡片标题断行数组；不写时用 `titleLine1 / titleLine2` |
+| `documentTitle` | 可选。`SONGS.md` 的显示标题；不写时用卡片标题用空格连接 |
+| `kicker` | 可选。覆盖首页卡片上的 `meta.kicker` |
+| `artists` | 可选。真正参与演唱的人；用于歌手统计和筛选。不写时使用 `meta.artist` 原串 |
+
+链接、缩略图、歌手、年份、难度和各项数量均由构建器推导，不要重复写进 catalog。生成后运行 `npm run check`；首页与清单过期时检查会失败。
+
 ### 封面（meta.cover）
 
 首屏默认渲染一张**排版式封面**（纯 CSS + 文字，无图片文件）：深青底、数码网格、歌名用衬线斜体，顶部 `SINGLE / 年份`，底部 `歌詞精読 / N3`。信息全部来自 `meta`，换歌自动变。

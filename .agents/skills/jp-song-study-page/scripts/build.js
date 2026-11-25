@@ -395,6 +395,9 @@ if (filled.missing.size) {
 }
 html = filled.out;
 
+/* meta.catalog 只供仓库根站点构建器使用，不写进单曲页面的运行数据。 */
+if (song.meta) delete song.meta.catalog;
+
 /* 注入资源（在占位符替换之后做，避免资源内容被二次替换） */
 const safeJson = JSON.stringify(song).replace(/</g, '\\u003c');
 html = html.replace('/*__CSS__*/', () => read(CSS, 'base.css'));

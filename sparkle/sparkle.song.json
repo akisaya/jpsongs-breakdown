@@ -19,7 +19,17 @@
     "discLabel": "2016",
     "discSub": "album",
     "coverTag": "MOVIE THEME",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 27,
+      "work": "君の名は。",
+      "source": "君の名は。 · 主題歌（original ver.）",
+      "tone": "teal",
+      "description": "「運命だとか未来とかって 言葉がどれだけ手を」——一个「って」把整串引用收住，是口语引用最典型的一手。全曲长句多，靠「とか」「なんて」把句子切成块。",
+      "title": [
+        "スパークル"
+      ]
+    }
   },
   "stats": [
     {

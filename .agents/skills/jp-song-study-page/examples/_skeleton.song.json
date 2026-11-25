@@ -16,7 +16,18 @@
       "内容待替换"
     ],
     "discLabel": "20XX",
-    "discSub": "single"
+    "discSub": "single",
+    "catalog": {
+      "order": 999,
+      "work": "ANIME TITLE",
+      "source": "作品名 · Insert Song · 20XX",
+      "tone": "teal",
+      "description": "两句话说明这首为什么值得逐句拆开听。",
+      "title": [
+        "song",
+        "title"
+      ]
+    }
   },
   "stats": [
     {

@@ -27,7 +27,17 @@
     "discSub": "single",
     "coverTag": "SINGLE",
     "backHref": "../index.html",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 26,
+      "work": "鬼滅の刃",
+      "source": "鬼滅の刃 · OP1",
+      "tone": "rust",
+      "description": "开头「強くなれる理由を知った 僕を連れて進め」就是可能形「なれる」加命令形「進め」。副歌「紅蓮の華よ咲き誇れ 運命を照らして」两个呼唤连打，整首都是喊出来的语气。",
+      "title": [
+        "紅蓮華"
+      ]
+    }
   },
   "stats": [
     {

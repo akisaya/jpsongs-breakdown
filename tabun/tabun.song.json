@@ -26,7 +26,17 @@
     "discSub": "digital single",
     "coverTag": "SINGLE",
     "backHref": "../index.html",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 35,
+      "work": "たぶん",
+      "source": "たぶん · 小説音楽化",
+      "tone": "rust",
+      "description": "把分手写成一场推理：先问「悪いのは誰だ」，再自己回答「誰のせいでもない」。「〜すら」「〜わけじゃない」「〜てしまったのなら」三个 N2 点全压在情绪转折处。",
+      "title": [
+        "たぶん"
+      ]
+    }
   },
   "stats": [
     {

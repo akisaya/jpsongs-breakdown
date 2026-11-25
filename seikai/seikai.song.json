@@ -19,7 +19,17 @@
     "discLabel": "2018",
     "discSub": "album",
     "coverTag": "NHK 18FES",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 29,
+      "work": "18祭",
+      "source": "NHK『RADWIMPS 18祭』書き下ろし（18FES ver.）",
+      "tone": "teal",
+      "description": "「答えがある問いばかりを 教わってきたよ」——一个「ばかり」把怨气顶出来。副歌干脆宣布「正解などまだ銀河にもない」，整首都在用「のに」「たり」把少年时代的琐事一件件摆开。",
+      "title": [
+        "正解"
+      ]
+    }
   },
   "stats": [
     {

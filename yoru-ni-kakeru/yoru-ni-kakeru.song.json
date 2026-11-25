@@ -19,7 +19,19 @@
     "discLabel": "2019",
     "discSub": "single",
     "coverTag": "DEBUT SINGLE",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 6,
+      "work": "Debut",
+      "source": "タナトスの誘惑 · 出道单曲",
+      "tone": "rust",
+      "description": "整首歌靠引用推进：「さよなら」「終わりにしたい」「もう嫌だ」全是别人说过的话。って／なんて／だなんて 三种转述挤在后半段，听懂这几处，叙事才立得住。",
+      "title": [
+        "夜に",
+        "駆ける"
+      ],
+      "documentTitle": "夜に駆ける"
+    }
   },
   "stats": [
     {

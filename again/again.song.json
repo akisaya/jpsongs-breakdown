@@ -18,7 +18,15 @@
     ],
     "discLabel": "2009",
     "discSub": "single",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 2,
+      "work": "FMA:B",
+      "source": "钢炼 FA · OP1",
+      "tone": "rust",
+      "description": "口语缩约最密集的一首：てく、ちゃ、ん、じゃん、らんない 全挤在副歌里。练「听懂日本人真实说话」比练考试语法更有用。",
+      "kicker": "鋼の錬金術師 FA · OP1 · 2009"
+    }
   },
   "stats": [
     {

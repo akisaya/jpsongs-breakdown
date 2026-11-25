@@ -27,7 +27,21 @@
     "discLabel": "2017",
     "discSub": "single",
     "coverTag": "Single",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 33,
+      "work": "打ち上げ花火",
+      "source": "打ち上げ花火 · 主題歌",
+      "tone": "teal",
+      "description": "「終わらない夏が」的动词在下一行。引用句里套着可能形「見られるかな」，短句段把「咲いた」和「咲いて」对着唱。",
+      "title": [
+        "打上花火"
+      ],
+      "artists": [
+        "DAOKO",
+        "米津玄師"
+      ]
+    }
   },
   "stats": [
     {

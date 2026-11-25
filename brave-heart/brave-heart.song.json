@@ -18,7 +18,14 @@
     ],
     "discLabel": "1999",
     "discSub": "single",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 1,
+      "work": "Digimon",
+      "source": "数码宝贝 · 进化曲",
+      "tone": "teal",
+      "description": "进化曲里最耐听的一首。命令形、意志形、假定形轮番上阵，句子短、咬字清楚，最合适拿来做影子跟读。副歌两句「つかめ」「まもれ」跟着喊几遍就顺了。"
+    }
   },
   "stats": [
     {

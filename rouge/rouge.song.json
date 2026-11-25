@@ -26,7 +26,17 @@
     "discSub": "album",
     "coverTag": "ALBUM",
     "backHref": "../index.html",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 36,
+      "work": "ルージュ",
+      "source": "おかえりなさい · Album（原曲 ちあきなおみ 1977）",
+      "tone": "teal",
+      "description": "只有十三句不同的歌词，却把一个人怎么被城市磨出来写透了。文语「〜まい」和口语缩约「気がつきゃ」出现在同一段，语体切换看得一清二楚。",
+      "title": [
+        "ルージュ"
+      ]
+    }
   },
   "stats": [
     {

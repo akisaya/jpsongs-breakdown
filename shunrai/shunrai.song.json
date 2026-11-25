@@ -25,7 +25,17 @@
     "discLabel": "2017",
     "discSub": "album",
     "coverTag": "ALBUM TRACK",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 18,
+      "work": "BOOTLEG",
+      "source": "BOOTLEG · Album Track",
+      "tone": "rust",
+      "description": "米津玄師歌词里密度最高的一首：一行里挤进「えも言えぬ」「足りやしない」「住み着いたまま」三种结构，还要唱进四拍。嫋やか、覚束ない、嗄れる、刹那——文学词一次认全。",
+      "title": [
+        "春雷"
+      ]
+    }
   },
   "stats": [
     {

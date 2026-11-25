@@ -23,7 +23,14 @@
     "discLabel": "2014",
     "discSub": "single",
     "coverTag": "ANIME OP",
-    "cover": "covers/cover.jpg"
+    "cover": "covers/cover.jpg",
+    "catalog": {
+      "order": 17,
+      "work": "東京喰種",
+      "source": "東京喰種 · OP",
+      "tone": "teal",
+      "description": "整首都在写「裂开」：壊れる／壊す／壊せる 三个形态轮着来，ほどける 和 unravel 说的是同一件事。自他动词与可能形一次讲完。"
+    }
   },
   "stats": [
     {
