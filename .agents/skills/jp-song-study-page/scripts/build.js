@@ -370,6 +370,40 @@ function fill(tpl, data) {
 
 let html = read(TEMPLATE, 'template.html');
 
+/* ---------- 站点图标 ----------
+   产物是单文件页：图标内联成 data URI，不多一个请求，换目录也不会 404。
+   图标从产物目录向上找 favicon.svg（站点根），找不到就不加——这套技能也可能
+   被用在没有图标的站点里。生成逻辑与仓库的 scripts/build-site.js 保持一致。 */
+function svgDataUri(svg) {
+  return encodeURIComponent(svg.replace(/\s+/g, ' ').trim())
+    .replace(/%20/g, ' ')
+    .replace(/%3D/g, '=')
+    .replace(/%3A/g, ':')
+    .replace(/%2F/g, '/')
+    .replace(/%2C/g, ',');
+}
+
+function faviconTags(outDir) {
+  let dir = outDir;
+  for (let depth = 0; depth < 5; depth++) {
+    const svgFile = path.join(dir, 'favicon.svg');
+    if (fs.existsSync(svgFile)) {
+      const rel = path.relative(outDir, dir).split(path.sep).join('/');
+      const prefix = rel ? rel + '/' : './';
+      const tags = [];
+      if (fs.existsSync(path.join(dir, 'favicon.ico'))) {
+        tags.push(`<link rel="icon" href="${prefix}favicon.ico" sizes="32x32">`);
+      }
+      tags.push(`<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,${svgDataUri(fs.readFileSync(svgFile, 'utf8'))}">`);
+      return tags.join('\n');
+    }
+    const parent = path.dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return '';
+}
+
 /* 只有显式关闭全文时才裁剪；默认缺少全文由校验报错。 */
 const OPTIONAL = ['lyrics'];
 const dropSections = new Set(OPTIONAL.filter(k => MODULES[k] === false));
@@ -411,6 +445,7 @@ const safeJson = JSON.stringify(song).replace(/</g, '\\u003c');
 html = html.replace('/*__CSS__*/', () => read(CSS, 'base.css'));
 html = html.replace('/*__RENDER_JS__*/', () => read(RENDER, 'render.js'));
 html = html.replace('__SONG_JSON__', () => safeJson);
+html = html.replace('<!--__FAVICON__-->', () => faviconTags(path.dirname(outPath)));
 
 /* ---------- 写出 ---------- */
 fs.mkdirSync(path.dirname(outPath), { recursive: true });

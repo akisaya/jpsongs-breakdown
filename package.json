@@ -4,10 +4,11 @@
   "private": true,
   "description": "日文歌词精读站：单曲由 song.json 构建，合集页与曲目清单自动汇总",
   "scripts": {
-    "build": "node scripts/optimize-covers.js && node scripts/build-site.js",
+    "build": "node scripts/build-favicon.js && node scripts/optimize-covers.js && node scripts/build-site.js",
     "build:site": "node scripts/build-site.js",
     "build:song": "node .agents/skills/jp-song-study-page/scripts/build.js",
     "build:covers": "node scripts/optimize-covers.js",
+    "build:icons": "node scripts/build-favicon.js",
     "check": "node scripts/build-site.js --check && node scripts/check-site.js",
     "check:site": "node scripts/check-site.js",
     "check:browser": "node scripts/check-site.js --browser"

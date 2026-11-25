@@ -135,7 +135,10 @@ npm run check
 ├── SONGS.md                            曲目清单（自动生成）
 ├── index.html                          合集索引页（自动生成）
 ├── docs/                               README 用的预览图
+├── favicon.svg                         站点图标（唯一源文件：墨色圆角方块 + 奶油唱片 + 橙标）
+├── favicon.ico                         16/32/48 三档，由 favicon.svg 生成（兜底用）
 ├── scripts/build-site.js               song.json → 首页 + SONGS.md
+├── scripts/build-favicon.js            favicon.svg → favicon.ico
 ├── scripts/optimize-covers.js          封面 → webp（首页缩略图、详情页内联图）
 ├── scripts/check-site.js               汇总过期、搜索筛选与响应式检查
 ├── site/index.template.html            首页模板与交互源码
@@ -176,6 +179,14 @@ npm run check
 
 - **首屏 4 张 preload**：卡片是 JS 注入的，不预载的话图片请求得等 HTML 下载 + 解析 + 执行完才发出，慢网络上等于白白多一个 RTT。链接由 `build-site.js` 生成，写在 `<head>` 里。
 - **`<picture>` + `display:contents`**：webp 优先、jpg 兜底。`.cov--img picture{display:contents}` 让 `<picture>` 不生成盒子，`<img>` 的百分比尺寸才能正常解析到 `.cov` 上。
+
+### 标签页图标
+
+`favicon.svg` 是唯一源文件，改图标只改它，再跑 `npm run build`（或 `npm run build:icons`）重新生成 `favicon.ico`。
+
+- 页面不引用外部图标文件：`build-site.js` 和技能的 `build.js` 在构建时把 SVG 读出来内联成 data URI，单页仍然可以单文件、离线打开。换目录也不会 404。
+- `<head>` 里先给 `favicon.ico`、再给内联 SVG（后声明的优先）：Chrome / Firefox / Safari 26+ 用矢量，老客户端和直接请求 `/favicon.ico` 的抓取器用 ico。
+- 生成 ico 需要 `rsvg-convert`（`brew install librsvg`）。没装时这一步会跳过并提示，不影响出页面。
 
 ## 验收
 

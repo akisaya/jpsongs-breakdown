@@ -273,6 +273,35 @@ function replaceOnce(source, search, replacement, label) {
    HTML 下载 + 解析 + 执行完才发出，在慢网络上等于白白多一个 RTT。 */
 const PRELOAD_COUNT = 4;
 
+/* 图标只有 favicon.svg 一份源文件：这里内联成 data URI，页面少一个请求、
+   换目录也不会 404；.ico 给老浏览器和直接请求 /favicon.ico 的客户端兜底。 */
+const FAVICON_SVG = path.join(ROOT, 'favicon.svg');
+
+function svgDataUri(svg) {
+  return encodeURIComponent(svg.replace(/\s+/g, ' ').trim())
+    .replace(/%20/g, ' ')
+    .replace(/%3D/g, '=')
+    .replace(/%3A/g, ':')
+    .replace(/%2F/g, '/')
+    .replace(/%2C/g, ',');
+}
+
+function renderFavicon(prefix) {
+  let svg;
+  try {
+    svg = fs.readFileSync(FAVICON_SVG, 'utf8');
+  } catch (error) {
+    errors.push(`读取 favicon.svg 失败：${error.message}`);
+    return '';
+  }
+  const tags = [];
+  if (hasFile(path.join(ROOT, 'favicon.ico'))) {
+    tags.push(`<link rel="icon" href="${prefix}favicon.ico" sizes="32x32">`);
+  }
+  tags.push(`<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,${svgDataUri(svg)}">`);
+  return tags.join('\n');
+}
+
 function renderPreload(cards) {
   return cards.slice(0, PRELOAD_COUNT)
     .filter(card => card.coverWebp)
@@ -291,6 +320,7 @@ function renderIndex(entries) {
   const cards = entries.map(entry => entry.card);
   const songsJson = JSON.stringify(cards, null, 2).replace(/</g, '\\u003c');
   let html = replaceOnce(template, '{{SITE_SONG_COUNT}}', String(entries.length), '曲目数');
+  html = replaceOnce(html, '<!--__FAVICON__-->', renderFavicon('./'), '站点图标');
   html = replaceOnce(html, '/*__SITE_SONGS__*/[]', songsJson, '曲目数组');
   html = replaceOnce(html, '<!--__SITE_PRELOAD__-->', renderPreload(cards), '首屏预加载');
   if (/\{\{[A-Z0-9_]+\}\}/.test(html)) errors.push('首页模板还有未替换的占位符');

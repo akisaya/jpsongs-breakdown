@@ -186,10 +186,10 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 （断链会被静默跳过、不报错）。换到别的项目复用：整目录复制过去，再重建同样的软链。
 
 ```
-assets/template.html   页面骨架，{{占位符}} 由 build 填充
+assets/template.html   页面骨架，{{占位符}} 与 <!--__FAVICON__--> 由 build 填充
 assets/base.css        全部样式（改配色只动这里）
 assets/render.js       渲染逻辑（改交互只动这里）
-scripts/build.js       JSON → HTML，含字段校验
+scripts/build.js       JSON → HTML，含字段校验；图标从产物目录向上找 favicon.svg 内联
 scripts/check.js       无头浏览器验收
 scripts/cover.js       检索并处理官方封面（iTunes）
 scripts/mv.js          检索 B 站视频、对照现有链接、校验与回测（已有链接默认不改）
