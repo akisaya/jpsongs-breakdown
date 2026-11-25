@@ -1,0 +1,138 @@
+index.html
+  s_678d2aa3e39ecd::t_83ee97a34393a7 7,606,609-628,630-1303,1308-1389,1393-1457,1461-1515
+  s_678d2aa3e39ecd::t_48be5e4f2bf3bc 1304-1307,1390-1392,1458-1460
+yoru-ni-kakeru/yoru-ni-kakeru.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 22-34
+sekai-ga-owaru-made/sekai-ga-owaru-made.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 28-38
+.agents/skills/jp-song-study-page/SKILL.md
+  s_678d2aa3e39ecd::t_75ee7d43a2b59f 41,90-92,94,97,104,125-126,161,193-194
+  s_678d2aa3e39ecd::t_80e2e300b346f0 43
+scripts/check-site.js
+  s_678d2aa3e39ecd::t_b3a086bc4cd698 55-56
+  s_678d2aa3e39ecd::t_688a1a284b096e 1-9,11-12,27-41,48-54,57-97,99-114,116,122-142
+  s_678d2aa3e39ecd::t_248ae5ca8cde34 10,13-26,98,115
+  s_678d2aa3e39ecd::t_c46fa4eb5e5b1e 117-121
+  s_678d2aa3e39ecd::t_335bfaa640b55c 42-47
+secret-base/secret-base.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 28-35
+tabun/tabun.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 29-39
+hello-world/hello-world.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 29-37
+konayuki/konayuki.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 29-39,1317
+SONGS.md
+  s_678d2aa3e39ecd::t_83ee97a34393a7 3-4,51-61
+tummy/tummy.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 22-29
+lemon/lemon.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 22-29
+only-my-railgun/only-my-railgun.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 29-36
+shunrai/shunrai.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 28-38
+gunjou/gunjou.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 22-29
+gurenge/gurenge.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 30-40
+sparkle/sparkle.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 22-32
+unravel/unravel.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 26-33
+rouge/rouge.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 29-39
+rasen/rasen.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 22-30
+package.json
+  s_678d2aa3e39ecd::t_2ad2dece1053c1 10
+  s_678d2aa3e39ecd::t_335bfaa640b55c 11-12
+  s_678d2aa3e39ecd::t_ae6adf59e56705 1-9,13-14
+README.md
+  s_678d2aa3e39ecd::t_7866505f417fd8 131
+  s_678d2aa3e39ecd::t_9882869768ccf2 129-130
+  s_678d2aa3e39ecd::t_18bb787d62a11d 7-8,17-20,22,58,75,101-116,120,122-128,144-146,157
+  s_678d2aa3e39ecd::t_4f7b9b33a8539a 21
+flamingo/flamingo.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 22-30,1519
+.agents/skills/jp-song-study-page/examples/_skeleton.song.json
+  s_678d2aa3e39ecd::t_75ee7d43a2b59f 19-30
+samurai-heart/samurai-heart.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 29-38
+tokyo-shibata/tokyo-shibata.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 27-34
+zenzenzense/zenzenzense.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 22-32
+there-is-a-reason/there-is-a-reason.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 22-29
+zange-roku/zange-roku.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 29-40
+koi/koi.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 22-29
+loser/loser.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 21-29
+lukaluka/lukaluka.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 29-40
+one-last-kiss/one-last-kiss.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 22-29
+boku-ga-shinou/boku-ga-shinou.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 29-37
+blue-bird/blue-bird.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 30-40
+kasaneteku/kasaneteku.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 29-39
+one-more-time/one-more-time.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 28-35
+again/again.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 21-29
+seikai/seikai.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 22-32
+uchiage-hanabi/uchiage-hanabi.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 30-44,1457
+zankoku-na-tenshi/zankoku-na-tenshi.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 22-29
+site/index.template.html
+  s_678d2aa3e39ecd::t_020ed4941b6e31 1-6,8-605,607,609-961
+  s_678d2aa3e39ecd::t_ca3cdb8428f5f7 7,606,608
+renai-circulation/renai-circulation.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 29-40
+brave-heart/brave-heart.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 21-28
+sakebitai/sakebitai.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 29-41
+.agents/skills/jp-song-study-page/references/pitfalls.md
+  s_678d2aa3e39ecd::t_73785609ba2472 11-12
+tobira-wo-akete/tobira-wo-akete.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 22-29
+.agents/skills/jp-song-study-page/references/song-schema.md
+  s_678d2aa3e39ecd::t_75ee7d43a2b59f 69-99
+scripts/build-site.js
+  s_678d2aa3e39ecd::t_2e3b48c69dab92 1-147,149-331
+  s_678d2aa3e39ecd::t_48be5e4f2bf3bc 148
+.agents/skills/jp-song-study-page/scripts/build.js
+  s_678d2aa3e39ecd::t_30dbb70911f9e8 398-400
+dan-dan/dan-dan.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 22-29
+night-dancer/night-dancer.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 28-35,1442
+otoko-no-kunshou/otoko-no-kunshou.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 22-29
+hikaru-nara/hikaru-nara.song.json
+  s_678d2aa3e39ecd::t_dcdc42dc8633b0 29-39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.52-trip",
+  "base_commit_sha": "18fff41abb8882fc5fbe0e7a08d96df60ef3bb83",
+  "prompts": {},
+  "sessions": {
+    "s_678d2aa3e39ecd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a211f5-8b1f-7fa2-ad29-0318a7f52015",
+        "model": "deepseek-v4.1-flash[1M]"
+      },
+      "human_author": "akisaya <akikevinsama@gmail.com>"
+    }
+  }
+}
