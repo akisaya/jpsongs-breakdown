@@ -34,6 +34,7 @@
     ├── scripts/build.js                song.json → index.html，含字段校验
     ├── scripts/check.js                无头浏览器验收（交互 + 溢出 + 截图）
     ├── scripts/cover.js                检索并处理官方封面（iTunes → 800px 方图）
+    ├── scripts/mv.js                   检索 B 站 MV，校验/回测现有链接（默认不改已有链接）
     ├── examples/                       骨架与完整范例
     └── references/                     字段字典、内容口径、坑表
 ```

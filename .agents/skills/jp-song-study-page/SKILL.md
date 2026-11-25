@@ -29,7 +29,7 @@ metadata:
 | 输出 | **当前工作目录**下的 `<slug>/{index.html,<slug>.song.json}` | 给了路径就用给的；同名文件存在时先问 |
 | 配色 | 奶油纸底 + 橙/青 | 「换个蓝色系」→ 改 `assets/base.css` 顶部的 `--orange` / `--teal` |
 | 封面 | **自动取官方封面**：`node scripts/cover.js <slug>/<slug>.song.json`（iTunes 检索 → 800px → 非方图自动补边 → 顺带出 webp → build 内联） | 「不要图片」→ 不跑脚本，`meta.cover` 留空走排版式封面；日区缺盘／搜到翻唱 → `--artwork <官方图URL>` 跳过检索 |
-| MV 链接 | **自动搜 B 站**：`node scripts/mv.js <slug>/<slug>.song.json --write`，取「歌名+作者」检索后评分最高的一条写进 `meta.lead` | 「用这个链接」→ `--pick BV1xxx`；「不要视频」→ 不跑，手工删掉 lead 里的 `<a>` 即可 |
+| MV 链接 | **自动搜 B 站**：`node scripts/mv.js <slug>/<slug>.song.json --write --only-missing`，多检索词汇集候选后按「作者/官方号/字幕/画质/播放」打分，写首选进 `meta.lead`。**已有链接默认不动**，只在控制台对照 | 「用这个链接」→ `--pick BV1xxx`；「不要视频」→ 不跑，手工删掉 lead 里的 `<a>` 即可 |
 | 卡片量 | 先分档再抽卡，不要停在 20 张出头。简单（N4–N3、短的 N3）约 20–26 张；中等（N3–N2）约 26–35 张；复杂（N2、文学、口语很密，或不同完整行明显更多的长歌）约 35–45 张或更多。只收有句型的不同完整行，可讲的行不足时不凑数 | 用户指定数量时按要求调整，但不得把来源行截成词组或重复建卡凑数 |
 
 **必须先确认的三种情况**（其余都自己判断）：
@@ -54,8 +54,8 @@ cp $SKILL/examples/_skeleton.song.json <slug>/<slug>.song.json
 # 2. 配封面（自动检索官方图，写入 covers/cover.jpg 并改 meta.cover）
 node $SKILL/scripts/cover.js <slug>/<slug>.song.json
 
-# 2b. 挂 B 站 MV 链接（先看候选，确认后加 --write）
-node $SKILL/scripts/mv.js <slug>/<slug>.song.json --write
+# 2b. 挂 B 站 MV 链接（先看候选与标签，确认后加 --write）
+node $SKILL/scripts/mv.js <slug>/<slug>.song.json --write --only-missing
 
 # 3. 只校验，不产出（改 JSON 时反复跑）
 node $SKILL/scripts/build.js --check --strict-lines <slug>/<slug>.song.json
@@ -124,7 +124,7 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 | 5 | **语法** 12–16：`form` 写完整接续，`warn` 写易错点，`examples` 写 2–3 个对应例句（注音 + 中文） | editorial「语法条」 |
 | 6 | **写文案**：`map.why` 四条理由，每首重写；页面上没有的板块不要提 | editorial「文案」 |
 | 7 | **配封面**：跑 `cover.js`，看一眼脚本打印的专辑名是不是原版单曲（不是 LIVE／翻唱／カラオケ）；非方图脚本会自动补边 | 命令见上 |
-| 8 | **挂 MV 链接**：跑 `mv.js` 搜 B 站，确认它选的那条是原曲原唱（不是翻唱／谱例／AMV），写入 `meta.lead` | `references/mv-links.md` |
+| 8 | **挂 MV 链接**：新歌跑 `mv.js --write --only-missing` 挂上首选；已有链接只跑不带 `--write` 的那条做对照，**不改它**。无论如何都要人工确认候选是原曲（不是翻唱／谱例／纯伴奏），首选不对就用 `--top 10` 往下挑 | `references/mv-links.md` |
 | 9 | **构建单曲 + 验收** | 命令见上、清单见下 |
 | 10 | **有合集页时重建站点汇总**：填写 `meta.catalog` 后在仓库根运行 `npm run build && npm run check` | `references/song-schema.md` 的 `meta.catalog` |
 
@@ -154,7 +154,7 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 - [ ] 语法图谱是最后一节；每条语法展开后有 2–3 个注音例句和中文译文
 - [ ] 顶部数据条项数正确、数值非 0
 - [ ] 封面与歌手／单曲对得上；非方图补边后主体没被裁（脚本会打印原图尺寸与专辑名）
-- [ ] 导语里的 B 站链接指向**这首歌的原唱原曲**，标题/UP/时长经得起看（不是翻唱、谱例、AMV、剪辑）
+- [ ] 导语里的 B 站链接指向**这首歌的原唱原曲**，标题/UP/时长经得起看（不是翻唱、谱例、纯伴奏、剪辑）；已有链接没被 `mv.js` 改掉
 - [ ] 全部精读卡可见，假名与中文显示开关生效
 - [ ] **每张 `lines[].jp` 去掉注音并忽略空白后，必须与一条 `lyrics.blocks[].lines` 完全相同；不能是词组、半句或跨行拼接**
 - [ ] **显示名称为「逐句精读」，`--strict-lines` 校验无错误；“短语精读”不能用来包装片段卡**
@@ -192,7 +192,7 @@ assets/render.js       渲染逻辑（改交互只动这里）
 scripts/build.js       JSON → HTML，含字段校验
 scripts/check.js       无头浏览器验收
 scripts/cover.js       检索并处理官方封面（iTunes）
-scripts/mv.js          检索 B 站视频并写进 meta.lead
+scripts/mv.js          检索 B 站视频、对照现有链接、校验与回测（已有链接默认不改）
 
 仓库根另有 `scripts/build-site.js`：扫描全部 song.json，生成根首页与 SONGS.md。它不是单曲模板的一部分。
 ```
