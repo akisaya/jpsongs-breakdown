@@ -202,6 +202,22 @@ function makeThumb(src, dest, size) {
     '-vf', `scale=${size}:${size}`, '-q:v', '4', dest], { stdio: 'ignore' });
 }
 
+/* webp 是可选的加速路径：有 cwebp / ffmpeg 就顺手出，没有就只留 jpg */
+function makeWebp(src, dest, size, quality) {
+  if (has('cwebp')) {
+    execFileSync('cwebp', ['-quiet', '-q', String(quality), '-resize', String(size), String(size),
+      '-metadata', 'none', src, '-o', dest], { stdio: 'ignore' });
+    return true;
+  }
+  if (has('ffmpeg')) {
+    execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', src,
+      '-vf', `scale=${size}:${size}:flags=lanczos`,
+      '-c:v', 'libwebp', '-quality', String(quality), '-compression_level', '5', dest], { stdio: 'ignore' });
+    return true;
+  }
+  return false;
+}
+
 /* ---------- 主流程 ---------- */
 
 (async () => {
@@ -261,6 +277,17 @@ function makeThumb(src, dest, size) {
   makeThumb(outFile, thumbFile, 320);
   const tkb = Math.round(fs.statSync(thumbFile).size / 1024);
   console.log(`✓ 缩略图 ${path.relative(process.cwd(), thumbFile)}（320×320，${tkb} KB，合集页用）`);
+
+  /* webp 版本：详情页内联用 cover.webp（720，约 2x 显示尺寸），
+     合集页卡片用 thumb.webp。缺工具就跳过，jpg 仍可正常使用。 */
+  const coverWebp = path.join(outDir, 'cover.webp');
+  const thumbWebp = path.join(outDir, 'thumb.webp');
+  if (makeWebp(outFile, coverWebp, 720, 80) && makeWebp(thumbFile, thumbWebp, 320, 78)) {
+    console.log(`✓ webp ${Math.round(fs.statSync(coverWebp).size / 1024)} KB / `
+      + `缩略图 ${Math.round(fs.statSync(thumbWebp).size / 1024)} KB（内联与合集页优先用）`);
+  } else {
+    console.log('· 没找到 cwebp / ffmpeg，跳过 webp（jpg 照常可用）');
+  }
   console.log(`✓ meta.cover 已设为 "${rel}"，重新 build 即可内联`);
 })().catch(err => {
   console.error('✗ ' + err.message);

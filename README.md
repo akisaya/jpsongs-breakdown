@@ -18,11 +18,15 @@
 ├── SONGS.md                            曲目清单（自动生成）
 ├── index.html                          合集索引页（自动生成）
 ├── scripts/build-site.js               song.json → 首页 + SONGS.md
+├── scripts/optimize-covers.js          封面 → webp（首页缩略图、详情页内联图）
 ├── scripts/check-site.js               汇总过期、搜索筛选与响应式检查
 ├── site/index.template.html            首页模板与交互源码
 ├── <slug>/                             一首歌一个目录
 │   ├── index.html                      构建产物（不要手改，重跑 build 会覆盖）
-│   ├── covers/cover.jpg                官方封面（cover.js 生成，build 内联；thumb.jpg 给合集页）
+│   ├── covers/cover.jpg                官方封面原图（cover.js 生成，800px）
+│   ├── covers/cover.webp               720px webp，详情页内联这张
+│   ├── covers/thumb.webp               320px webp，合集页卡片用
+│   ├── covers/thumb.jpg                320px jpg，不支持 webp 时兜底
 │   └── <slug>.song.json                数据源，页面全部内容都在这里
 └── .agents/skills/jp-song-study-page/  生成器技能
     ├── SKILL.md                        技能说明（给 Agent 看的工作流）
@@ -47,6 +51,24 @@ cd .agents/skills/jp-song-study-page && npm i
 
 不装也能用，`check.js` 会自动降级为静态检查。
 
+## 图片与加载
+
+每首歌的封面有四个文件，各管一段：
+
+| 文件 | 规格 | 谁在用 |
+|---|---|---|
+| `covers/cover.jpg` | 800×800（`cover.js` 抓来的原图） | 原始素材，换图从这里改 |
+| `covers/cover.webp` | 720×720 q80 | 详情页 `build.js` 内联成 base64（显示最大 368px） |
+| `covers/thumb.webp` | 320×320 q78 | 首页卡片（显示 128px / 窄屏 98px） |
+| `covers/thumb.jpg` | 320×320 | 首页卡片兜底，浏览器不支持 webp 时用 |
+
+`npm run build` 会先跑 `scripts/optimize-covers.js` 补齐缺失或过期的 webp，再生成首页。手工加图后单独跑 `npm run build:covers`（`--force` 强制重编码）。
+
+首页的两处提速，改模板时不要弄丢：
+
+- **首屏 4 张 preload**：卡片是 JS 注入的，不预载的话图片请求得等 HTML 下载 + 解析 + 执行完才发出，在慢网络上等于白白多一个 RTT。链接由 `build-site.js` 生成，写在 `<head>` 里。
+- **`<picture>` + `display:contents`**：webp 优先、jpg 兜底。`.cov--img picture{display:contents}` 让 `<picture>` 不生成盒子，`<img>` 的百分比尺寸才能正常解析到 `.cov` 上。
+
 ## 加一首新歌
 
 ### 方式一：让 Agent 做（推荐）
@@ -68,7 +90,7 @@ mkdir -p $SLUG
 cp $SKILL/examples/_skeleton.song.json $SLUG/$SLUG.song.json   # 6 卡 / 20 词的骨架
 
 # 先填 meta，再填 lines / vocab / grammar
-node $SKILL/scripts/cover.js $SLUG/$SLUG.song.json              # 官方封面 → covers/cover.jpg，并写回 meta.cover
+node $SKILL/scripts/cover.js $SLUG/$SLUG.song.json              # 官方封面 → covers/cover.jpg + webp，并写回 meta.cover
 node $SKILL/scripts/build.js --check --strict-lines $SLUG/$SLUG.song.json
 node $SKILL/scripts/build.js --strict-lines $SLUG/$SLUG.song.json $SLUG/index.html
 node $SKILL/scripts/check.js $SLUG/index.html --shots          # 交互 + 四档断点溢出 + 截图

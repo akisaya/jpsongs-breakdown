@@ -28,7 +28,7 @@ metadata:
 | 难度 | 页面标「N3 上下」这类**大致档位**，不写成 JLPT 等级判定 | 「N4」「N2」→ 调 `vocab[].lv` 分布与语法条难度，同时改 `meta.level` |
 | 输出 | **当前工作目录**下的 `<slug>/{index.html,<slug>.song.json}` | 给了路径就用给的；同名文件存在时先问 |
 | 配色 | 奶油纸底 + 橙/青 | 「换个蓝色系」→ 改 `assets/base.css` 顶部的 `--orange` / `--teal` |
-| 封面 | **自动取官方封面**：`node scripts/cover.js <slug>/<slug>.song.json`（iTunes 检索 → 800px → 非方图自动补边 → build 内联） | 「不要图片」→ 不跑脚本，`meta.cover` 留空走排版式封面；日区缺盘／搜到翻唱 → `--artwork <官方图URL>` 跳过检索 |
+| 封面 | **自动取官方封面**：`node scripts/cover.js <slug>/<slug>.song.json`（iTunes 检索 → 800px → 非方图自动补边 → 顺带出 webp → build 内联） | 「不要图片」→ 不跑脚本，`meta.cover` 留空走排版式封面；日区缺盘／搜到翻唱 → `--artwork <官方图URL>` 跳过检索 |
 | MV 链接 | **自动搜 B 站**：`node scripts/mv.js <slug>/<slug>.song.json --write`，取「歌名+作者」检索后评分最高的一条写进 `meta.lead` | 「用这个链接」→ `--pick BV1xxx`；「不要视频」→ 不跑，手工删掉 lead 里的 `<a>` 即可 |
 | 卡片量 | 先分档再抽卡，不要停在 20 张出头。简单（N4–N3、短的 N3）约 20–26 张；中等（N3–N2）约 26–35 张；复杂（N2、文学、口语很密，或不同完整行明显更多的长歌）约 35–45 张或更多。只收有句型的不同完整行，可讲的行不足时不凑数 | 用户指定数量时按要求调整，但不得把来源行截成词组或重复建卡凑数 |
 
@@ -79,7 +79,10 @@ node $SKILL/scripts/check.js <slug>/index.html --shots
 ├── index.html                 ← 合集索引页（可选）
 ├── brave-heart/
 │   ├── index.html             ← 构建产物
-│   ├── covers/cover.jpg       ← 官方封面（cover.js 生成，build 内联）
+│   ├── covers/cover.jpg       ← 官方封面原图（cover.js 生成，800px）
+│   ├── covers/cover.webp      ← 720px，build 内联这张（体积约为 jpg 的 1/4）
+│   ├── covers/thumb.webp      ← 320px，合集页卡片用
+│   ├── covers/thumb.jpg       ← 320px，合集页老浏览器兜底
 │   └── brave-heart.song.json  ← 数据源
 └── again/
     ├── index.html

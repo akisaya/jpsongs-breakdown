@@ -6,6 +6,10 @@
 <title>歌詞精読 · 日语歌词拆解合集</title>
 <meta name="description" content="日文歌词逐句解析：完整歌词、注音精读、核心词汇、语法图谱。收录动画、日剧与 J-POP 共 42 首。">
 <meta name="theme-color" content="#FBF6EF">
+<link rel="preload" as="image" type="image/webp" href="./brave-heart/covers/thumb.webp" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="./again/covers/thumb.webp" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="./loser/covers/thumb.webp" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="./flamingo/covers/thumb.webp" fetchpriority="high">
 <style>
 /* ============================================================
    0. 设计变量（与歌曲页共用同一套）
@@ -367,8 +371,10 @@ a{color:inherit;text-decoration:none}
   box-shadow:0 12px 24px -14px rgba(60,30,10,.55);
 }
 .song:hover .cov{transform:rotate(0deg) scale(1.02)}
-.cov--img{padding:0;background:var(--bg-deep);align-items:stretch}
+/* 双类名：窄屏的 .cov{--cov:98px;padding:…} 写在后面，单类名会被它盖掉 */
+.cov.cov--img{padding:0;background:var(--bg-deep);align-items:stretch}
 .cov--img::before{display:none}
+.cov--img picture{display:contents}
 .cov--img img{inline-size:100%;block-size:100%;object-fit:cover;border-radius:inherit;display:block}
 
 .cov::before{
@@ -610,6 +616,7 @@ a{color:inherit;text-decoration:none}
     "slug": "brave-heart",
     "href": "./brave-heart/index.html",
     "cover": "./brave-heart/covers/thumb.jpg",
+    "coverWebp": "./brave-heart/covers/thumb.webp",
     "kicker": "Digimon Adventure · Insert Song · 1999",
     "work": "Digimon",
     "title": [
@@ -632,6 +639,7 @@ a{color:inherit;text-decoration:none}
     "slug": "again-yui",
     "href": "./again/index.html",
     "cover": "./again/covers/thumb.jpg",
+    "coverWebp": "./again/covers/thumb.webp",
     "kicker": "鋼の錬金術師 FA · OP1 · 2009",
     "work": "FMA:B",
     "title": [
@@ -653,6 +661,7 @@ a{color:inherit;text-decoration:none}
     "slug": "loser",
     "href": "./loser/index.html",
     "cover": "./loser/covers/thumb.jpg",
+    "coverWebp": "./loser/covers/thumb.webp",
     "kicker": "LOSER / ナンバーナイン · 両A面シングル · 2016",
     "work": "LOSER",
     "title": [
@@ -674,6 +683,7 @@ a{color:inherit;text-decoration:none}
     "slug": "flamingo",
     "href": "./flamingo/index.html",
     "cover": "./flamingo/covers/thumb.jpg",
+    "coverWebp": "./flamingo/covers/thumb.webp",
     "kicker": "Flamingo / TEENAGE RIOT · Single · 2018",
     "work": "FLAMINGO",
     "title": [
@@ -695,6 +705,7 @@ a{color:inherit;text-decoration:none}
     "slug": "gunjou",
     "href": "./gunjou/index.html",
     "cover": "./gunjou/covers/thumb.jpg",
+    "coverWebp": "./gunjou/covers/thumb.webp",
     "kicker": "ブルーピリオド · イメージソング · 2020",
     "work": "Blue Period",
     "title": [
@@ -716,6 +727,7 @@ a{color:inherit;text-decoration:none}
     "slug": "yoru-ni-kakeru",
     "href": "./yoru-ni-kakeru/index.html",
     "cover": "./yoru-ni-kakeru/covers/thumb.jpg",
+    "coverWebp": "./yoru-ni-kakeru/covers/thumb.webp",
     "kicker": "タナトスの誘惑 · デビューシングル · 2019",
     "work": "Debut",
     "title": [
@@ -738,6 +750,7 @@ a{color:inherit;text-decoration:none}
     "slug": "rasen",
     "href": "./rasen/index.html",
     "cover": "./rasen/covers/thumb.jpg",
+    "coverWebp": "./rasen/covers/thumb.webp",
     "kicker": "BLEACH 千年血戦篇 · 禍進譚 ED · 2026",
     "work": "BLEACH",
     "title": [
@@ -760,6 +773,7 @@ a{color:inherit;text-decoration:none}
     "slug": "one-last-kiss",
     "href": "./one-last-kiss/index.html",
     "cover": "./one-last-kiss/covers/thumb.jpg",
+    "coverWebp": "./one-last-kiss/covers/thumb.webp",
     "kicker": "シン・エヴァンゲリオン劇場版 · 主題歌 · 2021",
     "work": "Evangelion",
     "title": [
@@ -781,6 +795,7 @@ a{color:inherit;text-decoration:none}
     "slug": "otoko-no-kunshou",
     "href": "./otoko-no-kunshou/index.html",
     "cover": "./otoko-no-kunshou/covers/thumb.jpg",
+    "coverWebp": "./otoko-no-kunshou/covers/thumb.webp",
     "kicker": "今日から俺は!! · 主題歌 · 2018",
     "work": "今日から俺は!!",
     "title": [
@@ -802,6 +817,7 @@ a{color:inherit;text-decoration:none}
     "slug": "tobira-wo-akete",
     "href": "./tobira-wo-akete/index.html",
     "cover": "./tobira-wo-akete/covers/thumb.jpg",
+    "coverWebp": "./tobira-wo-akete/covers/thumb.webp",
     "kicker": "カードキャプターさくら · OP2 · 1998",
     "work": "CCさくら",
     "title": [
@@ -823,6 +839,7 @@ a{color:inherit;text-decoration:none}
     "slug": "dan-dan",
     "href": "./dan-dan/index.html",
     "cover": "./dan-dan/covers/thumb.jpg",
+    "coverWebp": "./dan-dan/covers/thumb.webp",
     "kicker": "ドラゴンボールGT · OP · 1996",
     "work": "DBGT",
     "title": [
@@ -845,6 +862,7 @@ a{color:inherit;text-decoration:none}
     "slug": "zankoku-na-tenshi",
     "href": "./zankoku-na-tenshi/index.html",
     "cover": "./zankoku-na-tenshi/covers/thumb.jpg",
+    "coverWebp": "./zankoku-na-tenshi/covers/thumb.webp",
     "kicker": "新世紀エヴァンゲリオン · OP · 1995",
     "work": "Evangelion",
     "title": [
@@ -866,6 +884,7 @@ a{color:inherit;text-decoration:none}
     "slug": "koi",
     "href": "./koi/index.html",
     "cover": "./koi/covers/thumb.jpg",
+    "coverWebp": "./koi/covers/thumb.webp",
     "kicker": "逃げるは恥だが役に立つ · 主題歌 · 2016",
     "work": "逃げ恥",
     "title": [
@@ -887,6 +906,7 @@ a{color:inherit;text-decoration:none}
     "slug": "lemon",
     "href": "./lemon/index.html",
     "cover": "./lemon/covers/thumb.jpg",
+    "coverWebp": "./lemon/covers/thumb.webp",
     "kicker": "アンナチュラル · 主題歌 · 2018",
     "work": "アンナチュラル",
     "title": [
@@ -908,6 +928,7 @@ a{color:inherit;text-decoration:none}
     "slug": "there-is-a-reason",
     "href": "./there-is-a-reason/index.html",
     "cover": "./there-is-a-reason/covers/thumb.jpg",
+    "coverWebp": "./there-is-a-reason/covers/thumb.webp",
     "kicker": "ノーゲーム・ノーライフ ゼロ · 主題歌 · 2017",
     "work": "NGNL Zero",
     "title": [
@@ -929,6 +950,7 @@ a{color:inherit;text-decoration:none}
     "slug": "zenzenzense",
     "href": "./zenzenzense/index.html",
     "cover": "./zenzenzense/covers/thumb.jpg",
+    "coverWebp": "./zenzenzense/covers/thumb.webp",
     "kicker": "君の名は。 · 主題歌 · 2016",
     "work": "君の名は。",
     "title": [
@@ -950,6 +972,7 @@ a{color:inherit;text-decoration:none}
     "slug": "unravel",
     "href": "./unravel/index.html",
     "cover": "./unravel/covers/thumb.jpg",
+    "coverWebp": "./unravel/covers/thumb.webp",
     "kicker": "東京喰種 · OP · 2014",
     "work": "東京喰種",
     "title": [
@@ -971,6 +994,7 @@ a{color:inherit;text-decoration:none}
     "slug": "shunrai",
     "href": "./shunrai/index.html",
     "cover": "./shunrai/covers/thumb.jpg",
+    "coverWebp": "./shunrai/covers/thumb.webp",
     "kicker": "BOOTLEG · Album Track · 2017",
     "work": "BOOTLEG",
     "title": [
@@ -992,6 +1016,7 @@ a{color:inherit;text-decoration:none}
     "slug": "sakebitai",
     "href": "./sakebitai/index.html",
     "cover": "./sakebitai/covers/thumb.jpg",
+    "coverWebp": "./sakebitai/covers/thumb.webp",
     "kicker": "SLAM DUNK · OP1 · 1993",
     "work": "SLAM DUNK",
     "title": [
@@ -1014,6 +1039,7 @@ a{color:inherit;text-decoration:none}
     "slug": "sekai-ga-owaru-made",
     "href": "./sekai-ga-owaru-made/index.html",
     "cover": "./sekai-ga-owaru-made/covers/thumb.jpg",
+    "coverWebp": "./sekai-ga-owaru-made/covers/thumb.webp",
     "kicker": "SLAM DUNK · ED2 · 1994",
     "work": "SLAM DUNK",
     "title": [
@@ -1035,6 +1061,7 @@ a{color:inherit;text-decoration:none}
     "slug": "secret-base",
     "href": "./secret-base/index.html",
     "cover": "./secret-base/covers/thumb.jpg",
+    "coverWebp": "./secret-base/covers/thumb.webp",
     "kicker": "あの日見た花の名前を僕達はまだ知らない。 · ED · 2011（原曲 2001）",
     "work": "あの花",
     "title": [
@@ -1057,6 +1084,7 @@ a{color:inherit;text-decoration:none}
     "slug": "one-more-time",
     "href": "./one-more-time/index.html",
     "cover": "./one-more-time/covers/thumb.jpg",
+    "coverWebp": "./one-more-time/covers/thumb.webp",
     "kicker": "秒速5センチメートル · Theme · 2007（原曲 1997）",
     "work": "秒速5センチ",
     "title": [
@@ -1079,6 +1107,7 @@ a{color:inherit;text-decoration:none}
     "slug": "blue-bird",
     "href": "./blue-bird/index.html",
     "cover": "./blue-bird/covers/thumb.jpg",
+    "coverWebp": "./blue-bird/covers/thumb.webp",
     "kicker": "NARUTO 疾風伝 · OP3 · 2008",
     "work": "NARUTO",
     "title": [
@@ -1100,6 +1129,7 @@ a{color:inherit;text-decoration:none}
     "slug": "tokyo-shibata",
     "href": "./tokyo-shibata/index.html",
     "cover": "./tokyo-shibata/covers/thumb.jpg",
+    "coverWebp": "./tokyo-shibata/covers/thumb.webp",
     "kicker": "COVER 70's · Album Track · 2012（原曲 1975）",
     "work": "COVER 70's",
     "title": [
@@ -1121,6 +1151,7 @@ a{color:inherit;text-decoration:none}
     "slug": "only-my-railgun",
     "href": "./only-my-railgun/index.html",
     "cover": "./only-my-railgun/covers/thumb.jpg",
+    "coverWebp": "./only-my-railgun/covers/thumb.webp",
     "kicker": "とある科学の超電磁砲 · OP1 · 2009",
     "work": "とある",
     "title": [
@@ -1143,6 +1174,7 @@ a{color:inherit;text-decoration:none}
     "slug": "gurenge",
     "href": "./gurenge/index.html",
     "cover": "./gurenge/covers/thumb.jpg",
+    "coverWebp": "./gurenge/covers/thumb.webp",
     "kicker": "鬼滅の刃 · OP1 · 2019",
     "work": "鬼滅の刃",
     "title": [
@@ -1164,6 +1196,7 @@ a{color:inherit;text-decoration:none}
     "slug": "sparkle",
     "href": "./sparkle/index.html",
     "cover": "./sparkle/covers/thumb.jpg",
+    "coverWebp": "./sparkle/covers/thumb.webp",
     "kicker": "君の名は。 · 主題歌 · 2016",
     "work": "君の名は。",
     "title": [
@@ -1185,6 +1218,7 @@ a{color:inherit;text-decoration:none}
     "slug": "tummy",
     "href": "./tummy/index.html",
     "cover": "./tummy/covers/thumb.jpg",
+    "coverWebp": "./tummy/covers/thumb.webp",
     "kicker": "×と○と罪と · Album Track · 2013",
     "work": "×と○と罪と",
     "title": [
@@ -1206,6 +1240,7 @@ a{color:inherit;text-decoration:none}
     "slug": "seikai",
     "href": "./seikai/index.html",
     "cover": "./seikai/covers/thumb.jpg",
+    "coverWebp": "./seikai/covers/thumb.webp",
     "kicker": "NHK『RADWIMPS 18祭』· 書き下ろし · 2018",
     "work": "18祭",
     "title": [
@@ -1227,6 +1262,7 @@ a{color:inherit;text-decoration:none}
     "slug": "konayuki",
     "href": "./konayuki/index.html",
     "cover": "./konayuki/covers/thumb.jpg",
+    "coverWebp": "./konayuki/covers/thumb.webp",
     "kicker": "1リットルの涙 · 挿入歌 · 2005",
     "work": "1リットルの涙",
     "title": [
@@ -1248,6 +1284,7 @@ a{color:inherit;text-decoration:none}
     "slug": "kasaneteku",
     "href": "./kasaneteku/index.html",
     "cover": "./kasaneteku/covers/thumb.jpg",
+    "coverWebp": "./kasaneteku/covers/thumb.webp",
     "kicker": "重ねドルチェ · CMソング · 2017",
     "work": "重ねドルチェ",
     "title": [
@@ -1269,6 +1306,7 @@ a{color:inherit;text-decoration:none}
     "slug": "boku-ga-shinou",
     "href": "./boku-ga-shinou/index.html",
     "cover": "./boku-ga-shinou/covers/thumb.jpg",
+    "coverWebp": "./boku-ga-shinou/covers/thumb.webp",
     "kicker": "秋田ひろむ 提供曲 · Single · 2013",
     "work": "中島美嘉",
     "title": [
@@ -1291,6 +1329,7 @@ a{color:inherit;text-decoration:none}
     "slug": "uchiage-hanabi",
     "href": "./uchiage-hanabi/index.html",
     "cover": "./uchiage-hanabi/covers/thumb.jpg",
+    "coverWebp": "./uchiage-hanabi/covers/thumb.webp",
     "kicker": "打ち上げ花火、下から見るか？横から見るか？ · 主題歌 · 2017",
     "work": "打ち上げ花火",
     "title": [
@@ -1316,6 +1355,7 @@ a{color:inherit;text-decoration:none}
     "slug": "night-dancer",
     "href": "./night-dancer/index.html",
     "cover": "./night-dancer/covers/thumb.jpg",
+    "coverWebp": "./night-dancer/covers/thumb.webp",
     "kicker": "imase · Digital Single · 2022",
     "work": "NIGHT DANCER",
     "title": [
@@ -1338,6 +1378,7 @@ a{color:inherit;text-decoration:none}
     "slug": "tabun",
     "href": "./tabun/index.html",
     "cover": "./tabun/covers/thumb.jpg",
+    "coverWebp": "./tabun/covers/thumb.webp",
     "kicker": "たぶん · 小説音楽化 · 2020",
     "work": "たぶん",
     "title": [
@@ -1359,6 +1400,7 @@ a{color:inherit;text-decoration:none}
     "slug": "rouge",
     "href": "./rouge/index.html",
     "cover": "./rouge/covers/thumb.jpg",
+    "coverWebp": "./rouge/covers/thumb.webp",
     "kicker": "おかえりなさい · Album · 1979",
     "work": "ルージュ",
     "title": [
@@ -1380,6 +1422,7 @@ a{color:inherit;text-decoration:none}
     "slug": "lukaluka",
     "href": "./lukaluka/index.html",
     "cover": "./lukaluka/covers/thumb.jpg",
+    "coverWebp": "./lukaluka/covers/thumb.webp",
     "kicker": "VOCALOID · 巡音ルカ · 2009",
     "work": "VOCALOID",
     "title": [
@@ -1405,6 +1448,7 @@ a{color:inherit;text-decoration:none}
     "slug": "zange-roku",
     "href": "./zange-roku/index.html",
     "cover": "./zange-roku/covers/thumb.jpg",
+    "coverWebp": "./zange-roku/covers/thumb.webp",
     "kicker": "デモンズゲート · ED · 2016",
     "work": "懺悔録",
     "title": [
@@ -1426,6 +1470,7 @@ a{color:inherit;text-decoration:none}
     "slug": "samurai-heart",
     "href": "./samurai-heart/index.html",
     "cover": "./samurai-heart/covers/thumb.jpg",
+    "coverWebp": "./samurai-heart/covers/thumb.webp",
     "kicker": "銀魂 · ED17 · 2011",
     "work": "銀魂",
     "title": [
@@ -1448,6 +1493,7 @@ a{color:inherit;text-decoration:none}
     "slug": "renai-circulation",
     "href": "./renai-circulation/index.html",
     "cover": "./renai-circulation/covers/thumb.jpg",
+    "coverWebp": "./renai-circulation/covers/thumb.webp",
     "kicker": "化物語 · OP4 · 2009",
     "work": "化物語",
     "title": [
@@ -1473,6 +1519,7 @@ a{color:inherit;text-decoration:none}
     "slug": "hello-world",
     "href": "./hello-world/index.html",
     "cover": "./hello-world/covers/thumb.jpg",
+    "coverWebp": "./hello-world/covers/thumb.webp",
     "kicker": "血界戦線 · OP1 · 2015",
     "work": "血界戦線",
     "title": [
@@ -1495,6 +1542,7 @@ a{color:inherit;text-decoration:none}
     "slug": "hikaru-nara",
     "href": "./hikaru-nara/index.html",
     "cover": "./hikaru-nara/covers/thumb.jpg",
+    "coverWebp": "./hikaru-nara/covers/thumb.webp",
     "kicker": "四月は君の嘘 · OP1 · 2014",
     "work": "四月は君の嘘",
     "title": [
@@ -1648,7 +1696,18 @@ a{color:inherit;text-decoration:none}
     });
   }
 
-  function songCard(s){
+  /* 首屏前几张不懒加载：既是 LCP 元素，也已在 head 里 preload 过 */
+  var EAGER_COVERS = 4;
+
+  function coverFigure(s, titleText, eager){
+    return '<figure class="cov cov--img"><picture>'
+      + (s.coverWebp ? '<source type="image/webp" srcset="' + esc(s.coverWebp) + '">' : '')
+      + '<img src="' + esc(s.cover) + '" alt="' + titleText + ' 封面" width="128" height="128"'
+      + (eager ? ' fetchpriority="high" decoding="async"' : ' loading="lazy" decoding="async"')
+      + '></picture></figure>';
+  }
+
+  function songCard(s, index){
     var lines = s.title.filter(Boolean);
     var titleHtml = lines.map(esc).join('<br>');
     var titleText = lines.map(esc).join(' ');
@@ -1660,7 +1719,7 @@ a{color:inherit;text-decoration:none}
 
     return '<a class="song" href="' + esc(s.href) + '">'
       + (s.cover
-          ? '<figure class="cov cov--img"><img src="' + esc(s.cover) + '" alt="' + titleText + ' 封面" loading="lazy" decoding="async"></figure>'
+          ? coverFigure(s, titleText, index < EAGER_COVERS)
           : '<figure class="cov t-' + esc(s.tone) + '">'
             + '<div class="cov-top"><span>SINGLE</span><span>' + esc(s.year) + '</span></div>'
             + '<div class="cov-mid">'

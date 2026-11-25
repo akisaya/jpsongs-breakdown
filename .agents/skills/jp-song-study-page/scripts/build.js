@@ -308,12 +308,20 @@ if (song.meta && song.meta.cover && !COVER_KEYWORDS.has(song.meta.cover)
   if (!fs.existsSync(coverPath)) {
     errors.push(`meta.cover 图片不存在：${coverPath}`);
   } else {
-    const ext = path.extname(coverPath).toLowerCase();
+    /* 同目录同名 .webp 优先：base64 会原样塞进 HTML，800px 的 jpg 换成 webp 后
+       内联体积大约只剩四分之一，这是详情页首屏最主要的体积来源。
+       webp 比原图旧就说明封面换过但没重新编码，这时退回原图。 */
+    const webpPath = coverPath.replace(/\.(png|jpe?g|gif)$/i, '.webp');
+    const canUseWebp = webpPath !== coverPath && fs.existsSync(webpPath)
+      && fs.statSync(webpPath).mtimeMs >= fs.statSync(coverPath).mtimeMs - 1000;
+    const inlined = canUseWebp ? webpPath : coverPath;
+
+    const ext = path.extname(inlined).toLowerCase();
     const mime = {
       '.png': 'image/png', '.webp': 'image/webp', '.gif': 'image/gif',
       '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg'
     }[ext] || 'image/jpeg';
-    const buf = fs.readFileSync(coverPath);
+    const buf = fs.readFileSync(inlined);
     if (buf.length > 600 * 1024) {
       warns.push(`封面图 ${Math.round(buf.length / 1024)}KB，内联后页面会明显变大，建议压到 300KB 以内`);
     }

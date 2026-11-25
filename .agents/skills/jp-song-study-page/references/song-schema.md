@@ -110,7 +110,7 @@ node scripts/build.js --check --strict-lines song.json   # 新建/维护逐句�
 |---|---|
 | 不填 | 排版式封面（不跑 `cover.js` 时的兜底，零文件） |
 | `"disc"` | 回到旧版的 CD 唱片图形 |
-| `"covers/cover.jpg"` | `cover.js` 生成的封面。相对路径**相对于该 song.json**，build 时自动转 base64 内联，产物仍是单文件 |
+| `"covers/cover.jpg"` | `cover.js` 生成的封面。相对路径**相对于该 song.json**，build 时自动转 base64 内联，产物仍是单文件。同目录有更新的 `cover.webp` 时优先内联 webp（体积约为 jpg 的 1/4） |
 | `"https://..."` | 外链图片（不内联，页面需要联网） |
 
 图片建议：正方形，≥600×600，压到 300KB 以内（超过 600KB 会告警）。`build.js` 会自动识别 jpg / png / webp / gif / svg，并读取实际像素尺寸，两种情况会给出提醒：

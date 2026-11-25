@@ -125,9 +125,11 @@ function catalogEntry(dir, song) {
   }
 
   const coverFile = path.join(ROOT, dir, 'covers', 'thumb.jpg');
+  const coverWebpFile = path.join(ROOT, dir, 'covers', 'thumb.webp');
   const indexFile = path.join(ROOT, dir, 'index.html');
   if (!hasFile(indexFile)) errors.push(`${label}: 缺少构建产物 ${dir}/index.html`);
   if (!hasFile(coverFile)) errors.push(`${label}: 缺少合集缩略图 ${dir}/covers/thumb.jpg`);
+  if (!hasFile(coverWebpFile)) warnings.push(`${dir}: 缺少 covers/thumb.webp，卡片会退回 jpg（跑 npm run build 会自动补）`);
 
   const title = catalog.title || [meta.titleLine1, meta.titleLine2].filter(Boolean);
   if (!title.length) errors.push(`${label}: 无法确定卡片标题`);
@@ -141,6 +143,7 @@ function catalogEntry(dir, song) {
       slug: meta.slug,
       href: `./${dir}/index.html`,
       ...(hasFile(coverFile) ? { cover: `./${dir}/covers/thumb.jpg` } : {}),
+      ...(hasFile(coverWebpFile) ? { coverWebp: `./${dir}/covers/thumb.webp` } : {}),
       kicker: catalog.kicker || meta.kicker || '',
       work: catalog.work,
       title,
@@ -266,6 +269,17 @@ function replaceOnce(source, search, replacement, label) {
   return source.slice(0, first) + replacement + source.slice(first + search.length);
 }
 
+/* 首屏缩略图在 head 里 preload：卡片是 JS 注入的，不预载的话图片请求要等
+   HTML 下载 + 解析 + 执行完才发出，在慢网络上等于白白多一个 RTT。 */
+const PRELOAD_COUNT = 4;
+
+function renderPreload(cards) {
+  return cards.slice(0, PRELOAD_COUNT)
+    .filter(card => card.coverWebp)
+    .map(card => `<link rel="preload" as="image" type="image/webp" href="${card.coverWebp}" fetchpriority="high">`)
+    .join('\n');
+}
+
 function renderIndex(entries) {
   let template;
   try {
@@ -278,6 +292,7 @@ function renderIndex(entries) {
   const songsJson = JSON.stringify(cards, null, 2).replace(/</g, '\\u003c');
   let html = replaceOnce(template, '{{SITE_SONG_COUNT}}', String(entries.length), '曲目数');
   html = replaceOnce(html, '/*__SITE_SONGS__*/[]', songsJson, '曲目数组');
+  html = replaceOnce(html, '<!--__SITE_PRELOAD__-->', renderPreload(cards), '首屏预加载');
   if (/\{\{[A-Z0-9_]+\}\}/.test(html)) errors.push('首页模板还有未替换的占位符');
   return html;
 }
