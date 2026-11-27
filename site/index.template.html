@@ -83,78 +83,27 @@ a{color:inherit;text-decoration:none}
 @media (max-width:560px){.brand span{display:none}}
 
 /* ============================================================
-   2. 开场
+   2. 开场：只有一行站点标识
    ============================================================ */
-.intro{padding:clamp(3.2rem,8vw,5.4rem) 0 0}
+.intro{padding:clamp(1.5rem,3.4vw,2.2rem) 0 0}
 
+/* 标识一行完成：小字号、大字距，右侧细线把整行撑满当作刊头分隔 */
 .intro-kicker{
-  margin:0 0 1.1rem;
-  font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;
-  color:var(--orange);font-weight:700;
-}
-.intro h1{
+  display:flex;align-items:center;gap:1.15rem;
   margin:0;
-  font-family:var(--font-serif-zh);
-  font-style:normal;
-  font-weight:400;
-  font-size:clamp(2.4rem,6.6vw,4.35rem);
-  line-height:1.02;
-  letter-spacing:-.015em;
-  text-wrap:balance;
-  color:#262A31;
-}
-.intro h1 em{
-  font-style:inherit;
-  background:linear-gradient(96deg,var(--orange) 0%,#C43F1B 46%,#9A3416 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.intro-lead{
-  margin:1.5rem 0 0;
-  max-width:46ch;
-  font-size:.95rem;line-height:1.95;color:var(--ink-2);
-  text-wrap:pretty;
-}
-.intro-lead b{color:var(--ink);font-weight:600}
-
-/* 统计条 */
-.tally{
-  margin-top:clamp(2.2rem,5vw,3.2rem);
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  background:rgba(255,255,255,.68);
-  border:1px solid var(--line);
-  border-radius:var(--r-lg);
-  backdrop-filter:blur(10px);
-  box-shadow:var(--shadow-sm);
-  overflow:hidden;
-}
-.tally div{
-  padding:1.1rem 1rem;
-  text-align:center;
-  border-left:1px solid var(--line);
-}
-.tally div:first-child{border-left:0}
-.tally b{
-  display:block;
-  font-family:var(--font-display);
-  font-style:italic;
-  font-size:1.75rem;line-height:1.1;
+  font-size:.72rem;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;
   color:var(--orange);
 }
-.tally span{
-  display:block;margin-top:.28rem;
-  font-size:.63rem;letter-spacing:.16em;color:var(--ink-3);
-}
-@media (max-width:600px){
-  .tally{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .tally div:nth-child(3){border-left:0}
-  .tally div:nth-child(n+3){border-top:1px solid var(--line)}
+.intro-kicker::after{
+  content:"";flex:1 1 auto;min-width:1.25rem;
+  block-size:1px;background:var(--line);
 }
 
 /* ============================================================
    3. 曲目列表
    ============================================================ */
-.list{padding:clamp(3.2rem,7vw,4.6rem) 0 0}
+.list{padding:clamp(2.4rem,5vw,3.2rem) 0 0}
 
 .list-head{
   display:flex;align-items:baseline;justify-content:space-between;
@@ -531,13 +480,7 @@ a{color:inherit;text-decoration:none}
 
 <main>
   <section class="intro wrap">
-    <p class="intro-kicker">Japanese Lyrics · 逐句解析</p>
-    <h1>把一首歌，<br>拆成<em>看得懂的句子</em></h1>
-    <p class="intro-lead">
-      每首歌拆成 20 多张卡片：完整歌词、带注音的句子、句中单词、语法点，以及一句「唱的时候才会注意到的细节」。
-      不追求「学完就能考级」，只求<b>你把这首歌真的听懂、唱顺</b>。
-    </p>
-    <div class="tally" id="tally"></div>
+    <h1 class="intro-kicker">Japanese Songs Lyrics · 逐句解析</h1>
   </section>
 
   <section class="list wrap">
@@ -638,28 +581,6 @@ a{color:inherit;text-decoration:none}
   var ARROW = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">'
     + '<path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" '
     + 'stroke-linecap="round" stroke-linejoin="round"/></svg>';
-
-  function renderTally(){
-    var sum = SONGS.reduce(function(a, s){
-      return {
-        lyr: a.lyr + s.scale.lyr,
-        lines: a.lines + s.scale.lines,
-        vocab: a.vocab + s.scale.vocab,
-        grammar: a.grammar + s.scale.grammar
-      };
-    }, { lyr: 0, lines: 0, vocab: 0, grammar: 0 });
-
-    var items = [
-      [sum.lyr, '行 歌 词'],
-      [sum.lines, '精 读 句'],
-      [sum.vocab, '核 心 词'],
-      [sum.grammar, '语 法 点']
-    ];
-
-    $('#tally').innerHTML = items.map(function(it){
-      return '<div><b>' + it[0] + '</b><span>' + it[1] + '</span></div>';
-    }).join('');
-  }
 
   function normalize(text){
     return String(text == null ? '' : text).normalize('NFKC')
@@ -968,7 +889,6 @@ a{color:inherit;text-decoration:none}
     $('#song-search').focus();
   });
 
-  renderTally();
   renderSongs();
 })();
 </script>

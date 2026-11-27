@@ -13,13 +13,6 @@ const songFiles = fs.readdirSync(ROOT, { withFileTypes: true })
   .filter(file => fs.existsSync(file));
 const songs = songFiles.map(file => JSON.parse(fs.readFileSync(file, 'utf8')));
 const songCount = songs.length;
-const expectedTotals = songs.reduce((totals, song) => {
-  totals.lyr += song.modules?.lyrics === false ? 0 : (song.lyrics?.blocks || []).reduce((sum, block) => sum + (block.lines || []).length, 0);
-  totals.lines += song.lines.length;
-  totals.vocab += song.vocab.length;
-  totals.grammar += song.grammar.length;
-  return totals;
-}, { lyr: 0, lines: 0, vocab: 0, grammar: 0 });
 const mizukiCount = songs.filter(song => {
   const artists = song.meta.catalog?.artists;
   return (artists?.length ? artists : [song.meta.artist]).includes('米津玄師');
@@ -89,13 +82,11 @@ async function launch() {
     await page.waitForTimeout(150);
     const state = await page.evaluate(() => ({
       cards: document.querySelectorAll('#songs .song').length,
-      tally: Array.from(document.querySelectorAll('#tally b')).map(node => node.textContent.trim()),
       listCount: document.querySelector('#list-count')?.textContent || '',
       overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth
     }));
     check(!state.overflow, `${width}px 无横向溢出`);
     check(state.cards === 10, `${width}px 首屏 10 张卡片（实际 ${state.cards}）`);
-    check(state.tally.join('/') === [expectedTotals.lyr, expectedTotals.lines, expectedTotals.vocab, expectedTotals.grammar].join('/'), `${width}px 汇总统计正确（${state.tally.join(' / ')}）`);
     check(state.listCount.startsWith(`${songCount} 首`), `${width}px 总数正确（${state.listCount}）`);
 
     if (width === 1440) {
