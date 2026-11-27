@@ -463,6 +463,41 @@ a{color:inherit;text-decoration:none}
   .foot-meta{text-align:left}
 }
 
+/* 友情链接：页脚顶部一行，用细线与下面的版权说明分开 */
+.friends{
+  display:flex;align-items:baseline;flex-wrap:wrap;
+  gap:.4rem 1.15rem;
+  padding-bottom:1.1rem;
+  margin-bottom:1.5rem;
+  border-bottom:1px solid var(--line);
+}
+.friends-label{
+  flex:0 0 auto;
+  font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-3);
+}
+.friend{
+  display:inline-flex;align-items:center;gap:.55rem;
+  color:var(--ink);
+  transition:color .18s ease;
+}
+.friend b{
+  font-family:var(--font-serif);
+  font-size:.95rem;font-weight:600;letter-spacing:.08em;
+}
+.friend small{font-size:.72rem;letter-spacing:.02em;color:var(--ink-3)}
+.friend svg{
+  inline-size:12px;block-size:12px;flex:0 0 auto;
+  color:var(--orange);
+  transition:transform .18s ease;
+}
+.friend:hover b{
+  text-decoration:underline;text-underline-offset:.28em;
+  text-decoration-thickness:1px;text-decoration-color:rgba(217,84,31,.5);
+}
+.friend:hover svg{transform:translate(1px,-1px)}
+.friend:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:4px}
+
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important}
   html{scroll-behavior:auto}
@@ -532,6 +567,16 @@ a{color:inherit;text-decoration:none}
 </main>
 
 <footer class="foot wrap">
+  <div class="friends">
+    <span class="friends-label">友情链接</span>
+    <a class="friend" href="https://akisaya.github.io/yomu/" target="_blank" rel="noopener noreferrer">
+      <b lang="ja">読む</b>
+      <small>日剧台词精读 · 一行一句</small>
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M6 3h7v7M13 3 3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
   <div class="foot-inner">
     <p class="foot-note">
       本站为个人日语学习用途的歌词解析作品，非官方发布。歌词著作权归各曲作词、作曲、演唱者及相关权利方所有；
